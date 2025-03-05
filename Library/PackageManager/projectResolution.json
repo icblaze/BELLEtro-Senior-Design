@@ -1,18 +1,18 @@
 {
   "context": {
-    "projectPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Packages",
+    "projectPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Packages",
     "unityVersion": "6000.0.36f1"
   },
   "inputs": [
-    "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Packages/manifest.json",
-    "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Packages/packages-lock.json",
+    "/Users/win/Desktop/BELLEtro-Senior-Design/Packages/manifest.json",
+    "/Users/win/Desktop/BELLEtro-Senior-Design/Packages/packages-lock.json",
     "/Applications/Unity/Hub/Editor/6000.0.36f1/Unity.app/Contents/Resources/PackageManager/BuiltInPackages/BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
     "com.unity.cinemachine@2.10.3": {
       "name": "com.unity.cinemachine",
       "displayName": "Cinemachine",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.cinemachine@dcc61ebd6655",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.cinemachine@dcc61ebd6655",
       "fingerprint": "dcc61ebd6655e32f2b7f8ebca32ca02be455e2d9",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.10.3",
@@ -22,7 +22,7 @@
     "com.unity.collab-proxy@2.6.0": {
       "name": "com.unity.collab-proxy",
       "displayName": "Version Control",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.collab-proxy@001b54a8988a",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.collab-proxy@001b54a8988a",
       "fingerprint": "001b54a8988a14785c8e209d6c788bb15f9e58cf",
       "editorCompatibility": "2021.3.0f1",
       "version": "2.6.0",
@@ -32,7 +32,7 @@
     "com.unity.feature.2d@2.0.1": {
       "name": "com.unity.feature.2d",
       "displayName": "2D",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.feature.2d@dd1ea8910f12",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.feature.2d@dd1ea8910f12",
       "fingerprint": "dd1ea8910f12f021c166e8d0d78de44f1390ff6b",
       "version": "2.0.1",
       "source": "builtin",
@@ -41,7 +41,7 @@
     "com.unity.ide.rider@3.0.31": {
       "name": "com.unity.ide.rider",
       "displayName": "JetBrains Rider Editor",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.ide.rider@7921be93db40",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.ide.rider@7921be93db40",
       "fingerprint": "7921be93db40ec070fcb01ed82d1c3df1bbdddcd",
       "editorCompatibility": "2019.2.6f1",
       "version": "3.0.31",
@@ -51,7 +51,7 @@
     "com.unity.ide.visualstudio@2.0.22": {
       "name": "com.unity.ide.visualstudio",
       "displayName": "Visual Studio Editor",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.ide.visualstudio@8140e851d83e",
       "fingerprint": "8140e851d83e922ca2021b04a89519de94ebe38c",
       "editorCompatibility": "2019.4.25f1",
       "version": "2.0.22",
@@ -61,7 +61,7 @@
     "com.unity.multiplayer.center@1.0.0": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.multiplayer.center@f502d8ac613f",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.multiplayer.center@f502d8ac613f",
       "fingerprint": "f502d8ac613fa076192423e73892fbd89eb4049b",
       "editorCompatibility": "6000.0.0a1",
       "version": "1.0.0",
@@ -71,7 +71,7 @@
     "com.unity.render-pipelines.universal@17.0.3": {
       "name": "com.unity.render-pipelines.universal",
       "displayName": "Universal RP",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.render-pipelines.universal@a394fe607f89",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.render-pipelines.universal@a394fe607f89",
       "fingerprint": "a394fe607f89a478c3cc785b9888af03efac7c84",
       "editorCompatibility": "6000.0.0a1",
       "version": "17.0.3",
@@ -81,7 +81,7 @@
     "com.unity.test-framework@1.4.5": {
       "name": "com.unity.test-framework",
       "displayName": "Test Framework",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.test-framework@0a21eb82d95c",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.test-framework@0a21eb82d95c",
       "fingerprint": "0a21eb82d95cd331643a1e0ce4e8e9a5f18954c8",
       "editorCompatibility": "2019.4.0a10",
       "version": "1.4.5",
@@ -91,7 +91,7 @@
     "com.unity.timeline@1.8.7": {
       "name": "com.unity.timeline",
       "displayName": "Timeline",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.timeline@c58b4ee65782",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.timeline@c58b4ee65782",
       "fingerprint": "c58b4ee65782ad38338e29f7ee67787cb6998f04",
       "editorCompatibility": "2019.3.0a1",
       "version": "1.8.7",
@@ -101,7 +101,7 @@
     "com.unity.ugui@2.0.0": {
       "name": "com.unity.ugui",
       "displayName": "Unity UI",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.ugui@24b10291b18f",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.ugui@24b10291b18f",
       "fingerprint": "24b10291b18f65e937b22d041c48712033f29449",
       "editorCompatibility": "2019.2.0a1",
       "version": "2.0.0",
@@ -111,7 +111,7 @@
     "com.unity.visualscripting@1.9.5": {
       "name": "com.unity.visualscripting",
       "displayName": "Visual Scripting",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.visualscripting@1b53f46e931b",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.visualscripting@1b53f46e931b",
       "fingerprint": "1b53f46e931bea668e53f1feb0ac9138170c9455",
       "editorCompatibility": "2021.3.0a1",
       "version": "1.9.5",
@@ -393,7 +393,7 @@
     "com.unity.ext.nunit@2.0.5": {
       "name": "com.unity.ext.nunit",
       "displayName": "Custom NUnit",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.ext.nunit@60ef35ffd3cd",
       "fingerprint": "60ef35ffd3cd5e2f5c8887a4a4ca6148854cd092",
       "editorCompatibility": "2019.4.0a1",
       "version": "2.0.5",
@@ -403,7 +403,7 @@
     "com.unity.render-pipelines.core@17.0.3": {
       "name": "com.unity.render-pipelines.core",
       "displayName": "Core RP Library",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.render-pipelines.core@7bffd5bb179a",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.render-pipelines.core@7bffd5bb179a",
       "fingerprint": "7bffd5bb179ae35670a1bea73d5805f4510e7add",
       "editorCompatibility": "6000.0.0a1",
       "version": "17.0.3",
@@ -413,7 +413,7 @@
     "com.unity.shadergraph@17.0.3": {
       "name": "com.unity.shadergraph",
       "displayName": "Shader Graph",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.shadergraph@911117698220",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.shadergraph@911117698220",
       "fingerprint": "9111176982208cf007caa931c3cf2716ceec4632",
       "editorCompatibility": "6000.0.0a1",
       "version": "17.0.3",
@@ -423,7 +423,7 @@
     "com.unity.render-pipelines.universal-config@17.0.3": {
       "name": "com.unity.render-pipelines.universal-config",
       "displayName": "Universal RP Config",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.render-pipelines.universal-config@fa63c96d3e1a",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.render-pipelines.universal-config@fa63c96d3e1a",
       "fingerprint": "fa63c96d3e1af317d84d171cd6c0e0658ab159df",
       "editorCompatibility": "6000.0.0a1",
       "version": "17.0.3",
@@ -433,7 +433,7 @@
     "com.unity.2d.animation@10.1.4": {
       "name": "com.unity.2d.animation",
       "displayName": "2D Animation",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.animation@494a3b4e73a9",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.animation@494a3b4e73a9",
       "fingerprint": "494a3b4e73a9ae26677ef6e9fd6bff4ca643770a",
       "editorCompatibility": "2023.1.0a1",
       "version": "10.1.4",
@@ -443,7 +443,7 @@
     "com.unity.2d.pixel-perfect@5.0.3": {
       "name": "com.unity.2d.pixel-perfect",
       "displayName": "2D Pixel Perfect",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.pixel-perfect@e3ae982b672d",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.pixel-perfect@e3ae982b672d",
       "fingerprint": "e3ae982b672dc7cca42a6303bdf53b84c69991da",
       "editorCompatibility": "2021.1.0a1",
       "version": "5.0.3",
@@ -453,7 +453,7 @@
     "com.unity.2d.psdimporter@9.0.3": {
       "name": "com.unity.2d.psdimporter",
       "displayName": "2D PSD Importer",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.psdimporter@676bae148e11",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.psdimporter@676bae148e11",
       "fingerprint": "676bae148e11de9a02db5a3614b8c56e4f0f44ac",
       "editorCompatibility": "2023.1.0a1",
       "version": "9.0.3",
@@ -463,7 +463,7 @@
     "com.unity.2d.sprite@1.0.0": {
       "name": "com.unity.2d.sprite",
       "displayName": "2D Sprite",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.sprite@288185b75ab4",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.sprite@288185b75ab4",
       "fingerprint": "288185b75ab4115633459407db6f453f23b39ae9",
       "editorCompatibility": "2019.2.0a1",
       "version": "1.0.0",
@@ -473,7 +473,7 @@
     "com.unity.2d.spriteshape@10.0.7": {
       "name": "com.unity.2d.spriteshape",
       "displayName": "2D SpriteShape",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.spriteshape@9e35352ae135",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.spriteshape@9e35352ae135",
       "fingerprint": "9e35352ae135f602746220e7edc09eb95bbec530",
       "editorCompatibility": "2023.1.0a1",
       "version": "10.0.7",
@@ -483,7 +483,7 @@
     "com.unity.2d.tilemap@1.0.0": {
       "name": "com.unity.2d.tilemap",
       "displayName": "2D Tilemap Editor",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.tilemap@91020cbfae56",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.tilemap@91020cbfae56",
       "fingerprint": "91020cbfae5609e17fd435cd77f08d0a6b7138fb",
       "editorCompatibility": "2019.2.0a1",
       "version": "1.0.0",
@@ -493,7 +493,7 @@
     "com.unity.2d.tilemap.extras@4.1.0": {
       "name": "com.unity.2d.tilemap.extras",
       "displayName": "2D Tilemap Extras",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.tilemap.extras@13634da7dbe0",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.tilemap.extras@13634da7dbe0",
       "fingerprint": "13634da7dbe06c39bac6bbe2d1a166cf91f58ad7",
       "editorCompatibility": "6000.0.0a1",
       "version": "4.1.0",
@@ -503,7 +503,7 @@
     "com.unity.2d.aseprite@1.1.8": {
       "name": "com.unity.2d.aseprite",
       "displayName": "2D Aseprite Importer",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.aseprite@1f731787b516",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.aseprite@1f731787b516",
       "fingerprint": "1f731787b516be32a29864ebe53bd4e737058c54",
       "editorCompatibility": "2021.3.15f1",
       "version": "1.1.8",
@@ -513,7 +513,7 @@
     "com.unity.searcher@4.9.2": {
       "name": "com.unity.searcher",
       "displayName": "Searcher",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.searcher@90d011a70418",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.searcher@90d011a70418",
       "fingerprint": "90d011a70418fd5b0f4b8e86df39444d2af228dd",
       "editorCompatibility": "2019.1.0a1",
       "version": "4.9.2",
@@ -523,7 +523,7 @@
     "com.unity.burst@1.8.18": {
       "name": "com.unity.burst",
       "displayName": "Burst",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.burst@616862665d8c",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.burst@616862665d8c",
       "fingerprint": "616862665d8c8ffe643d505aebb5de2ee73b0ab0",
       "editorCompatibility": "2020.3.0a1",
       "version": "1.8.18",
@@ -533,7 +533,7 @@
     "com.unity.mathematics@1.3.2": {
       "name": "com.unity.mathematics",
       "displayName": "Mathematics",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.mathematics@8017b507cc74",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.mathematics@8017b507cc74",
       "fingerprint": "8017b507cc74bf0a1dd14b18aa860569f807314d",
       "editorCompatibility": "2021.3.0a1",
       "version": "1.3.2",
@@ -543,7 +543,7 @@
     "com.unity.collections@2.5.1": {
       "name": "com.unity.collections",
       "displayName": "Collections",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.collections@56bff8827a7e",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.collections@56bff8827a7e",
       "fingerprint": "56bff8827a7ef6d44fcee4f36e558a74da89c1a0",
       "editorCompatibility": "2022.3.11f1",
       "version": "2.5.1",
@@ -553,7 +553,7 @@
     "com.unity.rendering.light-transport@1.0.1": {
       "name": "com.unity.rendering.light-transport",
       "displayName": "Unity Light Transport Library",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.rendering.light-transport@307bc27a498f",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.rendering.light-transport@307bc27a498f",
       "fingerprint": "307bc27a498fc9cd409bbd426c85d8dc7f140bc1",
       "editorCompatibility": "2023.3.0b1",
       "version": "1.0.1",
@@ -563,7 +563,7 @@
     "com.unity.2d.common@9.0.7": {
       "name": "com.unity.2d.common",
       "displayName": "2D Common",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.2d.common@bb1fc9b3d81b",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.2d.common@bb1fc9b3d81b",
       "fingerprint": "bb1fc9b3d81b3bb452c6708e8c088fe4224a0369",
       "editorCompatibility": "2023.1.0a1",
       "version": "9.0.7",
@@ -573,7 +573,7 @@
     "com.unity.nuget.mono-cecil@1.11.4": {
       "name": "com.unity.nuget.mono-cecil",
       "displayName": "Mono Cecil",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.nuget.mono-cecil@d6f9955a5d5f",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.nuget.mono-cecil@d6f9955a5d5f",
       "fingerprint": "d6f9955a5d5f84d45442ff1ad0fb694cc6e2fd62",
       "editorCompatibility": "2018.4.0a1",
       "version": "1.11.4",
@@ -583,7 +583,7 @@
     "com.unity.test-framework.performance@3.0.3": {
       "name": "com.unity.test-framework.performance",
       "displayName": "Performance testing API",
-      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Balatro-Feel/Library/PackageCache/com.unity.test-framework.performance@fb0dc592af8b",
+      "resolvedPath": "/Users/win/Desktop/BELLEtro-Senior-Design/Library/PackageCache/com.unity.test-framework.performance@fb0dc592af8b",
       "fingerprint": "fb0dc592af8b524f1a06c50d7caf95552f1bcd2f",
       "editorCompatibility": "2020.3.0a1",
       "version": "3.0.3",
