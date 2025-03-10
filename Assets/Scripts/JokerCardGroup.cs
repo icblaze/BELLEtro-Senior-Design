@@ -15,7 +15,7 @@ public class JokerCardHolder : MonoBehaviour
     private RectTransform rect;
 
     [Header("Spawn Settings")]
-    [SerializeField] private int cardsToSpawn = 4;
+    [SerializeField] private int cardsToSpawn = 7;
     public List<Card> cards;
 
     bool isCrossing = false;
@@ -25,7 +25,8 @@ public class JokerCardHolder : MonoBehaviour
     {
         for (int i = 0; i < cardsToSpawn; i++)
         {
-            Instantiate(slotPrefab, transform);
+            GameObject newSlot = Instantiate(slotPrefab, transform);
+            newSlot.name = $"JokerCard {i + 1}"; // Assign meaningful names
         }
 
         rect = GetComponent<RectTransform>();
@@ -38,8 +39,20 @@ public class JokerCardHolder : MonoBehaviour
             card.PointerExitEvent.AddListener(CardPointerExit);
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
-            card.name = "JokerCard_" + cardCount.ToString();
+            card.name = $"Card {cardCount + 1}"; // Assign names sequentially
             cardCount++;
+        }
+
+        StartCoroutine(Frame());
+
+        IEnumerator Frame()
+        {
+            yield return new WaitForSecondsRealtime(.1f);
+            for (int i = 0; i < cards.Count; i++)
+            {
+                if (cards[i].cardVisual != null)
+                    cards[i].cardVisual.UpdateIndex(transform.childCount);
+            }
         }
     }
 
@@ -73,6 +86,15 @@ public class JokerCardHolder : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            if (hoveredCard != null)
+            {
+                Destroy(hoveredCard.transform.parent.gameObject);
+                cards.Remove(hoveredCard);
+            }
+        }
+
         if (Input.GetMouseButtonDown(1))
         {
             foreach (Card card in cards)
@@ -128,6 +150,7 @@ public class JokerCardHolder : MonoBehaviour
         bool swapIsRight = cards[index].ParentIndex() > selectedCard.ParentIndex();
         cards[index].cardVisual.Swap(swapIsRight ? -1 : 1);
 
+        //Updated Visual Indexes
         foreach (Card card in cards)
         {
             card.cardVisual.UpdateIndex(transform.childCount);
