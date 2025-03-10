@@ -444,6 +444,7 @@
 "Assets/Scripts/CardVisual.cs"
 "Assets/Scripts/DeleteCard.cs"
 "Assets/Scripts/HorizontalCardHolder.cs"
+"Assets/Scripts/JokerCardGroup.cs"
 "Assets/Scripts/PlayHand.cs"
 "Assets/Scripts/ShaderCode.cs"
 "Assets/Scripts/VisualCardsHandler.cs"

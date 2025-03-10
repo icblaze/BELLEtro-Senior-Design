@@ -1,7 +1,9 @@
 ﻿<Properties StartupConfiguration="{EAE8829A-A560-ACED-9BED-D64FBE3235EE}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayHand.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/JokerCardGroup.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayHand.cs" Line="22" Column="29" />
+      <File FileName="Assets/Scripts/DeleteCard.cs" Line="92" Column="1" />
+      <File FileName="Assets/Scripts/HorizontalCardHolder.cs" Line="79" Column="1" />
+      <File FileName="Assets/Scripts/JokerCardGroup.cs" Line="137" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -9,7 +11,7 @@
           <Node name="BELLEtro-Senior-Design" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="PlayHand.cs" selected="True" />
+                <Node name="JokerCardGroup.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -19,7 +21,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="33716b66-af45-49d6-8c5e-4a5d0e29de7b" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ed37798f-b29a-4ded-b1c8-c51956b5383b" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
