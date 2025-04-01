@@ -22,6 +22,8 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     public float selectionOffset = 50;
     private float pointerDownTime;
     private float pointerUpTime;
+    private bool loggedMissingParent = false;
+
 
     [Header("Visual")]
     [SerializeField] private GameObject cardVisualPrefab;
@@ -169,8 +171,32 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public int SiblingAmount()
     {
-        return transform.parent.CompareTag("Slot") ? transform.parent.parent.childCount - 1 : 0;
+        Transform slot = transform.parent;
+        if (slot == null || !slot.CompareTag("Slot"))
+        {
+            Debug.LogWarning("SiblingAmount: Invalid Slot structure.");
+            return 1;
+        }
+
+        Transform container = slot.parent;
+        if (container == null)
+        {
+            Debug.LogWarning("SiblingAmount: Slot has no container parent.");
+            return 1;
+        }
+
+        int siblingSlots = 0;
+        foreach (Transform child in container)
+        {
+            if (child.CompareTag("Slot"))
+                siblingSlots++;
+        }
+
+        return Mathf.Max(siblingSlots, 1); // Always return at least 1
     }
+
+
+
 
     public int ParentIndex()
     {
@@ -179,7 +205,44 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     public float NormalizedPosition()
     {
-        return transform.parent.CompareTag("Slot") ? ExtensionMethods.Remap((float)ParentIndex(), 0, (float)(transform.parent.parent.childCount - 1), 0, 1) : 0;
+        // First, check if parent exists
+        if (transform.parent == null)
+        {
+            Debug.LogWarning("Card has no parent transform!");
+            return 0;
+        }
+
+        // Check if parent has "Slot" tag
+        if (!transform.parent.CompareTag("Slot"))
+        {
+            Debug.LogWarning("Card's parent does not have 'Slot' tag!");
+            return 0;
+        }
+
+        // Check if parent's parent exists
+        if (transform.parent.parent == null)
+        {
+            Debug.LogWarning("Card's parent has no parent transform!");
+            return 0;
+        }
+
+        // Get the total child count of the parent's parent
+        int totalChildren = transform.parent.parent.childCount;
+
+        // Prevent division by zero
+        if (totalChildren <= 1)
+        {
+            return 0;
+        }
+
+        // Use the safe version of Remap
+        return ExtensionMethods.Remap(
+            (float)transform.parent.GetSiblingIndex(),
+            0,
+            (float)(totalChildren - 1),
+            0,
+            1
+        );
     }
 
     private void OnDestroy()

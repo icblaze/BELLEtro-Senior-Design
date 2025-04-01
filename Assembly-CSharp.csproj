@@ -70,6 +70,7 @@
     <Compile Include="Assets/Scripts/_Utility/ExtensionMethods.cs" />
     <Compile Include="Assets/Scripts/VisualCardsHandler.cs" />
     <Compile Include="Assets/Scripts/CardSelection.cs" />
+    <Compile Include="Assets/Scripts/DeckManager.cs" />
     <Compile Include="Assets/Scripts/Card.cs" />
     <Compile Include="Assets/Scripts/HorizontalCardHolder.cs" />
   </ItemGroup>

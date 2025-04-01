@@ -12,11 +12,19 @@ public class PlayHand : MonoBehaviour
 
     private List<GameObject> selectedCards = new List<GameObject>(); // Cards that are selected
     private DeleteCard deleteCardScript; // Reference to DeleteCard
+    private DeckManager deckManager; // Reference to DeckManager
 
     void Start()
     {
         playHandButton.onClick.AddListener(PlaySelectedCards);
         deleteCardScript = FindFirstObjectByType<DeleteCard>(); // Find DeleteCard in the scene
+        deckManager = FindFirstObjectByType<DeckManager>(); // Find DeckManager in the scene
+
+        if (deleteCardScript == null)
+            Debug.LogError("PlayHand: DeleteCard script not found in scene!");
+
+        if (deckManager == null)
+            Debug.LogError("PlayHand: DeckManager script not found in scene!");
     }
 
     void PlaySelectedCards()
@@ -30,12 +38,12 @@ public class PlayHand : MonoBehaviour
         }
 
         // Move selected cards to the play area
-        StartCoroutine(MoveCardsToCenter());
+        StartCoroutine(MoveCardsToPlayArea());
     }
 
-    IEnumerator MoveCardsToCenter()
+    IEnumerator MoveCardsToPlayArea()
     {
-        Debug.Log("MoveCardsToCenter started");
+        Debug.Log("MoveCardsToPlayArea started");
 
         float offsetX = -((selectedCards.Count - 1) * 50f); // Adjusts card positioning
 
@@ -57,16 +65,16 @@ public class PlayHand : MonoBehaviour
                 continue;
             }
 
-            // ✅ Set PlayArea as the new parent
+            // ✅ Move to play area
             card.transform.SetParent(playArea, false);
-
-            // ✅ Calculate the correct position relative to PlayArea
             Vector2 targetPosition = new Vector2(offsetX + (i * 100f), 0);
             StartCoroutine(MoveCard(card, targetPosition));
-
         }
 
         yield return new WaitForSeconds(displayDuration);
+
+        // ✅ Remove cards and draw new ones (Fix: Ensure only needed cards are drawn)
+        int cardsPlayed = selectedCards.Count;
 
         foreach (GameObject card in selectedCards)
         {
@@ -78,6 +86,12 @@ public class PlayHand : MonoBehaviour
         }
 
         selectedCards.Clear();
+
+        // ✅ Only draw new cards equal to the number of played cards
+        for (int i = 0; i < cardsPlayed; i++)
+        {
+            deckManager.DrawCard();
+        }
     }
 
 
@@ -104,6 +118,4 @@ public class PlayHand : MonoBehaviour
 
         cardRect.anchoredPosition = targetPosition; // Ensure exact final position
     }
-
-
 }

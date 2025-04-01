@@ -28,6 +28,7 @@
 *.so.*
 *.dylib
 
+
 # Executables
 *.exe
 *.out
@@ -50,3 +51,45 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# ========== Unity Generated Files ==========
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+UserSettings/
+Logs/
+MemoryCaptures/
+*.stacktrace
+
+# ========== Visual Studio/JetBrains Rider ==========
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+.vs/
+
+# DOTweenSettings.asset should be tracked to share DOTween config
+
+
+# ========== OS ==========
+.DS_Store
+Thumbs.db
+
+# ========== Crash Reports ==========
+*.dmp
+*.mdmp
+
+# ========== Unity Cache ==========
+*.unitypackage
+
+# Optional: keep just your Assets, ProjectSettings, Packages, and optionally .gitignore

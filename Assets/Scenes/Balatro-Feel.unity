@@ -2009,6 +2009,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1296720586}
+  - component: {fileID: 1296720587}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -2042,6 +2043,22 @@ RectTransform:
   m_AnchoredPosition: {x: 449, y: -324}
   m_SizeDelta: {x: 189.3, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1296720587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296720585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fb8b714bcdc490c866117a6b6ae674, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPrefab: {fileID: 3655645598659960977, guid: e99c361e7acdd41f0b904fef6be48fea, type: 3}
+  playingCardGroup: {fileID: 667881465}
+  deckPosition: {fileID: 0}
+  deckCards: []
 --- !u!1 &1401784926
 GameObject:
   m_ObjectHideFlags: 0

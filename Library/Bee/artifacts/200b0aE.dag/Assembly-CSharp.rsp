@@ -442,6 +442,7 @@
 "Assets/Scripts/Card.cs"
 "Assets/Scripts/CardSelection.cs"
 "Assets/Scripts/CardVisual.cs"
+"Assets/Scripts/DeckManager.cs"
 "Assets/Scripts/DeleteCard.cs"
 "Assets/Scripts/HorizontalCardHolder.cs"
 "Assets/Scripts/JokerCardGroup.cs"

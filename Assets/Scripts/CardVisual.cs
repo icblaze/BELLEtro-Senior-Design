@@ -109,9 +109,48 @@ public class CardVisual : MonoBehaviour
 
     private void HandPositioning()
     {
-        curveYOffset = (curve.positioning.Evaluate(parentCard.NormalizedPosition()) * curve.positioningInfluence) * parentCard.SiblingAmount();
-        curveYOffset = parentCard.SiblingAmount() < 5 ? 0 : curveYOffset;
-        curveRotationOffset = curve.rotation.Evaluate(parentCard.NormalizedPosition());
+        // Early exit if critical references are missing
+        if (parentCard == null || curve == null)
+        {
+            Debug.LogWarning("HandPositioning: Missing parentCard or curve reference");
+            return;
+        }
+
+        // Safely get normalized position with fallback
+        float normalizedPos = 0f;
+        try
+        {
+            normalizedPos = parentCard.NormalizedPosition();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error getting normalized position: {e.Message}");
+            return;
+        }
+
+        // Safely calculate sibling amount
+        int siblingAmount = 0;
+        try
+        {
+            siblingAmount = parentCard.SiblingAmount();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Error getting sibling amount: {e.Message}");
+            return;
+        }
+
+        // Null checks for curve components
+        if (curve.positioning == null || curve.rotation == null)
+        {
+            Debug.LogWarning("HandPositioning: Curve positioning or rotation is null");
+            return;
+        }
+
+        // Calculate curve offsets with additional safety checks
+        curveYOffset = (curve.positioning.Evaluate(normalizedPos) * curve.positioningInfluence) * siblingAmount;
+        curveYOffset = siblingAmount < 5 ? 0 : curveYOffset;
+        curveRotationOffset = curve.rotation.Evaluate(normalizedPos);
     }
 
     private void SmoothFollow()
@@ -138,7 +177,19 @@ public class CardVisual : MonoBehaviour
         Vector3 offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float tiltX = parentCard.isHovering ? ((offset.y * -1) * manualTiltAmount) : 0;
         float tiltY = parentCard.isHovering ? ((offset.x) * manualTiltAmount) : 0;
-        float tiltZ = parentCard.isDragging ? tiltParent.eulerAngles.z : (curveRotationOffset * (curve.rotationInfluence * parentCard.SiblingAmount()));
+        int siblingAmount = 1;
+        try
+        {
+            siblingAmount = parentCard.SiblingAmount();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"CardTilt: Error getting sibling amount: {e.Message}");
+            siblingAmount = 1;
+        }
+
+        float tiltZ = parentCard.isDragging ? tiltParent.eulerAngles.z : (curveRotationOffset * (curve.rotationInfluence * siblingAmount));
+
 
         float lerpX = Mathf.LerpAngle(tiltParent.eulerAngles.x, tiltX + (sine * autoTiltAmount), tiltSpeed * Time.deltaTime);
         float lerpY = Mathf.LerpAngle(tiltParent.eulerAngles.y, tiltY + (cosine * autoTiltAmount), tiltSpeed * Time.deltaTime);
