@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Audio
+  - TransitionImage
   layers:
   - Default
   - TransparentFX

@@ -15,15 +15,14 @@ public class MainMenuManager : MonoBehaviour
     private Button optionsButton;
     private Button quitButton;
     private AudioManager audioManager;
+    public CanvasGroup fadeToBlack;
+    public CanvasGroup optionsMenu;
 
     //Function called when object is first created/started. Used to obtain objects. Possibly do not need these
     //as buttons should be able to call functions themselves.
     private void Awake()
     {
         transitionImage = GameObject.FindGameObjectWithTag("TransitionImage").GetComponent<Image>();
-        // playButton = GameObject.FindGameObjectWithTag("PlayButton").GetComponent<Button>();
-        // optionsButton = GameObject.FindGameObjectWithTag("OptionButton").GetComponent<Button>();
-        // quitButton = GameObject.FindGameObjectWithTag("QuitButton").GetComponent<Button>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         Debug.Log("Main Menu Manager has Awoken");
 
@@ -57,7 +56,8 @@ public class MainMenuManager : MonoBehaviour
     public void StartClick()
     {
         //audioManager.PlaySFX(audioManager.);
-        StartCoroutine(DelayedTransition());
+        StartCoroutine(FadeToBlack());
+        //StartCoroutine(DelayedTransition());
         Debug.Log("StartButton Was Clicked");
     }
 
@@ -66,7 +66,17 @@ public class MainMenuManager : MonoBehaviour
     public void OptionClick()
     {
         Debug.Log("Options Button Clicked");
+        //If menu is not present, display. 
+        if(optionsMenu.alpha == 0){
 
+        
+        optionsMenu.alpha = 1;
+        optionsMenu.blocksRaycasts = true;
+        }//else, close menu. This is a non-issue as player isn't able to hit button when menu
+        else{//is open but this is just to ensure it works
+            optionsMenu.alpha = 0;
+            optionsMenu.blocksRaycasts = false;
+        }
     }
 
     //Function used to quit application. When the quit button is clicked, application quit runs.
@@ -75,10 +85,23 @@ public class MainMenuManager : MonoBehaviour
         Debug.Log("Quit Button Clicked");
         Application.Quit();
     }
+
     //Function that is called once the animation is done to load the playable scene.
     public void DelayedLoad()
     {
         SceneManager.LoadScene("Balatro-Feel");
+    }
+
+    private IEnumerator FadeToBlack()//Fade the scene when the quit button is clikced
+    {
+        while (fadeToBlack.alpha < 1)
+        {
+            float opacity = fadeToBlack.alpha + .01f;
+            Mathf.Clamp(opacity, 0, 1);
+            fadeToBlack.alpha = opacity;
+            yield return new WaitForSecondsRealtime(.01f);
+        }
+        Invoke("DelayedLoad", .5f);
     }
 }
 

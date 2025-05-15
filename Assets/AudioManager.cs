@@ -29,14 +29,14 @@ public class AudioManager : MonoBehaviour
     {
         // //sceneCounter = GameObject.Find("Scene Counter");
         // //Apply each audio clip to its source
-        // mainMenuSource.clip = MainMenuMusic;
+        mainMenuSource.clip = MainMenuMusic;
         // roundSource.clip = RoundMusic;
         // shopSource.clip = ShopMusic;
         // bossSource.clip = BossMusic;
         // defeatSource.clip = DefeatMusic;
 
         // //Play all music sources to have them synced. Used for transitioning between tracks
-        // mainMenuSource.Play();
+        mainMenuSource.Play();
         // roundSource.Play();
         // shopSource.Play();
         // bossSource.Play();
@@ -49,10 +49,10 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip);
     }
 
-    //if scene count < 5, play Low Soft
+    //Function call to change between music tracks
     public void changeMusic(int curCount)
     {
-        //For now test chnaging it to End
+     
         StartCoroutine(blendTrack(mainMenuSource));
 
     }
