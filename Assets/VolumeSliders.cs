@@ -48,12 +48,15 @@ public class VolumeSliders : MonoBehaviour
         audioMixer.SetFloat("SFX", SFXSlider.value);
         PlayerPrefs.SetFloat("SFX", SFXSlider.value);
     }
-
+    //Set sliders to player prefs.
     private void Load()
     {
         MasterVolumeSlider.value = PlayerPrefs.GetFloat("Master");
+        SetMasterVolume();
         MusicSlider.value = PlayerPrefs.GetFloat("Music");
+        SetMusicVolume();
         SFXSlider.value = PlayerPrefs.GetFloat("SFX");
+        SetSFXVolume();
     }
 
     private void Save()
