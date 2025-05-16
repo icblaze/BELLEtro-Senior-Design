@@ -63,6 +63,7 @@
     <Compile Include="Assets/Scripts/ChangeAlpha.cs" />
     <Compile Include="Assets/Scripts/HorizontalCardHolder.cs" />
     <Compile Include="Assets/VolumeSliders.cs" />
+    <Compile Include="Assets/PauseMenuManager.cs" />
     <Compile Include="Assets/AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>

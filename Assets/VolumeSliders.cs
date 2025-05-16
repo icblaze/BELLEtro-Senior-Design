@@ -10,6 +10,7 @@ public class VolumeSliders : MonoBehaviour
     [SerializeField] Slider MasterVolumeSlider;
     [SerializeField] Slider MusicSlider;
     [SerializeField] Slider SFXSlider;
+    [SerializeField] Slider VoiceSlider;
     private AudioManager audioManager;
 
     //Functions ensures that player prefs for volume are set. If not, it sets them to 0. 
@@ -24,7 +25,8 @@ public class VolumeSliders : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("SFX"))
             PlayerPrefs.SetFloat("SFX", -10);
-
+        if (!PlayerPrefs.HasKey("Voice"))
+            PlayerPrefs.SetFloat("Voice", -10);
         //Load after ensuring playerprefs exist
         Load();
     }
@@ -48,6 +50,11 @@ public class VolumeSliders : MonoBehaviour
         audioMixer.SetFloat("SFX", SFXSlider.value);
         PlayerPrefs.SetFloat("SFX", SFXSlider.value);
     }
+    public void SetVoiceVolume()
+    {
+        audioMixer.SetFloat("Voice", VoiceSlider.value);
+        PlayerPrefs.SetFloat("Voice", VoiceSlider.value);
+    }
     //Set sliders to player prefs.
     private void Load()
     {
@@ -57,6 +64,8 @@ public class VolumeSliders : MonoBehaviour
         SetMusicVolume();
         SFXSlider.value = PlayerPrefs.GetFloat("SFX");
         SetSFXVolume();
+        VoiceSlider.value = PlayerPrefs.GetFloat("Voice");
+        SetVoiceVolume();
     }
 
     private void Save()
@@ -64,5 +73,6 @@ public class VolumeSliders : MonoBehaviour
         PlayerPrefs.SetFloat("Master", MasterVolumeSlider.value);
         PlayerPrefs.SetFloat("Music", MusicSlider.value);
         PlayerPrefs.SetFloat("SFX", SFXSlider.value);
+        PlayerPrefs.SetFloat("Voice", VoiceSlider.value);
     }
 }
