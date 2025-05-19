@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      balatro-main-menu-image-without-ui-elements-v0-yl1be0ojeevc1_0: 1661895352553163231
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
