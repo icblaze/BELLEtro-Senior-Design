@@ -50,10 +50,12 @@
   <ItemGroup>
     <Compile Include="Assets/Scripts/PlayHand.cs" />
     <Compile Include="Assets/MainMenuManager.cs" />
+    <Compile Include="Assets/RunInfoManager.cs" />
     <Compile Include="Assets/Scripts/ShaderCode.cs" />
     <Compile Include="Assets/ShopManager.cs" />
     <Compile Include="Assets/Scripts/DeleteCard.cs" />
     <Compile Include="Assets/Scripts/JokerCardGroup.cs" />
+    <Compile Include="Assets/PlayerPrefsManager.cs" />
     <Compile Include="Assets/Scripts/_SciptableObjects/CurveParameters.cs" />
     <Compile Include="Assets/Scripts/CardVisual.cs" />
     <Compile Include="Assets/Scripts/_Utility/ExtensionMethods.cs" />
@@ -62,9 +64,11 @@
     <Compile Include="Assets/Scripts/DeckManager.cs" />
     <Compile Include="Assets/Scripts/Card.cs" />
     <Compile Include="Assets/Scripts/ChangeAlpha.cs" />
+    <Compile Include="Assets/GameManager.cs" />
     <Compile Include="Assets/Scripts/HorizontalCardHolder.cs" />
     <Compile Include="Assets/VolumeSliders.cs" />
     <Compile Include="Assets/PauseMenuManager.cs" />
+    <Compile Include="Assets/ScrollingImage.cs" />
     <Compile Include="Assets/AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
