@@ -51,6 +51,7 @@
     <Compile Include="Assets/Scripts/PlayHand.cs" />
     <Compile Include="Assets/MainMenuManager.cs" />
     <Compile Include="Assets/Scripts/ShaderCode.cs" />
+    <Compile Include="Assets/ShopManager.cs" />
     <Compile Include="Assets/Scripts/DeleteCard.cs" />
     <Compile Include="Assets/Scripts/JokerCardGroup.cs" />
     <Compile Include="Assets/Scripts/_SciptableObjects/CurveParameters.cs" />
