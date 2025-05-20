@@ -11,19 +11,18 @@ using UnityEngine;
 // player has and deals with selling
 public class Player
 {
-  public:
-    Deck deck;
-    Mentor[] mentorDeck;
-    Consumable[] consumables;
-    Deck hand;
-    int discards;
-    int handCount;
-    int moneyCount;
-    BigInteger chipCount;
-    int maxConsumables;
-    Voucher[] vouchers;
+    public Deck deck;
+    public Mentor[] mentorDeck;
+    public Consumable[] consumables;
+    public Deck hand;
+    public int discards;
+    public int handCount;
+    public int moneyCount;
+    public BigInteger chipCount;
+    public int maxConsumables;
+    public Voucher[] vouchers;
     // Make Hand Table here  <--------
-    Game game;
+    public Game game;
     float discount;
     
     public void removeCard (Card card)

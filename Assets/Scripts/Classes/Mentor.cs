@@ -11,12 +11,11 @@ using UnityEngine;
 // Their effects can range from giving money, to multuplying the mult in a round.
 public class Mentor
 {
-  public:
-    int sellValue;
-    int price;
-    MentorName name;
-    CardEdition edition;
-    UseLocation[] locations;
+    public int sellValue;
+    public int price;
+    public MentorName name;
+    public CardEdition edition;
+    public UseLocation[] locations;
 
     public void useMentor (Game game)
     {

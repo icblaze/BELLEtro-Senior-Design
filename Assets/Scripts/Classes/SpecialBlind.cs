@@ -11,7 +11,7 @@ using UnityEngine;
 public class SpecialBlind
 {
     public float chipMultiplier;
-    public specialBlindNames blindType;
+    public SpecialBlindNames blindType;
 
     public void applySpecialBlinds()
     {

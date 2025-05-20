@@ -8,20 +8,14 @@ using UnityEngine;
 
 // This interface extends the BaseCard interface and has basic information for 
 // each type of consumable
-}
-public interface Consumable : BaseCard
+
+public abstract class Consumable : BaseCard
 {
     public CardType kindOfCard;
-  public:
-    int sellValue;
-    ConsumableType type;
-    bool isInstant;
-    int price;
-    bool isNegative;
-    bool isDisabled;
-
-    public void applyEffect(Game game)
-    {
-
-    }
+    public int sellValue;
+    public ConsumableType type;
+    public bool isInstant;
+    public int price;
+    public bool isNegative;
+    public bool isDisabled;
 }

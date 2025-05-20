@@ -9,18 +9,9 @@ using UnityEngine;
 // CardBuffs will change the cards that are in your hand, add consumables, and give money
 public class CardBuff : Consumable
 {
-    public CardType kindOfCard;
+    public CardBuffName name;
 
-  public:
-    CardBuffName name;
-    int sellValue;
-    ConsumableType type;
-    bool isInstant;
-    int price;
-    bool isNegative;
-    bool isDisabled;
-
-    public void applyEffect(Game game)
+    public void applyCardBuff (Game game)
     {
 
     }

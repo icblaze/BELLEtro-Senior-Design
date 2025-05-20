@@ -9,18 +9,9 @@ using UnityEngine;
 // Textbooks will enhance the base chips and mult for a kind of hand
 public class Textbook : Consumable
 {
-    public CardType kindOfCard;
+    public TextbookName name;
 
-  public:
-    TextbookName name;
-    int sellValue;
-    ConsumableType type;
-    bool isInstant;
-    int price;
-    bool isNegative;
-    bool isDisabled;
-
-    public void applyEffect(Game game)
+    public void applyTextbook (Game game)
     {
 
     }

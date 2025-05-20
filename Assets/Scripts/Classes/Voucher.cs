@@ -10,7 +10,7 @@ using UnityEngine;
 // The Vouchers will permenantly enhance the player with many kinds of Buffs
 public class Voucher
 {
-    public voucherNames name;
+    public VoucherNames name;
     public int initialPrice;
 
     public void applyEffect(Player player)

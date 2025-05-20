@@ -8,11 +8,11 @@ using System.Collections;
 using UnityEngine;
 
 // Card inherits from BaseCard
-public class Card : BaseCard
+public class PCard : BaseCard
 {
-    public CardType kindOfCard = Card;
+    public CardType kindOfCard;
     public char linguisticChar;
-    public suitName suit;
+    public SuitName suit;
     public PlaceArticulation placeArt;
     public MannerArticulation mannerArt;
     public bool isDiphthong;

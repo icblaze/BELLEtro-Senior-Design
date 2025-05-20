@@ -10,9 +10,8 @@ using UnityEngine;
 // from a select number and uses or adds them to the deck or mentorDeck
 public class Pack
 {
-  public:
-    PackType name;
-    int packSize; // number of cards in the pack
-    int PackDraw; // number of cards a player can choose
-    int price;
+    public PackType name;
+    public int packSize; // number of cards in the pack
+    public int PackDraw; // number of cards a player can choose
+    public int price;
 }
