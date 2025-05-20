@@ -13,27 +13,19 @@ public class DeleteCard : MonoBehaviour
 
     void Start()
     {
-        // find DeckManager
         deckManager = FindObjectOfType<DeckManager>();
         if (deckManager == null)
             Debug.LogError("DeleteCard: no DeckManager in scene!");
 
-        // auto-assign playingCardGroup if left null in Inspector
         if (playingCardGroup == null)
         {
             var go = GameObject.Find("PlayingCardGroup");
             if (go != null)
-            {
                 playingCardGroup = go.transform;
-                Debug.Log("DeleteCard: auto-found PlayingCardGroup at runtime.");
-            }
             else
-            {
                 Debug.LogError("DeleteCard: playingCardGroup not assigned AND no GameObject named 'PlayingCardGroup' found!");
-            }
         }
 
-        // hook up the Delete button
         if (deleteButton != null)
             deleteButton.onClick.AddListener(RemoveSelectedCards);
         else
@@ -54,7 +46,6 @@ public class DeleteCard : MonoBehaviour
             selectedCards.Remove(card);
     }
 
-    // so other scripts (PlayHand.cs) can inspect your selection
     public List<GameObject> GetSelectedCards()
     {
         return new List<GameObject>(selectedCards);
@@ -90,8 +81,11 @@ public class DeleteCard : MonoBehaviour
 
     private IEnumerator RefillNextFrame(int count)
     {
-        yield return null;   // wait one frame for Destroy() to complete
+        // wait one frame so the Slots are truly empty
+        yield return null;
+
+        // ← here’s the only change: use DrawCard() so it honors your Slot layout
         for (int i = 0; i < count; i++)
-            deckManager.DrawCardNoLimit();
+            deckManager.DrawCard();
     }
 }
