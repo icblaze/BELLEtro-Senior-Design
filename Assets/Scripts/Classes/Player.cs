@@ -25,7 +25,7 @@ public class Player
     public Game game;
     float discount;
     
-    public void removeCard (Card card)
+    public void removeCard (PCard card)
     {
 
     }

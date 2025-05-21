@@ -11,24 +11,27 @@ using UnityEngine;
 // these cards (and a random drawing function)
 public class Deck
 {
-  public Card[] cards;
+  public PCard[] cards;
 
-  public Card[] drawCards (Game game)
+  public PCard[] drawCards(Game game)
+  {
+    PCard card = new PCard();
+    PCard[] list = { card };
+    return list;
+  }
+
+  public void addCard (PCard card)
   {
 
   }
 
-  public void addCard (Card card)
+  public PCard removeCard (PCard card)
   {
-
+    PCard card2 = new PCard();
+    return card2;
   }
 
-  public Card removeCard (Card card)
-  {
-
-  }
-
-  public void updateCard (Card original, Card updated)
+  public void updateCard (PCard original, PCard updated)
   {
 
   }

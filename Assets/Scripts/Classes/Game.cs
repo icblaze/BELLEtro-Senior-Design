@@ -24,44 +24,59 @@ public class Game
 
     }
 
-    public Card[] randomDraw (Deck deck, int drawCount)
+    public PCard[] randomDraw(Deck deck, int drawCount)
     {
-
+        PCard card = new PCard();
+        PCard[] list = { card };
+        return list;
     }
 
-    public Card[] randomCard (int cardCount)
+    public PCard[] randomCard (int cardCount)
     {
-
+        PCard card = new PCard();
+        PCard[] list = { card };
+        return list;
     }
 
     public Voucher[] randomVoucher (int voucherCount)
     {
-
+        Voucher card = new Voucher();
+        Voucher[] list = { card };
+        return list;
     }
 
     public Textbook[] randomTextbook (int textbookCount)
     {
-
+        Textbook card = new Textbook();
+        Textbook[] list = { card };
+        return list;
     }
 
     public Mentor[] randomMentor (int mentorCount)
     {
-
+        Mentor card = new Mentor();
+        Mentor[] list = { card };
+        return list;
     }
 
     public CardBuff[] randomCardBuff (int cardCount)
     {
-
+        CardBuff card = new CardBuff();
+        CardBuff[] list = { card };
+        return list;
     }
 
     public Pack[] randomPack (int packCount)
     {
-
+        Pack card = new Pack();
+        Pack[] list = { card };
+        return list;
     }
 
     public SpecialBlind randomSpecialBlind()
     {
-
+        SpecialBlind blind = new SpecialBlind();
+        return blind;
     }
       
 }
