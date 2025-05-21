@@ -80,6 +80,9 @@ MemoryCaptures/
 
 # DOTweenSettings.asset should be tracked to share DOTween config
 
+#DOTween files
+*.dll.mdb
+*.dll.mdb.meta
 
 # ========== OS ==========
 .DS_Store
@@ -92,4 +95,6 @@ Thumbs.db
 # ========== Unity Cache ==========
 *.unitypackage
 
+# ========== Log files ==========
+*.log
 # Optional: keep just your Assets, ProjectSettings, Packages, and optionally .gitignore
