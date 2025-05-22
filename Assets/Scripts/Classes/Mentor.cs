@@ -18,6 +18,13 @@ public class Mentor
     public CardEdition edition;
     public UseLocation[] locations;
 
+
+    //  Default constructor
+    public Mentor()
+    {
+
+    }
+
     //  Constructor that each Mentor will use as the base
     public Mentor (MentorName name, int price, int sellValue, CardEdition edition, UseLocation[] locations)
     {
