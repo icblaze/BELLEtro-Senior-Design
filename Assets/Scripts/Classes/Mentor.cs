@@ -3,6 +3,7 @@
 // contained in the Mentor directory which is located in this directory
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
+// Andy (flakkid): constructor and method to be overriden
 
 using System.Collections;
 using UnityEngine;
@@ -17,8 +18,19 @@ public class Mentor
     public CardEdition edition;
     public UseLocation[] locations;
 
-    public void useMentor (Game game)
+    //  Constructor that each Mentor will use as the base
+    public Mentor (MentorName name, int price, int sellValue, CardEdition edition, UseLocation[] locations)
     {
+        this.name = name;
+        this.price = price;
+        this.sellValue = sellValue;
+        this.edition = edition;
+        this.locations = locations;
+    }
 
+    //  Method to override for each unique Mentor, activates effect
+    public virtual void UseMentor (Game game)
+    {
+        
     }
 }

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      belatrobackground_0: 666066566997250167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
