@@ -98,3 +98,4 @@ Thumbs.db
 # ========== Log files ==========
 *.log
 # Optional: keep just your Assets, ProjectSettings, Packages, and optionally .gitignore
+*.log
