@@ -1,7 +1,7 @@
 // This Document contains the code for the CardBuff class
 // This class contains information about a CardBuff which is a type of consumable
 // Current Devs:
-// Robert (momomonkeyman): made class and varuables
+// Robert (momomonkeyman): made class and variables
 
 using System.Collections;
 using UnityEngine;

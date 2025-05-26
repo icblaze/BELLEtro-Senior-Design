@@ -1,4 +1,4 @@
-// This Document contains the code for the TextbookName enum
+// This Document contains the code for the TextbookName enum which corresponds to the Planets
 // This enum contains the names for the different kinds of Textbooks in BELLEtro
 // Current Devs:
 // Robert (momomonkeyman): made enum

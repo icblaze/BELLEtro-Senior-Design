@@ -102,3 +102,7 @@ dkms.conf
 .idea_project/
 *.ipr
 *.iws
+
+#=========== Extra Files that should be ignored ======
+EditorUserSettings.asset
+packages-lock.json

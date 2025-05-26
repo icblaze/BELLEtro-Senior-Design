@@ -14,7 +14,7 @@ public class DeckManager : MonoBehaviour
 
     [Header("Settings")]
     public int maxCardsInHand = 10;
-
+    
     void Start()
     {
         // Fill the deck with 20 shuffled placeholder cards

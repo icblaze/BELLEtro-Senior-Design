@@ -6,7 +6,7 @@
 using System.Collections;
 using UnityEngine;
 
-// This interface is the base for all of the other cards in BELLEtro
+// This abstract class is the base for all of the other cards in BELLEtro
 public abstract class BaseCard
 {
     CardType kindOfCard;

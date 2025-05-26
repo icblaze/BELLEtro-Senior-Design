@@ -9,7 +9,7 @@ using System.Collections;
 using UnityEngine;
 
 // Mentors can fundamentally alter the way a player will be able to play BELLEtro.
-// Their effects can range from giving money, to multuplying the mult in a round.
+// Their effects can range from giving money, to multiplying the mult in a round.
 public class Mentor
 {
     public int sellValue;

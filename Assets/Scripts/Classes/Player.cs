@@ -2,7 +2,7 @@
 // This class contains information about what the player has
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
-//
+
 using System.Numerics;
 using System.Collections;
 using UnityEngine;

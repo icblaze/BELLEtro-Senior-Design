@@ -6,7 +6,7 @@
 using System.Collections;
 using UnityEngine;
 
-// Enhancemetns are a type of effect that a card can have
+// Enhancements are a type of effect that a card can have
 public enum CardEnhancement
 {
     Base,        // No Change

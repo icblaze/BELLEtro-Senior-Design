@@ -8,8 +8,8 @@ using UnityEngine;
 
 public enum PackType
 {
-  Card,
-  CardBuff,
-  Textbook,
-  Mentor
+  Card,     //This represents the linguistic cards in our game.
+  CardBuff, //This represents the tarots in our game.
+  Textbook, //This represents the planets in our game.
+  Mentor    //This represents the Joker in our game.
 }
