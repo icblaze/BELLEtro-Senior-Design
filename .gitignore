@@ -1,49 +1,91 @@
-# Prerequisites
-*.d
+# ===========================================
+# UNITY - SAFE & CLEAN .GITIGNORE
+# ===========================================
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+# ========== Unity Generated Files ==========
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+MemoryCaptures/
+Logs/
+UserSettings/
+*.stacktrace
 
-# Linker output
-*.ilk
-*.map
-*.exp
+# ========== Unity Package Cache ==========
+# Prevent broken dependencies and large cache files
+Packages/com.unity.*.lock
+**/Library/PackageCache/
+**/Library/ScriptAssemblies/
+**/Library/Bee/
 
-# Precompiled Headers
-*.gch
-*.pch
+# ========== Assets Metadata ==========
+*.pidb
+*.booproj
+*.svd
+*.user
+*.userprefs
 
-# Libraries
+# ========== Visual Studio / JetBrains Rider ==========
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.log
+*.bak
+
+# ========== OS Generated Files ==========
+.DS_Store
+Thumbs.db
+
+# ========== Crash Reports ==========
+*.dmp
+*.mdmp
+
+# ========== Executables ==========
+*.exe
+*.app
+*.apk
+*.x86
+*.x86_64
+*.out
+*.i*86
+*.hex
+
+# ========== Libraries and Binaries ==========
+*.dll
+*.dll.meta
+*.so
+*.so.*
+*.dylib
 *.lib
 *.a
 *.la
 *.lo
+*.obj
+*.o
+*.ko
+*.elf
+*.ilk
+*.exp
+*.map
+*.gch
+*.pch
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+# ========== DOTween Exceptions ==========
+# Keep this one to preserve DOTween settings!
+!Assets/Resources/DOTweenSettings.asset
 
+# Optional: UnityPackages & Archives
+*.unitypackage
+*.zip
+*.tar.gz
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
-
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
-
-# Kernel Module Compile Results
+# ========== Kernel & Modules ==========
 *.mod*
 *.cmd
 .tmp_versions/
@@ -52,44 +94,11 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# ========== Unity Generated Files ==========
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
-UserSettings/
-Logs/
-MemoryCaptures/
-*.stacktrace
-
-# ========== Visual Studio/JetBrains Rider ==========
-.vscode/
+# ========== Rider logs and temp ==========
 .idea/
-*.csproj
-*.unityproj
-*.sln
-*.suo
-*.tmp
-*.user
-*.userprefs
-*.pidb
-*.booproj
-*.svd
-.vs/
-
-# DOTweenSettings.asset should be tracked to share DOTween config
-
-
-# ========== OS ==========
-.DS_Store
-Thumbs.db
-
-# ========== Crash Reports ==========
-*.dmp
-*.mdmp
-
-# ========== Unity Cache ==========
-*.unitypackage
-
-# Optional: keep just your Assets, ProjectSettings, Packages, and optionally .gitignore
+.idea_modules/
+.idea_workspace/
+.idea_content/
+.idea_project/
+*.ipr
+*.iws
