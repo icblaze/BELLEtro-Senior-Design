@@ -66,6 +66,10 @@
     <Compile Include="Assets/Scripts/Classes/Mentor.cs" />
     <Compile Include="Assets/Scripts/Classes/CardBuffName.cs" />
     <Compile Include="Assets/Scripts/Classes/Game.cs" />
+    <Compile Include="Assets/Scripts/Classes/PackType.cs" />
+    <Compile Include="Assets/Scripts/Classes/Mentor.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardBuffName.cs" />
+    <Compile Include="Assets/Scripts/Classes/Game.cs" />
     <Compile Include="Assets/MainMenuManager.cs" />
     <Compile Include="Assets/Scripts/Classes/BaseCard.cs" />
     <Compile Include="Assets/Scripts/Classes/CardBuff.cs" />
@@ -74,7 +78,9 @@
     <Compile Include="Assets/RunInfoManager.cs" />
     <Compile Include="Assets/Scripts/ShaderCode.cs" />
     <Compile Include="Assets/Scripts/Classes/Player.cs" />
+    <Compile Include="Assets/Scripts/Classes/Player.cs" />
     <Compile Include="Assets/ShopManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardType.cs" />
     <Compile Include="Assets/Scripts/Classes/CardType.cs" />
     <Compile Include="Assets/Scripts/DeleteCard.cs" />
     <Compile Include="Assets/Scripts/JokerCardGroup.cs" />
@@ -88,6 +94,11 @@
     <Compile Include="Assets/Scripts/Classes/Deck.cs" />
     <Compile Include="Assets/Scripts/Classes/Textbook.cs" />
     <Compile Include="Assets/Scripts/Classes/Consumable.cs" />
+    <Compile Include="Assets/Scripts/Classes/Card.cs" />
+    <Compile Include="Assets/Scripts/Classes/VoucherNames.cs" />
+    <Compile Include="Assets/Scripts/Classes/Deck.cs" />
+    <Compile Include="Assets/Scripts/Classes/Textbook.cs" />
+    <Compile Include="Assets/Scripts/Classes/Consumable.cs" />
     <Compile Include="Assets/Scripts/_Utility/ExtensionMethods.cs" />
     <Compile Include="Assets/Scripts/VisualCardsHandler.cs" />
     <Compile Include="Assets/Scripts/CardSelection.cs" />
@@ -95,7 +106,10 @@
     <Compile Include="Assets/Scripts/DeckManager.cs" />
     <Compile Include="Assets/Scripts/Classes/SuitName.cs" />
     <Compile Include="Assets/Scripts/Classes/UseLocation.cs" />
+    <Compile Include="Assets/Scripts/Classes/SuitName.cs" />
+    <Compile Include="Assets/Scripts/Classes/UseLocation.cs" />
     <Compile Include="Assets/Scripts/Card.cs" />
+    <Compile Include="Assets/Scripts/Classes/SpecialBlindNames.cs" />
     <Compile Include="Assets/Scripts/Classes/SpecialBlindNames.cs" />
     <Compile Include="Assets/Scripts/ChangeAlpha.cs" />
     <Compile Include="Assets/GameManager.cs" />
@@ -103,7 +117,12 @@
     <Compile Include="Assets/VolumeSliders.cs" />
     <Compile Include="Assets/Scripts/Classes/TextbookName.cs" />
     <Compile Include="Assets/Scripts/Classes/CardEnhancement.cs" />
+    <Compile Include="Assets/Scripts/Classes/TextbookName.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardEnhancement.cs" />
     <Compile Include="Assets/PauseMenuManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/MannerArticulation.cs" />
+    <Compile Include="Assets/Scripts/Classes/SpecialBlind.cs" />
+    <Compile Include="Assets/Scripts/Classes/ConsumableType.cs" />
     <Compile Include="Assets/Scripts/Classes/MannerArticulation.cs" />
     <Compile Include="Assets/Scripts/Classes/SpecialBlind.cs" />
     <Compile Include="Assets/Scripts/Classes/ConsumableType.cs" />

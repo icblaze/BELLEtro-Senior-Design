@@ -1,16 +1,15 @@
 using UnityEngine;
-
+//Script is used to close out the RunInfo Manager.
 public class RunInfoManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public CanvasGroup runInfo;
+
+    //Function called to go back to regular gameplay. Make run info menu
+    //disappear
+    public void BackButton()
     {
-        
+        runInfo.alpha = 0;
+        runInfo.blocksRaycasts = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
