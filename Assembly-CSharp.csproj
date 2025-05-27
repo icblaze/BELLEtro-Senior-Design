@@ -49,26 +49,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/PlayHand.cs" />
+    <Compile Include="Assets/Scripts/Classes/PackType.cs" />
+    <Compile Include="Assets/Scripts/Classes/Mentor.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardBuffName.cs" />
+    <Compile Include="Assets/Scripts/Classes/Game.cs" />
     <Compile Include="Assets/MainMenuManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/BaseCard.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardBuff.cs" />
+    <Compile Include="Assets/Scripts/Classes/Pack.cs" />
     <Compile Include="Assets/RunInfoManager.cs" />
     <Compile Include="Assets/Scripts/ShaderCode.cs" />
+    <Compile Include="Assets/Scripts/Classes/Player.cs" />
     <Compile Include="Assets/ShopManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardType.cs" />
     <Compile Include="Assets/Scripts/DeleteCard.cs" />
     <Compile Include="Assets/Scripts/JokerCardGroup.cs" />
     <Compile Include="Assets/PlayerPrefsManager.cs" />
     <Compile Include="Assets/Scripts/_SciptableObjects/CurveParameters.cs" />
+    <Compile Include="Assets/Scripts/Classes/Voucher.cs" />
     <Compile Include="Assets/Scripts/CardVisual.cs" />
+    <Compile Include="Assets/Scripts/Classes/Card.cs" />
+    <Compile Include="Assets/Scripts/Classes/VoucherNames.cs" />
+    <Compile Include="Assets/Scripts/Classes/Deck.cs" />
+    <Compile Include="Assets/Scripts/Classes/Textbook.cs" />
+    <Compile Include="Assets/Scripts/Classes/Consumable.cs" />
     <Compile Include="Assets/Scripts/_Utility/ExtensionMethods.cs" />
     <Compile Include="Assets/Scripts/VisualCardsHandler.cs" />
     <Compile Include="Assets/Scripts/CardSelection.cs" />
+    <Compile Include="Assets/UIManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardSeal.cs" />
     <Compile Include="Assets/Scripts/DeckManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/SuitName.cs" />
+    <Compile Include="Assets/Scripts/Classes/UseLocation.cs" />
     <Compile Include="Assets/Scripts/Card.cs" />
+    <Compile Include="Assets/Scripts/Classes/SpecialBlindNames.cs" />
     <Compile Include="Assets/Scripts/ChangeAlpha.cs" />
     <Compile Include="Assets/GameManager.cs" />
     <Compile Include="Assets/Scripts/HorizontalCardHolder.cs" />
     <Compile Include="Assets/VolumeSliders.cs" />
+    <Compile Include="Assets/Scripts/Classes/TextbookName.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardEnhancement.cs" />
     <Compile Include="Assets/PauseMenuManager.cs" />
+    <Compile Include="Assets/Scripts/Classes/MannerArticulation.cs" />
+    <Compile Include="Assets/Scripts/Classes/SpecialBlind.cs" />
+    <Compile Include="Assets/Scripts/Classes/ConsumableType.cs" />
     <Compile Include="Assets/ScrollingImage.cs" />
+    <Compile Include="Assets/TextScroll.cs" />
+    <Compile Include="Assets/Scripts/Classes/PlaceArticulation.cs" />
+    <Compile Include="Assets/Scripts/Classes/MentorName.cs" />
+    <Compile Include="Assets/Scripts/Classes/CardEdition.cs" />
     <Compile Include="Assets/AudioManager.cs" />
   </ItemGroup>
   <ItemGroup>
