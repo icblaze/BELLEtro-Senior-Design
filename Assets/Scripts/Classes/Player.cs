@@ -5,6 +5,7 @@
 //
 using System.Numerics;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // The Player class will contain the information about each of the things the
@@ -21,7 +22,7 @@ public class Player
     public BigInteger chipCount;
     public int maxConsumables;
     public Voucher[] vouchers;
-    // Make Hand Table here  <--------
+    public Dictionary<TextbookName, HandInfo> handTable;
     public Game game;
     float discount;
     

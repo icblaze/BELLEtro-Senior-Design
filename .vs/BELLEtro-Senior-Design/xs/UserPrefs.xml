@@ -1,15 +1,25 @@
 ﻿<Properties StartupConfiguration="{EAE8829A-A560-ACED-9BED-D64FBE3235EE}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ShopManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Classes/Textbook.cs">
     <Files>
-      <File FileName="Assets/ShopManager.cs" Line="5" Column="13" />
+      <File FileName="Assets/Scripts/Classes/Game.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Classes/Player.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameLogic/MentorBufferManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Classes/HandTable.cs" Line="38" Column="36" />
+      <File FileName="Assets/Scripts/Classes/TextbookName.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Classes/Mentor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Classes/Textbook.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="BELLEtro-Senior-Design" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True" />
-              <Node name="ShopManager.cs" selected="True" />
+              <Node name="Scripts" expanded="True">
+                <Node name="Classes" expanded="True">
+                  <Node name="Textbook.cs" selected="True" />
+                </Node>
+                <Node name="GameLogic" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -18,7 +28,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2f0c5872-4632-4598-8ac8-19ad0bd8b1c6" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7c9f3480-efdd-44ec-8f87-8ad42629f4ec" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
