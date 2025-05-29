@@ -5,9 +5,7 @@
 // Current Devs:
 // Andy (flakkid): made class's constuctor, variables, getters
 
-
 using UnityEngine;
-using System.Collections;
 
 [System.Serializable]
 public class HandInfo : ScriptableObject

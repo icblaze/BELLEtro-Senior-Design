@@ -9,30 +9,31 @@ using System.Collections;
 using UnityEngine;
 
 // Mentors can fundamentally alter the way a player will be able to play BELLEtro.
-// Their effects can range from giving money, to multiplying the mult in a round.
-public class Mentor
+// Their effects can range from giving money, to multuplying the mult in a round.
+public class Mentor : MonoBehaviour
 {
     public int sellValue;
     public int price;
-    public MentorName name;
+    new public MentorName name;
     public CardEdition edition;
     public UseLocation[] locations;
 
 
-    //  Default constructor
+    //  placeholder default constructor (will be "CheatSheet" mentor, base edition)
     public Mentor()
     {
-
+        new CheatSheet(CardEdition.Base);
     }
 
-    //  Constructor that each Mentor will use as the base
-    public Mentor (MentorName name, int price, int sellValue, CardEdition edition, UseLocation[] locations)
+    //  Constructor that each Mentor will use as the base, locations filled out in specific mentor
+    public Mentor (MentorName name, CardEdition edition, int basePrice)
     {
         this.name = name;
-        this.price = price;
-        this.sellValue = sellValue;
         this.edition = edition;
-        this.locations = locations;
+
+        //  Calculate price based on edition, and have sell value be half that amount
+        price = basePrice + PriceAssignment.EditionPrice(edition);
+        sellValue = (int)Mathf.Floor(price / 2.0f);
     }
 
     //  Method to override for each unique Mentor, activates effect

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MentorBufferManager
+public class MentorBufferManager : MonoBehaviour
 {
     public static Dictionary<UseLocation, List<Mentor>> mentorBuffers = new();
 
