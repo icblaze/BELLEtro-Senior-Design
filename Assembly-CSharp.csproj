@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\Classes\BaseCard.cs" />
     <Compile Include="Assets\Scripts\Classes\CardBuff.cs" />
     <Compile Include="Assets\Scripts\Classes\Pack.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\MentorBufferManager.cs" />
     <Compile Include="Assets\RunInfoManager.cs" />
     <Compile Include="Assets\Scripts\CardObject.cs" />
     <Compile Include="Assets\Scripts\ShaderCode.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\_Utility\ExtensionMethods.cs" />
     <Compile Include="Assets\Scripts\VisualCardsHandler.cs" />
     <Compile Include="Assets\Scripts\CardSelection.cs" />
+    <Compile Include="Assets\UIManager.cs" />
     <Compile Include="Assets\Scripts\Classes\CardSeal.cs" />
     <Compile Include="Assets\Scripts\DeckManager.cs" />
     <Compile Include="Assets\Scripts\Classes\SuitName.cs" />
@@ -86,7 +88,6 @@
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\Classes\SpecialBlindNames.cs" />
     <Compile Include="Assets\Scripts\ChangeAlpha.cs" />
-    <Compile Include="Assets\Scripts\MentorBufferManager.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\HorizontalCardHolder.cs" />
     <Compile Include="Assets\VolumeSliders.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Scripts\Classes\SpecialBlind.cs" />
     <Compile Include="Assets\Scripts\Classes\ConsumableType.cs" />
     <Compile Include="Assets\ScrollingImage.cs" />
+    <Compile Include="Assets\TextScroll.cs" />
     <Compile Include="Assets\Scripts\Classes\PlaceArticulation.cs" />
     <Compile Include="Assets\Scripts\Classes\MentorName.cs" />
     <Compile Include="Assets\Scripts\Classes\CardEdition.cs" />
