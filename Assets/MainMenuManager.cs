@@ -68,13 +68,15 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("Options Button Clicked");
         //If menu is not present, display. 
-        if (optionsMenu.alpha == 0) {
+        if (optionsMenu.alpha == 0)
+        {
 
 
             optionsMenu.alpha = 1;
             optionsMenu.blocksRaycasts = true;
         }//else, close menu. This is a non-issue as player isn't able to hit button when menu
-        else {//is open but this is just to ensure it works
+        else
+        {//is open but this is just to ensure it works
             optionsMenu.alpha = 0;
             optionsMenu.blocksRaycasts = false;
         }
@@ -111,7 +113,7 @@ public class MainMenuManager : MonoBehaviour
         }
         Invoke("DelayedLoad", .5f);
     }
-    
+
     //Function is used to change "pages" in the HowToPlay Menu. 
     //In this case, it is the next page.
     public void NextPage()
@@ -137,6 +139,12 @@ public class MainMenuManager : MonoBehaviour
         {
             text.pageToDisplay--;
         }
+    }
+
+    public void BackButtonHowToPlay()
+    {
+        howToPlayMenu.alpha = 0;
+        howToPlayMenu.blocksRaycasts = false;
     }
 }
 
