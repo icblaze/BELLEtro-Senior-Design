@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\Classes\UseLocation.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\Classes\SpecialBlindNames.cs" />
+    <Compile Include="Assets\Scripts\MentorBufferManager.cs" />
     <Compile Include="Assets\Scripts\ChangeAlpha.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\HorizontalCardHolder.cs" />
