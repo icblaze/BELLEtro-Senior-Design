@@ -4,7 +4,11 @@
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // The Deck will hold the player's cards and will allow for CRUD operations upon
@@ -12,11 +16,98 @@ using UnityEngine;
 public class Deck
 {
   public static int deckSize = 56;  //Deck count
+  public static int counter = 0;
 
-  //Constructor for the Deck so that we can create our deck for the game.
+  public List<PCard> deckCardsData = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
+
+  //This constructor handles the creation of the deck for the game.
   public Deck()
   {
-   
+    foreach (SuitName suit in Enum.GetValues(typeof(SuitName)))
+    {
+      foreach (PlaceArticulation placeArticulation in Enum.GetValues(typeof(PlaceArticulation)))
+      {
+        foreach (MannerArticulation mannerArticulation in Enum.GetValues(typeof(MannerArticulation)))
+        {
+          foreach (LinguisticTerms linguisticterm in Enum.GetValues(typeof(LinguisticTerms)))
+          {
+            if (IsValidCombination(suit, placeArticulation, mannerArticulation, linguisticterm) == true)
+            {
+              PCard newCard = new PCard
+              {
+                kindOfCard = CardType.Card,
+                term = linguisticterm,
+                suit = suit,
+                placeArt = placeArticulation,
+                mannerArt = mannerArticulation,
+                isDiphthong = false,
+                chips = 10,
+                multiplier = 1,
+                edition = CardEdition.Base,
+                enhancement = CardEnhancement.Base,
+                seal = CardSeal.Base,
+                isDisabled = false,
+              };
+
+              counter++;
+
+              if (IsVowel(suit, placeArticulation, mannerArticulation, linguisticterm) == true)
+              {
+                newCard.chips = 8;
+
+                if (IsDiphthong(suit, placeArticulation, mannerArticulation, linguisticterm) == true)
+                {
+                  newCard.isDiphthong = true;
+                }
+                deckCardsData.Add(new PCard
+                {
+                  kindOfCard = CardType.Card,
+                  term = linguisticterm,
+                  suit = suit,
+                  placeArt = placeArticulation,
+                  mannerArt = mannerArticulation,
+                  isDiphthong = newCard.isDiphthong,
+                  chips = 8,
+                  multiplier = 1,
+                  edition = CardEdition.Base,
+                  enhancement = CardEnhancement.Base,
+                  seal = CardSeal.Base,
+                  isDisabled = false,
+                });
+                counter++;
+                Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
+
+              }
+              deckCardsData.Add(newCard);
+              Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
+
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+  public bool IsDiphthong(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
+  {
+    return term.ToString().Contains(suit.ToString()) &&
+           term.ToString().Contains(placeArt.ToString()) &&
+           (term.ToString().Contains("High") || term.ToString().Contains("Mid") || term.ToString().Contains("Low")) &&
+           term.ToString().Contains("Diphthong");
+  }
+  public bool IsVowel(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
+  {
+    return term.ToString().Contains(suit.ToString()) &&
+           term.ToString().Contains(placeArt.ToString()) &&
+           (term.ToString().Contains("High") || term.ToString().Contains("Mid") || term.ToString().Contains("Low"));
+
+  }
+  public bool IsValidCombination(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
+  {
+    return term.ToString().Contains(suit.ToString()) &&
+           term.ToString().Contains(placeArt.ToString()) &&
+           term.ToString().Contains(mannerArt.ToString());
   }
   
   public PCard[] cards; //This variable will hold the hand of the player.

@@ -12,8 +12,8 @@ public enum LinguisticTerms
     //Consonants
 
     //Stop Consonants         
-    Voiceless_Bilabial_Stop,                      //(p)
-    Voiced_Bilabial_Stop,                         //(b)
+    Voiceless_Labial_Stop,                        //(p)
+    Voiced_Labial_Stop,                           //(b)
     Voiced_Alveolar_Stop,                         //(d)
     Voiced_Velar_Stop,                            //(g)
     Voiceless_Alveolar_Stop,                      //(t)
@@ -24,28 +24,28 @@ public enum LinguisticTerms
     Voiceless_Labiodental_Fricative,              //(f)
     Voiceless_Interdental_Fricative,              //(θ̼)
     Voiceless_Alveolar_Fricative,                 //(s)
-    Voiceless_Palatal_Fricative,                  //(ʃ)
+    Voiceless_AlveoPalatal_Fricative,             //(ʃ)
     Voiceless_Glottal_Fricative,                  //(h)
     Voiced_Labiodental_Fricative,                 //(v)
     Voiced_Interdental_Fricative,                 //(ð)
-    Voiced_Alveolar_Fricative_z,                  //(z)  
-    Voiced_Palatal_Fricative,                     //(ʒ)
+    Voiced_Alveolar_Fricative,                    //(z)  
+    Voiced_AlveoPalatal_Fricative,                //(ʒ)
     
     //Affricate Consonants        
-    Voiceless_Palatal_Affricate,                  //(tʃ)
-    Voiced_Palatal_Affricate,                     //(dʒ)
+    Voiceless_AlveoPalatal_Affricate,             //(tʃ)
+    Voiced_AlveoPalatal_Affricate,                //(dʒ)
     
     //Nasal Consonants        
     Voiced_Alveolar_Nasal,                        //(n)
     Voiced_Velar_Nasal,                           //(ŋ)
-    Voiced_Bilabial_Nasal,                        //(m)
+    Voiced_Labial_Nasal,                          //(m)
     
     //Liquid Consonants       
-    Voiced_Alveolar_Lateral,                      //(l)
-    Voiced_Alveolar_Retroflex,                    //(ɹ)
+    Voiced_Alveolar_Liquid_Lateral,               //(l)
+    Voiced_Alveolar_Liquid_Retroflex,             //(ɹ)
     
     //Glide Consonants        
-    Voiced_Palatal_Glide,                         //(j)
+    Voiced_AlveoPalatal_Glide,                    //(j)
     Voiced_Velar_Glide,                           //(w)
     Voiceless_Velar_Glide,                        //((ʍ))
 
@@ -55,24 +55,24 @@ public enum LinguisticTerms
     //Lax vowels don't require much muscular effort from the vocal tract.
 
     //High Vowels
-    High_Front_Tense,                             //(ij)
-    High_Back_Tense,                              //(uw)
-    High_Front_Lax,                               //(I)
-    High_Back_Lax,                                //(ʊ)
+    Voiced_High_Front_Tense,                             //(ij)
+    Voiced_High_Back_Tense,                              //(uw)
+    Voiced_High_Front_Lax,                               //(I)
+    Voiced_High_Back_Lax,                                //(ʊ)
     
     //Mid vowels          
-    Mid_Front_Tense,                              //(ej)
-    Mid_Back_Rounded_Diphthong,                   //(ow)
-    Mid_Back_To_HighFront_Rounded_Diphthong,      //(oj)
-    Mid_Front_Lax,                                //(ɛ)
-    Mid_Central_Vowel,                            //(ə)
-    Mid_Low_Back_Unrounded_Vowel,                 //(ʌ)
-    Mid_Back_Rounded_Vowel,                       //(ɔ)
+    Voiced_Mid_Front_Tense_Diphthong,                    //(ej)
+    Voiced_Mid_Central_Rounded_Diphthong,                //(ow)
+    Voiced_Mid_Back_Rounded_Diphthong,                   //(oj)
+    Voiced_Mid_Front_Lax,                                //(ɛ)
+    Voiced_Mid_Central_Vowel_Schwa,                      //(ə)
+    Voiced_Mid_Central_Vowel,                            //(ʌ)
+    Voiced_Mid_Back_Rounded_Vowel,                       //(ɔ)
           
     //Low vowels          
-    Low_Central_To_HighFront_Diphthong,           //(aj)
-    Low_Central_To_HighBack_Diphthong,            //(aw)
-    Low_Back_Tense_Vowel,                         //(a)
-    Low_Front_Lax,                                //(æ)
+    Voiced_Low_Central_Diphthong,                        //(aj)
+    Voiced_Low_Back_Diphthong,                           //(aw)
+    Voiced_Low_Back_Tense_Vowel,                         //(a)
+    Voiced_Low_Front_Lax,                                //(æ)
 
 }   

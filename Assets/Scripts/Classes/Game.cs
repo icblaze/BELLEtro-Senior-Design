@@ -12,16 +12,16 @@ using System;
 // The Game class contains all of the information about the Game
 public class Game
 {
-    private int Ante;                            // Ante is the set of Rounds the player is on
-    private int RoundValue;                      // RoundValue is the Round within the current Ante
-    public BigInteger BaseChips;                // BaseChips are a calculation point for the value in each round, these are the blue chips.
-    public SpecialBlind[] PastSpecialBlinds;    // PastSpecialBlinds are the used Blinds 
+    private int Ante;                            //Ante is the set of Rounds the player is on
+    private int RoundValue;                      //RoundValue is the Round within the current Ante
+    public BigInteger BaseChips;                 //BaseChips are a calculation point for the value in each round, these are the blue chips.
+    public SpecialBlind[] PastSpecialBlinds;     //PastSpecialBlinds are the used Blinds 
     private int ChipTotal;                       // ChipTotal is the number of chips needed to win a round
-    public Voucher[] VoucherHolder;             // VoucherHolder contains the current Ante's Vouchers
-    public SpecialBlind CurrentSpecialBlind;    // CurrentSpecialBlind contains this Ante's Special Blind
-    public Player ThePlayer;                    // ThePlayer is a refrence to the Player class 
-    private int index;                          //This varaibale will hold a value that we would use to index into our deck
-    private static Random rnd = new Random();   //Random number generator
+    public Voucher[] VoucherHolder;              //VoucherHolder contains the current Ante's Vouchers
+    public SpecialBlind CurrentSpecialBlind;     //CurrentSpecialBlind contains this Ante's Special Blind
+    public Player ThePlayer;                     //ThePlayer is a refrence to the Player class 
+    private int index;                           //This varaibale will hold a value that we would use to index into our deck
+    private static Random rnd = new Random();    //Random number generator
 
 
     //This function is used to create a seed, so that we can get a random card from the deck.

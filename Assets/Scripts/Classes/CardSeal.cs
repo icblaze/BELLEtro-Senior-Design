@@ -9,6 +9,7 @@ using UnityEngine;
 // The seal is an additional effect that can be on a base card only
 public enum CardSeal
 {
+    Base,    // No seal
     Funding, // Grants $3 when card is scored
     Retake,  // Retriggers the card once
     Study    // Creates a Textbook which enhances the final played hand of round when 
