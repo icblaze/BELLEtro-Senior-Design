@@ -69,6 +69,7 @@
     <Compile Include="Assets\PlayerPrefsManager.cs" />
     <Compile Include="Assets\Scripts\_SciptableObjects\CurveParameters.cs" />
     <Compile Include="Assets\Scripts\Classes\Voucher.cs" />
+    <Compile Include="Assets\Scripts\Classes\HandInfo.cs" />
     <Compile Include="Assets\Scripts\CardVisual.cs" />
     <Compile Include="Assets\Scripts\Classes\VoucherNames.cs" />
     <Compile Include="Assets\Scripts\Classes\Deck.cs" />

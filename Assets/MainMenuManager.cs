@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 using Unity.VisualScripting;
 using System.Threading.Tasks;
 public class MainMenuManager : MonoBehaviour
@@ -13,10 +13,11 @@ public class MainMenuManager : MonoBehaviour
     private Image transitionImage;
     private Button playButton;
     private Button optionsButton;
-    private Button quitButton;
     private AudioManager audioManager;
     public CanvasGroup fadeToBlack;
     public CanvasGroup optionsMenu;
+    public CanvasGroup howToPlayMenu;
+    public TMP_Text text;
 
     //Function called when object is first created/started. Used to obtain objects. Possibly do not need these
     //as buttons should be able to call functions themselves.
@@ -67,13 +68,13 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("Options Button Clicked");
         //If menu is not present, display. 
-        if(optionsMenu.alpha == 0){
+        if (optionsMenu.alpha == 0) {
 
-        
-        optionsMenu.alpha = 1;
-        optionsMenu.blocksRaycasts = true;
+
+            optionsMenu.alpha = 1;
+            optionsMenu.blocksRaycasts = true;
         }//else, close menu. This is a non-issue as player isn't able to hit button when menu
-        else{//is open but this is just to ensure it works
+        else {//is open but this is just to ensure it works
             optionsMenu.alpha = 0;
             optionsMenu.blocksRaycasts = false;
         }
@@ -84,6 +85,13 @@ public class MainMenuManager : MonoBehaviour
     {
         Debug.Log("Quit Button Clicked");
         Application.Quit();
+    }
+    //Function is used to bring up the howtoplay menu in main menu.
+    public void HowToPlayClick()
+    {
+        howToPlayMenu.alpha = 1;
+        howToPlayMenu.blocksRaycasts = true;
+
     }
 
     //Function that is called once the animation is done to load the playable scene.
@@ -102,6 +110,33 @@ public class MainMenuManager : MonoBehaviour
             yield return new WaitForSecondsRealtime(.01f);
         }
         Invoke("DelayedLoad", .5f);
+    }
+    
+    //Function is used to change "pages" in the HowToPlay Menu. 
+    //In this case, it is the next page.
+    public void NextPage()
+    {
+        if (text.pageToDisplay == 4)
+        {
+            //Nothing
+        }
+        else
+        {
+            text.pageToDisplay++;
+        }
+    }
+    //Function is used to change "pages" in the HowToPlay Menu. 
+    //In this case, it is the back page.
+    public void BackPage()
+    {
+        if (text.pageToDisplay == 1)
+        {
+            //Nothing
+        }
+        else
+        {
+            text.pageToDisplay--;
+        }
     }
 }
 
