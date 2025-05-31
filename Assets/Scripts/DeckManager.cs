@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;            // ← for Linq helpers
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DeckManager : MonoBehaviour
@@ -14,13 +15,26 @@ public class DeckManager : MonoBehaviour
 
     [Header("Settings")]
     public int maxCardsInHand = 10;
-
+    
     void Start()
     {
+        Deck deck = new Deck();
+
+        //Debug.LogError($"Deck Counter Updated: {Deck.counter}");
+
+        if (deck.deckCardsData.Count < 56)
+        {
+            Debug.LogError("Not enough cards in deckCardsData! Check deck initialization.");
+            return;
+        }
+    
+
         // Fill the deck with 20 shuffled placeholder cards
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 56; i++)
         {
             GameObject newCard = Instantiate(cardPrefab, deckPosition);
+            CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
+
             newCard.name = $"DeckCard_{i}";
             newCard.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
             newCard.transform.localPosition = new Vector3(
@@ -28,6 +42,8 @@ public class DeckManager : MonoBehaviour
                 i * -0.05f,
                 0f
             );
+
+            cardComponent.cardData = deck.deckCardsData[i];
 
             deckCards.Add(newCard);
         }
