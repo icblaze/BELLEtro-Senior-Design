@@ -8,7 +8,7 @@ public class DeckManager : MonoBehaviour
     public GameObject cardPrefab;             // Assign your card prefab asset
     public Transform playingCardGroup;        // Assign PlayingCardGroup in Inspector
     public Transform deckPosition;            // Where your deck sits
-
+    public RectTransform pinkCardImage; 
     [Header("Deck Data")]
     public List<GameObject> deckCards = new List<GameObject>();
 
@@ -31,6 +31,7 @@ public class DeckManager : MonoBehaviour
 
             deckCards.Add(newCard);
         }
+        pinkCardImage.SetAsLastSibling();
     }
 
     /// <summary>
