@@ -18,7 +18,7 @@ public class CheatSheet : Mentor
         //  Normally assign locations here, but CheatSheet copies Mentor to the right
     }
 
-    //  Dynamically change the effect of Cheat Sheet based on rightMentor
+    //  Dynamically change the effect of Cheat Sheet based on rightMentor, call in JokerCard group
     public void ChangeEffect (Game game)
     {
         //  Get index of Cheat Sheet mentor

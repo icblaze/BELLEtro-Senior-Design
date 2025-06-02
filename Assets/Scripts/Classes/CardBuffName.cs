@@ -28,7 +28,7 @@ public enum CardBuffName
     Potato,
     Flatbread,
     Bagel,
-    Pretzal,
+    Pretzel,
     Banana,
     Toast
 }
