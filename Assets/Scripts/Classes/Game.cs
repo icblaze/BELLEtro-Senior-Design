@@ -12,6 +12,18 @@ using System;
 // The Game class contains all of the information about the Game
 public class Game
 {
+    
+    private static Game instance;
+    
+    public static Game access()
+    {
+      if (instance == null)
+      {
+        instance = new Game();
+      }
+      return instance;
+    }
+
     private int Ante;                            //Ante is the set of Rounds the player is on
     private int RoundValue;                      //RoundValue is the Round within the current Ante
     public BigInteger BaseChips;                 //BaseChips are a calculation point for the value in each round, these are the blue chips.

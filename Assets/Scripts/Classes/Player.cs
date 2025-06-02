@@ -12,6 +12,19 @@ using UnityEngine;
 // player has and deals with selling
 public class Player
 {
+
+    private static Player instance;
+
+    public static Player access()
+    {
+      if(instance == null)
+      {
+        instance = new Player();
+      }
+
+      return instance;
+    }
+
     public Deck deck;
     public Mentor[] mentorDeck;
     public Consumable[] consumables;
