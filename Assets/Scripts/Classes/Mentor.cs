@@ -39,7 +39,7 @@ public class Mentor
     }
 
     //  Method to override for each unique Mentor, activates effect
-    public virtual void UseMentor (Game game)
+    public virtual void UseMentor ()
     {
         
     }

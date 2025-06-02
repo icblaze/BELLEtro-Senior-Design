@@ -62,7 +62,7 @@ public class CardBuff : Consumable
     }
 
     //  Will apply appropiate buff based on 
-    public void applyCardBuff (Game game)
+    public void applyCardBuff ()
     {
         
     }
