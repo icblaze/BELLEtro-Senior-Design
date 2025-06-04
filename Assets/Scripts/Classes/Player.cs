@@ -2,6 +2,7 @@
 // This class contains information about what the player has
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
+// Andy (flakkid): turned arrays into List and added maxMentors variable;
 
 using System.Numerics;
 using System.Collections;
@@ -28,23 +29,22 @@ public class Player
         return instance;
     }
 
-    public Deck deck;                                                   //Deck of the game 
-    public List<Mentor> mentorDeck = new List<Mentor>();                //List of mentors the player currently has.
-    public List<Consumable> consumableDeck = new List<Consumable>();    //List of consumables the player currently has.
-    public Deck hand;                                                   //Players hand in the game.
-    public int discards;                                                //The amount of discards a player has in the game.                       
-    public int handCount;                                               //The amount of hands the player can play in the game.
-    public int moneyCount;                                              //Total money the player has in the game
-    public BigInteger chipCount;                                        //Players chip count
-    public int maxConsumables;                                          //Max consumables a player can have.
-    public Voucher[] vouchers;                                          //Vouchers that the player has currently.
-    public Dictionary<TextbookName, HandInfo> handTable;                //Dictionary that gets the handInfo from the poker hand played 
-    public Game game;                                                   //Game object
-    float discount;                                                     //Discount variable
-    int sellValue;                                                      // This variable contains the sellValue of a card 
-
-    //This removes the card from the players hand
-    public void removeCard(PCard card)
+    public Deck deck;
+    public List<Mentor> mentorDeck;
+    public List<Consumable> consumables;
+    public Deck hand;
+    public int discards;
+    public int handCount;
+    public int moneyCount;
+    public BigInteger chipCount;
+    public int maxConsumables;
+    public int maxMentors;
+    public List<Voucher> vouchers;
+    public Dictionary<TextbookName, HandInfo> handTable;
+    public Game game;
+    float discount;
+    
+    public void removeCard (PCard card)
     {
         if (deck.playerHand.Contains(card))
         {

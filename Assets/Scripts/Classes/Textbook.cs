@@ -2,6 +2,7 @@
 // This class contains information about a Textbook which is a type of consumable
 // Current Devs:
 // Robert (momomonkeyman): made class and varuables
+// Andy (flakkid): applying hand table logic, singleton change
 
 using System.Collections;
 using UnityEngine;
@@ -11,8 +12,34 @@ public class Textbook : Consumable
 {
     public TextbookName name;
 
-    public void applyTextbook (Game game)
+    //  Placeholder default constructor (High Card)
+    public Textbook()
     {
+        name = TextbookName.HighCard;
+        price = 3;
+        sellValue = 1;
+        isInstant = true;
+        type = ConsumableType.Textbook;
+        isDisabled = false;
+        isNegative = false;
+    }
 
+    //  Construct Textbook consumable with name of hand
+    public Textbook(TextbookName name)
+    {
+        this.name = name;
+        price = 3; 
+        sellValue = 1; 
+        isInstant = true; 
+        type = ConsumableType.Textbook;
+        isDisabled = false;
+        isNegative = false;
+    }
+
+    //  Increases appropiate hand based on textbook name
+    public void applyTextbook ()
+    {
+        Player player = Player.access();
+        player.handTable[name].increaseLevel();
     }
 }

@@ -5,9 +5,7 @@
 // Current Devs:
 // Andy (flakkid): made class's constuctor, variables, getters
 
-
 using UnityEngine;
-using System.Collections;
 
 [System.Serializable]
 public class HandInfo : ScriptableObject
@@ -25,73 +23,73 @@ public class HandInfo : ScriptableObject
 
         switch (textbookName)
         {
-            case (TextbookName.HighCard):
+            case TextbookName.HighCard:
                 baseMult = 1;
                 baseChips = 5;
                 incrementMult = 1;
                 incrementChips = 10;
                 break;
-            case (TextbookName.Pair):
+            case TextbookName.Pair:
                 baseMult = 2;
                 baseChips = 10;
                 incrementMult = 1;
                 incrementChips = 15;
                 break;
-            case (TextbookName.TwoPair):
+            case TextbookName.TwoPair:
                 baseMult = 2;
                 baseChips = 20;
                 incrementMult = 1;
                 incrementChips = 20;
                 break;
-            case (TextbookName.ThreeKind):
+            case TextbookName.ThreeKind:
                 baseMult = 3;
                 baseChips = 30;
                 incrementMult = 2;
                 incrementChips = 20;
                 break;
-            case (TextbookName.Straight):
+            case TextbookName.Straight:
                 baseMult = 4;
                 baseChips = 30;
                 incrementMult = 3;
                 incrementChips = 30;
                 break;
-            case (TextbookName.Flush):
+            case TextbookName.Flush:
                 baseMult = 4;
                 baseChips = 35;
                 incrementMult = 2;
                 incrementChips = 15;
                 break;
-            case (TextbookName.FullHouse):
+            case TextbookName.FullHouse:
                 baseMult = 4;
                 baseChips = 40;
                 incrementMult = 2;
                 incrementChips = 25;
                 break;
-            case (TextbookName.FourKind):
+            case TextbookName.FourKind:
                 baseMult = 7;
                 baseChips = 60;
                 incrementMult = 3;
                 incrementChips = 30;
                 break;
-            case (TextbookName.StraightFlush):
+            case TextbookName.StraightFlush:
                 baseMult = 8;
                 baseChips = 100;
                 incrementMult = 4;
                 incrementChips = 40;
                 break;
-            case (TextbookName.FiveKind):
+            case TextbookName.FiveKind:
                 baseMult = 12;
                 baseChips = 120;
                 incrementMult = 3;
                 incrementChips = 35;
                 break;
-            case (TextbookName.FlushHouse):
+            case TextbookName.FlushHouse:
                 baseMult = 14;
                 baseChips = 140;
                 incrementMult = 4;
                 incrementChips = 40;
                 break;
-            case (TextbookName.FlushFive):
+            case TextbookName.FlushFive:
                 baseMult = 16;
                 baseChips = 160;
                 incrementMult = 3;  

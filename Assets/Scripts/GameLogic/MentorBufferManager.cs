@@ -8,20 +8,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MentorBufferManager
+public class MentorBufferManager : MonoBehaviour
 {
     public static Dictionary<UseLocation, List<Mentor>> mentorBuffers = new();
+    private static Player player = Player.access();
+    private static Game game = Game.access();
 
 
     //  Assigns each Mentor of the Player's mentorDeck to their buffer
-    public static void AssignToBuffer (Game game)
+    public static void AssignToBuffer ()
     {
         foreach (UseLocation location in System.Enum.GetValues(typeof(UseLocation)))
         {
             mentorBuffers[location] = new List<Mentor>();
         }
 
-        foreach (Mentor mentor in game.ThePlayer.mentorDeck)
+        foreach (Mentor mentor in player.mentorDeck)
         {
             foreach (UseLocation location in mentor.locations)
             {
@@ -31,22 +33,22 @@ public class MentorBufferManager
     }
 
     //  Execute buffer of specified location
-    public static void RunBuffer (Game game, UseLocation buffer)
+    public static void RunBuffer (UseLocation buffer)
     {
         foreach (Mentor mentor in mentorBuffers[buffer])
         {
-            mentor.UseMentor(game);
+            mentor.UseMentor();
         }
     }
 
     //  Playing hand buffer execution
-    public static void PlayHand (Game game)
+    public static void PlayHand ()
     {
         //  Putting effect cards in their assigned buffer
-        AssignToBuffer(game);
+        AssignToBuffer();
 
         //  Using Initial Effect Cards
-        RunBuffer(game, UseLocation.Initial);
+        RunBuffer(UseLocation.Initial);
 
         //  Playing Each Card in Hand
         //  TODO Differentiate between playHand and drawHand (change the outer foreach loop)
@@ -57,9 +59,9 @@ public class MentorBufferManager
                 continue;
             }
 
-            RunBuffer(game, UseLocation.PreCard);
+            RunBuffer(UseLocation.PreCard);
             //  TODO Play Card call here
-            RunBuffer(game, UseLocation.PostCard);
+            RunBuffer(UseLocation.PostCard);
         }
 
         //  Playing From-Draw Cards
@@ -70,13 +72,13 @@ public class MentorBufferManager
                 continue;
             }
 
-            RunBuffer(game, UseLocation.PreFromDraw);
+            RunBuffer(UseLocation.PreFromDraw);
             //  TODO Play From-Draw call here
-            RunBuffer(game, UseLocation.PostFromDraw);
+            RunBuffer(UseLocation.PostFromDraw);
         }
 
         //  Using Post Effect Cards
-        RunBuffer(game, UseLocation.Post);
+        RunBuffer(UseLocation.Post);
 
         //  TODO Scoring phase here
     }
