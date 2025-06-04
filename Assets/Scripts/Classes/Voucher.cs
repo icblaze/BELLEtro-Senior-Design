@@ -11,7 +11,7 @@ using UnityEngine;
 public class Voucher
 {
     public VoucherNames name;
-    public int initialPrice;
+    public int initialPrice = 10; //Vouchers have a base price of 10
 
     public void applyEffect(Player player)
     {

@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,10 +16,13 @@ using UnityEngine;
 // these cards (and a random drawing function)
 public class Deck
 {
-  public static int deckSize = 56;  //Deck count
+  public static int deckSize = 56;  //Deck count, might remove later
   public static int counter = 0;
 
-  public List<PCard> deckCardsData = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
+  public List<PCard> deckCards = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
+  public List<PCard> cardsDrawn = new List<PCard>(); //This should store all the cards that were drawn
+  public List<PCard> playerHand = new List<PCard>(); //This variable will hold the hand of the player.
+
 
   //This constructor handles the creation of the deck for the game.
   public Deck()
@@ -87,6 +91,7 @@ public class Deck
       }
 
     }
+    counter = 0; //Set the counter back to 0
   }
 
   public bool IsDiphthong(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
@@ -109,31 +114,65 @@ public class Deck
            term.ToString().Contains(placeArt.ToString()) &&
            term.ToString().Contains(mannerArt.ToString());
   }
-  
-  public PCard[] cards; //This variable will hold the hand of the player.
 
+  //This function is responsible for drawing a certain amount of cards into the players hand.
+  //PlayerHandCount represents how many missing cards are missing from the players hand.
   public PCard[] drawCards(Game game, int playerHandCount)
   {
-    PCard card = new PCard();
-    PCard[] list = { card };
+    if (deckCards.Count == 0)
+    {
+      return null;
+    }
+    
+    //This calls the random draw function with the entire deck and playerhandcount
+    PCard[] list = game.randomDraw(deckCards, playerHandCount);
+
+    //Remove cards from the deck
+    for (int i = 0; i < playerHandCount; i++)
+    {
+      PCard removed = removeCard(list[i]);
+      if (removed != null)
+      {
+        cardsDrawn.Add(removed);
+      }      
+      
+    }
+
     return list;
   }
 
+  //Adds a card to the deck
   public void addCard(PCard card)
   {
-
+    if (card != null)
+    {
+      deckCards.Add(card);
+    }
   }
 
+  //This function should remove the card from the deck and return the removed card.  
   public PCard removeCard(PCard card)
   {
-    PCard card2 = new PCard();
-    return card2;
+    if (deckCards.Remove(card))
+    {
+      PCard removedCard = card;
+      return removedCard;
+    }
+
+    return null;
   }
 
-  //This function is responsible for updating the card selected based of a CardType such as a Mentor, Textbook, or CardBuff.
-  public void updateCard(PCard original, PCard updated)
+  //This function is responsible for updating the card selected.
+  //Update the card in the scene
+  public void updateCard(PCard originalCard, PCard updatedCard)
   {
+    int index = deckCards.FindIndex(card => card == originalCard);
 
+    if (index != -1)
+    {
+      deckCards[index] = updatedCard;
+    }
+    
   }
 
 }

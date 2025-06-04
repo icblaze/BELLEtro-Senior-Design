@@ -6,6 +6,8 @@
 using System.Numerics;
 using System.Collections;
 using System;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 
 
@@ -28,11 +30,11 @@ public class Game
     private int RoundValue;                      //RoundValue is the Round within the current Ante
     public BigInteger BaseChips;                 //BaseChips are a calculation point for the value in each round, these are the blue chips.
     public SpecialBlind[] PastSpecialBlinds;     //PastSpecialBlinds are the used Blinds 
-    private int ChipTotal;                       // ChipTotal is the number of chips needed to win a round
+    private int ChipTotal;                       //ChipTotal is the number of chips needed to win a round
     public Voucher[] VoucherHolder;              //VoucherHolder contains the current Ante's Vouchers
     public SpecialBlind CurrentSpecialBlind;     //CurrentSpecialBlind contains this Ante's Special Blind
-    public Player ThePlayer;                     //ThePlayer is a refrence to the Player class 
-    private int index;                           //This varaibale will hold a value that we would use to index into our deck
+    public Player ThePlayer;                     //The Player is a refrence to the Player class 
+    private int index;                           //This variable will hold a value that we would use to index into our deck
     private static Random rnd = new Random();    //Random number generator
 
 
@@ -42,29 +44,25 @@ public class Game
         return rnd.Next(0, deckSize);
     }
 
-    //This will randomly draw cards for the deck after a player plays a hand or removes cards from their deck.
-    public PCard[] randomDraw(Deck deck, int drawCount)
+    //This will randomly draw cards from the deck after a player plays a hand or removes cards from the deck.
+    public PCard[] randomDraw(List<PCard> deckCards, int drawCount)
     {
         PCard[] list = new PCard[drawCount];
-        PCard card;
 
         for (int i = 0; i < drawCount; i++)
         {
             //Call the randomizer function so that we can get a random number so that we can get a random card from the deck.
-            index = randomizer(Deck.deckSize);
+            index = randomizer(deckCards.Count);
 
-            //Next we should index into our deck so that we can get a card from our deck.'
-            
-            //Then we should add that card to the list of cards.
-            card = new PCard();
-
+            //Next we should index into our deck so that we can get a card from our deck.
+            list[i] = deckCards[index];
         }
         
         return list;
     }
 
     //This function is responsible for generating a random card, useful for when we want to retrieve a random card for packs.
-    public PCard[] randomCard(int cardCount)
+    public PCard[] randomPackCards(int cardCount)
     {
         PCard card = new PCard();
         PCard[] list = { card };
@@ -119,3 +117,4 @@ public class Game
     }
       
 }
+

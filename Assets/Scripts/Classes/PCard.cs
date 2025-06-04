@@ -11,15 +11,15 @@ using UnityEngine;
 public class PCard : BaseCard
 {
     public CardType kindOfCard;
-    public LinguisticTerms term;
-    public SuitName suit;
-    public PlaceArticulation placeArt;
-    public MannerArticulation mannerArt;
+    public LinguisticTerms term;                    //Enum that contains all the Linguistic Terms in the deck
+    public SuitName suit;                           //This enum contains the suits in the deck
+    public PlaceArticulation placeArt;              //Place of articulation 
+    public MannerArticulation mannerArt;            //Manner of articulation
     public bool isDiphthong;
     public int chips;
     public int multiplier;
-    public CardEdition edition;
-    public CardEnhancement enhancement;
-    public CardSeal seal;
+    public CardEdition edition;                     //Edition of the card
+    public CardEnhancement enhancement;             //Card enhancement of the card  
+    public CardSeal seal;                           //Card seal on the card
     public bool isDisabled;
 }
