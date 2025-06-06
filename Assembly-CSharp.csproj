@@ -57,6 +57,9 @@
     <Compile Include="Assets\MainMenuManager.cs" />
     <Compile Include="Assets\Scripts\Classes\BaseCard.cs" />
     <Compile Include="Assets\Scripts\Classes\CardBuff.cs" />
+    <Compile Include="Assets\Scripts\GameLogic\PriceAssignment.cs" />
+    <Compile Include="Assets\Scripts\Classes\Mentor\CheatSheet.cs" />
+    <Compile Include="Assets\Scripts\StartGame.cs" />
     <Compile Include="Assets\Scripts\Classes\Pack.cs" />
     <Compile Include="Assets\Scripts\GameLogic\MentorBufferManager.cs" />
     <Compile Include="Assets\RunInfoManager.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Assets\Scripts\Classes\UseLocation.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\Classes\SpecialBlindNames.cs" />
+    <Compile Include="Assets\Scripts\Classes\MentorRarity.cs" />
     <Compile Include="Assets\Scripts\ChangeAlpha.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\HorizontalCardHolder.cs" />

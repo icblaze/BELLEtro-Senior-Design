@@ -9,16 +9,20 @@ public class DeckManager : MonoBehaviour
     public GameObject cardPrefab;                                           // Assign your card prefab asset
     public Transform playingCardGroup;                                      // Assign PlayingCardGroup in Inspector
     public Transform deckPosition;                                          // Where the deck sits
-    public RectTransform pinkCardImage; 
+    public RectTransform pinkCardImage;
     [Header("Deck Data")]
     public List<GameObject> deckCards = new List<GameObject>();             //List of GameObject cards
 
     [Header("Settings")]
-    public int maxCardsInHand = 10;
-    
+    private int maxCardsInHand;                                              //This variable will store the maximum cards in a hand for the round
+
     void Start()
     {
         Deck deck = new Deck();
+
+        //In the future we might change this so we can modify the hand size based off the selected deck.
+        setMaxHandCount(8);
+        maxCardsInHand = getMaxHandCount();
 
         //Debug.LogError($"Deck Counter Updated: {Deck.counter}");
 
@@ -27,10 +31,10 @@ public class DeckManager : MonoBehaviour
             Debug.LogError("Not enough cards in deckCardsData! Check deck initialization.");
             return;
         }
-    
+
 
         // Fill the deck with 56 placeholder cards
-        for (int i = 0; i < 56; i++)
+        for (int i = 0; i < maxCardsInHand; i++)
         {
             //Don't spawn all 56 cards, have one face down card in the deck
             GameObject newCard = Instantiate(cardPrefab, deckPosition);
@@ -50,6 +54,8 @@ public class DeckManager : MonoBehaviour
             deckCards.Add(newCard);
         }
         pinkCardImage.SetAsLastSibling();
+
+        
     }
 
     /// <summary>
@@ -128,5 +134,17 @@ public class DeckManager : MonoBehaviour
             );
             t.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
         }
+    }
+
+    //Set the maximum hand count for the round.
+    public void setMaxHandCount(int handCount)
+    {
+        maxCardsInHand = handCount;
+    }
+
+    //Getter to retrieve the max hand count for the round.
+    public int getMaxHandCount()
+    {
+        return maxCardsInHand;
     }
 }

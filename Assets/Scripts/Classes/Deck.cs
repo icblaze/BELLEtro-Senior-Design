@@ -24,9 +24,39 @@ public class Deck
   public List<PCard> playerHand = new List<PCard>(); //This variable will hold the hand of the player.
 
 
-  //This constructor handles the creation of the deck for the game.
+  //This constructor sets up the initial deck in the game
   public Deck()
   {
+    createDeck(); //Call createDeck to create the deck for the game.
+  }
+
+  public bool IsDiphthong(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
+  {
+    return term.ToString().Contains(suit.ToString()) &&
+           term.ToString().Contains(placeArt.ToString()) &&
+           (term.ToString().Contains("High") || term.ToString().Contains("Mid") || term.ToString().Contains("Low")) &&
+           term.ToString().Contains("Diphthong");
+  }
+  public bool IsVowel(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
+  {
+    return term.ToString().Contains(suit.ToString()) &&
+           term.ToString().Contains(placeArt.ToString()) &&
+           (term.ToString().Contains("High") || term.ToString().Contains("Mid") || term.ToString().Contains("Low"));
+
+  }
+  public bool IsValidCombination(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
+  {
+    return term.ToString().Contains(suit.ToString()) &&
+           term.ToString().Contains(placeArt.ToString()) &&
+           term.ToString().Contains(mannerArt.ToString());
+  }
+
+  //This function is responsible for creating a new deck , and removing all the cards from the last deck.
+  //This function will be useful when we need to create a new deck for a new round.
+  public void createDeck()
+  {
+    deckCards.Clear();
+
     foreach (SuitName suit in Enum.GetValues(typeof(SuitName)))
     {
       foreach (PlaceArticulation placeArticulation in Enum.GetValues(typeof(PlaceArticulation)))
@@ -63,7 +93,7 @@ public class Deck
                 {
                   newCard.isDiphthong = true;
                 }
-                deckCardsData.Add(new PCard
+                deckCards.Add(new PCard
                 {
                   kindOfCard = CardType.Card,
                   term = linguisticterm,
@@ -82,7 +112,7 @@ public class Deck
                 Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
 
               }
-              deckCardsData.Add(newCard);
+              deckCards.Add(newCard);
               Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
 
             }
@@ -94,27 +124,6 @@ public class Deck
     counter = 0; //Set the counter back to 0
   }
 
-  public bool IsDiphthong(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
-  {
-    return term.ToString().Contains(suit.ToString()) &&
-           term.ToString().Contains(placeArt.ToString()) &&
-           (term.ToString().Contains("High") || term.ToString().Contains("Mid") || term.ToString().Contains("Low")) &&
-           term.ToString().Contains("Diphthong");
-  }
-  public bool IsVowel(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
-  {
-    return term.ToString().Contains(suit.ToString()) &&
-           term.ToString().Contains(placeArt.ToString()) &&
-           (term.ToString().Contains("High") || term.ToString().Contains("Mid") || term.ToString().Contains("Low"));
-
-  }
-  public bool IsValidCombination(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
-  {
-    return term.ToString().Contains(suit.ToString()) &&
-           term.ToString().Contains(placeArt.ToString()) &&
-           term.ToString().Contains(mannerArt.ToString());
-  }
-
   //This function is responsible for drawing a certain amount of cards into the players hand.
   //PlayerHandCount represents how many missing cards are missing from the players hand.
   public PCard[] drawCards(Game game, int playerHandCount)
@@ -123,7 +132,7 @@ public class Deck
     {
       return null;
     }
-    
+
     //This calls the random draw function with the entire deck and playerhandcount
     PCard[] list = game.randomDraw(deckCards, playerHandCount);
 
@@ -134,8 +143,8 @@ public class Deck
       if (removed != null)
       {
         cardsDrawn.Add(removed);
-      }      
-      
+      }
+
     }
 
     return list;

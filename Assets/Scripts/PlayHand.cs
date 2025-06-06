@@ -1,3 +1,5 @@
+
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -11,8 +13,8 @@ public class PlayHand : MonoBehaviour
     public float displayDuration = 2.0f; // Time before cards disappear
 
     private List<GameObject> selectedCards = new List<GameObject>(); // Cards that are selected
-    private DeleteCard deleteCardScript; // Reference to DeleteCard
-    private DeckManager deckManager; // Reference to DeckManager
+    private DeleteCard deleteCardScript;                             // Reference to DeleteCard
+    private DeckManager deckManager;                                 // Reference to DeckManager
 
     void Start()
     {

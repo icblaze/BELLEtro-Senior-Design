@@ -3,6 +3,7 @@
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
 // Andy (flakkid): turned arrays into List and added maxMentors variable;
+// Zack: Added comments to the functions and variables for future developers.
 
 using System.Numerics;
 using System.Collections;
@@ -29,22 +30,24 @@ public class Player
         return instance;
     }
 
-    public Deck deck;
-    public List<Mentor> mentorDeck;
-    public List<Consumable> consumables;
-    public Deck hand;
-    public int discards;
-    public int handCount;
-    public int moneyCount;
-    public BigInteger chipCount;
-    public int maxConsumables;
-    public int maxMentors;
-    public List<Voucher> vouchers;
-    public Dictionary<TextbookName, HandInfo> handTable;
-    public Game game;
-    float discount;
+    public Deck deck;               
+    public List<Mentor> mentorDeck;                              //List of Mentors that the player currently has.
+    public List<Consumable> consumables;                         //List of consumables that the player currently has. Consumables are also called Textbooks.
+    public Deck hand;                                            //This refers to the players current hand.
+    public int discards;                                         //The amount of discards the player currently has.
+    public int handCount;                                        //The amoung of hands the player can play.
+    public int moneyCount;                                       //Money count for player.
+    public BigInteger chipCount;                                 //Current chip count for the player.
+    public int maxConsumables;                                   
+    public int maxMentors;              
+    public List<Voucher> vouchers;                               //List of vouchers that the player has.
+    public Dictionary<TextbookName, HandInfo> handTable;         //This table conatins the table that contains all the info for each textbook card.
+    public Game game;                                            //Game object
+    float discount;                                              //Discount that can be used in store.
+    public int sellValue;                                        //Sell value of a card enhancer
     
-    public void removeCard (PCard card)
+    //This removes a card from the player hand list if it is contained within the list
+    public void removeCard(PCard card)
     {
         if (deck.playerHand.Contains(card))
         {
@@ -57,6 +60,7 @@ public class Player
     }
 
     //This function is responsible for selling the mentor, and updates the players money count.
+    //This function also removes the mentor from the list that contains all the mentors for the player
     public void sellMentor(Mentor mentor)
     {
         sellValue = (int)math.max(1, math.floor(mentor.price / 2));
@@ -71,6 +75,6 @@ public class Player
         sellValue = (int)math.max(1, math.floor(consumable.price / 2));
         Player currPlayer = access();
         currPlayer.moneyCount += sellValue;  
-        currPlayer.consumableDeck.Remove(consumable);
+        currPlayer.consumables.Remove(consumable);
     }
 }

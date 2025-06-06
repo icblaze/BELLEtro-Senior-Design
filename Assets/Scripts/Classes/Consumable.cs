@@ -16,6 +16,7 @@ public abstract class Consumable : BaseCard
     public ConsumableType type;
     public bool isInstant;
     public int price;
+    public int sellValue;
     public bool isNegative;
     public bool isDisabled;
 }

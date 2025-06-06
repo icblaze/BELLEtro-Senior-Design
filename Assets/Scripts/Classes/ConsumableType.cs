@@ -8,6 +8,6 @@ using UnityEngine;
 
 public enum ConsumableType
 {
-    Textbook,
-    CardBuff
+    Textbook,                //Planet cards in Balatro
+    CardBuff                //Tarot cards in Balatro
 }

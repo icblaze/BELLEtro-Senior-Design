@@ -1,5 +1,5 @@
 ﻿// This Document contains the code for the CheatSheet Mentor.
-//  Effect is to copy the effect of the Mentor to its right.
+// Effect is to copy the effect of the Mentor to its right.
 // Current Devs:
 // Andy (flakkid): made format for constructor and overridden effect method, singleton change
 
@@ -9,7 +9,7 @@ using System.Collections;
 
 public class CheatSheet : Mentor
 {
-    //  Stores the rightMentor
+    // Stores the rightMentor
     Mentor rightMentor = null;
 
     //  Mentor name and basePrice are preset
