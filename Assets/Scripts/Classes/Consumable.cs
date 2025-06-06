@@ -12,10 +12,11 @@ using UnityEngine;
 public abstract class Consumable : BaseCard
 {
     public CardType kindOfCard;
-    public int sellValue;
+    //public int sellValue; //Removed sell value since we can calculate the sell value manually
     public ConsumableType type;
     public bool isInstant;
     public int price;
+    public int sellValue;
     public bool isNegative;
     public bool isDisabled;
 }

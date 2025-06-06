@@ -12,12 +12,11 @@ public class HandInfo : ScriptableObject
 {
     private int baseChips;
     private int baseMult;
-
     public int level;
     public int incrementChips;
     public int incrementMult;
 
-    //  Construct hand at level 1 with associated base and increment values
+    // Construct hand at level 1 with associated base and increment values
     public HandInfo(TextbookName textbookName)
     {
         level = 1;

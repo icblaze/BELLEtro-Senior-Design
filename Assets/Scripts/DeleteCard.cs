@@ -32,6 +32,7 @@ public class DeleteCard : MonoBehaviour
             Debug.LogError("DeleteCard: deleteButton not assigned in Inspector!");
     }
 
+    //Adds the card to the selectedCards list
     public void AddSelectedCard(GameObject card)
     {
         if (card == null) return;
@@ -39,18 +40,22 @@ public class DeleteCard : MonoBehaviour
             selectedCards.Add(card);
     }
 
+    //This removes the card the player unselected from the selectedCards list
     public void RemoveSelectedCard(GameObject card)
     {
         if (card == null) return;
         if (selectedCards.Contains(card))
             selectedCards.Remove(card);
     }
-
+    
+    //This returns the selected cards that the player currently has selected
     public List<GameObject> GetSelectedCards()
     {
         return new List<GameObject>(selectedCards);
     }
 
+    //This function removes the cards that the player played, and clears the selectedCards list.
+    //This function also starts a coroutine to fill the player hand with new cards
     void RemoveSelectedCards()
     {
         if (selectedCards.Count == 0)
@@ -84,7 +89,7 @@ public class DeleteCard : MonoBehaviour
         // wait one frame so the Slots are truly empty
         yield return null;
 
-        // ← here’s the only change: use DrawCard() so it honors your Slot layout
+        // here’s the only change: use DrawCard() so it honors your Slot layout
         for (int i = 0; i < count; i++)
             deckManager.DrawCard();
     }

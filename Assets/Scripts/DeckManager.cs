@@ -6,32 +6,37 @@ using UnityEngine;
 public class DeckManager : MonoBehaviour
 {
     [Header("Prefabs & Transforms")]
-    public GameObject cardPrefab;             // Assign your card prefab asset
-    public Transform playingCardGroup;        // Assign PlayingCardGroup in Inspector
-    public Transform deckPosition;            // Where your deck sits
-    public RectTransform pinkCardImage; 
+    public GameObject cardPrefab;                                           // Assign your card prefab asset
+    public Transform playingCardGroup;                                      // Assign PlayingCardGroup in Inspector
+    public Transform deckPosition;                                          // Where the deck sits
+    public RectTransform pinkCardImage;
     [Header("Deck Data")]
-    public List<GameObject> deckCards = new List<GameObject>();
+    public List<GameObject> deckCards = new List<GameObject>();             //List of GameObject cards
 
     [Header("Settings")]
-    public int maxCardsInHand = 10;
-    
+    private int maxCardsInHand;                                              //This variable will store the maximum cards in a hand for the round
+
     void Start()
     {
         Deck deck = new Deck();
 
+        //In the future we might change this so we can modify the hand size based off the selected deck.
+        setMaxHandCount(8);
+        maxCardsInHand = getMaxHandCount();
+
         //Debug.LogError($"Deck Counter Updated: {Deck.counter}");
 
-        if (deck.deckCardsData.Count < 56)
+        if (deck.deckCards.Count < 56)
         {
             Debug.LogError("Not enough cards in deckCardsData! Check deck initialization.");
             return;
         }
-    
 
-        // Fill the deck with 20 shuffled placeholder cards
-        for (int i = 0; i < 56; i++)
+
+        // Fill the deck with 56 placeholder cards
+        for (int i = 0; i < maxCardsInHand; i++)
         {
+            //Don't spawn all 56 cards, have one face down card in the deck
             GameObject newCard = Instantiate(cardPrefab, deckPosition);
             CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
 
@@ -43,11 +48,14 @@ public class DeckManager : MonoBehaviour
                 0f
             );
 
-            cardComponent.cardData = deck.deckCardsData[i];
+            //I need to assign a random card from the deck and assign it to the cardComponent I made
+            cardComponent.cardData = deck.deckCards[i];
 
             deckCards.Add(newCard);
         }
         pinkCardImage.SetAsLastSibling();
+
+        
     }
 
     /// <summary>
@@ -126,5 +134,17 @@ public class DeckManager : MonoBehaviour
             );
             t.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
         }
+    }
+
+    //Set the maximum hand count for the round.
+    public void setMaxHandCount(int handCount)
+    {
+        maxCardsInHand = handCount;
+    }
+
+    //Getter to retrieve the max hand count for the round.
+    public int getMaxHandCount()
+    {
+        return maxCardsInHand;
     }
 }
