@@ -18,62 +18,89 @@ public class ShopManager : MonoBehaviour
     private Button nextRoundButton;
     private Button rerollButton;
     private TextMeshPro moneyText;
+    //private string[] cardsInShop = new string[2];
     private Mentor mentor1;
-    private Button mentor1Button;
+    private Textbook textbook1;
+    private CardBuff cardBuff1;
+    public Button mentor1Button;
     private Mentor mentor2;
-    private Button mentor2Button;
+    private Textbook textbook2;
+    private CardBuff cardBuff2;
+    public Button mentor2Button;
     private Voucher voucher;
-    private Button voucherButton;
+    public Button voucherButton;
     public CanvasGroup shopUI;
     private Pack pack1;
     private Pack pack2;
+    public Button pack1Button;
+    public Button pack2Button;
     private int reroll = 5;
     private int shopMentorsAmount = 2;
+
+    public void Start()
+    {
+
+        mentor1Button.image.sprite = Resources.Load<Sprite>("TestImage");
+    }
 
     //Function called when  shopUI is opened. This intiallizes the 
     //shop with any mentors, packs, vouchers, etc. This should be called once
     //an ante.
     public void newShop()
     {
+        Game inst = Game.access();
         Game game = gameObject.GetComponent<Game>();
         //Use probablilties to generate the card shops
         int cardSlot = Random.Range(1, 100);
 
-        //If number is under 10, create a textbook
-        if (cardSlot < 10)
+        for (int i = 1; i <= shopMentorsAmount; i++)
         {
+            //If number is under 10, create a textbook
+            if (cardSlot < 10)
+            {
+                //cardInShop[i] = "textbook" + i;
+                Textbook[] textbooks = inst.randomTextbook(shopMentorsAmount);
+                textbook1 = textbooks[0];
+                textbook2 = textbooks[1];
+                mentor1Button.image.sprite = Resources.Load<Sprite>(textbook1.name.ToString());
+                mentor2Button.image.sprite = Resources.Load<Sprite>(textbook2.name.ToString());
+            }
+            else if (cardSlot < 20) //Create a CardBuff
+            {
+                //cardInShop[i] = "cardBuff" + i;
+                CardBuff[] cardBuffs = new CardBuff[shopMentorsAmount];
+                cardBuffs = inst.randomCardBuff(shopMentorsAmount);
+                cardBuff1 = cardBuffs[0];
+                cardBuff2 = cardBuffs[1];
+                mentor1Button.image.sprite = Resources.Load<Sprite>(cardBuff1.name.ToString());
+                mentor2Button.image.sprite = Resources.Load<Sprite>(cardBuff2.name.ToString());
+            }
+            else//Create a Joker card.
+            {
+                //cardInShop[i] = "mentor" + i;
+                Mentor[] mentors = new Mentor[shopMentorsAmount];
+                mentors = inst.randomMentor(shopMentorsAmount);
+                mentor1 = mentors[0];
+                mentor2 = mentors[1];
+                mentor1Button.image.sprite = Resources.Load<Sprite>(mentor1.name.ToString());
+                mentor2Button.image.sprite = Resources.Load<Sprite>(mentor2.name.ToString());
+            }
 
         }
-        else if (cardSlot < 20) //Create a CardBuff
-        {
-
-        }
-        else//Create a Joker card.
-        {
-
-        }
-        //random Mentors
-        Mentor[] mentors = new Mentor[shopMentorsAmount];
-        mentors = game.randomMentor(shopMentorsAmount);
-        //Loop must be changed later to account for more than two mentor/card
-        //slots
-        for (int i = 0; i < shopMentorsAmount; i++)
-        {
-            mentor1 = mentors[0];
-            mentor2 = mentors[1];
-        }
-
 
         //randomVoucher
         Voucher[] vouchers = new Voucher[1];
         vouchers = game.randomVoucher(1);
         voucher = vouchers[0];
+        voucherButton.image.sprite = Resources.Load<Sprite>(voucher.name.ToString());
 
         //randomn Packs
         Pack[] packs = new Pack[2];
         packs = game.randomPack(2);
         pack1 = packs[0];
         pack2 = packs[1];
+        pack1Button.image.sprite = Resources.Load<Sprite>(pack1.name.ToString());
+        pack2Button.image.sprite = Resources.Load<Sprite>(pack2.name.ToString());
     }
 
     //Function call takes in a Mentor Card and adds the Mentor Card into the players collection.
