@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Threading.Tasks;
+
 using TMPro;
 
 
@@ -15,9 +16,10 @@ using TMPro;
 //Fredrick Bouloute (bouloutef04)
 public class ShopManager : MonoBehaviour
 {
+    //UI Components
     private Button nextRoundButton;
     private Button rerollButton;
-    private TextMeshPro moneyText;
+    public GameObject moneyText;
     //private string[] cardsInShop = new string[2];
     private Mentor mentor1;
     private Textbook textbook1;
@@ -36,20 +38,42 @@ public class ShopManager : MonoBehaviour
     public Button pack2Button;
     private int reroll = 5;
     private int shopMentorsAmount = 2;
+    //Game and Player Manager Scripts for accessing functions and variables
+    Game inst = Game.access();
+    Player playerInst = Player.access();
 
     public void Start()
     {
 
-        mentor1Button.image.sprite = Resources.Load<Sprite>("TestImage");
+        //mentor1Button.image.sprite = Resources.Load<Sprite>("TestImage");
+        NewShop();
     }
 
     //Function called when  shopUI is opened. This intiallizes the 
     //shop with any mentors, packs, vouchers, etc. This should be called once
     //an ante.
-    public void newShop()
+    public void NewShop()
     {
-        Game inst = Game.access();
-        Game game = gameObject.GetComponent<Game>();
+        //Generate Mentors/Textbooks/CardBuffs
+        NewCards();
+
+        //randomVoucher
+        Voucher[] vouchers = new Voucher[1];
+        vouchers = inst.randomVoucher(1);
+        voucher = vouchers[0];
+        voucherButton.image.sprite = Resources.Load<Sprite>(voucher.name.ToString());
+
+        //randomn Packs
+        Pack[] packs = new Pack[2];
+        packs = inst.randomPack(2);
+        pack1 = packs[0];
+        //pack2 = packs[1];
+        pack1Button.image.sprite = Resources.Load<Sprite>(pack1.name.ToString());
+        //pack2Button.image.sprite = Resources.Load<Sprite>(pack2.name.ToString());
+    }
+
+    private void NewCards()
+    {
         //Use probablilties to generate the card shops
         int cardSlot = Random.Range(1, 100);
 
@@ -60,87 +84,128 @@ public class ShopManager : MonoBehaviour
             {
                 //cardInShop[i] = "textbook" + i;
                 Textbook[] textbooks = inst.randomTextbook(shopMentorsAmount);
+                Debug.Log(textbooks);
                 textbook1 = textbooks[0];
-                textbook2 = textbooks[1];
+                //textbook2 = textbooks[1];
                 mentor1Button.image.sprite = Resources.Load<Sprite>(textbook1.name.ToString());
-                mentor2Button.image.sprite = Resources.Load<Sprite>(textbook2.name.ToString());
+                //mentor2Button.image.sprite = Resources.Load<Sprite>(/TextBook/textbook_" + textbook2.name.ToString());
             }
             else if (cardSlot < 20) //Create a CardBuff
             {
                 //cardInShop[i] = "cardBuff" + i;
                 CardBuff[] cardBuffs = new CardBuff[shopMentorsAmount];
                 cardBuffs = inst.randomCardBuff(shopMentorsAmount);
+                Debug.Log(cardBuffs);
                 cardBuff1 = cardBuffs[0];
-                cardBuff2 = cardBuffs[1];
+                //cardBuff2 = cardBuffs[1];
                 mentor1Button.image.sprite = Resources.Load<Sprite>(cardBuff1.name.ToString());
-                mentor2Button.image.sprite = Resources.Load<Sprite>(cardBuff2.name.ToString());
+                //mentor2Button.image.sprite = Resources.Load<Sprite>("/CardBuff/" + cardBuff2.name.ToString());
             }
             else//Create a Joker card.
             {
                 //cardInShop[i] = "mentor" + i;
-                Mentor[] mentors = new Mentor[shopMentorsAmount];
-                mentors = inst.randomMentor(shopMentorsAmount);
+                Mentor[] mentors = new Mentor[2];
+                mentors = inst.randomMentor(2);
+                Debug.Log("Mentor Object: " + mentors[0]);
                 mentor1 = mentors[0];
-                mentor2 = mentors[1];
+                Debug.Log("Mentor 1 Name: " + mentor1.name.ToString());
+                //mentor2 = mentors[1];
                 mentor1Button.image.sprite = Resources.Load<Sprite>(mentor1.name.ToString());
-                mentor2Button.image.sprite = Resources.Load<Sprite>(mentor2.name.ToString());
+                //mentor2Button.image.sprite = Resources.Load<Sprite>(mentor2.name.ToString());
             }
 
         }
-
-        //randomVoucher
-        Voucher[] vouchers = new Voucher[1];
-        vouchers = game.randomVoucher(1);
-        voucher = vouchers[0];
-        voucherButton.image.sprite = Resources.Load<Sprite>(voucher.name.ToString());
-
-        //randomn Packs
-        Pack[] packs = new Pack[2];
-        packs = game.randomPack(2);
-        pack1 = packs[0];
-        pack2 = packs[1];
-        pack1Button.image.sprite = Resources.Load<Sprite>(pack1.name.ToString());
-        pack2Button.image.sprite = Resources.Load<Sprite>(pack2.name.ToString());
     }
 
     //Function call takes in a Mentor Card and adds the Mentor Card into the players collection.
-    public void BuyMentor(Mentor mentor, Button mentorButton)
+    private void BuyMentor(Mentor mentor, Button mentorButton)
     {
         //Add Mentor to user's collection
+        playerInst.mentorDeck.Add(mentor);
 
         //Remove Mentor from Screen
         mentorButton.gameObject.SetActive(false);
 
         // //Reduce money based on price and change text to display new money
-        //money = money - mentor.price;
-        //moneyText.text = "$" - money;
+        playerInst.moneyCount = playerInst.moneyCount - mentor.price;
+        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
+    }
+    public void CardButton1()
+    {
+        //Should use if statements to determine what the card is
+        //and call the respective function
+        BuyMentor(mentor1, mentor1Button);
+    }
+    public void CardButton2()
+    {
+        //Should use if statements to determine what the card is
+        //and call the respective function
+        BuyMentor(mentor2, mentor2Button);
     }
     //Function call takes in a voucher card and adds the effects into the player's run.
-    public void BuyVoucher(Voucher voucher)
+    public void BuyVoucher()
     {
         // //Add voucher effect to user's run
-        // voucher.applyEffect();
+        voucher.applyEffect(playerInst);
 
         //Remove voucher from screen
         voucherButton.interactable = false;
         voucherButton.gameObject.SetActive(false);
 
         // //Reduce money based on price and change text to display new money
-        // money = money - voucher.initialPrice;
-        // moneyText.text = "$" - money;
+        playerInst.moneyCount = playerInst.moneyCount - voucher.initialPrice;
+        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
     //Function call takes in a pack card and opens it, calling the necessary functions.
-    public void BuyPack(Pack pack)
+    private void BuyPack(Pack pack, Button packButton)
     {
         //Open pack and allow user to choose from cards
 
         //Call respected function for cards (whether it be a Mentor, Planet, or Tarrot)
 
         //Make pack disappear
+        packButton.interactable |= false;
+        packButton.gameObject.SetActive(false);
 
         // //Reduce money based on price and change text to display new money
-        //money = money - pack.price
-        //moneyText.text = "$" - money;
+        playerInst.moneyCount = playerInst.moneyCount - pack.price;
+        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
+    }
+    public void BuyPack1()
+    {
+        BuyPack(pack1, pack1Button);
+    }
+    public void BuyPack2()
+    {
+        BuyPack(pack2, pack2Button);
+    }
+
+    public void BuyTextbook(Textbook textbook, Button textbookButton)
+    {
+        if (playerInst.consumables.Count < playerInst.maxConsumables)
+        {
+            //Open pack and allow user to choose from cards
+            playerInst.consumables.Add(textbook);
+
+            //Move pack disappear
+            textbookButton.interactable |= false;
+            textbookButton.gameObject.SetActive(false);
+
+            // //Reduce money based on price and change text to display new money
+            playerInst.moneyCount = playerInst.moneyCount - textbook.price;
+            moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
+        }
+        else
+        {
+            //Should make the UI shake
+            Debug.Log("Not Enough Space In Consumables");
+        }
+    }
+
+    //Function is used to show the details of what the Joker does
+    public void ShowMentorDetails()
+    {
+
     }
 
     //Function causes the shop UI to disappear and transitions back into the regular scene.
@@ -154,7 +219,6 @@ public class ShopManager : MonoBehaviour
         shopUI.alpha = 0;
         shopUI.blocksRaycasts = false;
 
-
         // //Possibly change shop title screen back to the Ante screen.
         // ante.alpha = 1;
         // ante.blocksRaycasts = true;
@@ -162,12 +226,12 @@ public class ShopManager : MonoBehaviour
     //Function causes the Mentors to reset. 
     public void Reroll()
     {
-        //Refresh the Mentor slots with new random Mentors
-
+        //Refresh the Card slots with new random Cards
+        NewCards();
 
         //Reduce money based on reroll price and change text to display new money
-        //money = money - reroll
-        //moneyText.text = "$" - money;
+        playerInst.moneyCount = playerInst.moneyCount - reroll;
+        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount;
         reroll++;
 
     }

@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public CanvasGroup runInfo;
     public CanvasGroup pauseMenu;
-    public TextMeshPro moneyText;
+    public GameObject moneyText;
 
     public void PauseButton()
     {
@@ -30,6 +30,6 @@ public class UIManager : MonoBehaviour
 
     public void ChangeMoneyText(int money)
     {
-        moneyText.SetText("$" + money);
+        moneyText.GetComponentInChildren<TMP_Text>().SetText("$" + money);
     }
 }
