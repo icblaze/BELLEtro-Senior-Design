@@ -39,7 +39,7 @@ public class ShopManager : MonoBehaviour
     private int reroll = 5;
     private int shopMentorsAmount = 2;
     public CanvasGroup Mentor1Details;
-        public CanvasGroup Mentor2Details;
+    public CanvasGroup Mentor2Details;
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
@@ -62,15 +62,16 @@ public class ShopManager : MonoBehaviour
         Voucher[] vouchers = new Voucher[1];
         vouchers = inst.randomVoucher(1);
         voucher = vouchers[0];
-        voucherButton.image.sprite = Resources.Load<Sprite>(voucher.name.ToString());
+        voucherButton.image.sprite = Resources.Load<Sprite>($"Voucher/voucher_" + voucher.name.ToString());
 
         //Generate randomn Packs
         Pack[] packs = new Pack[2];
         packs = inst.randomPack(2);
         pack1 = packs[0];
-        //pack2 = packs[1];
-        pack1Button.image.sprite = Resources.Load<Sprite>(pack1.name.ToString());
-        //pack2Button.image.sprite = Resources.Load<Sprite>(pack2.name.ToString());
+        packs = inst.randomPack(2);
+        pack2 = packs[0];
+        pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack1.name.ToString());
+        pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack2.name.ToString());
     }
 
     private void NewCards()
@@ -85,44 +86,68 @@ public class ShopManager : MonoBehaviour
         cardBuff1 = null;
         cardBuff2 = null;
 
-        //Use probablilties to generate the card shops
-        int cardSlot = Random.Range(1, 100);
+
 
         for (int i = 1; i <= shopMentorsAmount; i++)
         {
+            //Use probablilties to generate the card shops
+            int cardSlot = Random.Range(1, 100);
             //If number is under 10, create a textbook
-            if (cardSlot < 10)
+            if (cardSlot < 15)
             {
-                //cardInShop[i] = "textbook" + i;
-                Textbook[] textbooks = inst.randomTextbook(shopMentorsAmount);
-                Debug.Log(textbooks);
-                textbook1 = textbooks[0];
-                //textbook2 = textbooks[1];
-                cardButton1.image.sprite = Resources.Load<Sprite>(textbook1.name.ToString());
-                //cardButton2.image.sprite = Resources.Load<Sprite>(/TextBook/textbook_" + textbook2.name.ToString());
+                Textbook[] Textbooks = new Textbook[2];
+                Textbooks = inst.randomTextbook(2);
+                Debug.Log("Textbook Object: " + Textbooks[0]);
+                if (mentor1 == null && cardBuff1 == null && textbook1 == null)
+                {
+                    textbook1 = Textbooks[0];
+                    //cardButton1.image.sprite = Resources.Load<Sprite>(textbook1.name.ToString());
+                    cardButton1.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook1.name.ToString());
+                    Debug.Log("Textbook 1 Name: " + textbook1.name.ToString());
+                }
+                else
+                {
+                    textbook2 = Textbooks[0];
+                    Debug.Log("Textbook 2 Name: " + textbook2.name.ToString());
+                    cardButton2.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook2.name.ToString());
+                }
+
             }
-            else if (cardSlot < 20) //Create a CardBuff
+            else if (cardSlot < 30) //Create a CardBuff
             {
-                //cardInShop[i] = "cardBuff" + i;
-                CardBuff[] cardBuffs = new CardBuff[shopMentorsAmount];
-                cardBuffs = inst.randomCardBuff(shopMentorsAmount);
-                Debug.Log(cardBuffs);
-                cardBuff1 = cardBuffs[0];
-                //cardBuff2 = cardBuffs[1];
-                cardButton1.image.sprite = Resources.Load<Sprite>(cardBuff1.name.ToString());
-                //cardButton2.image.sprite = Resources.Load<Sprite>("/CardBuff/" + cardBuff2.name.ToString());
+                CardBuff[] CardBuffs = new CardBuff[2];
+                CardBuffs = inst.randomCardBuff(2);
+                Debug.Log("CardBuff Object: " + CardBuffs[0]);
+                if (mentor1 == null && cardBuff1 == null && textbook1 == null)
+                {
+                    cardBuff1 = CardBuffs[0];
+                    cardButton1.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff1.name.ToString());
+                    Debug.Log("CardBuff 1 Name: " + cardBuff1.name.ToString());
+                }
+                else
+                {
+                    cardBuff2 = CardBuffs[0];
+                    Debug.Log("CardBuff 2 Name: " + cardBuff2.name.ToString());
+                    cardButton2.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff2.name.ToString());
+                }
             }
             else//Create a Joker card.
             {
-                //cardInShop[i] = "mentor" + i;
                 Mentor[] mentors = new Mentor[2];
                 mentors = inst.randomMentor(2);
                 Debug.Log("Mentor Object: " + mentors[0]);
-                mentor1 = mentors[0];
-                Debug.Log("Mentor 1 Name: " + mentor1.name.ToString());
-                //mentor2 = mentors[1];
-                cardButton1.image.sprite = Resources.Load<Sprite>(mentor1.name.ToString());
-                //cardButton2.image.sprite = Resources.Load<Sprite>(mentor2.name.ToString());
+                if (mentor1 == null && cardBuff1 == null && textbook1 == null)
+                {
+                    mentor1 = mentors[0];
+                    cardButton1.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor1.name.ToString());
+                    Debug.Log("Mentor 1 Name: " + mentor1.name.ToString());
+                }
+                else
+                {
+                    mentor2 = mentors[0];
+                    Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
+                    cardButton2.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
+                }
             }
 
         }
@@ -216,7 +241,7 @@ public class ShopManager : MonoBehaviour
         {
             BuyMentor(mentor2, cardButton2);
         }
-        else if (cardBuff1 != null)
+        else if (cardBuff2 != null)
         {
             BuyCardBuff(cardBuff2, cardButton2);
         }
@@ -292,54 +317,175 @@ public class ShopManager : MonoBehaviour
 
     }
 
-
-    //Function is used to show the details of what the Joker does
-    public void ShowMentor1Details()
+    //Card Details Hovering Functions
+    public void ShowCard1Detail()
     {
-        //Mentor1Detailsetails.GetComponentInChildren<TMP_Text>().enabled = true;
+        if (mentor1 != null)
+        {
+            ShowMentor1Details();
+        }
+        else if (cardBuff1 != null)
+        {
+            ShowCardBuff1Details();
+        }
+        else
+        {
+            ShowTextbook1Details();
+        }
+    }
+    public void ShowCard2Detail()
+    {
+        if (mentor2 != null)
+        {
+            ShowMentor2Details();
+        }
+        else if (cardBuff2 != null)
+        {
+            ShowCardBuff2Details();
+        }
+        else
+        {
+            ShowTextbook2Details();
+        }
+    }
+
+    public void RemoveCard1Detail()
+    {
+        if (mentor1 != null)
+        {
+            RemoveMentor1Details();
+        }
+        else if (cardBuff1 != null)
+        {
+            RemoveCardBuff1Details();
+        }
+        else
+        {
+            RemoveTextbook1Details();
+        }
+    }
+    public void RemoveCard2Detail()
+    {
+        if (mentor2 != null)
+        {
+            RemoveMentor2Details();
+        }
+        else if (cardBuff2 != null)
+        {
+            RemoveCardBuff2Details();
+        }
+        else
+        {
+            RemoveTextbook2Details();
+        }
+    }
+    //Function is used to show the details of what the Joker does
+    private void ShowMentor1Details()
+    {
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.name.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
     }
-    public void RemoveMentor1Details()
+    private void RemoveMentor1Details()
     {
-        //Mentor1Detailsetails.GetComponentInChildren<TMP_Text>().enabled = false;
         Mentor1Details.blocksRaycasts = false;
         Mentor1Details.interactable = false;
         StartCoroutine(FadeOut(Mentor1Details));
     }
-    public void ShowMentor2Details()
+    private void ShowMentor2Details()
     {
-        //Mentor1Detailsetails.GetComponentInChildren<TMP_Text>().enabled = true;
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.name.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
     }
-    public void RemoveMentor2Details()
+    private void RemoveMentor2Details()
     {
-        //Mentor1Detailsetails.GetComponentInChildren<TMP_Text>().enabled = false;
+        Mentor2Details.blocksRaycasts = false;
+        Mentor2Details.interactable = false;
+        StartCoroutine(FadeOut(Mentor2Details));
+    }
+
+    private void ShowTextbook1Details()
+    {
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = textbook1.name.ToString();
+        Mentor1Details.blocksRaycasts = true;
+        StartCoroutine(FadeIn(Mentor1Details));
+        Mentor1Details.interactable = true;
+    }
+    private void RemoveTextbook1Details()
+    {
+        Mentor1Details.blocksRaycasts = false;
+        Mentor1Details.interactable = false;
+        StartCoroutine(FadeOut(Mentor1Details));
+    }
+    private void ShowTextbook2Details()
+    {
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = textbook2.name.ToString();
+        Mentor2Details.blocksRaycasts = true;
+        StartCoroutine(FadeIn(Mentor2Details));
+        Mentor2Details.interactable = true;
+    }
+    private void RemoveTextbook2Details()
+    {
+        Mentor2Details.blocksRaycasts = false;
+        Mentor2Details.interactable = false;
+        StartCoroutine(FadeOut(Mentor2Details));
+    }
+
+    private void ShowCardBuff1Details()
+    {
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = cardBuff1.name.ToString();
+        Mentor1Details.blocksRaycasts = true;
+        StartCoroutine(FadeIn(Mentor1Details));
+        Mentor1Details.interactable = true;
+    }
+    private void RemoveCardBuff1Details()
+    {
+        Mentor1Details.blocksRaycasts = false;
+        Mentor1Details.interactable = false;
+        StartCoroutine(FadeOut(Mentor1Details));
+    }
+    private void ShowCardBuff2Details()
+    {
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = cardBuff2.name.ToString();
+        Mentor2Details.blocksRaycasts = true;
+        StartCoroutine(FadeIn(Mentor2Details));
+        Mentor2Details.interactable = true;
+    }
+    private void RemoveCardBuff2Details()
+    {
         Mentor2Details.blocksRaycasts = false;
         Mentor2Details.interactable = false;
         StartCoroutine(FadeOut(Mentor2Details));
     }
     private IEnumerator FadeIn(CanvasGroup fadeInObject)//Fade the scene when the quit button is clikced
     {
+        float timeToFade = .2f;
+        float timeElapsed = 0;
         while (fadeInObject.alpha < 1)
         {
-            float opacity = fadeInObject.alpha + .05f;
-            Mathf.Clamp(opacity, 0, 1);
-            fadeInObject.alpha = opacity;
+            //float opacity = fadeInObject.alpha - .05f;
+            //Mathf.Clamp(opacity, 0, 1);
+            fadeInObject.alpha = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
+            timeElapsed += Time.deltaTime;
+            //fadeInObject.alpha = opacity;
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 1;
     }
     private IEnumerator FadeOut(CanvasGroup fadeInObject)//Fade the scene when the quit button is clikced
     {
+        float timeToFade = .2f;
+        float timeElapsed = 0;
         while (fadeInObject.alpha > 0)
         {
-            float opacity = fadeInObject.alpha - .05f;
-            Mathf.Clamp(opacity, 0, 1);
-            fadeInObject.alpha = opacity;
+            //float opacity = fadeInObject.alpha - .05f;
+            //Mathf.Clamp(opacity, 0, 1);
+            fadeInObject.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
+            timeElapsed += Time.deltaTime;
+            //fadeInObject.alpha = opacity;
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 0;
