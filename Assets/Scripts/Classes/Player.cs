@@ -33,7 +33,6 @@ public class Player
     public Deck deck;               
     public List<Mentor> mentorDeck;                              //List of Mentors that the player currently has.
     public List<Consumable> consumables;                         //List of consumables that the player currently has. Consumables are also called Textbooks.
-    public Deck hand;                                            //This refers to the players current hand.
     public int discards;                                         //The amount of discards the player currently has.
     public int handCount;                                        //The amoung of hands the player can play.
     public int moneyCount;                                       //Money count for player.
@@ -42,7 +41,6 @@ public class Player
     public int maxMentors;              
     public List<Voucher> vouchers;                               //List of vouchers that the player has.
     public Dictionary<TextbookName, HandInfo> handTable;         //This table conatins the table that contains all the info for each textbook card.
-    public Game game;                                            //Game object
     float discount;                                              //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
     

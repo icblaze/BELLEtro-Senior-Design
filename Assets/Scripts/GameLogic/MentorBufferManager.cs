@@ -52,7 +52,7 @@ public class MentorBufferManager : MonoBehaviour
 
         //  Playing Each Card in Hand
         //  TODO Differentiate between playHand and drawHand (change the outer foreach loop)
-        foreach (PCard card in game.ThePlayer.hand.playerHand)
+        foreach (PCard card in game.ThePlayer.deck.playerHand)
         {
             if(card.isDisabled)
             {
@@ -64,8 +64,8 @@ public class MentorBufferManager : MonoBehaviour
             RunBuffer(UseLocation.PostCard);
         }
 
-        //  Playing From-Draw Cards
-        foreach (PCard card in game.ThePlayer.hand.playerHand)
+        //  Playing From-Draw Cards (could track "not selected"?)
+        foreach (PCard card in game.ThePlayer.deck.playerHand)
         {
             if (card.isDisabled)
             {
@@ -74,7 +74,7 @@ public class MentorBufferManager : MonoBehaviour
 
             RunBuffer(UseLocation.PreFromDraw);
             //  TODO Play From-Draw call here
-            RunBuffer(UseLocation.PostFromDraw);
+            // RunBuffer(UseLocation.PostFromDraw);
         }
 
         //  Using Post Effect Cards
