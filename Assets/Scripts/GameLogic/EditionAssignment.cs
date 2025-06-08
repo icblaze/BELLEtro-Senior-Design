@@ -1,8 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PriceAssignment
+public class EditionAssignment
 {
+    private static System.Random rand = new System.Random();
+    //  Rates of editions out of 100 
+    private static Dictionary<int, CardEdition> editionRates = new()
+    {
+        { 70, CardEdition.Base },
+        { 16, CardEdition.Foil },
+        { 8, CardEdition.Holographic },
+        { 4, CardEdition.Polychrome },
+        { 2, CardEdition.Negative }
+    };
+
     //  Return additional price based on edition, 0 if base
     public static int EditionPrice(CardEdition edition)
     {
@@ -20,4 +32,5 @@ public class PriceAssignment
                 return 0;
         }
     }
+
 }

@@ -2,6 +2,7 @@
 // This class is used to hold information about the game's state
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
+// Andy (flakkid): added previous consumable variable
 
 using System.Numerics;
 using System.Collections;
@@ -36,6 +37,8 @@ public class Game
     public Player ThePlayer;                     //The Player is a refrence to the Player class 
     private int index;                           //This variable will hold a value that we would use to index into our deck
     private static Random rnd = new Random();    //Random number generator
+
+    public Consumable previousConsumable;        //  Stores name of last used consumable
 
 
     //This function is used to create a seed, so that we can get a random card from the deck.
