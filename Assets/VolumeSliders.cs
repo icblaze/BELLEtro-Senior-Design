@@ -15,6 +15,8 @@ public class VolumeSliders : MonoBehaviour
 
     //Functions ensures that player prefs for volume are set. If not, it sets them to 0. 
     //Otherwise, it loads the values.
+    //Current Devs:
+    //Fredrick Bouloute (bouloutef04)
     void Start()
     {
         if (!PlayerPrefs.HasKey("Master"))
