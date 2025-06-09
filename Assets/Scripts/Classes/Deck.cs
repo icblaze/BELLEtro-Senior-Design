@@ -16,8 +16,20 @@ using UnityEngine;
 // these cards (and a random drawing function)
 public class Deck
 {
-  public static int deckSize = 56;  //Deck count, might remove later
-  public static int counter = 0;
+  private static Deck instance;
+
+  //Singelton for the Deck class
+  public static Deck access()
+  {
+    if (instance == null)
+    {
+      instance = new Deck();
+    }
+    return instance;
+  }
+
+  public static int deckSize = 56;  // This variable holds the original deck size
+  public static int counter = 0;  
 
   public List<PCard> deckCards = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
   public List<PCard> cardsDrawn = new List<PCard>(); //This should store all the cards that were drawn
@@ -173,6 +185,7 @@ public class Deck
 
   //This function is responsible for updating the card selected.
   //Update the card in the scene
+  //Might need to return the update card so that we can attach it to the gameobject
   public void updateCard(PCard originalCard, PCard updatedCard)
   {
     int index = deckCards.FindIndex(card => card == originalCard);
@@ -181,7 +194,7 @@ public class Deck
     {
       deckCards[index] = updatedCard;
     }
-    
+
   }
 
 }

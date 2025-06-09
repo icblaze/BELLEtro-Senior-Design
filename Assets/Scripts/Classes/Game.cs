@@ -18,13 +18,14 @@ public class Game
     
     private static Game instance;
     
+    //Singelton for the Game class
     public static Game access()
     {
-      if (instance == null)
-      {
-        instance = new Game();
-      }
-      return instance;
+        if (instance == null)
+        {
+            instance = new Game();
+        }
+        return instance;
     }
 
     private int Ante;                            //Ante is the set of Rounds the player is on
@@ -42,9 +43,10 @@ public class Game
 
 
     //This function is used to create a seed, so that we can get a random card from the deck.
-    public int randomizer(int deckSize)
+    //This randomizer will also be used to retrieve a random index so we can select a random consumable/pack.
+    public int randomizer(int Size)
     {
-        return rnd.Next(0, deckSize);
+        return rnd.Next(0, Size);
     }
 
     //This will randomly draw cards from the deck after a player plays a hand or removes cards from the deck.
@@ -65,8 +67,12 @@ public class Game
     }
 
     //This function is responsible for generating a random card, useful for when we want to retrieve a random card for packs.
-    public PCard[] randomPackCards(int cardCount)
+    public List<CardObject> randomPackCards(Pack pack)
     {
+        Player player = Player.access();
+        
+        List<PCard> card = player.deck.deckCards;
+
         PCard card = new PCard();
         PCard[] list = { card };
         return list;
@@ -81,7 +87,7 @@ public class Game
     }
 
     //This will generate a random textbook card for the shop.
-    public Textbook[] randomTextbook(int textbookCount)
+    public List<CardObject> randomTextbook(Pack pack)
     {
         Textbook card = new Textbook();
         Textbook[] list = { card };
@@ -89,7 +95,7 @@ public class Game
     }
 
     //This function is responsible for retrieving random Mentors for the shop.
-    public Mentor[] randomMentor(int mentorCount)
+    public Mentor[] randomMentor(Pack pack)
     {
         Mentor card = new Mentor();
         Mentor[] list = { card };
@@ -97,19 +103,54 @@ public class Game
     }
 
     //This function is responsible for retrieving random card buffs for the shop.
-    public CardBuff[] randomCardBuff(int cardCount)
+    public List<CardObject> randomCardBuff(Pack pack)
     {
         CardBuff card = new CardBuff();
+        
         CardBuff[] list = { card };
         return list;
     }
 
     //This is function is responsible for retrieving random packs for the shop.
-    public Pack[] randomPack(int packCount)
+    public Pack[] randomPacks(int packCount)
     {
-        Pack card = new Pack();
-        Pack[] list = { card };
-        return list;
+        Pack[] pack = new Pack[packCount];
+
+        for (int i = 0; i < packCount; i++)
+        {
+            pack[i] = new Pack(); //Instantiate a new pack object
+
+            PackEdition selectedEdition = (PackEdition)rnd.Next(Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
+            PackType selectedType = (PackType)rnd.Next(Enum.GetValues(typeof(PackType)).Length);             // Get the PackType value that corresponds to a PackType in the enum list
+
+            //The following code fills all the variables for the pack
+            pack[i].packType = selectedType;
+            pack[i].edition = selectedEdition;
+            pack[i].price = pack[i].getPackPrice(selectedEdition);
+            pack[i].selectableCards = pack[i].getSelectableCount(selectedEdition);
+            pack[i].packSize = pack[i].getPackSize(selectedEdition);
+
+            if (pack[i].packType == PackType.Standard_Pack)
+            {
+                pack[i].cardsInPack = randomPackCards(pack[i]);
+            }
+            else if (pack[i].packType == PackType.CardBuff_Pack)
+            {
+                pack[i].cardsInPack = randomCardBuff(pack[i]);
+            }
+            else if (pack[i].packType == PackType.Textbook_Pack)
+            {
+                pack[i].cardsInPack = randomTextbook(pack[i]);
+            }
+            else if (pack[i].packType == PackType.Mentor_Pack)
+            {
+                pack[i].cardsInPack = randomMentor(pack[i]);
+            }
+
+
+        }
+        
+        return pack;
     }
 
     //This function is responsible for retrieving random special blinds for the Ante

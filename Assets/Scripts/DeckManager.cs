@@ -14,7 +14,7 @@ public class DeckManager : MonoBehaviour
     public List<GameObject> deckCards = new List<GameObject>();             //List of GameObject cards
 
     [Header("Settings")]
-    private int maxCardsInHand;                                              //This variable will store the maximum cards in a hand for the round
+    private int maxCardsInHand;                                             //This variable will store the maximum cards in a hand for the round
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class DeckManager : MonoBehaviour
         }
 
 
-        // Fill the deck with 56 placeholder cards
+        // Fill the deck with maxCardsInHand placeholder cards
         for (int i = 0; i < maxCardsInHand; i++)
         {
             //Don't spawn all 56 cards, have one face down card in the deck

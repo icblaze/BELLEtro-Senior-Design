@@ -11,7 +11,7 @@ using UnityEngine;
 
 public abstract class Consumable : BaseCard
 {
-    public CardType kindOfCard;
+    private CardType _kindOfCard;
     //public int sellValue; //Removed sell value since we can calculate the sell value manually
     public ConsumableType type;
     public bool isInstant;
@@ -19,4 +19,12 @@ public abstract class Consumable : BaseCard
     public int sellValue;
     public bool isNegative;
     public bool isDisabled;
+    
+    //Getter and setter for setting up the property _kindOfCard
+    public override CardType kindOfCard
+    {
+        get { return _kindOfCard; }
+        set { kindOfCard = value; }
+    } 
+
 }
