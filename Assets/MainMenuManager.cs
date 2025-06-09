@@ -6,10 +6,15 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using System.Threading.Tasks;
+
+//This script is used as a manager object for the main menu. This includes function calls
+//for the buttons, audio and transitions.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
+
 public class MainMenuManager : MonoBehaviour
 {
-    //This script is used as a manager object for the main menu. This includes function calls
-    //for the buttons, audio and transitions.
+
     private Image transitionImage;
     private Button playButton;
     private Button optionsButton;

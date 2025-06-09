@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 //Script is made to control and manage the UI of the game excluding the 
 //card playing area and the shop. This includes the side bar and any pop-ups.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
 public class UIManager : MonoBehaviour
 {
     public CanvasGroup runInfo;
