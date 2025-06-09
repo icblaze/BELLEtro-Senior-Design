@@ -9,7 +9,7 @@ using UnityEngine;
 
 public enum PackType
 {   
-    Standard_Pack,      // This pack can include cards such as Textbook, CardBuff, Mentor, and regular deck cards with enhancements.
+    Standard_Pack,      // This pack includes deck cards that can contain Card Modifiers(enhancements, seals, edition).
 
     CardBuff_Pack,      // This pack can only contain CardBuff cards
 

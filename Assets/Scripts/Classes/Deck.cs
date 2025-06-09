@@ -58,9 +58,14 @@ public class Deck
   }
   public bool IsValidCombination(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
   {
+    if (suit.ToString() == "None")
+    {
+      return false;
+    }
+
     return term.ToString().Contains(suit.ToString()) &&
-           term.ToString().Contains(placeArt.ToString()) &&
-           term.ToString().Contains(mannerArt.ToString());
+             term.ToString().Contains(placeArt.ToString()) &&
+             term.ToString().Contains(mannerArt.ToString());
   }
 
   //This function is responsible for creating a new deck , and removing all the cards from the last deck.

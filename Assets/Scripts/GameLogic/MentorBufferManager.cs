@@ -55,9 +55,10 @@ public class MentorBufferManager : MonoBehaviour
 
         //  Playing Each Card in Hand
         //  TODO Differentiate between playHand and drawHand (change the outer foreach loop)
-        foreach (PCard card in game.ThePlayer.deck.playerHand)
+        Deck deck = Deck.access();
+        foreach (PCard card in deck.playerHand)
         {
-            if(card.isDisabled)
+            if (card.isDisabled)
             {
                 continue;
             }
@@ -68,7 +69,7 @@ public class MentorBufferManager : MonoBehaviour
         }
 
         //  Playing From-Draw Cards (could track "not selected"?)
-        foreach (PCard card in game.ThePlayer.deck.playerHand)
+        foreach (PCard card in deck.playerHand)
         {
             if (card.isDisabled)
             {

@@ -8,6 +8,7 @@ using System.ComponentModel.Design;
 
 public enum PackEdition
 {
+    None,
     Normal_Pack,       // Normal packs allow players to select 1 out of 3 playing cards to add to their deck
 
     Jumbo_Pack,        // Jumbo packs allow players to select 1 out of 5 playing cards to add to their deck

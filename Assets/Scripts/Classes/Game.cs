@@ -3,21 +3,25 @@
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
 // Andy (flakkid): added previous consumable variable
+// Zaccharia Alaoui (ZachariaAlaoui): Added the functions and the logic for the functions
 
 using System.Numerics;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
+using System.Xml;
+using Unity.Collections;
 
 
 
 // The Game class contains all of the information about the Game
 public class Game
 {
-    
+
     private static Game instance;
-    
+
     //Singelton for the Game class
     public static Game access()
     {
@@ -62,28 +66,105 @@ public class Game
             //Next we should index into our deck so that we can get a card from our deck.
             list[i] = deckCards[index];
         }
-        
+
         return list;
     }
 
     //This function is responsible for generating a random card, useful for when we want to retrieve a random card for packs.
     public List<CardObject> randomPackCards(Pack pack)
     {
-        Player player = Player.access();
-        
-        List<PCard> card = player.deck.deckCards;
+        //Get access to the Deck 
+        Deck deck = Deck.access();
 
-        PCard card = new PCard();
-        PCard[] list = { card };
-        return list;
+        //This list of card objects will contain the random cards that were selected from the deck
+        List<CardObject> cards = new List<CardObject>();
+
+        //Retrieve random cards from the deck so that we can potentially apply card modifiers to the cards
+        for (int i = 0; i < pack.packSize; i++)
+        {
+            int index = randomizer(deck.deckCards.Count);
+
+            CardObject newCard = new CardObject();
+            newCard.cardData = deck.deckCards[index];
+
+
+            //Call a function here to determine what the enhancements will be on the current card
+            applyEnhancement(newCard, pack.edition);
+
+            cards.Add(newCard);
+        }
+
+        return cards;
+    }
+
+    //This function modifies a deck card , and applies any modifiers to it so that it can be added to a pack for use.
+    public CardObject applyEnhancement(CardObject newCard, PackEdition packEdition)
+    {
+        //Set the temporary dictionaries with the ones in the CardModifier class.
+        //This allows us to enhance the dictionaries below based on packtype, this allows rarer cards show up in higher ranked packs.
+        var adjustedEditions = CardModifier.editionRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        var adjustedEnhancements = CardModifier.enhancementRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        var adjustedSeals = CardModifier.sealRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+
+        if (packEdition == PackEdition.Jumbo_Pack)
+        {
+            //This updates all the keys in the dictionary that are less than 60.
+            //This piece of code doubles the Key in the dictionary, which gives 
+            //rarer cards a higher chance to be selected
+
+            adjustedEditions = adjustedEditions.ToDictionary(
+                kvp => (kvp.Key < 60) ? kvp.Key * 2 : kvp.Key,
+                kvp => kvp.Value
+            );
+
+            adjustedEnhancements = adjustedEnhancements.ToDictionary(
+                kvp => (kvp.Key < 40) ? kvp.Key * 2 : kvp.Key,
+                kvp => kvp.Value
+            );
+
+            adjustedSeals = adjustedSeals.ToDictionary(
+                kvp => (kvp.Key < 50) ? kvp.Key * 2 : kvp.Key,
+                kvp => kvp.Value
+            );
+
+        }
+        else if (packEdition == PackEdition.Mega_Pack)
+        {
+            adjustedEditions = adjustedEditions.ToDictionary(
+                kvp => (kvp.Key < 60) ? kvp.Key * 3 : kvp.Key,
+                kvp => kvp.Value
+            );
+
+            adjustedEnhancements = adjustedEnhancements.ToDictionary(
+                kvp => (kvp.Key < 40) ? kvp.Key * 3 : kvp.Key,
+                kvp => kvp.Value
+            );
+
+            adjustedSeals = adjustedSeals.ToDictionary(
+                kvp => (kvp.Key < 50) ? kvp.Key * 3 : kvp.Key,
+                kvp => kvp.Value
+            );
+        }
+
+        newCard.cardData.seal = CardModifier.GetWeightedModifier(adjustedSeals);
+        newCard.cardData.enhancement = CardModifier.GetWeightedModifier(adjustedEnhancements);
+        newCard.cardData.edition = CardModifier.GetWeightedModifier(adjustedEditions);
+
+
+        return newCard;
     }
 
     //This will generate a random voucher for the shop.
     public Voucher[] randomVoucher(int voucherCount)
     {
-        Voucher card = new Voucher();
-        Voucher[] list = { card };
-        return list;
+        Voucher[] cards = new Voucher[voucherCount];
+
+        for (int i = 0; i < voucherCount; i++)
+        { 
+
+        }
+
+        return card;
     }
 
     //This will generate a random textbook card for the shop.
@@ -95,7 +176,7 @@ public class Game
     }
 
     //This function is responsible for retrieving random Mentors for the shop.
-    public Mentor[] randomMentor(Pack pack)
+    public List<CardObject> randomMentor(Pack pack)
     {
         Mentor card = new Mentor();
         Mentor[] list = { card };
@@ -105,9 +186,9 @@ public class Game
     //This function is responsible for retrieving random card buffs for the shop.
     public List<CardObject> randomCardBuff(Pack pack)
     {
-        CardBuff card = new CardBuff();
         
-        CardBuff[] list = { card };
+        CardBuff card = new CardBuff();
+
         return list;
     }
 
@@ -146,10 +227,8 @@ public class Game
             {
                 pack[i].cardsInPack = randomMentor(pack[i]);
             }
-
-
         }
-        
+
         return pack;
     }
 
@@ -159,6 +238,6 @@ public class Game
         SpecialBlind blind = new SpecialBlind();
         return blind;
     }
-      
+
 }
 
