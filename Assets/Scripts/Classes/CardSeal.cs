@@ -3,9 +3,6 @@
 // Current Devs:
 // Robert (momomonkeyman): made enum
 
-using System.Collections;
-using UnityEngine;
-
 // The seal is an additional effect that can be on a base card only
 public enum CardSeal
 {

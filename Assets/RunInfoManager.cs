@@ -1,5 +1,7 @@
 using UnityEngine;
 //Script is used to close out the RunInfo Manager.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
 public class RunInfoManager : MonoBehaviour
 {
     public CanvasGroup runInfo;

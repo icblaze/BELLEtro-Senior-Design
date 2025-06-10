@@ -6,5 +6,7 @@ using UnityEngine;
 
 public class CardObject : MonoBehaviour
 {
-    public PCard cardData; //Stores card info
+    public PCard cardData; //Stores card info 
+
+    public Sprite cardSprite; //This will allow us to assign a sprite to the card for visual representation
 }

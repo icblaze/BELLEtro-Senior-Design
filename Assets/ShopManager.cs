@@ -40,6 +40,9 @@ public class ShopManager : MonoBehaviour
     private int shopMentorsAmount = 2;
     public CanvasGroup Mentor1Details;
     public CanvasGroup Mentor2Details;
+    public CanvasGroup VoucherDetails;
+    public CanvasGroup Pack1Details;
+    public CanvasGroup Pack2Details;
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
@@ -157,9 +160,10 @@ public class ShopManager : MonoBehaviour
     private void BuyMentor(Mentor mentor, Button mentorButton)
     {
         //If Joker threshold is hit, do not purchase.
-        if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+        if (playerInst.mentorDeck.Count >= playerInst.maxMentors ||
+        playerInst.moneyCount < mentor.price)
         {
-            Debug.Log("Not Enough Space In Mentors");
+            Debug.Log("Not Enough Space In Mentors or Money Insufficient");
             return;
         }
         //Add Mentor to user's collection
@@ -174,7 +178,9 @@ public class ShopManager : MonoBehaviour
     }
     private void BuyTextbook(Textbook textbook, Button textbookButton)
     {
-        if (playerInst.consumables.Count < playerInst.maxConsumables)
+        //If consumables is maxed or not enough money
+        if (playerInst.consumables.Count < playerInst.maxConsumables
+        && playerInst.moneyCount >= textbook.price)
         {
             //Open pack and allow user to choose from cards
             playerInst.consumables.Add(textbook);
@@ -190,14 +196,17 @@ public class ShopManager : MonoBehaviour
         else
         {
             //Should make the UI shake
-            Debug.Log("Not Enough Space In Consumables");
+            Debug.Log("Not Enough Space In Consumables or Money Insufficient");
+            return;
         }
     }
     private void BuyCardBuff(CardBuff cardBuff, Button cardBuffButton)
     {
-        if (playerInst.consumables.Count >= playerInst.maxConsumables)
+        if (playerInst.consumables.Count >= playerInst.maxConsumables
+        || playerInst.moneyCount < cardBuff.price)
         {
-            Debug.Log("Not Enough Space In Consumables");
+            //Should make the UI shake
+            Debug.Log("Not Enough Space In Consumables or Money Insufficient");
             return;
         }
 
@@ -253,6 +262,12 @@ public class ShopManager : MonoBehaviour
     //Function call takes in a voucher card and adds the effects into the player's run.
     public void BuyVoucher()
     {
+        if (playerInst.moneyCount < voucher.initialPrice)
+        {
+            Debug.Log("Insufficient Funds");
+            return;
+        }
+        Debug.Log("Voucher Purchased");
         // //Add voucher effect to user's run
         voucher.applyEffect(playerInst);
 
@@ -267,6 +282,11 @@ public class ShopManager : MonoBehaviour
     //Function call takes in a pack card and opens it, calling the necessary functions.
     private void BuyPack(Pack pack, Button packButton)
     {
+        if (playerInst.moneyCount < pack.price)
+        {
+            Debug.Log("Insufficient Funds");
+            return;
+        }
         //Open pack and allow user to choose from cards
 
         //Call respected function for cards (whether it be a Mentor, Planet, or Tarrot)
@@ -307,6 +327,12 @@ public class ShopManager : MonoBehaviour
     //Function causes the Mentors to reset. 
     public void Reroll()
     {
+        if (playerInst.moneyCount < reroll)
+        {
+            //Possibly make screen shake
+            Debug.Log("Money Insufficient");
+            return;
+        }
         //Refresh the Card slots with new random Cards
         NewCards();
 
@@ -459,6 +485,45 @@ public class ShopManager : MonoBehaviour
         Mentor2Details.blocksRaycasts = false;
         Mentor2Details.interactable = false;
         StartCoroutine(FadeOut(Mentor2Details));
+    }
+    public void ShowVoucherDetails()
+    {
+        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString();
+        VoucherDetails.blocksRaycasts = true;
+        VoucherDetails.interactable = true;
+        StartCoroutine(FadeIn(VoucherDetails));
+    }
+    public void RemoveVoucherDetails()
+    {
+        VoucherDetails.blocksRaycasts = false;
+        VoucherDetails.interactable = false;
+        StartCoroutine(FadeOut(VoucherDetails));
+    }
+    public void ShowPack1Details()
+    {
+        Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.name.ToString();
+        Pack1Details.blocksRaycasts = true;
+        StartCoroutine(FadeIn(Pack1Details));
+        Pack1Details.interactable = true;
+    }
+    public void RemovePack1Details()
+    {
+        Pack1Details.blocksRaycasts = false;
+        Pack1Details.interactable = false;
+        StartCoroutine(FadeOut(Pack1Details));
+    }
+    public void ShowPack2Details()
+    {
+        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.name.ToString();
+        Pack2Details.blocksRaycasts = true;
+        StartCoroutine(FadeIn(Pack2Details));
+        Pack2Details.interactable = true;
+    }
+    public void RemovePack2Details()
+    {
+        Pack2Details.blocksRaycasts = false;
+        Pack2Details.interactable = false;
+        StartCoroutine(FadeOut(Pack2Details));
     }
     private IEnumerator FadeIn(CanvasGroup fadeInObject)//Fade the scene when the quit button is clikced
     {

@@ -18,13 +18,16 @@ public class MentorBufferManager : MonoBehaviour
     //  Assigns each Mentor of the Player's mentorDeck to their buffer
     public static void AssignToBuffer ()
     {
+        //This creates a list of mentors for each location that is in the UseLocation enum
         foreach (UseLocation location in System.Enum.GetValues(typeof(UseLocation)))
         {
             mentorBuffers[location] = new List<Mentor>();
         }
 
+        //Go through all the mentors in the players deck
         foreach (Mentor mentor in player.mentorDeck)
         {
+            //Add mentor to the mentorBuffer dictionary based on location
             foreach (UseLocation location in mentor.locations)
             {
                 mentorBuffers[location].Add(mentor);
@@ -52,9 +55,10 @@ public class MentorBufferManager : MonoBehaviour
 
         //  Playing Each Card in Hand
         //  TODO Differentiate between playHand and drawHand (change the outer foreach loop)
-        foreach (PCard card in game.ThePlayer.deck.playerHand)
+        Deck deck = Deck.access();
+        foreach (PCard card in deck.playerHand)
         {
-            if(card.isDisabled)
+            if (card.isDisabled)
             {
                 continue;
             }
@@ -65,7 +69,7 @@ public class MentorBufferManager : MonoBehaviour
         }
 
         //  Playing From-Draw Cards (could track "not selected"?)
-        foreach (PCard card in game.ThePlayer.deck.playerHand)
+        foreach (PCard card in deck.playerHand)
         {
             if (card.isDisabled)
             {

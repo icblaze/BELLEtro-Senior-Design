@@ -4,6 +4,8 @@ using System.Collections.Generic;
 //Script is used as a manager for the PlayerPrefs for the game.
 //This includes the setters, the getters, and the intial values for the
 //PlayerPrefs.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
 public class PlayerPrefsManager
 {
     private const string MONEY = "money";
