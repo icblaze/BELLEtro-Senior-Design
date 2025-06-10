@@ -30,7 +30,6 @@ public class Player
         return instance;
     }
 
-    public Deck deck;               
     public List<Mentor> mentorDeck;                              //List of Mentors that the player currently has.
     public List<Consumable> consumables;                         //List of consumables that the player currently has. Consumables are also called Textbooks.
     public int discards;                                         //The amount of discards the player currently has.
@@ -47,6 +46,8 @@ public class Player
     //This removes a card from the player hand list if it is contained within the list
     public void removeCard(PCard card)
     {
+        Deck deck = Deck.access();
+
         if (deck.playerHand.Contains(card))
         {
             deck.playerHand.Remove(card);

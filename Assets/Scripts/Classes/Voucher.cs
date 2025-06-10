@@ -3,6 +3,7 @@
 // purchaseable (where the price is used) or owned by a player.
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
+// Zacharia Alaoui: Added variables for the base class
 
 using System.Collections;
 using UnityEngine;

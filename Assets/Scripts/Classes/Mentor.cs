@@ -34,7 +34,7 @@ public class Mentor
         this.edition = edition;
 
         //  Calculate price based on edition, and have sell value be half that amount
-        price = basePrice + EditionAssignment.EditionPrice(edition);
+        price = basePrice + CardModifier.EditionPrice(edition);
         sellValue = (int)Mathf.Floor(price / 2.0f);
     }
 

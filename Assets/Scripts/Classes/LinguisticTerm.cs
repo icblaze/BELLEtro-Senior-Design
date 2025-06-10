@@ -9,6 +9,9 @@ using UnityEngine;
 //This enum contains the list of linguistic characters
 public enum LinguisticTerms
 {
+    //Default Value
+    None,
+
     //Consonants
 
     //Stop Consonants         

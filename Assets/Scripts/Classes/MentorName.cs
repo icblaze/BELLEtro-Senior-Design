@@ -10,6 +10,7 @@ using UnityEngine;
 // the Mentor interface 
 public enum MentorName
 {
+    None,
     CheatSheet,
     ExtraCredit,
     BonusPoints,
@@ -59,5 +60,6 @@ public enum MentorName
     Bookstore,
     MadHatter,
     HighlyEducated,
-    LightSnack
+    LightSnack,
+
 }
