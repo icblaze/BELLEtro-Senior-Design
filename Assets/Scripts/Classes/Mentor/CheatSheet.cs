@@ -16,6 +16,7 @@ public class CheatSheet : Mentor
     public CheatSheet(CardEdition edition) : base(MentorName.CheatSheet, edition, 10)
     {
         //  Normally assign locations here, but CheatSheet copies Mentor to the right
+        description = "Copies the ability of the Mentor to the right";
     }
 
     //  Dynamically change the effect of Cheat Sheet based on rightMentor, call in JokerCard group

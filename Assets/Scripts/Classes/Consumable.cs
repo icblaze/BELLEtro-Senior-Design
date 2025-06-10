@@ -19,4 +19,5 @@ public abstract class Consumable : BaseCard
     public int sellValue;
     public bool isNegative;
     public bool isDisabled;
+    public string description; //   Stores details for effect of consumable
 }

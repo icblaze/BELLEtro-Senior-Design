@@ -38,7 +38,7 @@ public class Game
     private int index;                           //This variable will hold a value that we would use to index into our deck
     private static Random rnd = new Random();    //Random number generator
 
-    public Consumable previousConsumable;        //  Stores name of last used consumable
+    public Consumable previousConsumable = null;        //  Stores name of last used consumable
 
 
     //This function is used to create a seed, so that we can get a random card from the deck.

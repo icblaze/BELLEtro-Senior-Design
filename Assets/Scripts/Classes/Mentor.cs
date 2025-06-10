@@ -17,13 +17,27 @@ public class Mentor
     public MentorName name;
     public CardEdition edition;
     public UseLocation[] locations;
+    public string description;
 
+    //  This will construct the appropiate Mentor subclass with passed card edition
+    public static Mentor MentorFactory(MentorName name, CardEdition cardEdition)
+    {
+        switch(name)
+        {
+            case MentorName.CheatSheet:
+                return new CheatSheet(cardEdition);
+            case MentorName.ExtraCredit:
+                return new ExtraCredit(cardEdition);
+            default:
+                return new CheatSheet(cardEdition);
+        }
+    }
 
     //  placeholder default constructor (will be "CheatSheet" mentor, base edition)
     public Mentor()
     {
         sellValue = 2;
-        price = 4;
+        price = 4;  
 
     }
 
@@ -42,5 +56,11 @@ public class Mentor
     public virtual void UseMentor ()
     {
         
+    }
+
+    //  Returns the description of mentor 
+    public virtual string GetDescription()
+    {
+        return description;
     }
 }

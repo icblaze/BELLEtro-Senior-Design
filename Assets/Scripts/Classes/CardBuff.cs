@@ -44,9 +44,8 @@ public class CardBuff : Consumable
     //  Placeholder constructor (Leftovers)
     public CardBuff()
     {
-        this.name = CardBuffName.Leftovers;
+        name = CardBuffName.Leftovers;
         price = 3;
-        sellValue = 1;
         isInstant = true;
         type = ConsumableType.CardBuff;
         isDisabled = false;
@@ -58,16 +57,22 @@ public class CardBuff : Consumable
     {
         this.name = name;
         price = 3;
-        sellValue = 1;
         isInstant = instantDict[name];
         type = ConsumableType.CardBuff;
         isDisabled = false;
         isNegative = false;
     }
 
-    //  Will apply appropiate buff based on name. 
-    public void applyCardBuff ()
+    //  Check if the card buff can be used to set isDisabled, and return details
+    public virtual string CheckAvailability()
     {
+        return "test";
+    }
+
+    //  Will apply appropiate buff based on name. 
+    public virtual void applyCardBuff ()
+    {
+        //  Use effect of card buff
         switch(name)
         {
             //  Generates the last used consumable
@@ -163,7 +168,7 @@ public class CardBuff : Consumable
             //  Gives total sell value of current mentors
             case CardBuffName.Milk:
                 int totalSell = 0;
-                foreach(Mentor mentor in player.mentorDeck)
+                foreach (Mentor mentor in player.mentorDeck)
                 {
                     totalSell += mentor.sellValue;
                 }
@@ -192,7 +197,7 @@ public class CardBuff : Consumable
 
             //  Generate a random Mentor (must have room)
             case CardBuffName.Banana:
-                if(player.mentorDeck.Count < player.maxMentors)
+                if (player.mentorDeck.Count < player.maxMentors)
                 {
                     player.mentorDeck.AddRange(game.randomMentor(1));
                 }
@@ -205,6 +210,12 @@ public class CardBuff : Consumable
             //  TODO Converts up to 3 selected cards into random Tense cards
             case CardBuffName.Toast:
                 break;
+        }
+
+        //  Set prev used consumable to current textbook (except for Leftovers)
+        if (name != CardBuffName.Leftovers)
+        {
+            game.previousConsumable = new CardBuff(name);
         }
     }
 
@@ -223,14 +234,14 @@ public class CardBuff : Consumable
             }
         }
 
-        //  Add random consumables
+        //  Add random consumables (change this later/move to different classes)
         if (consumableType == ConsumableType.Textbook)
         {
-            player.consumables.AddRange(game.randomTextbook(Math.Min(space, 2)));
+            //player.consumables.AddRange(game.randomTextbook(Math.Min(space, 2)));
         }
         else
         {
-            player.consumables.AddRange(game.randomCardBuff(Math.Min(space, 2)));
+            //player.consumables.AddRange(game.randomCardBuff(Math.Min(space, 2)));
         }
     }
 }
