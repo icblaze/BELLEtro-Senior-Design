@@ -42,7 +42,23 @@ public class Player
     public Dictionary<TextbookName, HandInfo> handTable = new(); //This table contains the table that contains all the info for each textbook card.
     float discount;                                              //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
-    
+
+    //  The player constructor
+    private Player()
+    {
+        maxMentors = 5;
+        maxConsumables = 2;
+        mentorDeck = new List<Mentor>(maxMentors);
+        consumables = new List<Consumable>(maxConsumables);
+        vouchers = new List<Voucher>();
+        discards = 4;
+        handCount = 4;
+        moneyCount = 4;
+        chipCount = 0;
+        discount = 1.0f;    //  100% price initially
+        InitializeHandTable();  
+    }
+
     //This removes a card from the player hand list if it is contained within the list
     public void removeCard(PCard card)
     {
