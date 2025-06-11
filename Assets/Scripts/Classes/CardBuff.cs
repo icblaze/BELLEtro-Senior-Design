@@ -1,8 +1,10 @@
-// This Document contains the code for the CardBuff class
-// This class contains information about a CardBuff which is a type of consumable
+// This interface is the base for all of the mentor cards which will be 
+// contained in the CardBuff directory which is located in this directory
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
-// Andy (flakid): made dict for instantUse, created buff functions
+// Andy (flakid): created buff functions
+
+//  6/10/25 (commented randomGenerating methods and going to move to different classes)
 
 using System;
 using System.Collections.Generic;
@@ -12,31 +14,82 @@ using UnityEngine;
 public class CardBuff : Consumable
 {
     public CardBuffName name;
-    private static readonly Dictionary<CardBuffName, bool> instantDict = new()
+
+    //  This will construct the appropiate CardBuff subclass
+    public static CardBuff CardBuffFactory(CardBuffName name)
     {
-        { CardBuffName.Leftovers, true },
-        { CardBuffName.Coffee, false },
-        { CardBuffName.Almonds, true },
-        { CardBuffName.Cookies, false},
-        { CardBuffName.Pancakes, true},
-        { CardBuffName.Chips, false},
-        { CardBuffName.Popcorn, false},
-        { CardBuffName.Spinach, false},
-        { CardBuffName.ChiliPepper, false},
-        { CardBuffName.Egg, true},
-        { CardBuffName.MysteryFood, true},
-        { CardBuffName.Tea, false},
-        { CardBuffName.IceCream, false},
-        { CardBuffName.Cherry, false},
-        { CardBuffName.Milk, true},
-        { CardBuffName.Cheese, false},
-        { CardBuffName.Potato, false},
-        { CardBuffName.Flatbread, false},
-        { CardBuffName.Bagel, false},
-        { CardBuffName.Pretzel, false},
-        { CardBuffName.Banana, true},
-        { CardBuffName.Toast, false}
-    };
+        switch(name)
+        {
+            //  Generates the last used consumable
+            case CardBuffName.Leftovers:
+                return new Leftovers();
+            //  TODO Add "Retake" seal to 1 card
+            case CardBuffName.Coffee:
+                return new Coffee();
+            //  Generates up to 2 random Textbooks
+            case CardBuffName.Almonds:
+                return new Almonds();
+            //  TODO Enhances up to 2 selected cards to "Mult" cards
+            case CardBuffName.Cookies:
+                return new Cookies();
+            //  Generates up to 2 random Card Buffs
+            case CardBuffName.Pancakes:
+                return new Pancakes();
+            //  TODO Enhances up to 2 selected cards to "Bonus" cards
+            case CardBuffName.Chips:
+                return new Chips();
+            //  TODO Enhanced 1 card to "Wild" Card
+            case CardBuffName.Popcorn:
+                return new Popcorn();
+            //  TODO Enhances 1 card to "Steel" Card
+            case CardBuffName.Spinach:
+                return new Spinach();
+            //  TODO Enhances 1 card to "Glass" Card
+            case CardBuffName.ChiliPepper:
+                return new ChiliPepper();
+            //  Doubles current money (up to $20)
+            case CardBuffName.Egg:
+                return new Egg();
+            //  25% chance to add an Edition to random Mentor
+            case CardBuffName.MysteryFood:
+                return new MysteryFood();
+            //  TODO Add "Study" seal to 1 card
+            case CardBuffName.Tea:
+                return new  Tea();
+            //  TODO Destroys up to 2 selected cards
+            case CardBuffName.IceCream:
+                return new IceCream();
+            //  TODO Select 2 cards, converts the left card into right
+            case CardBuffName.Cherry:
+                return new Cherry();
+            //  Gives total sell value of current mentors
+            case CardBuffName.Milk:
+                return new Milk();
+            //  TODO Enhances 1 card to "Gold" Card
+            case CardBuffName.Cheese:
+                return new Cheese();
+            //  TODO Add "Funding" seal to 1 card
+            case CardBuffName.Potato:
+                return new Potato();
+            //  TODO Converts up to 3 selected cards into random Voiceless cards
+            case CardBuffName.Flatbread:
+                return new Flatbread();
+            //  TODO Converts up to 3 selected cards into random Voiced cards
+            case CardBuffName.Bagel:
+                return new Bagel();
+            //  TODO Converts up to 3 selected cards into random Lax cards CHANGE THIS
+            case CardBuffName.Pretzel:
+                return new Pretzel();
+            //  TODO Generate a random Mentor (must have room) FIX
+            case CardBuffName.Banana:
+                return new Banana();
+            //  TODO Converts up to 3 selected cards into random Tense cards CHANGE THIS
+            case CardBuffName.Toast:
+                return new Toast();
+            default:
+                return new Leftovers();
+        }
+    }
 
     Game game = Game.access();
     Player player = Player.access();
@@ -57,170 +110,31 @@ public class CardBuff : Consumable
     {
         this.name = name;
         price = 3;
-        isInstant = instantDict[name];
         type = ConsumableType.CardBuff;
         isDisabled = false;
         isNegative = false;
     }
 
-    //  Check if the card buff can be used to set isDisabled, and return details
-    public virtual string CheckAvailability()
+    //  If CardBuff was used in the consumables group, then remove it from here
+    public void RemoveConsumable()
     {
-        return "test";
+        player.consumables.Remove(this);
+    }
+
+    //  Set if the card buff can be used to set isDisabled, and return details
+    public virtual string CheckDescription()
+    {
+        return description;
     }
 
     //  Will apply appropiate buff based on name. 
     public virtual void applyCardBuff ()
     {
-        //  Use effect of card buff
-        switch(name)
-        {
-            //  Generates the last used consumable
-            case CardBuffName.Leftovers:
-                Consumable lastUsed = game.previousConsumable;
-                if (lastUsed.type == ConsumableType.Textbook)
-                {
-                    Textbook prevTextbook = (Textbook) game.previousConsumable;
-                    player.consumables.Add(new Textbook(prevTextbook.name));
-                }
-                else if (lastUsed.type == ConsumableType.CardBuff)
-                {
-                    CardBuff prevCardBuff = (CardBuff) game.previousConsumable;
-                    player.consumables.Add(new CardBuff(prevCardBuff.name));
-                }
-                break;
 
-            //  TODO Add "Retake" seal to 1 card
-            case CardBuffName.Coffee:
-                break;
-
-            //  Generates up to 2 random Textbooks
-            case CardBuffName.Almonds:
-                GenerateConsumables(ConsumableType.Textbook);
-                break;
-
-            //  TODO Enhances up to 2 selected cards to "Mult" cards
-            case CardBuffName.Cookies:
-                break;
-
-            //  Generates up to 2 random Card Buffs
-            case CardBuffName.Pancakes:
-                GenerateConsumables(ConsumableType.CardBuff);
-                break;
-
-            //  TODO Enhances up to 2 selected cards to "Bonus" cards
-            case CardBuffName.Chips:
-                break;
-
-            //  TODO Enhanced 1 card to "Wild" Card
-            case CardBuffName.Popcorn:
-                break;
-
-            //  TODO Enhances 1 card to "Steel" Card
-            case CardBuffName.Spinach:
-                break;
-
-            //  TODO Enhances 1 card to "Glass" Card
-            case CardBuffName.ChiliPepper:
-                break;
-
-            //  Doubles current money (up to $20)
-            case CardBuffName.Egg:
-                player.moneyCount += Math.Min(player.moneyCount * 2, 20);
-                break;
-
-            //  25% chance to add an Edition to random Mentor
-            case CardBuffName.MysteryFood:
-                System.Random rand = new System.Random();
-
-                List<Mentor> baseMentors = new List<Mentor>();
-
-                foreach(Mentor mentor in player.mentorDeck)
-                {
-                    if(mentor.edition == CardEdition.Base)
-                    {
-                        baseMentors.Add(mentor);
-                    }
-                }
-
-                if(rand.NextDouble() < 0.25)
-                {
-                    int mentorIndex = rand.Next(baseMentors.Count);
-
-                    // +1 because can't be base; also no weighing here
-                    CardEdition randEdition = (CardEdition) 1 + rand.Next(Enum.GetValues(typeof(CardEdition)).Length);
-                    player.mentorDeck[mentorIndex].edition = randEdition;
-                }
-                break;
-
-            //  TODO Add "Study" seal to 1 card
-            case CardBuffName.Tea:
-                break;
-
-            //  TODO Destroys up to 2 selected cards
-            case CardBuffName.IceCream:
-                break;
-
-            //  TODO Select 2 cards, converts the left card into right
-            case CardBuffName.Cherry:
-                break;
-
-            //  Gives total sell value of current mentors
-            case CardBuffName.Milk:
-                int totalSell = 0;
-                foreach (Mentor mentor in player.mentorDeck)
-                {
-                    totalSell += mentor.sellValue;
-                }
-                player.moneyCount += totalSell;
-                break;
-
-            //  TODO Enhances 1 card to "Gold" Card
-            case CardBuffName.Cheese:
-                break;
-
-            //  TODO Add "Funding" seal to 1 card
-            case CardBuffName.Potato:
-                break;
-
-            //  TODO Converts up to 3 selected cards into random Voiceless cards
-            case CardBuffName.Flatbread:
-                break;
-
-            //  TODO Converts up to 3 selected cards into random Voiced cards
-            case CardBuffName.Bagel:
-                break;
-
-            //  TODO Converts up to 3 selected cards into random Lax cards
-            case CardBuffName.Pretzel:
-                break;
-
-            //  Generate a random Mentor (must have room)
-            case CardBuffName.Banana:
-                if (player.mentorDeck.Count < player.maxMentors)
-                {
-                    player.mentorDeck.AddRange(game.randomMentor(1));
-                }
-                else
-                {
-                    isDisabled = true;
-                }
-                break;
-
-            //  TODO Converts up to 3 selected cards into random Tense cards
-            case CardBuffName.Toast:
-                break;
-        }
-
-        //  Set prev used consumable to current textbook (except for Leftovers)
-        if (name != CardBuffName.Leftovers)
-        {
-            game.previousConsumable = new CardBuff(name);
-        }
     }
 
-    //  Generates up to 2 consuables of given type
-    private void GenerateConsumables(ConsumableType consumableType)
+    //  TODO Generates up to 2 consuables of given type FIX RANDOM (Used for Almonds and Panackes)
+    protected void GenerateConsumables(ConsumableType consumableType)
     {
         
         int space = player.maxConsumables - player.consumables.Count;
@@ -234,7 +148,9 @@ public class CardBuff : Consumable
             }
         }
 
-        //  Add random consumables (change this later/move to different classes)
+        RemoveConsumable();
+
+        //  Add random consumables 
         if (consumableType == ConsumableType.Textbook)
         {
             //player.consumables.AddRange(game.randomTextbook(Math.Min(space, 2)));
@@ -245,3 +161,4 @@ public class CardBuff : Consumable
         }
     }
 }
+
