@@ -69,12 +69,12 @@ public class ShopManager : MonoBehaviour
 
         //Generate randomn Packs
         Pack[] packs = new Pack[2];
-        packs = inst.randomPack(2);
+        packs = inst.randomPacks(2);
         pack1 = packs[0];
-        packs = inst.randomPack(2);
+        packs = inst.randomPacks(2);
         pack2 = packs[0];
-        pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack1.name.ToString());
-        pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack2.name.ToString());
+        pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack1.price.ToString());
+        pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack2.price.ToString());
     }
 
     private void NewCards()
@@ -96,10 +96,10 @@ public class ShopManager : MonoBehaviour
             //Use probablilties to generate the card shops
             int cardSlot = Random.Range(1, 100);
             //If number is under 10, create a textbook
-            if (cardSlot < 15)
+            if (cardSlot <= 15)
             {
                 Textbook[] Textbooks = new Textbook[2];
-                Textbooks = inst.randomTextbook(2);
+                Textbooks = inst.randomTextbookShop();
                 Debug.Log("Textbook Object: " + Textbooks[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
@@ -119,7 +119,7 @@ public class ShopManager : MonoBehaviour
             else if (cardSlot < 30) //Create a CardBuff
             {
                 CardBuff[] CardBuffs = new CardBuff[2];
-                CardBuffs = inst.randomCardBuff(2);
+                CardBuffs = inst.randomCardBuffShop();
                 Debug.Log("CardBuff Object: " + CardBuffs[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
@@ -137,7 +137,7 @@ public class ShopManager : MonoBehaviour
             else//Create a Joker card.
             {
                 Mentor[] mentors = new Mentor[2];
-                mentors = inst.randomMentor(2);
+                mentors = inst.randomMentorShop();
                 Debug.Log("Mentor Object: " + mentors[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
@@ -488,7 +488,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowVoucherDetails()
     {
-        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString();
+        //VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString();
         VoucherDetails.blocksRaycasts = true;
         VoucherDetails.interactable = true;
         StartCoroutine(FadeIn(VoucherDetails));
@@ -501,7 +501,8 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowPack1Details()
     {
-        Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.name.ToString();
+        //Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.price.ToString();
+    
         Pack1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack1Details));
         Pack1Details.interactable = true;
@@ -514,13 +515,13 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowPack2Details()
     {
-        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.name.ToString();
+        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.price.ToString();
         Pack2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack2Details));
         Pack2Details.interactable = true;
     }
     public void RemovePack2Details()
-    {
+    {//
         Pack2Details.blocksRaycasts = false;
         Pack2Details.interactable = false;
         StartCoroutine(FadeOut(Pack2Details));

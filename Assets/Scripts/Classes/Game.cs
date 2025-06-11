@@ -4,6 +4,7 @@
 // Robert (momomonkeyman): made base class with the variables
 // Andy (flakkid): added previous consumable variable
 // Zaccharia Alaoui (ZachariaAlaoui): Added the functions and the logic for the functions
+// Fredrick (bouloutef04): Added functions to obtain mentors, cardbuffs, and textbooks for the shop.
 
 using System.Numerics;
 using System.Collections;
@@ -160,35 +161,62 @@ public class Game
         Voucher[] cards = new Voucher[voucherCount];
 
         for (int i = 0; i < voucherCount; i++)
-        { 
-
+        {
+            cards[i] = new Voucher();
         }
 
-        return card;
+        return cards;
     }
 
-    //This will generate a random textbook card for the shop.
+    //This will generate a random textbook card for packs.
     public List<CardObject> randomTextbook(Pack pack)
+    {
+        Textbook card = new Textbook();
+        Textbook[] list = { card };
+        List<CardObject> list2 = new List<CardObject>();
+        return list2;
+    }
+    //This will generate a random textbook card for the shop.
+    public Textbook[] randomTextbookShop()
     {
         Textbook card = new Textbook();
         Textbook[] list = { card };
         return list;
     }
 
-    //This function is responsible for retrieving random Mentors for the shop.
+    //This function is responsible for retrieving random Mentors for packs.
     public List<CardObject> randomMentor(Pack pack)
+    {
+        Mentor card = new Mentor();
+        Mentor[] list = { card };
+        List<CardObject> list2 = new List<CardObject>();
+        return list2;
+    }
+
+    //This function is responsible for retrieving random Mentors for the shop.
+    public Mentor[] randomMentorShop()
     {
         Mentor card = new Mentor();
         Mentor[] list = { card };
         return list;
     }
 
-    //This function is responsible for retrieving random card buffs for the shop.
+    //This function is responsible for retrieving random card buffs for packs.
     public List<CardObject> randomCardBuff(Pack pack)
     {
-        
-        CardBuff card = new CardBuff();
 
+        CardBuff card = new CardBuff();
+        CardBuff[] list = { card };
+
+        List<CardObject> list2 = new List<CardObject>();
+        return list2;
+    }
+       //This function is responsible for retrieving random card buffs for the shop.
+    public CardBuff[] randomCardBuffShop()
+    {
+
+        CardBuff card = new CardBuff();
+        CardBuff[] list = { card };
         return list;
     }
 

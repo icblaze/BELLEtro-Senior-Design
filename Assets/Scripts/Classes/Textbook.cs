@@ -55,9 +55,10 @@ public class Textbook : Consumable
     public string GetDescription()
     {
         string handName = name.ToString();
-        int level = player.handTable[name].level;
-        int incrementMult = player.handTable[name].incrementMult;
-        int incrementChips = player.handTable[name].incrementChips;
-        return  "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + "Mult and" + "+" + incrementChips + " Chips"; 
+        //int level = player.handTable[name].level;
+        //int incrementMult = player.handTable[name].incrementMult;
+        //int incrementChips = player.handTable[name].incrementChips;
+        //return  "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + "Mult and" + "+" + incrementChips + " Chips"; 
+        return handName;
     }
 }
