@@ -29,16 +29,20 @@ public class Mentor
             case MentorName.ExtraCredit:
                 return new ExtraCredit(cardEdition);
             default:
-                return new CheatSheet(cardEdition);
+                return new Mentor();
         }
     }
 
-    //  placeholder default constructor (will be "CheatSheet" mentor, base edition)
+    //  placeholder default constructor (debug "None" mentor, base edition)
     public Mentor()
     {
-        sellValue = 2;
-        price = 4;  
+        name = MentorName.None;
+        edition = CardEdition.Base;
+        locations = new UseLocation[] { UseLocation.Blind };
 
+        price = 2;
+        sellValue = 1;
+        description = "This is a test mentor";
     }
 
     //  Constructor that each Mentor will use as the base, locations filled out in specific mentor

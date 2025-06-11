@@ -5,6 +5,7 @@
 // Andy (flakkid): turned arrays into List and added maxMentors variable;
 // Zack: Added comments to the functions and variables for future developers.
 
+using System;
 using System.Numerics;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +17,6 @@ using System.Linq;
 // player has and deals with selling
 public class Player
 {
-
     private static Player instance;  //Player instance varaiable
 
     //Singleton for the player
@@ -39,7 +39,7 @@ public class Player
     public int maxConsumables;                                   
     public int maxMentors;              
     public List<Voucher> vouchers;                               //List of vouchers that the player has.
-    public Dictionary<TextbookName, HandInfo> handTable;         //This table conatins the table that contains all the info for each textbook card.
+    public Dictionary<TextbookName, HandInfo> handTable = new(); //This table contains the table that contains all the info for each textbook card.
     float discount;                                              //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
     
@@ -75,5 +75,17 @@ public class Player
         Player currPlayer = access();
         currPlayer.moneyCount += sellValue;  
         currPlayer.consumables.Remove(consumable);
+    }
+
+    //  This function initializes the player's handTable
+    public void InitializeHandTable()
+    {
+        foreach(TextbookName handName in Enum.GetValues(typeof(TextbookName)))
+        {
+            if (!handTable.ContainsKey(handName))
+            {
+                handTable.Add(handName, new HandInfo(handName));
+            }
+        }
     }
 }
