@@ -1,5 +1,5 @@
-﻿// This Document contains the code for the CheatSheet Mentor.
-// Effect is to copy the effect of the Mentor to its right.
+﻿// This Document contains the code for the ExtraCredit Mentor.
+// Effect is add $1 at end of round.
 // Current Devs:
 // Andy (flakkid): Created mentor
 
@@ -13,7 +13,7 @@ public class ExtraCredit : Mentor
     public ExtraCredit(CardEdition edition) : base(MentorName.ExtraCredit, edition, 5)
     {
         //  Might have to change this buffer location?
-        locations = new UseLocation[] { UseLocation.Shop };
+        locations = new UseLocation[] { UseLocation.PostBlind };
         description = "Earn $1 at end of round";
     }
 

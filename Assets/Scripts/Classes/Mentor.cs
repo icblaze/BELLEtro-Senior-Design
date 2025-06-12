@@ -28,6 +28,12 @@ public class Mentor
                 return new CheatSheet(cardEdition);
             case MentorName.ExtraCredit:
                 return new ExtraCredit(cardEdition);
+            case MentorName.BonusPoints:
+                return new BonusPoints(cardEdition);
+            case MentorName.Curve:
+                return new Curve(cardEdition); //  TODO change variable for remaining hands in round
+            case MentorName.HelpingHand:
+                return new HelpingHand(cardEdition);
             default:
                 return new Mentor();
         }

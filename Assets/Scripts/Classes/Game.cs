@@ -267,5 +267,10 @@ public class Game
         return blind;
     }
 
+    public BigInteger GetChipTotal()
+    {
+        return ChipTotal;
+    }
+
 }
 

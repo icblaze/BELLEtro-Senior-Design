@@ -16,5 +16,6 @@ public enum UseLocation
   PostFromDraw,
   Post,
   Shop,
-  Blind
+  Blind,
+  PostBlind
 }
