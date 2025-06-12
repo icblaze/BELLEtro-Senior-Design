@@ -12,6 +12,7 @@ public class MysteryFood : CardBuff
 {
     Game game = Game.access();
     Player player = Player.access();
+    List<Mentor> baseMentors;
 
     //  Construct CardBuff consumable with enum for name
     public MysteryFood() : base(CardBuffName.MysteryFood)
@@ -21,18 +22,10 @@ public class MysteryFood : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
-        return description;
-    }
-
-    //  25% chance to add an Edition to random Mentor
-    public override void applyCardBuff ()
-    {
-        System.Random rand = new System.Random();
-
-        List<Mentor> baseMentors = new List<Mentor>();
-
+        //  Get list of Base Mentors in player's mentorDeck
+        baseMentors = new List<Mentor>();
         foreach (Mentor mentor in player.mentorDeck)
         {
             if (mentor.edition == CardEdition.Base)
@@ -41,12 +34,31 @@ public class MysteryFood : CardBuff
             }
         }
 
+        //  Disable if no base mentors available
+        if(baseMentors.Count == 0)
+        {
+            isDisabled = true;
+        }
+        else
+        {
+            isDisabled = false;
+        }
+
+        description = "25% chance to add an Edition to a random Mentor";
+        return description;
+    }
+
+    //  25% chance to add an Edition to random Mentor
+    public override void applyCardBuff ()
+    {
+        System.Random rand = new System.Random();
+
         if (rand.NextDouble() < 0.25)
         {
             int mentorIndex = rand.Next(baseMentors.Count);
 
             // +1 because can't be base; also no weighing here
-            CardEdition randEdition = (CardEdition)1 + rand.Next(Enum.GetValues(typeof(CardEdition)).Length);
+            CardEdition randEdition = (CardEdition) (1 + rand.Next(Enum.GetValues(typeof(CardEdition)).Length));
             player.mentorDeck[mentorIndex].edition = randEdition;
         }
 

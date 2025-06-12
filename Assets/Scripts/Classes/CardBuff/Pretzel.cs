@@ -12,23 +12,51 @@ public class Pretzel : CardBuff
 {
     Game game = Game.access();
     Player player = Player.access();
+    TextbookName mostPlayedHand;
 
     //  Construct CardBuff consumable with enum for name
     public Pretzel() : base(CardBuffName.Pretzel)
     {
-        isInstant = false;
+        isInstant = true;
         isDisabled = false;
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Find most used hand (highest rank breaks tie)
+        int max = 0;
+        TextbookName mostPlayedHand = TextbookName.HighCard;
+
+        foreach(TextbookName tbook in player.handTable.Keys)
+        {
+            int timesPlayed = player.handTable[tbook].GetTimesPlayed();
+            if (timesPlayed >= max)
+            {
+                max = timesPlayed;
+                mostPlayedHand = tbook;
+            }
+        }
+
+        //  Disable if no room
+        if(player.consumables.Count >= player.maxConsumables)
+        {
+            isDisabled = true;
+        }
+        else
+        {
+            isDisabled = false;
+        }
+
+        description = "Generates Textbook for most played hand";
+        description += " (" + mostPlayedHand.ToString() + ")";
         return description;
     }
 
-    //  TODO Converts up to 3 selected cards into random Lax cards CHANGE THIS
+    //  Generates Textbook for most played Textbook hand
     public override void applyCardBuff ()
     {
+        player.consumables.Add(new Textbook(mostPlayedHand));
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

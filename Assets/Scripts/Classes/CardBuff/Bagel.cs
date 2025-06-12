@@ -21,8 +21,11 @@ public class Bagel : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Disabled until at least 1 card selected, but 3 max
+
+        description = "Converts up to 3 selected cards into random Voiced cards";
         return description;
     }
 

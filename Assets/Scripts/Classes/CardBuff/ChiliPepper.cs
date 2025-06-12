@@ -1,4 +1,4 @@
-// This Document contains the code for the Spinach CardBuff subclass
+// This Document contains the code for the ChiliPepper CardBuff subclass
 // This class contains information about a CardBuff which is a type of consumable
 // Current Devs:
 // Andy (flakid): made class 
@@ -21,8 +21,11 @@ public class ChiliPepper : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Disable if 1 card is not selected
+
+        description = "Enhances 1 selected card to be Glass.";
         return description;
     }
 

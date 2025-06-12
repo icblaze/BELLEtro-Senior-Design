@@ -21,12 +21,15 @@ public class Toast : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Checks if at least one card is selected, max 3
+
+        description = "Increase chips by 10 for up to 3 selected cards";
         return description;
     }
 
-    //  TODO Converts up to 3 selected cards into random Tense cards CHANGE THIS
+    //  TODO Increase chips by 10 for up to 3 selected cards
     public override void applyCardBuff ()
     {
 

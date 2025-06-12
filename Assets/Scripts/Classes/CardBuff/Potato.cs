@@ -21,8 +21,11 @@ public class Potato : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Disable if 1 card isn't selected
+
+        description = "Add a Funding seal to 1 selected card.";
         return description;
     }
 

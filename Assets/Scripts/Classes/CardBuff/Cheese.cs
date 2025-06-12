@@ -21,8 +21,11 @@ public class Cheese : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Disables if 1 card isn't selected
+
+        description = "Enhances 1 selected card to be Gold.";
         return description;
     }
 

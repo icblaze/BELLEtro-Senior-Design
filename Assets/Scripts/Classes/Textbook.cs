@@ -42,7 +42,7 @@ public class Textbook : Consumable
     //  Increases appropiate hand based on textbook name
     public void applyTextbook()
     {
-        player.handTable[name].increaseLevel();
+        player.handTable[name].IncreaseLevel();
 
         //  Set previous consumable to used Textbook
         Game.access().previousConsumable = new Textbook(name);

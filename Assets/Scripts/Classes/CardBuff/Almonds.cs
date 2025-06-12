@@ -21,8 +21,9 @@ public class Almonds : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        description = "Generate up to 2 Textbooks";
         return description;
     }
 

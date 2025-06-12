@@ -21,8 +21,27 @@ public class Leftovers : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Show last used consumable in description (if available)
+        Consumable lastUsed = game.previousConsumable;
+        description = "Generates the last used consumable except Leftovers";
+
+        if(lastUsed is null)
+        {
+            description += " (None)";
+        }
+        else if(lastUsed.type == ConsumableType.Textbook)
+        {
+            Textbook prevTextbook = (Textbook) lastUsed;
+            description += " (" + prevTextbook.name.ToString() + ")";
+        }
+        else if(lastUsed.type == ConsumableType.CardBuff)
+        {
+            Textbook prevTextbook = (Textbook)lastUsed;
+            description += " (" + prevTextbook.name.ToString() + ")";
+        }
+
         return description;
     }
 
@@ -32,12 +51,12 @@ public class Leftovers : CardBuff
         Consumable lastUsed = game.previousConsumable;
         if (lastUsed.type == ConsumableType.Textbook)
         {
-            Textbook prevTextbook = (Textbook)game.previousConsumable;
+            Textbook prevTextbook = (Textbook) lastUsed;
             player.consumables.Add(new Textbook(prevTextbook.name));
         }
-        else if (lastUsed.type == ConsumableType.CardBuff)
+        else
         {
-            CardBuff prevCardBuff = (CardBuff)game.previousConsumable;
+            CardBuff prevCardBuff = (CardBuff) lastUsed;
             player.consumables.Add(CardBuffFactory(prevCardBuff.name));
         }
 

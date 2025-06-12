@@ -21,15 +21,27 @@ public class Banana : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  If no space available, then disable
+        if(player.mentorDeck.Count >= player.maxMentors)
+        {
+            isDisabled = true;
+        }
+        else
+        {
+            isDisabled = false;
+        }
+
+        description = "Generate a random Mentor (must have room)";
         return description;
     }
 
-    //  TODO Generate a random Mentor (must have room) FIX
+    //  Generate a random Mentor (must have room) 
     public override void applyCardBuff ()
     {
-        //player.mentorDeck.AddRange(game.randomMentor(1));
+        //  Liable to change depending on random function
+        player.mentorDeck.AddRange(game.randomMentorShop());
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

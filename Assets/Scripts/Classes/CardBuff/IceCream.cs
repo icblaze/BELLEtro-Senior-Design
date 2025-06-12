@@ -21,8 +21,11 @@ public class IceCream : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Checks if 1 card selected, max 2
+
+        description = "Destroys up to 2 selected cards.";
         return description;
     }
 

@@ -12,6 +12,7 @@ public class HandInfo : ScriptableObject
 {
     private int baseChips;
     private int baseMult;
+    public int timesPlayed;
     public int level;
     public int incrementChips;
     public int incrementMult;
@@ -20,6 +21,7 @@ public class HandInfo : ScriptableObject
     public HandInfo(TextbookName textbookName)
     {
         level = 1;
+        timesPlayed = 0;
 
         switch (textbookName)
         {
@@ -92,20 +94,20 @@ public class HandInfo : ScriptableObject
             case TextbookName.FlushFive:
                 baseMult = 16;
                 baseChips = 160;
-                incrementMult = 3;  
+                incrementMult = 3;
                 incrementChips = 50;
                 break;
         }
     }
 
     //  Increase level of hand and scoring
-    public void increaseLevel()
+    public void IncreaseLevel()
     {
         level++;
     }
 
     //  Decrease level of hand and scoring
-    public bool decreaseLevel()
+    public bool DecreaseLevel()
     {
         //  Can't decrease level below 1
         if (level == 1)
@@ -118,16 +120,22 @@ public class HandInfo : ScriptableObject
     }
 
     //  Get the current chips (using base chips, increment, and level)
-    public int getCurrChips()
+    public int GetCurrChips()
     {
         int currChips = baseChips + (incrementChips * level);
         return currChips;
     }
 
     //  Get the current mult (using base mult, increment, and level)
-    public int getCurrMult()
+    public int GetCurrMult()
     {
         int currMult = baseMult + (incrementMult * level);
         return currMult;
+    }
+
+    //  Returns the amount of times the hand is played in the run
+    public int GetTimesPlayed()
+    {
+        return timesPlayed;
     }
 }

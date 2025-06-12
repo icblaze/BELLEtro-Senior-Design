@@ -21,8 +21,11 @@ public class Flatbread : CardBuff
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
-    public override string CheckDescription()
+    public override string GetDescription()
     {
+        //  Check if at least 1 card is selected, max 3
+
+        description = "Converts up to 3 selected cards into random Voiceless cards.";
         return description;
     }
 
