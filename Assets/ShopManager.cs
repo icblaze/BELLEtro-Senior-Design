@@ -184,7 +184,7 @@ public class ShopManager : MonoBehaviour
             //Open pack and allow user to choose from cards
             playerInst.consumables.Add(textbook);
 
-            // Move pack disappear
+            //Move pack disappear
             // textbookButton.interactable |= false;
             textbookButton.gameObject.SetActive(false);
 
@@ -555,29 +555,32 @@ public class ShopManager : MonoBehaviour
         }
         fadeInObject.alpha = 0;
     }
-    //
+    // //Function takes in a pack, sets the pack cards in Unity to the respetectove cards.
+    // User is then allowed to grab 1 (or 2) or skip cards before the pack closes and 
+    // returns to the shop.
     // private void OpenPacks(Pack pack)
     // {
-    //     //Take in Pack
+    //     //Fade Out UI
 
-    //     //Attach the corresponding objects onto the sections needed.
-    //     if (pack[i].packType == PackType.Standard_Pack)
-    //         {
-    //             pack[i].cardsInPack = randomPackCards(pack[i]);
-    //         }
-    //         else if (pack[i].packType == PackType.CardBuff_Pack)
-    //         {
-    //             pack[i].cardsInPack = randomCardBuff(pack[i]);
-    //         }
-    //         else if (pack[i].packType == PackType.Textbook_Pack)
-    //         {
-    //             pack[i].cardsInPack = randomTextbook(pack[i]);
-    //         }
-    //         else if (pack[i].packType == PackType.Mentor_Pack)
-    //         {
-    //             pack[i].cardsInPack = randomMentor(pack[i]);
-    //         }
+
+    //     //Attach the corresponding objects(cards) onto the sections needed.
+    //     PackCard1 = pack.cardsInPack[0];
+    //     PackCard2 = pack.cardsInPack[1];
+    //     PackCard3 = pack.cardsInPack[2];
+    //     PackCard4 = pack.cardsInPack[3];
+    //     if (pack.packSize > 4)
+    //     {
+    //         PackCard5 = pack.cardsInPack[4];
+    //         PackCard6 = pack.cardsInPack[5];
+    //     }
+    //     //Fade In Card UI
+    //     StartCoroutine(FadeIn(PackCards));
+
     //     //Allow User to choose the specific card(s) and add them where needed
+
+    //     //Allow User To Skip Selection
+
+    //     //Return to shop UI
 
     // }
 }
