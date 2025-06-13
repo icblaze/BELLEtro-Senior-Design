@@ -71,8 +71,7 @@ public class ShopManager : MonoBehaviour
         Pack[] packs = new Pack[2];
         packs = inst.randomPacks(2);
         pack1 = packs[0];
-        packs = inst.randomPacks(2);
-        pack2 = packs[0];
+        pack2 = packs[1];
         pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack1.price.ToString());
         pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack2.price.ToString());
     }
@@ -502,7 +501,7 @@ public class ShopManager : MonoBehaviour
     public void ShowPack1Details()
     {
         //Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.price.ToString();
-    
+
         Pack1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack1Details));
         Pack1Details.interactable = true;
@@ -556,4 +555,29 @@ public class ShopManager : MonoBehaviour
         }
         fadeInObject.alpha = 0;
     }
+    //
+    // private void OpenPacks(Pack pack)
+    // {
+    //     //Take in Pack
+
+    //     //Attach the corresponding objects onto the sections needed.
+    //     if (pack[i].packType == PackType.Standard_Pack)
+    //         {
+    //             pack[i].cardsInPack = randomPackCards(pack[i]);
+    //         }
+    //         else if (pack[i].packType == PackType.CardBuff_Pack)
+    //         {
+    //             pack[i].cardsInPack = randomCardBuff(pack[i]);
+    //         }
+    //         else if (pack[i].packType == PackType.Textbook_Pack)
+    //         {
+    //             pack[i].cardsInPack = randomTextbook(pack[i]);
+    //         }
+    //         else if (pack[i].packType == PackType.Mentor_Pack)
+    //         {
+    //             pack[i].cardsInPack = randomMentor(pack[i]);
+    //         }
+    //     //Allow User to choose the specific card(s) and add them where needed
+
+    // }
 }
