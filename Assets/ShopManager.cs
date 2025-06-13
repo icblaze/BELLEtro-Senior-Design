@@ -184,7 +184,7 @@ public class ShopManager : MonoBehaviour
             //Open pack and allow user to choose from cards
             playerInst.consumables.Add(textbook);
 
-            //Move pack disappear
+            // Move pack disappear
             // textbookButton.interactable |= false;
             textbookButton.gameObject.SetActive(false);
 
@@ -520,12 +520,12 @@ public class ShopManager : MonoBehaviour
         Pack2Details.interactable = true;
     }
     public void RemovePack2Details()
-    {//
+    {
         Pack2Details.blocksRaycasts = false;
         Pack2Details.interactable = false;
         StartCoroutine(FadeOut(Pack2Details));
     }
-    private IEnumerator FadeIn(CanvasGroup fadeInObject)//Fade the scene when the quit button is clikced
+    private IEnumerator FadeIn(CanvasGroup fadeInObject)//Fade the scene when the quit button is clicked
     {
         float timeToFade = .2f;
         float timeElapsed = 0;
@@ -540,7 +540,7 @@ public class ShopManager : MonoBehaviour
         }
         fadeInObject.alpha = 1;
     }
-    private IEnumerator FadeOut(CanvasGroup fadeInObject)//Fade the scene when the quit button is clikced
+    private IEnumerator FadeOut(CanvasGroup fadeInObject)//Fade the scene when the quit button is clicked
     {
         float timeToFade = .2f;
         float timeElapsed = 0;

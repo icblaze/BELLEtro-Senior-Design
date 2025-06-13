@@ -1,4 +1,4 @@
-/// This Document contains the code for the Leftovers CardBuff subclass
+// This Document contains the code for the Leftovers CardBuff subclass
 // This class contains information about a CardBuff which is a type of consumable
 // Current Devs:
 // Andy (flakid): made class 

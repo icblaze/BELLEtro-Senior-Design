@@ -13,6 +13,11 @@ public class SpecialBlind
     public float chipMultiplier;
     public SpecialBlindNames blindType;
 
+    public SpecialBlind(SpecialBlindNames specialBlindNames)
+    { 
+        //Complete this constructor for setting up the Special Blind
+    }
+
     public void applySpecialBlinds()
     {
 

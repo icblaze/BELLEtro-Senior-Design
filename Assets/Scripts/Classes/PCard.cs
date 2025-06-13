@@ -25,7 +25,7 @@ public class PCard : BaseCard
 
     public MentorName mentor;                       // Mentor card
     public TextbookName textbook;                   // Textbook card
-    public CardBuffName cardBuffName;               // Card buff card
+    public CardBuff cardBuff;                       // Card buff card
 
     public override CardType kindOfCard
     {
