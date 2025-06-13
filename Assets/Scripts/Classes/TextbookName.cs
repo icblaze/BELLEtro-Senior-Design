@@ -9,7 +9,6 @@ using UnityEngine;
 // Textbooks will enhance the base chips and mult for a kind of hand
 public enum TextbookName
 {
-    None,
     HighCard,
     Pair,
     TwoPair,

@@ -11,11 +11,9 @@ using UnityEngine;
 // special effects.
 public enum SpecialBlindNames
 {
-    None,
     TheScrambler,
     TheSilence,
     TheCollector,
     ThePurist,
     TheMirage
-
 }
