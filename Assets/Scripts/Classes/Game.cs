@@ -250,6 +250,9 @@ public class Game
             int index = randomizer(Enum.GetValues(typeof(CardBuffName)).Length);
             CardObject newCardBuff = new CardObject();
 
+            //  You have to intialize the cardData field before assigning the cardBuff field inside it
+            newCardBuff.cardData = new PCard();
+
             newCardBuff.cardData.cardBuff = CardBuff.CardBuffFactory((CardBuffName)index);  //Create a CardBuff and assign it to our cardObject
 
             //Checks if the cardBuff already exists in the cardBuffCards list
@@ -268,14 +271,46 @@ public class Game
 
         return cardBuffCards;
     }
+    ////This function is responsible for retrieving random card buffs for the shop. OLD
+    //public CardBuff[] randomCardBuffShop()
+    //{
+
+    //    CardBuff card = new CardBuff();
+    //    CardBuff[] list = { card };
+    //    return list;
+    //}
+
     //This function is responsible for retrieving random card buffs for the shop.
-    public CardBuff[] randomCardBuffShop()
+    public CardBuff[] randomCardBuffShop(int num)
     {
 
-        CardBuff card = new CardBuff();
-        CardBuff[] list = { card };
+        CardBuff[] list = new CardBuff[num];
+        int count = 0;
+
+        while (count < num)
+        {
+            index = randomizer(Enum.GetValues(typeof(CardBuffName)).Length);    // Select a random number that is in the range of the TextbookName enum 
+            CardBuff cardBuffCard = CardBuff.CardBuffFactory((CardBuffName)index);          // Created a new textbook card  
+
+            bool alreadyExists = Array.Exists(list, cardBuff => cardBuff == cardBuffCard);
+
+            //This checks if the textBook already exists within the array.
+            //This statement helps prevent producing duplicate textbook cards.
+            if (!alreadyExists)
+            {
+                list[count] = cardBuffCard;
+                count++;
+            }
+            else
+            {
+                continue;
+            }
+
+        }
+
         return list;
     }
+
 
     //This is function is responsible for retrieving random packs for the shop.
     public Pack[] randomPacks(int packCount)

@@ -98,7 +98,7 @@ public class ShopManager : MonoBehaviour
             if (cardSlot <= 15)
             {
                 Textbook[] Textbooks = new Textbook[2];
-                Textbooks = inst.randomTextbookShop();
+                Textbooks = inst.randomTextbookShop(2);
                 Debug.Log("Textbook Object: " + Textbooks[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
@@ -118,7 +118,7 @@ public class ShopManager : MonoBehaviour
             else if (cardSlot < 30) //Create a CardBuff
             {
                 CardBuff[] CardBuffs = new CardBuff[2];
-                CardBuffs = inst.randomCardBuffShop();
+                CardBuffs = inst.randomCardBuffShop(2);
                 Debug.Log("CardBuff Object: " + CardBuffs[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
