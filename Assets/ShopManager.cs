@@ -245,7 +245,7 @@ public class ShopManager : MonoBehaviour
     {
         //Should use if statements to determine what the card is
         //and call the respective function
-        if (mentor1 != null)
+        if (mentor2 != null)
         {
             BuyMentor(mentor2, cardButton2);
         }
