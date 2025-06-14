@@ -250,9 +250,6 @@ public class Game
             int index = randomizer(Enum.GetValues(typeof(CardBuffName)).Length);
             CardObject newCardBuff = new CardObject();
 
-            //  You have to intialize the cardData field before assigning the cardBuff field inside it
-            newCardBuff.cardData = new PCard();
-
             newCardBuff.cardData.cardBuff = CardBuff.CardBuffFactory((CardBuffName)index);  //Create a CardBuff and assign it to our cardObject
 
             //Checks if the cardBuff already exists in the cardBuffCards list
