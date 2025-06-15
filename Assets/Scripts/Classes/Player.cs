@@ -40,7 +40,7 @@ public class Player
     public int maxMentors;              
     public List<Voucher> vouchers;                               //List of vouchers that the player has.
     public Dictionary<TextbookName, HandInfo> handTable = new(); //This table contains the table that contains all the info for each textbook card.
-    float discount;                                              //Discount that can be used in store.
+    public float discount;                                              //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
 
     //  The player constructor

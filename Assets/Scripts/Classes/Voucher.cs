@@ -6,6 +6,7 @@
 // Zacharia Alaoui: Added variables for the base class
 
 using System.Collections;
+using System.Reflection.Emit;
 using UnityEngine;
 
 // The Vouchers will permanently enhance the player with many kinds of Buffs
@@ -13,6 +14,13 @@ public class Voucher
 {
     public VoucherNames name;
     public int initialPrice = 10; //Vouchers have a base price of 10
+
+    //Constructor for Voucher
+    public Voucher(VoucherNames voucherName)
+    {
+        this.name = voucherName;
+    }    
+
 
     public void applyEffect(Player player)
     {

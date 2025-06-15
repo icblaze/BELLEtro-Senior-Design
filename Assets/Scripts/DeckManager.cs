@@ -48,7 +48,7 @@ public class DeckManager : MonoBehaviour
                 0f
             );
 
-            //I need to assign a random card from the deck and assign it to the cardComponent I made
+            //Assign a random card from the deck and assign it to the cardComponent
             cardComponent.cardData = deck.deckCards[i];
 
             deckCards.Add(newCard);

@@ -13,7 +13,7 @@ using UnityEngine;
 // from a select number and uses or adds them to the deck or mentorDeck
 public class Pack
 {
-    public List<CardObject> cardsInPack = new List<CardObject>(); // List of cards in the pack
+    public List<PCard> cardsInPack = new List<PCard>(); // List of cards in the pack
     public PackType packType;                                     // This variable holds a enum that contains all the different packs in the game 
     public int packSize;                                          // This variable will hold how many cards are in the pack
     public PackEdition edition;                                   // This variable indicates the size edition of the pack

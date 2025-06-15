@@ -24,12 +24,12 @@ public class HelpingHand : Mentor
         //  We can check after every hand played
 
         //  Find percentage of scored chips this round that 
-        float goal = (float)Game.access().BaseChips / (float)Game.access().GetChipTotal();
+        float goal = (float)Game.access().baseChips / (float)Game.access().GetChipTotal();
 
         //  If at least 95% and not passed
         if (goal >= 0.95 && goal < 1)
         {
-            Game.access().BaseChips = Game.access().GetChipTotal();
+            Game.access().baseChips = Game.access().GetChipTotal();
         }
     }
 }

@@ -41,7 +41,7 @@ public class Banana : CardBuff
     public override void applyCardBuff ()
     {
         //  Liable to change depending on random function
-        player.mentorDeck.AddRange(game.randomMentorShop());
+        player.mentorDeck.AddRange(game.randomMentorShop(1));
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);
