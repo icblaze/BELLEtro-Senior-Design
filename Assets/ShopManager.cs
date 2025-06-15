@@ -69,9 +69,9 @@ public class ShopManager : MonoBehaviour
 
         //Generate randomn Packs
         Pack[] packs = new Pack[2];
-        packs = inst.randomPacks(2);
+        packs = inst.randomPacks(1);
         pack1 = packs[0];
-        packs = inst.randomPacks(2);
+        packs = inst.randomPacks(1);
         pack2 = packs[0];
         pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack1.price.ToString());
         pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack2.price.ToString());
@@ -93,13 +93,13 @@ public class ShopManager : MonoBehaviour
 
         for (int i = 1; i <= shopMentorsAmount; i++)
         {
-            //Use probablilties to generate the card shops
+            //Use probabililties to generate the card shops
             int cardSlot = Random.Range(1, 100);
             //If number is under 10, create a textbook
             if (cardSlot <= 15)
             {
                 Textbook[] Textbooks = new Textbook[2];
-                Textbooks = inst.randomTextbookShop();
+                Textbooks = inst.randomTextbookShop(1);
                 Debug.Log("Textbook Object: " + Textbooks[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
@@ -118,18 +118,18 @@ public class ShopManager : MonoBehaviour
             }
             else if (cardSlot < 30) //Create a CardBuff
             {
-                CardBuff[] CardBuffs = new CardBuff[2];
-                CardBuffs = inst.randomCardBuffShop();
-                Debug.Log("CardBuff Object: " + CardBuffs[0]);
+                CardBuff[] cardBuffs = new CardBuff[2];
+                cardBuffs = inst.randomCardBuffShop(1);
+                Debug.Log("CardBuff Object: " + cardBuffs[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
-                    cardBuff1 = CardBuffs[0];
+                    cardBuff1 = cardBuffs[0];
                     cardButton1.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff1.name.ToString());
                     Debug.Log("CardBuff 1 Name: " + cardBuff1.name.ToString());
                 }
                 else
                 {
-                    cardBuff2 = CardBuffs[0];
+                    cardBuff2 = cardBuffs[0];
                     Debug.Log("CardBuff 2 Name: " + cardBuff2.name.ToString());
                     cardButton2.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff2.name.ToString());
                 }
@@ -137,7 +137,7 @@ public class ShopManager : MonoBehaviour
             else//Create a Joker card.
             {
                 Mentor[] mentors = new Mentor[2];
-                mentors = inst.randomMentorShop();
+                mentors = inst.randomMentorShop(1);
                 Debug.Log("Mentor Object: " + mentors[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {

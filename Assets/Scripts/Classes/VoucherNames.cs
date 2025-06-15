@@ -8,5 +8,6 @@ using UnityEngine;
 
 public enum VoucherNames
 {
-
+    None,
+    Voucher1,
 }

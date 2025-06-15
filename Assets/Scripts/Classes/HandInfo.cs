@@ -8,7 +8,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class HandInfo : ScriptableObject
+public class HandInfo 
 {
     private int baseChips;
     private int baseMult;

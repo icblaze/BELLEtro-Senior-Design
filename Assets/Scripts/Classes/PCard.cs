@@ -23,9 +23,50 @@ public class PCard : BaseCard
     public CardSeal seal;                           // Card seal on the card
     public bool isDisabled;                         // isDisabled is used to indicate if a card is able to be used
 
-    public MentorName mentor;                       // Mentor card
-    public TextbookName textbook;                   // Textbook card
+    public Mentor mentor;                       // Mentor card
+    public Textbook textbook;                   // Textbook card
     public CardBuff cardBuff;                       // Card buff card
+
+
+    //Default constructor for PCard
+    public PCard()
+    {
+
+    }
+
+    //Copy constructor for PCard
+    public PCard(PCard original)
+    {
+        this.kindOfCard = original.kindOfCard;
+        this.term = original.term;
+        this.suit = original.suit;
+        this.placeArt = original.placeArt;
+        this.mannerArt = original.mannerArt;
+        this.isDiphthong = original.isDiphthong;
+        this.chips = original.chips;
+        this.multiplier = original.multiplier;
+        this.edition = original.edition;
+        this.enhancement = original.enhancement;
+        this.seal = original.seal;
+        this.isDisabled = original.isDisabled;
+    }
+
+    public static PCard CloneCard(PCard card)
+    {
+        PCard clonedCard = new PCard(card);
+        return clonedCard;
+    }
+
+    public bool Equals(PCard other)
+    {
+        return suit == other.suit &&
+               term == other.term &&
+               placeArt == other.placeArt &&
+               mannerArt == other.mannerArt &&
+               edition == other.edition &&
+               enhancement == other.enhancement &&
+               seal == other.seal;
+    }
 
     public override CardType kindOfCard
     {

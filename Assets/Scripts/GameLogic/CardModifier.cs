@@ -3,7 +3,7 @@
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
 // Andy (flakkid): Added class and the editionRates dictionary
-// Zaccharia Alaoui: Added the functions and implemented dictionaries
+// Zacharia Alaoui: Added the functions and implemented the dictionaries
 
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +17,29 @@ public class CardModifier
     public static Dictionary<int, CardEdition> editionRates = new()
     {
         { 60, CardEdition.Base },
-        { 20, CardEdition.Foil },
+        { 18, CardEdition.Foil },
         { 10, CardEdition.Holographic },
-        { 6, CardEdition.Polychrome },
-        { 4, CardEdition.Negative }
+        { 7, CardEdition.Polychrome },
+        { 5, CardEdition.Negative }
     };
 
     public static Dictionary<int, CardEnhancement> enhancementRates = new()
     {
         { 40, CardEnhancement.Base },
-        { 20, CardEnhancement.BonusCard },
+        { 18, CardEnhancement.BonusCard },
         { 15, CardEnhancement.MultCard },
-        { 10, CardEnhancement.WildCard },
+        { 11, CardEnhancement.WildCard },
         { 8, CardEnhancement.GlassCard },
         { 5, CardEnhancement.SteelCard },
-        { 2, CardEnhancement.GoldCard }
+        { 3, CardEnhancement.GoldCard }
     };
 
     public static Dictionary<int, CardSeal> sealRates = new()
     {
         { 50, CardSeal.Base },
-        { 25, CardSeal.Funding },
-        { 15, CardSeal.Retake },
-        { 10, CardSeal.Study }
+        { 20, CardSeal.Funding },
+        { 18, CardSeal.Retake },
+        { 12, CardSeal.Study }
     };
 
     //This function is used to retrieve a card modifier based on weighted values.

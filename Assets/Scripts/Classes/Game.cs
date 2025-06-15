@@ -8,9 +8,10 @@
 
 using System.Numerics;
 using System.Collections;
-using System;
+//using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Unity.VisualScripting;
 using System.Xml;
 using Unity.Collections;
@@ -33,24 +34,25 @@ public class Game
         return instance;
     }
 
-    private int Ante;                                   //Ante is the set of Rounds the player is on
-    private int RoundValue;                             //RoundValue is the Round within the current Ante
-    public BigInteger BaseChips;                        //BaseChips are a calculation point for the value in each round, these are the blue chips.
-    public SpecialBlind[] PastSpecialBlinds;            //PastSpecialBlinds are the used Blinds 
-    private int ChipTotal;                              //ChipTotal is the number of chips needed to win a round
-    public Voucher[] VoucherHolder;                     //VoucherHolder contains the current Ante's Vouchers
-    public SpecialBlind CurrentSpecialBlind;            //CurrentSpecialBlind contains this Ante's Special Blind
-    public Player ThePlayer;                            //The Player is a refrence to the Player class 
-    private int index;                                  //This variable will hold a value that we would use to index into our deck
-    private static Random rnd = new Random();           //Random number generator
-    public Consumable previousConsumable = null;        //  Stores name of last used consumable
+    public GameObject cardPrefab;
+    private int ante;                                                              //Ante is the set of Rounds the player is on
+    private int roundValue;                                                        //RoundValue is the Round within the current Ante
+    public BigInteger baseChips;                                                   //BaseChips are a calculation point for the value in each round, these are the blue chips.
+    private int ChipTotal;                                                         //ChipTotal is the number of chips needed to win a round
+    public Voucher[] voucherHolder;                                                //VoucherHolder contains the current Ante's Vouchers
+    public SpecialBlind currentSpecialBlind;                                       //CurrentSpecialBlind contains this Ante's Special Blind
+    public Player thePlayer;                                                       //The Player is a refrence to the Player class 
+    private int index;                                                             //This variable will hold a value that we would use to index into our deck
+    public Consumable previousConsumable = null;                                   //Stores name of last used consumable
+    public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
+
 
 
     //This function is used to create a seed, so that we can get a random card from the deck.
     //This randomizer will also be used to retrieve a random index so we can select a random consumable/pack.
-    public int randomizer(int Size)
+    public int randomizer(int start, int Size)
     {
-        return rnd.Next(0, Size);
+        return Random.Range(start, Size);
     }
 
     //This will randomly draw cards from the deck after a player plays a hand or removes cards from the deck.
@@ -61,7 +63,7 @@ public class Game
         for (int i = 0; i < drawCount; i++)
         {
             //Call the randomizer function so that we can get a random number so that we can get a random card from the deck.
-            index = randomizer(deckCards.Count);
+            index = randomizer(0, deckCards.Count);
 
             //Next we should index into our deck so that we can get a card from our deck.
             list[i] = deckCards[index];
@@ -70,38 +72,41 @@ public class Game
         return list;
     }
 
-    //This function is responsible for generating a random card, useful for when we want to retrieve a random card for packs.
-    public List<CardObject> randomPackCards(Pack pack)
+    //This function is responsible for generating a list of cards, useful for when we want to retrieve a random cards for packs.
+    public List<PCard> randomPackCards(Pack pack)
     {
+        int count = 0;
+
         //Get access to the Deck 
         Deck deck = Deck.access();
 
         //This list of card objects will contain the random cards that were selected from the deck
-        List<CardObject> cards = new List<CardObject>();
+        List<PCard> cardList = new List<PCard>();
 
         //Retrieve random cards from the deck so that we can potentially apply card modifiers to the cards
-        for (int i = 0; i < pack.packSize; i++)
+        while (count < pack.packSize)
         {
-            int index = randomizer(deck.deckCards.Count);
+            int index = randomizer(0, deck.deckCards.Count);
 
-            CardObject newCard = new CardObject();
-            newCard.cardData = deck.deckCards[index];
-
+            PCard clonedCard = PCard.CloneCard(deck.deckCards[index]);
 
             //Call a function here to determine what the enhancements will be on the current card
-            applyEnhancement(newCard, pack.edition);
+            applyEnhancement(clonedCard, pack.edition);
 
-            cards.Add(newCard);
+            bool alreadyExists = cardList.Any(card => card.Equals(clonedCard));    //This checks if the new card exists already in the card list
+
+
+            cardList.Add(clonedCard);
         }
 
-        return cards;
+        return cardList;
     }
 
     //This function modifies a deck card , and applies any modifiers to it so that it can be added to a pack for use.
-    public CardObject applyEnhancement(CardObject newCard, PackEdition packEdition)
+    public PCard applyEnhancement(PCard newCard, PackEdition packEdition)
     {
         //Set the temporary dictionaries with the ones in the CardModifier class.
-        //This allows us to enhance the dictionaries below based on packtype, this allows rarer cards show up in higher ranked packs.
+        //This allows us to enhance the dictionaries below based on packtype, this allows rarer cards to show up in higher ranked packs.
         var adjustedEditions = CardModifier.editionRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         var adjustedEnhancements = CardModifier.enhancementRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
         var adjustedSeals = CardModifier.sealRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
@@ -146,9 +151,9 @@ public class Game
             );
         }
 
-        newCard.cardData.seal = CardModifier.GetWeightedModifier(adjustedSeals);
-        newCard.cardData.enhancement = CardModifier.GetWeightedModifier(adjustedEnhancements);
-        newCard.cardData.edition = CardModifier.GetWeightedModifier(adjustedEditions);
+        newCard.seal = CardModifier.GetWeightedModifier(adjustedSeals);
+        newCard.enhancement = CardModifier.GetWeightedModifier(adjustedEnhancements);
+        newCard.edition = CardModifier.GetWeightedModifier(adjustedEditions);
 
 
         return newCard;
@@ -162,10 +167,10 @@ public class Game
 
         while (count < voucherCount)
         {
-            index = randomizer(Enum.GetValues(typeof(VoucherNames)).Length);    // Select a random number that is in the range of the TextbookName enum 
-            Voucher voucherCard = new Voucher();                                // Created a new voucher card  
+            index = randomizer(1, System.Enum.GetValues(typeof(VoucherNames)).Length);                                            // Select a random number that is in the range of the VoucherNames enum 
+            Voucher voucherCard = new Voucher((VoucherNames)index);                                                            // This constructs a new Voucher with the name of a random voucher from the VoucherNames enum  
 
-            bool alreadyExists = Array.Exists(vouchers, voucher => voucher == voucherCard);
+            bool alreadyExists = System.Array.Exists(vouchers, voucher => voucher != null && voucher.name == voucherCard.name); //This checks if the Voucher already exists in out vouchers array
 
 
             if (!alreadyExists)
@@ -184,32 +189,54 @@ public class Game
     }
 
     //This will generate a random textbook card for packs.
-    public List<CardObject> randomTextbook(Pack pack)
+    public List<PCard> randomTextbook(Pack pack)
     {
-        Textbook card = new Textbook();
-        Textbook[] list = { card };
-        List<CardObject> list2 = new List<CardObject>();
-        return list2;
+        List<PCard> textBookCards = new List<PCard>();
+        int count = 0;
+        bool alreadyExists;
+
+        while (count < pack.packSize)
+        {
+            int index = randomizer(1, System.Enum.GetValues(typeof(TextbookName)).Length);
+
+            PCard textBookCard = new PCard();
+            textBookCard.textbook = new Textbook((TextbookName)index);
+
+            //Checks if the textbook card already exists in the textBookCards list
+            alreadyExists = textBookCards.Any(textBook => textBook.textbook.name == textBookCard.textbook.name);
+
+            if (!alreadyExists)
+            {
+                textBookCards.Add(textBookCard);
+                count++;
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        return textBookCards;
     }
 
     //This will generate a random textbook card for the shop.
     public Textbook[] randomTextbookShop(int num)
     {
-        Textbook[] list = new Textbook[num];
+        Textbook[] textbooksList = new Textbook[num];
         int count = 0;
 
         while (count < num)
         {
-            index = randomizer(Enum.GetValues(typeof(TextbookName)).Length);    // Select a random number that is in the range of the TextbookName enum 
-            Textbook textBookCard = new Textbook((TextbookName)index);          // Created a new textbook card  
+            index = randomizer(1, System.Enum.GetValues(typeof(TextbookName)).Length);    // Select a random number that is in the range of the TextbookName enum 
+            Textbook textBookCard = new Textbook((TextbookName)index);                 // Created a new textbook card  
 
-            bool alreadyExists = Array.Exists(list, textBook => textBook == textBookCard);
+            bool alreadyExists = System.Array.Exists(textbooksList, textBook => textBook != null && textBook.name == textBookCard.name);
 
             //This checks if the textBook already exists within the array.
             //This statement helps prevent producing duplicate textbook cards.
             if (!alreadyExists)
             {
-                list[count] = textBookCard;
+                textbooksList[count] = textBookCard;
                 count++;
             }
             else
@@ -219,41 +246,115 @@ public class Game
 
         }
 
-        return list;
+        return textbooksList;
     }
 
-    //This function is responsible for retrieving random Mentors for packs.
-    public List<CardObject> randomMentor(Pack pack)
+    //This function is responsible for retrieving random card buffs for the shop.
+    public CardBuff[] randomCardBuffShop(int numCardBuffs)
     {
-        Mentor card = new Mentor();
-        Mentor[] list = { card };
-        List<CardObject> list2 = new List<CardObject>();
-        return list2;
+        CardBuff[] cardBuffCards = new CardBuff[numCardBuffs];
+        int count = 0;
+
+        while (count < numCardBuffs)
+        {
+            index = randomizer(1,System.Enum.GetValues(typeof(CardBuffName)).Length);    // Select a random number that is in the range of the cardBuffName enum 
+            CardBuff cardBuffCard = CardBuff.CardBuffFactory((CardBuffName)index);     // Create a new cardbuff card with the card buff factory
+
+            bool alreadyExists = System.Array.Exists(cardBuffCards, cardBuff => cardBuff != null && cardBuff.name == cardBuffCard.name);    //Check to see if the cardbuff already exists within the cardBuffCards array
+
+            if (!alreadyExists)
+            {
+                cardBuffCards[count] = cardBuffCard;
+                count++;
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+
+        return cardBuffCards;
+    }
+    //This function is responsible for retrieving random Mentors for packs.
+    public List<PCard> randomMentor(Pack pack)
+    {
+        List<PCard> mentorCards = new List<PCard>();
+        int count = 0;
+        bool alreadyExists;
+
+        while (count < pack.packSize)
+        {
+            int mentorNameIndex = randomizer(1,System.Enum.GetValues(typeof(MentorName)).Length);
+            int mentorEditionIndex = randomizer(0,System.Enum.GetValues(typeof(CardEdition)).Length);
+
+            PCard newMentorCard = new PCard();
+
+            newMentorCard.mentor = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)mentorEditionIndex);
+
+            //Checks if the cardBuff already exists in the cardBuffCards list
+            alreadyExists = mentorCards.Any(mentorCard => mentorCard.mentor.name == newMentorCard.mentor.name);
+
+            if (!alreadyExists)
+            {
+                mentorCards.Add(newMentorCard);
+                count++;
+            }
+            else
+            {
+                continue;
+            }
+
+        }
+
+        return mentorCards;
     }
 
     //This function is responsible for retrieving random Mentors for the shop.
-    public Mentor[] randomMentorShop()
+    public Mentor[] randomMentorShop(int numMentors)
     {
-        Mentor card = new Mentor();
-        Mentor[] list = { card };
-        return list;
+        Mentor[] mentorCards = new Mentor[numMentors];
+        int count = 0;
+
+        while (count < numMentors)
+        {
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);                   // Select a random Mentor name 
+            int editionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);                     // Select a random edition
+
+            Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)editionIndex);     // Create a Mentor with the MentorFactory
+
+            bool alreadyExists = System.Array.Exists(mentorCards, mentor => mentor != null && mentor.name == mentorCard.name);    //Check to see if the mentor already exists within the mentorCards array
+
+            if (!alreadyExists)
+            {
+                mentorCards[count] = mentorCard;
+                count++;
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        return mentorCards;
     }
 
     //This function is responsible for retrieving random card buffs for packs.
-    public List<CardObject> randomCardBuff(Pack pack)
+    public List<PCard> randomCardBuff(Pack pack)
     {
-        List<CardObject> cardBuffCards = new List<CardObject>();    //This list contains card objects
+        List<PCard> cardBuffCards = new List<PCard>();    //This list contains card objects
 
         int count = 0;
         while (count < pack.packSize)
         {
-            int index = randomizer(Enum.GetValues(typeof(CardBuffName)).Length);
-            CardObject newCardBuff = new CardObject();
+            int index = randomizer(1,System.Enum.GetValues(typeof(CardBuffName)).Length);
 
-            newCardBuff.cardData.cardBuff = CardBuff.CardBuffFactory((CardBuffName)index);  //Create a CardBuff and assign it to our cardObject
+            PCard newCardBuff = new PCard();
+
+            newCardBuff.cardBuff = CardBuff.CardBuffFactory((CardBuffName)index);  //Create a new CardBuff and assign it to our new PCard instance
 
             //Checks if the cardBuff already exists in the cardBuffCards list
-            bool alreadyExists = cardBuffCards.Any(cardBuffCard => cardBuffCard.cardData.cardBuff.name == newCardBuff.cardData.cardBuff.name);
+            bool alreadyExists = cardBuffCards.Any(cardBuffCard => cardBuffCard.cardBuff.name == newCardBuff.cardBuff.name);
 
             if (!alreadyExists)
             {
@@ -268,16 +369,8 @@ public class Game
 
         return cardBuffCards;
     }
-    //This function is responsible for retrieving random card buffs for the shop.
-    public CardBuff[] randomCardBuffShop()
-    {
 
-        CardBuff card = new CardBuff();
-        CardBuff[] list = { card };
-        return list;
-    }
-
-    //This is function is responsible for retrieving random packs for the shop.
+    //This function is responsible for retrieving random packs for the shop.
     public Pack[] randomPacks(int packCount)
     {
         Pack[] pack = new Pack[packCount];
@@ -286,8 +379,8 @@ public class Game
         {
             pack[i] = new Pack(); //Instantiate a new pack object
 
-            PackEdition selectedEdition = (PackEdition)rnd.Next(Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
-            PackType selectedType = (PackType)rnd.Next(Enum.GetValues(typeof(PackType)).Length);             // Get the PackType value that corresponds to a PackType in the enum list
+            PackEdition selectedEdition = (PackEdition)Random.Range(0, System.Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
+            PackType selectedType = (PackType)Random.Range(0, System.Enum.GetValues(typeof(PackType)).Length);             // Get the PackType value that corresponds to a PackType in the enum list
 
             //The following code fills all the variables for the pack
             pack[i].packType = selectedType;
@@ -317,14 +410,30 @@ public class Game
         return pack;
     }
 
-    //This function is responsible for retrieving random special blinds for the Ante
+    //This function is responsible for retrieving random special blinds for each Ante
     public SpecialBlind randomSpecialBlind()
     {
-        index = randomizer(Enum.GetValues(typeof(SpecialBlind)).Length);
+        int count = 0;
+        bool alreadyExists;
 
-        SpecialBlind blind = new SpecialBlind((SpecialBlindNames)index); 
+        SpecialBlind blind = null;
+        while (count < 1)
+        {
+            index = randomizer(0,System.Enum.GetValues(typeof(SpecialBlindNames)).Length);
+            blind = new SpecialBlind((SpecialBlindNames)index);
+            alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
 
-        //Add the blind to the past special blinds array
+            if (!alreadyExists)
+            {
+                pastSpecialBlinds.Add(blind);          //This line adds the blind to the list that contains the past special blinds in the game.
+                count++;
+            }
+            else
+            {
+                continue;
+            }
+
+        }
 
         return blind;
     }
@@ -333,6 +442,7 @@ public class Game
     {
         return ChipTotal;
     }
+
 
 }
 
