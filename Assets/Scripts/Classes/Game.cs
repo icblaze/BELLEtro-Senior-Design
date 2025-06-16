@@ -95,8 +95,15 @@ public class Game
 
             bool alreadyExists = cardList.Any(card => card.Equals(clonedCard));    //This checks if the new card exists already in the card list
 
-
-            cardList.Add(clonedCard);
+            if (!alreadyExists)
+            {
+                cardList.Add(clonedCard);
+                count++;
+            }
+            else
+            {
+                continue;
+            }
         }
 
         return cardList;
@@ -379,7 +386,7 @@ public class Game
         {
             pack[i] = new Pack(); //Instantiate a new pack object
 
-            PackEdition selectedEdition = (PackEdition)Random.Range(0, System.Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
+            PackEdition selectedEdition = (PackEdition)Random.Range(1, System.Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
             PackType selectedType = (PackType)Random.Range(0, System.Enum.GetValues(typeof(PackType)).Length);             // Get the PackType value that corresponds to a PackType in the enum list
 
             //The following code fills all the variables for the pack

@@ -12,7 +12,7 @@ public class Pretzel : CardBuff
 {
     Game game = Game.access();
     Player player = Player.access();
-    TextbookName mostPlayedHand;
+    TextbookName mostPlayedHand = TextbookName.HighCard;
 
     //  Construct CardBuff consumable with enum for name
     public Pretzel() : base(CardBuffName.Pretzel)
@@ -26,7 +26,7 @@ public class Pretzel : CardBuff
     {
         //  Find most used hand (highest rank breaks tie)
         int max = 0;
-        TextbookName mostPlayedHand = TextbookName.HighCard;
+        mostPlayedHand = TextbookName.HighCard;
 
         foreach(TextbookName tbook in player.handTable.Keys)
         {
