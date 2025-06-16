@@ -19,6 +19,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     [Header("Selection")]
     public bool selected;
+    public bool isPlayed = false;
     public float selectionOffset = 50;
     private float pointerDownTime;
     private float pointerUpTime;
@@ -212,7 +213,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             return 0;
         }
 
-        
+        // Check if parent has "Slot" tag
+        if (!transform.parent.CompareTag("Slot"))
+        {
+            Debug.LogWarning("Card's parent does not have 'Slot' tag!");
+            return 0;
+        }
 
         // Check if parent's parent exists
         if (transform.parent.parent == null)
