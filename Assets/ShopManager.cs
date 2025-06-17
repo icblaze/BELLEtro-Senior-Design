@@ -16,33 +16,52 @@ using TMPro;
 //Fredrick Bouloute (bouloutef04)
 public class ShopManager : MonoBehaviour
 {
-    //UI Components
+    //All UI Components Below
     private Button nextRoundButton;
     private Button rerollButton;
     public GameObject moneyText;
-    //private string[] cardsInShop = new string[2];
+    //First Purchasable Card
     private Mentor mentor1;
     private Textbook textbook1;
     private CardBuff cardBuff1;
     public Button cardButton1;
+    //Second Purchasable Card
     private Mentor mentor2;
     private Textbook textbook2;
     private CardBuff cardBuff2;
     public Button cardButton2;
-    private Voucher voucher;
-    public Button voucherButton;
-    public CanvasGroup shopUI;
     private Pack pack1;
     private Pack pack2;
+    //Cards in Pack
+    private PCard PackCard1;
+    private PCard PackCard2;
+    private PCard PackCard3;
+    private PCard PackCard4;
+    private PCard PackCard5;
+    private PCard PackCard6;
+    public Button PackCardButton1;
+    public Button PackCardButton2;
+    public Button PackCardButton3;
+    public Button PackCardButton4;
+    public Button PackCardButton5;
+    public Button PackCardButton6;
+    //Vouchers
+    private Voucher voucher;
+    public Button voucherButton;
+    public CanvasGroup shopUI;//Canvas Group for ShopUI
     public Button pack1Button;
     public Button pack2Button;
-    private int reroll = 5;
-    private int shopMentorsAmount = 2;
-    public CanvasGroup Mentor1Details;
+    private int reroll = 5;//Reroll price
+    private int shopMentorsAmount = 2;//Amount of top cards/purchasable cards
+    public CanvasGroup Mentor1Details;//Details for purchasable cards (says mentor but is for anytype)
     public CanvasGroup Mentor2Details;
     public CanvasGroup VoucherDetails;
     public CanvasGroup Pack1Details;
     public CanvasGroup Pack2Details;
+    public CanvasGroup RegularUI;//Canvas Group for All UI excluding the Packs
+    public CanvasGroup PackGroup;//Canvas Group for Cards 1-4
+    public CanvasGroup PackGroupPlus;//Canvas group for Cards 5 and 6
+    int cardsSelected = 0;//Cards currently selected in pack
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
@@ -65,7 +84,8 @@ public class ShopManager : MonoBehaviour
         Voucher[] vouchers = new Voucher[1];
         vouchers = inst.randomVoucher(1);
         voucher = vouchers[0];
-        voucherButton.image.sprite = Resources.Load<Sprite>($"Voucher/voucher_" + voucher.name.ToString());
+        voucherButton.image.sprite = Resources.Load<Sprite>($"Voucher/" + voucher.name.ToString());
+        Debug.Log("Vocuher Name: " + voucher.name.ToString());
 
         //Generate randomn Packs
         Pack[] packs = new Pack[2];
@@ -279,6 +299,15 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount = playerInst.moneyCount - voucher.initialPrice;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
+    public void Pack1()
+    {
+        BuyPack(pack1, pack1Button);
+    }
+    public void Pack2()
+    {
+        BuyPack(pack2, pack2Button);
+    }
+
     //Function call takes in a pack card and opens it, calling the necessary functions.
     private void BuyPack(Pack pack, Button packButton)
     {
@@ -287,9 +316,6 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Insufficient Funds");
             return;
         }
-        //Open pack and allow user to choose from cards
-
-        //Call respected function for cards (whether it be a Mentor, Planet, or Tarrot)
 
         //Make pack disappear
         packButton.interactable |= false;
@@ -298,6 +324,9 @@ public class ShopManager : MonoBehaviour
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
+
+        //Open pack and allow user to choose from cards
+        OpenPacks(pack);
     }
     public void BuyPack1()
     {
@@ -559,29 +588,290 @@ public class ShopManager : MonoBehaviour
     // //Function takes in a pack, sets the pack cards in Unity to the respetectove cards.
     // User is then allowed to grab 1 (or 2) or skip cards before the pack closes and 
     // returns to the shop.
-    // private void OpenPacks(Pack pack)
-    // {
-    //     //Fade Out UI
+    private void OpenPacks(Pack pack)
+    {
+        //Fade Out UI
+        StartCoroutine(FadeOut(RegularUI));
 
+        //Attach the corresponding objects(cards) onto the sections needed.
+        PackCard1 = pack.cardsInPack[0];
+        PackCard2 = pack.cardsInPack[1];
+        PackCard3 = pack.cardsInPack[2];
+        PackCard4 = pack.cardsInPack[3];
 
-    //     //Attach the corresponding objects(cards) onto the sections needed.
-    //     PackCard1 = pack.cardsInPack[0];
-    //     PackCard2 = pack.cardsInPack[1];
-    //     PackCard3 = pack.cardsInPack[2];
-    //     PackCard4 = pack.cardsInPack[3];
-    //     if (pack.packSize > 4)
-    //     {
-    //         PackCard5 = pack.cardsInPack[4];
-    //         PackCard6 = pack.cardsInPack[5];
-    //     }
-    //     //Fade In Card UI
-    //     StartCoroutine(FadeIn(PackCards));
+        //Set Images Fro
 
-    //     //Allow User to choose the specific card(s) and add them where needed
+        StartCoroutine(FadeIn(PackGroup));
+        PackGroup.interactable = true;
+        PackGroup.blocksRaycasts = true;
+        if (pack.packSize > 4)
+        {
+            PackCard5 = pack.cardsInPack[4];
+            PackCard6 = pack.cardsInPack[5];
+            StartCoroutine(FadeIn(PackGroupPlus));
+            PackGroupPlus.interactable = true;
+            PackGroupPlus.blocksRaycasts = true;
+        }
 
-    //     //Allow User To Skip Selection
+        //Allow User to choose the specific card(s) and add them where needed
+        //Wait until user has selected card(s)
+        while (cardsSelected < pack.selectableCards)
+        {
+            continue;
+        }
+        //Allow User To Skip Selection
+        PackCardSelected();
+    }
 
-    //     //Return to shop UI
+    //Next set of functions is to select the different Cards in a Pack
+    public void PackCard1Selected()
+    {
+        //If Mentor Card, check if count is not max then add if not
+        if (PackCard1.mentor != null)
+        {
+            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            {
+                Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
+                return;
+            }
+            playerInst.mentorDeck.Add(PackCard1.mentor);
+            cardsSelected++;
+        }
+        //If CardBuff Card, check if count is not max then add if not
+        if (PackCard1.textbook != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard1.textbook);
+            cardsSelected++;
+        }
+        //If Texbook Card, check if count is not max then add if not
+        if (PackCard1.cardBuff != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard1.cardBuff);
+            cardsSelected++;
+        }
+        PackCardButton1.interactable = false;
+    }
+    public void PackCard2Selected()
+    {
+        //If Mentor Card, check if count is not max then add if not
+        if (PackCard2.mentor != null)
+        {
+            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            {
+                Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
+                return;
+            }
+            playerInst.mentorDeck.Add(PackCard2.mentor);
+            cardsSelected++;
+        }
+        //If CardBuff Card, check if count is not max then add if not
+        if (PackCard2.textbook != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard2.textbook);
+            cardsSelected++;
+        }
+        //If Texbook Card, check if count is not max then add if not
+        if (PackCard2.cardBuff != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard2.cardBuff);
+            cardsSelected++;
+        }
+        PackCardButton2.interactable = false;
+    }
+    public void PackCard3Selected()
+    {
+        //If Mentor Card, check if count is not max then add if not
+        if (PackCard1.mentor != null)
+        {
+            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            {
+                Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
+                return;
+            }
+            playerInst.mentorDeck.Add(PackCard1.mentor);
+            cardsSelected++;
+        }
+        //If CardBuff Card, check if count is not max then add if not
+        if (PackCard1.textbook != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard1.textbook);
+            cardsSelected++;
+        }
+        //If Texbook Card, check if count is not max then add if not
+        if (PackCard1.cardBuff != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard1.cardBuff);
+            cardsSelected++;
+        }
+        PackCardButton1.interactable = false;
+    }
+    public void PackCard4Selected()
+    {
+        //If Mentor Card, check if count is not max then add if not
+        if (PackCard4.mentor != null)
+        {
+            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            {
+                Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
+                return;
+            }
+            playerInst.mentorDeck.Add(PackCard4.mentor);
+            cardsSelected++;
+        }
+        //If CardBuff Card, check if count is not max then add if not
+        if (PackCard4.textbook != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard4.textbook);
+            cardsSelected++;
+        }
+        //If Texbook Card, check if count is not max then add if not
+        if (PackCard4.cardBuff != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard4.cardBuff);
+            cardsSelected++;
+        }
+        PackCardButton4.interactable = false;
+    }
+    public void PackCard5Selected()
+    {
+        //If Mentor Card, check if count is not max then add if not
+        if (PackCard5.mentor != null)
+        {
+            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            {
+                Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
+                return;
+            }
+            playerInst.mentorDeck.Add(PackCard5.mentor);
+            cardsSelected++;
+        }
+        //If CardBuff Card, check if count is not max then add if not
+        if (PackCard5.textbook != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard5.textbook);
+            cardsSelected++;
+        }
+        //If Texbook Card, check if count is not max then add if not
+        if (PackCard5.cardBuff != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard5.cardBuff);
+            cardsSelected++;
+        }
+        PackCardButton5.interactable = false;
+    }
+    public void PackCard6Selected()
+    {
+        //If Mentor Card, check if count is not max then add if not
+        if (PackCard6.mentor != null)
+        {
+            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            {
+                Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
+                return;
+            }
+            playerInst.mentorDeck.Add(PackCard6.mentor);
+            cardsSelected++;
+        }
+        //If CardBuff Card, check if count is not max then add if not
+        if (PackCard6.textbook != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard6.textbook);
+            cardsSelected++;
+        }
+        //If Texbook Card, check if count is not max then add if not
+        if (PackCard6.cardBuff != null)
+        {
+            if (playerInst.consumables.Count < playerInst.maxConsumables)
+            {
+                Debug.Log("Consumables Is Maxed. Please Sell or Use A Consumable To Add.");
+                return;
+            }
+            playerInst.consumables.Add(PackCard6.cardBuff);
+            cardsSelected++;
+        }
+        PackCardButton6.interactable = false;
+    }
 
-    // }
+    public void SkipPack()
+    {
+        cardsSelected = 7;//Allowable cards selection amount will never be more than 7 so this works
+    }
+    //Removes UI for packs once card is selected
+    public void PackCardSelected()
+    {
+        //Set cards to null and removing blocking for PackGroup
+        PackCard1 = null;
+        PackCard2 = null;
+        PackCard3 = null;
+        PackCard4 = null;
+        PackCard5 = null;
+        PackCard6 = null;
+        PackGroup.interactable = false;
+        PackGroup.blocksRaycasts = false;
+
+        //Fade Out UI
+        StartCoroutine(FadeOut(PackGroup));
+        StartCoroutine(FadeOut(PackGroupPlus));
+
+        //Bring back Regular UI
+        StartCoroutine(FadeIn(RegularUI));
+        RegularUI.interactable = true;
+        RegularUI.blocksRaycasts = true;
+
+    }
 }
