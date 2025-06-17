@@ -34,6 +34,16 @@ public class Mentor
                 return new Curve(cardEdition); //  TODO change variable for remaining hands in round
             case MentorName.HelpingHand:
                 return new HelpingHand(cardEdition);
+            case MentorName.Brainstorm:
+                return new Brainstorm(cardEdition);
+            case MentorName.LabGlasses:
+                return new LabGlasses(cardEdition); //  TODO Assign the mult to the variable in round
+            case MentorName.Extension:
+                return new Extension(cardEdition); // TODO Be able to access ShopManager's variables
+            case MentorName.LibraryCard:
+                return new LibraryCard(cardEdition);
+            case MentorName.TwelveCredits:
+                return new TwelveCredits(cardEdition); // TODO Be able to track selected hand
             default:
                 return new Mentor();
         }
@@ -56,6 +66,7 @@ public class Mentor
     {
         this.name = name;
         this.edition = edition;
+        locations = new UseLocation[]{};    // Create empty locations array
 
         //  Calculate price based on edition, and have sell value be half that amount
         price = basePrice + CardModifier.EditionPrice(edition);
