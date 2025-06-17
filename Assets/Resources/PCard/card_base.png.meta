@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 154c6eabf9f5349ada6f8ab2dbf72c10
+guid: 30009d96286d146b799404bf0771c967
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4226397978021778064
-    second: steel_0
+      213: 7560894977010240419
+    second: card_base_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: steel_0
+      name: card_base_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 092da6f819e27aa30800000000000000
-      internalID: 4226397978021778064
+      spriteID: 3ab0bb81ce1bde860800000000000000
+      internalID: 7560894977010240419
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      steel_0: 4226397978021778064
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
