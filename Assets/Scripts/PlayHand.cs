@@ -69,13 +69,16 @@ public class PlayHand : MonoBehaviour
 
             // ✅ Move to play area
             card.transform.SetParent(playArea, false);
+
+            card.GetComponent<Card>().isPlayed = true;
+
             Vector2 targetPosition = new Vector2(offsetX + (i * 100f), 0);
             StartCoroutine(MoveCard(card, targetPosition));
         }
 
         yield return new WaitForSeconds(displayDuration);
 
-        // ✅ Remove cards and draw new ones (Fix: Ensure only needed cards are drawn)
+        // ✅ Remove cards and draw new ones
         int cardsPlayed = selectedCards.Count;
 
         foreach (GameObject card in selectedCards)

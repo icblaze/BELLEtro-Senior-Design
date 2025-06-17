@@ -100,11 +100,28 @@ public class CardVisual : MonoBehaviour
     {
         if (!initalize || parentCard == null) return;
 
-        HandPositioning();
+        // --- Start of Changes ---
+
+        // Check if the card has been played.
+        if (parentCard.isPlayed)
+        {
+            // When played, we don't need hand positioning logic.
+            // Reset the curve offset so the card animates flatly to the play area.
+            curveYOffset = 0;
+        }
+        else
+        {
+            // If the card is NOT played, run the normal hand logic.
+            HandPositioning();
+            CardTilt();
+        }
+
+        // These methods should always run to keep the visual smoothly
+        // following the card's RectTransform, even during animation.
         SmoothFollow();
         FollowRotation();
-        CardTilt();
 
+        // --- End of Changes ---
     }
 
     private void HandPositioning()
