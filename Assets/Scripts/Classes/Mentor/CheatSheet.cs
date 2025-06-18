@@ -40,4 +40,10 @@ public class CheatSheet : Mentor
     {
         rightMentor.UseMentor();
     }
+
+    //  Uses rightMentor effect when card-specific
+    public override void UseMentor(PCard card)
+    {
+        rightMentor.UseMentor(card);
+    }
 }

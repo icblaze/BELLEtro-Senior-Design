@@ -40,4 +40,10 @@ public class Brainstorm : Mentor
     {
         leftmostMentor.UseMentor();
     }
+
+    //  Uses leftmostMentor's effect when card-specific
+    public override void UseMentor(PCard card)
+    {
+        leftmostMentor.UseMentor(card);
+    }
 }
