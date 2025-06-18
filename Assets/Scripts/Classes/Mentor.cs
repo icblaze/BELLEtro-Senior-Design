@@ -44,6 +44,10 @@ public class Mentor
                 return new LibraryCard(cardEdition);
             case MentorName.TwelveCredits:
                 return new TwelveCredits(cardEdition); // TODO Be able to track selected hand
+            case MentorName.Valentine:
+                return new Valentine(cardEdition); //  TODO add +3 to Mult variable of round
+            case MentorName.NoVoice:
+                return new NoVoice(cardEdition); //  TODO add +3 to Mult variable of round
             default:
                 return new Mentor();
         }
@@ -77,6 +81,12 @@ public class Mentor
     public virtual void UseMentor ()
     {
         
+    }
+
+    //  Method to override for Mentors with card specific criteria
+    public virtual void UseMentor (PCard card)
+    {
+
     }
 
     //  Returns the description of mentor 

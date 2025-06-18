@@ -44,6 +44,15 @@ public class MentorBufferManager : MonoBehaviour
         }
     }
 
+    //  Execute buffer of specified location that require a specific card
+    public static void RunBuffer(UseLocation buffer, PCard card)
+    {
+        foreach (Mentor mentor in mentorBuffers[buffer])
+        {
+            mentor.UseMentor(card);
+        }
+    }
+
     //  Playing hand buffer execution
     public static void PlayHand ()
     {
@@ -63,9 +72,9 @@ public class MentorBufferManager : MonoBehaviour
                 continue;
             }
 
-            RunBuffer(UseLocation.PreCard);
+            RunBuffer(UseLocation.PreCard, card);
             //  TODO Play Card call here
-            RunBuffer(UseLocation.PostCard);
+            RunBuffer(UseLocation.PostCard, card);
         }
 
         //  Playing From-Draw Cards (could track "not selected"?)
@@ -76,7 +85,7 @@ public class MentorBufferManager : MonoBehaviour
                 continue;
             }
 
-            RunBuffer(UseLocation.PreFromDraw);
+            RunBuffer(UseLocation.PreFromDraw, card);
             //  TODO Play From-Draw call here
             // RunBuffer(UseLocation.PostFromDraw);
         }
