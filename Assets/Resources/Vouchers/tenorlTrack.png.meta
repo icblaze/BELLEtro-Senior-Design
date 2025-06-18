@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tenorlTrack_0: 7085103936802139413
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
