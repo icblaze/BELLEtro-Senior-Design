@@ -360,7 +360,7 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
-       
+
 
         //Open pack and allow user to choose from cards
         OpenPacks(pack);
@@ -474,7 +474,7 @@ public class ShopManager : MonoBehaviour
     //Function is used to show the details of what the Joker does
     private void ShowMentor1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.name.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.description.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -487,7 +487,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowMentor2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.name.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.description.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -635,7 +635,7 @@ public class ShopManager : MonoBehaviour
         PackCard2 = pack.cardsInPack[1];
         PackCard3 = pack.cardsInPack[2];
         packText.GetComponentInChildren<TMP_Text>().text = "" + pack.packType.ToString() + "\n\nChoose Up To " + pack.selectableCards.ToString();
-        
+
 
         Debug.Log("PackCard1 Mentor:" + PackCard1.mentor);
         Debug.Log("PackCard1 cardBuff:" + PackCard1.cardBuff);
@@ -940,5 +940,24 @@ public class ShopManager : MonoBehaviour
         RegularUI.interactable = true;
         RegularUI.blocksRaycasts = true;
 
+    }
+
+    public PCard GetCardFromPack(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                return PackCard1;
+            case 2:
+                return PackCard2;
+            case 3:
+                return PackCard3;
+            case 4:
+                return PackCard4;
+            case 5:
+                return PackCard5;
+            default:
+                return null;
+        }
     }
 }
