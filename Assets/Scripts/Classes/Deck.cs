@@ -124,6 +124,7 @@ public class Deck
                   enhancement = CardEnhancement.Base,
                   seal = CardSeal.Base,
                   isDisabled = false,
+                  replayCounter = 0
                 });
                 counter++;
                 Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");

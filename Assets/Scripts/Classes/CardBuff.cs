@@ -96,7 +96,7 @@ public class CardBuff : Consumable
             case CardBuffName.Bagel:
                 return new Bagel();
 
-            //  TODO Converts up to 3 selected cards into random Lax cards CHANGE THIS
+            //  Generates Textbook for most played Textbook hand
             case CardBuffName.Pretzel:
                 return new Pretzel();
 

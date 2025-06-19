@@ -17,5 +17,6 @@ public enum UseLocation
   Post,
   Shop,
   Blind,
-  PostBlind
+  PostBlind,
+  PostHand
 }

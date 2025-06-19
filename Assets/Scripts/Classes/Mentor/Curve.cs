@@ -14,7 +14,7 @@ public class Curve : Mentor
     public Curve(CardEdition edition) : base(MentorName.Curve, edition, 5)
     {
         //  Might have to change this buffer location?
-        locations = new UseLocation[] { UseLocation.Post };
+        locations = new UseLocation[] { UseLocation.PostBlind };
         description = "Prevents loss if chips scored at least required 25%. Disappears after use.";
     }
 
