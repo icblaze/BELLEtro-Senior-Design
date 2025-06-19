@@ -36,7 +36,7 @@ public class DeckManager : MonoBehaviour
         // Fill the deck with maxCardsInHand placeholder cards
         for (int i = 0; i < maxCardsInHand; i++)
         {
-            //Don't spawn all 56 cards, have one face down card in the deck
+            //Spawn a new card
             GameObject newCard = Instantiate(cardPrefab, deckPosition);
             CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
 
@@ -94,7 +94,7 @@ public class DeckManager : MonoBehaviour
         drawn.transform.SetParent(emptySlot, false);
         drawn.transform.localScale = Vector3.one;
 
-        Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
+        //Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
     }
 
     /// <summary>
