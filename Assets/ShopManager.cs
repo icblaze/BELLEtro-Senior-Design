@@ -157,17 +157,49 @@ public class ShopManager : MonoBehaviour
             }
             else//Create a Joker card.
             {
+                // --- START DEBUGGING ---
+                if (inst == null) {
+                    Debug.LogError("FATAL ERROR: The 'inst' variable is NULL!");
+                    return; // Stop the function here
+                }
+                // --- END DEBUGGING ---
+
                 Mentor[] mentors = new Mentor[2];
                 mentors = inst.randomMentorShop(1);
+
+                // --- START DEBUGGING ---
+                if (mentors == null || mentors.Length == 0) {
+                    Debug.LogError("ERROR: randomMentorShop() returned an empty or null array!");
+                    continue; // Skip to the next loop iteration
+                }
+                if (mentors[0] == null) {
+                    Debug.LogError("ERROR: The first mentor returned from the shop was NULL!");
+                    continue; // Skip to the next loop iteration
+                }
+                // --- END DEBUGGING ---
+
                 Debug.Log("Mentor Object: " + mentors[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
                     mentor1 = mentors[0];
+                    
+                    // --- START DEBUGGING ---
+                    if (cardButton1 == null) {
+                        Debug.LogError("FATAL ERROR: cardButton1 is NULL!");
+                        return;
+                    }
+                    if (cardButton1.image == null) {
+                        Debug.LogError("FATAL ERROR: cardButton1 does not have an Image component!");
+                        return;
+                    }
+                    // --- END DEBUGGING ---
+
                     cardButton1.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor1.name.ToString());
                     Debug.Log("Mentor 1 Name: " + mentor1.name.ToString());
                 }
                 else
                 {
+                    // (You would add similar checks for mentor2 and cardButton2 here)
                     mentor2 = mentors[0];
                     Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
                     cardButton2.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
