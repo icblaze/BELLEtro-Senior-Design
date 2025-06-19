@@ -94,7 +94,7 @@ public class DeckManager : MonoBehaviour
         drawn.transform.SetParent(emptySlot, false);
         drawn.transform.localScale = Vector3.one;
 
-        Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
+        //Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
     }
 
     /// <summary>

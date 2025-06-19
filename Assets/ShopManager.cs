@@ -622,7 +622,7 @@ public class ShopManager : MonoBehaviour
         }
         fadeInObject.alpha = 0;
     }
-    // //Function takes in a pack, sets the pack cards in Unity to the respetectove cards.
+    // Function takes in a pack, sets the pack cards in Unity to the respective cards.
     // User is then allowed to grab 1 (or 2) or skip cards before the pack closes and 
     // returns to the shop.
     private void OpenPacks(Pack pack)
