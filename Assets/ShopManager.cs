@@ -157,17 +157,49 @@ public class ShopManager : MonoBehaviour
             }
             else//Create a Joker card.
             {
+                // --- START DEBUGGING ---
+                if (inst == null) {
+                    Debug.LogError("FATAL ERROR: The 'inst' variable is NULL!");
+                    return; // Stop the function here
+                }
+                // --- END DEBUGGING ---
+
                 Mentor[] mentors = new Mentor[2];
                 mentors = inst.randomMentorShop(1);
+
+                // --- START DEBUGGING ---
+                if (mentors == null || mentors.Length == 0) {
+                    Debug.LogError("ERROR: randomMentorShop() returned an empty or null array!");
+                    continue; // Skip to the next loop iteration
+                }
+                if (mentors[0] == null) {
+                    Debug.LogError("ERROR: The first mentor returned from the shop was NULL!");
+                    continue; // Skip to the next loop iteration
+                }
+                // --- END DEBUGGING ---
+
                 Debug.Log("Mentor Object: " + mentors[0]);
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
                     mentor1 = mentors[0];
+                    
+                    // --- START DEBUGGING ---
+                    if (cardButton1 == null) {
+                        Debug.LogError("FATAL ERROR: cardButton1 is NULL!");
+                        return;
+                    }
+                    if (cardButton1.image == null) {
+                        Debug.LogError("FATAL ERROR: cardButton1 does not have an Image component!");
+                        return;
+                    }
+                    // --- END DEBUGGING ---
+
                     cardButton1.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor1.name.ToString());
                     Debug.Log("Mentor 1 Name: " + mentor1.name.ToString());
                 }
                 else
                 {
+                    // (You would add similar checks for mentor2 and cardButton2 here)
                     mentor2 = mentors[0];
                     Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
                     cardButton2.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
@@ -328,7 +360,7 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
-       
+
 
         //Open pack and allow user to choose from cards
         OpenPacks(pack);
@@ -442,7 +474,7 @@ public class ShopManager : MonoBehaviour
     //Function is used to show the details of what the Joker does
     private void ShowMentor1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.name.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.description.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -455,7 +487,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowMentor2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.name.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.description.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -603,7 +635,7 @@ public class ShopManager : MonoBehaviour
         PackCard2 = pack.cardsInPack[1];
         PackCard3 = pack.cardsInPack[2];
         packText.GetComponentInChildren<TMP_Text>().text = "" + pack.packType.ToString() + "\n\nChoose Up To " + pack.selectableCards.ToString();
-        
+
 
         Debug.Log("PackCard1 Mentor:" + PackCard1.mentor);
         Debug.Log("PackCard1 cardBuff:" + PackCard1.cardBuff);
@@ -908,5 +940,24 @@ public class ShopManager : MonoBehaviour
         RegularUI.interactable = true;
         RegularUI.blocksRaycasts = true;
 
+    }
+
+    public PCard GetCardFromPack(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                return PackCard1;
+            case 2:
+                return PackCard2;
+            case 3:
+                return PackCard3;
+            case 4:
+                return PackCard4;
+            case 5:
+                return PackCard5;
+            default:
+                return null;
+        }
     }
 }

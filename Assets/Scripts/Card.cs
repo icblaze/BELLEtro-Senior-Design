@@ -5,9 +5,17 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
+using TMPro;
 
 public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
-{
+{   
+    [Header("Hover Information")]
+    [Tooltip("This is the specific information for this card. Set this from DeckManager.")]
+    [TextArea(3, 5)]
+    public string cardDescription = "Default card information.";
+
+    private static GameObject infoPanel;
+    private static TextMeshProUGUI infoText;
     private Canvas canvas;
     private Image imageComponent;
     [SerializeField] private bool instantiateVisual = true;
@@ -46,6 +54,19 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     void Start()
     {
+         if (infoPanel == null)
+        {
+            infoPanel = GameObject.Find("CardInfoPanel");
+            if (infoPanel != null)
+            {
+                infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
+                infoPanel.SetActive(false); // Ensure it's hidden at the start
+            }
+            else
+            {
+                Debug.LogError("Could not find 'CardInfoPanel' in the scene. Make sure it is named correctly and exists in your Hierarchy.");
+            }
+        }
         canvas = GetComponentInParent<Canvas>();
         imageComponent = GetComponent<Image>();
 
@@ -115,12 +136,25 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         PointerEnterEvent.Invoke(this);
         isHovering = true;
+        if (infoPanel != null && infoText != null)
+        {
+            // Update the text with this card's specific description
+            infoText.text = cardDescription;
+            // Show the panel
+            infoPanel.SetActive(true);
+            
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         PointerExitEvent.Invoke(this);
         isHovering = false;
+        if (infoPanel != null)
+        {
+            // Hide the panel
+            infoPanel.SetActive(false);
+        }
     }
 
 
