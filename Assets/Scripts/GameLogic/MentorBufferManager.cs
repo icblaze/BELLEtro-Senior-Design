@@ -72,9 +72,15 @@ public class MentorBufferManager : MonoBehaviour
                 continue;
             }
 
-            RunBuffer(UseLocation.PreCard, card);
-            //  TODO Play Card call here
-            RunBuffer(UseLocation.PostCard, card);
+            int replayCounter = 0;
+
+            do
+            {
+                RunBuffer(UseLocation.PreCard, card);
+                //  TODO Play Card call here
+                RunBuffer(UseLocation.PostCard, card);
+                replayCounter--;
+            }while(replayCounter >= 0);
         }
 
         //  Playing From-Draw Cards (could track "not selected"?)

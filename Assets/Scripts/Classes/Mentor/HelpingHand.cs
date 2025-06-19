@@ -14,7 +14,7 @@ public class HelpingHand : Mentor
     public HelpingHand(CardEdition edition) : base(MentorName.HelpingHand, edition, 5)
     {
         //  Might have to change this buffer location?
-        locations = new UseLocation[] { UseLocation.Post };
+        locations = new UseLocation[] { UseLocation.PostHand };
         description = "If 95% of required chips are scored, give the remaining 5%";
     }
 
@@ -31,5 +31,7 @@ public class HelpingHand : Mentor
         {
             Game.access().baseChips = Game.access().GetChipTotal();
         }
+
+        //  Sequence before round win check
     }
 }
