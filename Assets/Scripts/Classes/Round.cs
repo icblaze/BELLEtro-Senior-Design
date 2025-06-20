@@ -8,4 +8,3 @@
 // Grab the special blind for the round and apply the effect to the round as well as get the
 // chip amount that the player needs to win the round
 
-

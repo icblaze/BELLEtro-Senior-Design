@@ -22,7 +22,7 @@ public class DeckManager : MonoBehaviour
     }
     void Start()
     {
-        // Deck deck = Deck.access();
+        //Deck deck = Deck.access();
 
         // //In the future we might change this so we can modify the hand size based off the selected deck.
         // setMaxHandCount(8);
@@ -42,8 +42,8 @@ public class DeckManager : MonoBehaviour
         // {
         //     //Don't spawn all 56 cards, have one face down card in the deck
         //     GameObject newCard = Instantiate(cardPrefab, deckPosition);
-        //     //CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
-        //     Card card = newCard.GetComponent<Card>();
+        //     CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
+
         //     newCard.name = $"DeckCard_{i}";
         //     newCard.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
         //     newCard.transform.localPosition = new Vector3(
@@ -51,9 +51,9 @@ public class DeckManager : MonoBehaviour
         //         i * -0.05f,
         //         0f
         //     );
-        //     //newCard.GetComponent<Card>().cardDescription = "This is Card Number " + i + ". Its data comes from cardData.";   
+
         //     //Assign a random card from the deck and assign it to the cardComponent
-        //     //cardComponent.cardData = deck.deckCards[i];
+        //     cardComponent.cardData = deck.deckCards[i];
 
         //     deckCards.Add(newCard);
         // }
