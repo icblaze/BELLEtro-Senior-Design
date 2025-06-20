@@ -36,7 +36,7 @@ public class UIManager : MonoBehaviour
         moneyText.GetComponentInChildren<TMP_Text>().SetText("$" + money);
     }
 
-        //Function used to bring up options menu. When options button is clicked, it will determine
+    //Function used to bring up options menu. When options button is clicked, it will determine
     //if the menu is opened. If so, it will disable it. Otherwise, it will enable the menu.
     public void OptionClick()
     {
@@ -48,9 +48,11 @@ public class UIManager : MonoBehaviour
 
             optionsMenu.alpha = 1;
             optionsMenu.blocksRaycasts = true;
-        }//else, close menu. This is a non-issue as player isn't able to hit button when menu
+        }
+        //else, close menu. This is a non-issue as player isn't able to hit button when menu
+        //is open but this is just to ensure it works
         else
-        {//is open but this is just to ensure it works
+        {
             optionsMenu.alpha = 0;
             optionsMenu.blocksRaycasts = false;
         }
