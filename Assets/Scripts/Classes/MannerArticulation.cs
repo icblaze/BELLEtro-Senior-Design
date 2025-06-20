@@ -10,6 +10,7 @@ using UnityEngine;
 // Holds the Manner of Articulation which is a way of saying a sound
 public enum MannerArticulation
 {
+    None,
     Stop,
     Fricative,
     Affricate,

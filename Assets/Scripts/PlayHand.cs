@@ -1,3 +1,5 @@
+
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -11,8 +13,8 @@ public class PlayHand : MonoBehaviour
     public float displayDuration = 2.0f; // Time before cards disappear
 
     private List<GameObject> selectedCards = new List<GameObject>(); // Cards that are selected
-    private DeleteCard deleteCardScript; // Reference to DeleteCard
-    private DeckManager deckManager; // Reference to DeckManager
+    private DeleteCard deleteCardScript;                             // Reference to DeleteCard
+    private DeckManager deckManager;                                 // Reference to DeckManager
 
     void Start()
     {
@@ -67,13 +69,16 @@ public class PlayHand : MonoBehaviour
 
             // ✅ Move to play area
             card.transform.SetParent(playArea, false);
+
+            card.GetComponent<Card>().isPlayed = true;
+
             Vector2 targetPosition = new Vector2(offsetX + (i * 100f), 0);
             StartCoroutine(MoveCard(card, targetPosition));
         }
 
         yield return new WaitForSeconds(displayDuration);
 
-        // ✅ Remove cards and draw new ones (Fix: Ensure only needed cards are drawn)
+        // ✅ Remove cards and draw new ones
         int cardsPlayed = selectedCards.Count;
 
         foreach (GameObject card in selectedCards)

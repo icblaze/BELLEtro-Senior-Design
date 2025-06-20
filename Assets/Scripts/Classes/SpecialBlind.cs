@@ -4,6 +4,7 @@
 // special blinds are reused later.
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
+// Zacharia Alaoui (ZachariaAlaoui): Made constructor for the SpecialBlind class
 
 using System.Collections;
 using UnityEngine;
@@ -12,6 +13,12 @@ public class SpecialBlind
 {
     public float chipMultiplier;
     public SpecialBlindNames blindType;
+
+    public SpecialBlind(SpecialBlindNames specialBlindName)
+    {
+        //Complete this constructor for setting up the Special Blind
+        this.blindType = specialBlindName;
+    }
 
     public void applySpecialBlinds()
     {

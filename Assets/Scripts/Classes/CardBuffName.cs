@@ -9,6 +9,7 @@ using UnityEngine;
 // CardBuffs will change the cards that are in your hand, add consumables, and give money
 public enum CardBuffName
 {
+    None,
     Leftovers,
     Coffee,
     Almonds,
@@ -28,7 +29,7 @@ public enum CardBuffName
     Potato,
     Flatbread,
     Bagel,
-    Pretzal,
+    Pretzel,
     Banana,
     Toast
 }

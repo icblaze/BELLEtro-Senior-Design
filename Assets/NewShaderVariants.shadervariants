@@ -75,16 +75,6 @@ ShaderVariantCollection:
         passType: 0
       - keywords: _BLOOM_LQ_DIRT _CHROMATIC_ABERRATION
         passType: 0
-  - first: {fileID: 4800000, guid: 93446b5c5339d4f00b85c159e1159b7c, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
-  - first: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
-    second:
-      variants:
-      - keywords: 
-        passType: 0
   - first: {fileID: 4800000, guid: 1121bb4e615ca3c48b214e79e841e823, type: 3}
     second:
       variants:
@@ -105,6 +95,16 @@ ShaderVariantCollection:
       variants:
       - keywords: 
         passType: 0
+  - first: {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
+  - first: {fileID: 4800000, guid: 93446b5c5339d4f00b85c159e1159b7c, type: 3}
+    second:
+      variants:
+      - keywords: 
+        passType: 0
   - first: {fileID: -6465566751694194690, guid: 0110ae31753964e0184c6593492227c8, type: 3}
     second:
       variants:
@@ -113,6 +113,8 @@ ShaderVariantCollection:
       - keywords: USE_SHAPE_LIGHT_TYPE_0 _EDITION_POLYCHROME
         passType: 13
       - keywords: USE_SHAPE_LIGHT_TYPE_0 _EDITION_REGULAR
+        passType: 13
+      - keywords: _CULLMODE_OFF _EDITION_FOIL
         passType: 13
   - first: {fileID: -6465566751694194690, guid: 51abecf52e7604994a05574e119b3b25, type: 3}
     second:

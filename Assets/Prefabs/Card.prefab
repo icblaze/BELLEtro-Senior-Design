@@ -65,7 +65,7 @@ MonoBehaviour:
   moveSpeedLimit: 50
   selected: 0
   selectionOffset: 25
-  cardVisualPrefab: {fileID: 7310339964073049012, guid: bddd0263814164da396aa8d1438dd810, type: 3}
+  cardVisualPrefab: {fileID: 7310339964073049012, guid: 0fb7e7dd5a1fa4a34847033e11641ead, type: 3}
   cardVisual: {fileID: 0}
   isHovering: 0
   isDragging: 0

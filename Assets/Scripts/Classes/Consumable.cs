@@ -11,11 +11,20 @@ using UnityEngine;
 
 public abstract class Consumable : BaseCard
 {
-    public CardType kindOfCard;
-    public int sellValue;
+    private CardType _kindOfCard;
     public ConsumableType type;
     public bool isInstant;
     public int price;
+    public int sellValue;
     public bool isNegative;
-    public bool isDisabled;
+    public bool isDisabled;         // This variable is used to indicate if a consumable is able to be used
+    
+    //Getter and setter for setting up the property _kindOfCard
+    public override CardType kindOfCard
+    {
+        get { return _kindOfCard; }
+        set { kindOfCard = value; }
+    } 
+
+    public string description; //   Stores details for effect of consumable
 }

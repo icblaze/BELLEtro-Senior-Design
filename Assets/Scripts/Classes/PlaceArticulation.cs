@@ -7,9 +7,10 @@
 using System.Collections;
 using UnityEngine;
 
-// The place of articulation is where the tongue is when saying a sound
+// The place of articulation refers to the place in the vocal tract that produces the sound
 public enum PlaceArticulation
 {
+    None,
     Labial,
     Labiodental,
     Interdental,

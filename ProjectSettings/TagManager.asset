@@ -46,5 +46,8 @@ TagManager:
   - name: EffectLayer
     uniqueID: 3943087487
     locked: 0
+  - name: SpriteLayer
+    uniqueID: 700068073
+    locked: 0
   m_RenderingLayers:
   - Default

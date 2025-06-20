@@ -5,7 +5,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+//Script is used to manage the audio including music, sfx functions,
+//transitions, etc.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
 public class AudioManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -52,7 +55,7 @@ public class AudioManager : MonoBehaviour
     //Function call to change between music tracks
     public void changeMusic(int curCount)
     {
-     
+
         StartCoroutine(blendTrack(mainMenuSource));
 
     }
