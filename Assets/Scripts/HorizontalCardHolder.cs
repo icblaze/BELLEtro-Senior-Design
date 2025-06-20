@@ -15,15 +15,17 @@ public class HorizontalCardHolder : MonoBehaviour
     private RectTransform rect;
 
     [Header("Spawn Settings")]
-    [SerializeField] private int cardsToSpawn = 7;
+    [SerializeField] private int handSize = 8;
     public List<Card> cards;
 
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
+    private Deck deck = Deck.access();
+
     void Start()
     {
-        for (int i = 0; i < cardsToSpawn; i++)
+        for (int i = 0; i < handSize; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
             newSlot.name = $"Card {i + 1}"; // Assign meaningful names
@@ -31,6 +33,9 @@ public class HorizontalCardHolder : MonoBehaviour
 
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
+
+        //  Draw PCards from the deck for each Card intially 
+        PCard[] pcardArray = deck.drawCards(handSize);
 
         int cardCount = 0;
         foreach (Card card in cards)
@@ -40,6 +45,7 @@ public class HorizontalCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.name = $"Card {cardCount + 1}"; // Assign names sequentially
+            card.AssignPCard(pcardArray[cardCount]); //  Assign PCard object to each card
             cardCount++;
         }
 

@@ -74,5 +74,12 @@ public class PCard : BaseCard
         get { return _kindOfCard; }
         set { _kindOfCard = value; }
     } //Getter and setter for typeOfCard
+
+    //  Return attributes of the PCard
+    public override string ToString()
+    {
+        return "Linguistic Term: " + term.ToString() + "\nSuit:" + suit.ToString();
+        
+    }
 }
 
