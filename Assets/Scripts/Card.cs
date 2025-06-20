@@ -52,6 +52,17 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public UnityEvent<Card> EndDragEvent;
     [HideInInspector] public UnityEvent<Card, bool> SelectEvent;
 
+    
+    public PCard pcard;
+    [Header("PCard Object")]
+    public string termName;
+    public string termSymbol;
+    public string suitName;
+    public string enhancementName;
+    public string sealName;
+    public string editionName;
+
+
     void Start()
     {
          if (infoPanel == null)
@@ -284,5 +295,19 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         if(cardVisual != null)
         Destroy(cardVisual.gameObject);
+    }
+
+    //  Assigns the PCard object to Card and assigns attributes from PCard
+    public void AssignPCard(PCard pcard)
+    {
+        this.pcard = pcard;
+        termName = pcard.term.ToString();
+        suitName = pcard.suit.ToString();
+        enhancementName = pcard.enhancement.ToString();
+        sealName = pcard.seal.ToString();
+        editionName = pcard.edition.ToString();
+
+        //  Description shows these attributes (for now just term and suit)
+        cardDescription = pcard.ToString(); 
     }
 }
