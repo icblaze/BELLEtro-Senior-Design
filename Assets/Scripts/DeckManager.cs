@@ -23,7 +23,7 @@ public class DeckManager : MonoBehaviour
     }
     void Start()
     {
-        Deck deck = Deck.access();
+        //Deck deck = Deck.access();
 
         // //In the future we might change this so we can modify the hand size based off the selected deck.
         // setMaxHandCount(8);
