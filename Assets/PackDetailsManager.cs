@@ -51,7 +51,7 @@ public class PackDetailsManager : MonoBehaviour
         }
         else if (pCard.textbook != null)
         {
-            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.textbook.description;
+            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.textbook.GetDescription();
         }
         else if (pCard.cardBuff != null)
         {
@@ -59,34 +59,34 @@ public class PackDetailsManager : MonoBehaviour
         }
         else
         {
-            return;
+            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.term.ToString();
         }
-        cardDetails.blocksRaycasts = true;
+        // cardDetails.blocksRaycasts = true;
         StartCoroutine(FadeIn(cardDetails));
-        cardDetails.interactable = true;
+        // cardDetails.interactable = true;
     }
     public void RemoveCardDetails1()
     {
         RemoveCardDetails(card1Details);
     }
-        public void RemoveCardDetails2()
+    public void RemoveCardDetails2()
     {
         RemoveCardDetails(card2Details);
     }
-        public void RemoveCardDetails3()
+    public void RemoveCardDetails3()
     {
         RemoveCardDetails(card3Details);
     }
-        public void RemoveCardDetails4()
+    public void RemoveCardDetails4()
     {
         RemoveCardDetails(card4Details);
     }
-        public void RemoveCardDetails5()
+    public void RemoveCardDetails5()
     {
         RemoveCardDetails(card5Details);
     }
 
-        private void RemoveCardDetails(CanvasGroup cardDetails)
+    private void RemoveCardDetails(CanvasGroup cardDetails)
     {
         cardDetails.blocksRaycasts = false;
         StartCoroutine(FadeOut(cardDetails));
@@ -100,11 +100,8 @@ public class PackDetailsManager : MonoBehaviour
         float timeElapsed = 0;
         while (fadeInObject.alpha < 1)
         {
-            //float opacity = fadeInObject.alpha - .05f;
-            //Mathf.Clamp(opacity, 0, 1);
             fadeInObject.alpha = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
             timeElapsed += Time.deltaTime;
-            //fadeInObject.alpha = opacity;
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 1;
@@ -115,11 +112,8 @@ public class PackDetailsManager : MonoBehaviour
         float timeElapsed = 0;
         while (fadeInObject.alpha > 0)
         {
-            //float opacity = fadeInObject.alpha - .05f;
-            //Mathf.Clamp(opacity, 0, 1);
             fadeInObject.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
             timeElapsed += Time.deltaTime;
-            //fadeInObject.alpha = opacity;
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 0;

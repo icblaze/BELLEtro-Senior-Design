@@ -554,7 +554,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowVoucherDetails()
     {
-        //VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString();
+        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString();
         VoucherDetails.blocksRaycasts = true;
         VoucherDetails.interactable = true;
         StartCoroutine(FadeIn(VoucherDetails));
@@ -567,7 +567,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowPack1Details()
     {
-        //Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.price.ToString();
+        Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.packType.ToString() + "\nChoose " + pack1.selectableCards.ToString() + " of " + pack1.packSize.ToString() + " cards";
 
         Pack1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack1Details));
@@ -581,7 +581,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowPack2Details()
     {
-        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.price.ToString();
+        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.packType.ToString() + "\nChoose " + pack2.selectableCards.ToString() + " of " + pack2.packSize.ToString() + " cards";
         Pack2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack2Details));
         Pack2Details.interactable = true;
@@ -598,11 +598,8 @@ public class ShopManager : MonoBehaviour
         float timeElapsed = 0;
         while (fadeInObject.alpha < 1)
         {
-            //float opacity = fadeInObject.alpha - .05f;
-            //Mathf.Clamp(opacity, 0, 1);
             fadeInObject.alpha = Mathf.Lerp(0, 1, timeElapsed / timeToFade);
             timeElapsed += Time.deltaTime;
-            //fadeInObject.alpha = opacity;
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 1;
@@ -613,11 +610,8 @@ public class ShopManager : MonoBehaviour
         float timeElapsed = 0;
         while (fadeInObject.alpha > 0)
         {
-            //float opacity = fadeInObject.alpha - .05f;
-            //Mathf.Clamp(opacity, 0, 1);
             fadeInObject.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
             timeElapsed += Time.deltaTime;
-            //fadeInObject.alpha = opacity;
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 0;
