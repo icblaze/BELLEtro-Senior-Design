@@ -1,9 +1,12 @@
 // This Document contains the code for the Game class.
-// This class is used to hold information about the game's state
+// This class is used to hold information about the game's state.
+// This class contains all the logic for retrieving the different packs in the game,
+// and this class is used to retrieve different consumbales and Mentors, and enhanced cards.
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
 // Andy (flakkid): added previous consumable variable
-// Zacharia Alaoui (ZachariaAlaoui): Added the functions and the logic for the functions
+// Zacharia Alaoui (ZachariaAlaoui): Added the functions and created the logic for the functions, I also created
+//                                   the logic for obtaining the different packs in the game.
 // Fredrick (bouloutef04): Added functions to obtain mentors, cardbuffs, and textbooks for the shop.
 
 using System.Numerics;
@@ -35,15 +38,15 @@ public class Game
     }
 
     public GameObject cardPrefab;
-    private int ante;                                                              //Ante is the set of Rounds the player is on
+    private int ante;                                                              //Ante variable holds the current ante that the player is on
     private int roundValue;                                                        //RoundValue is the Round within the current Ante
     public BigInteger baseChips;                                                   //BaseChips are a calculation point for the value in each round, these are the blue chips.
     private int ChipTotal;                                                         //ChipTotal is the number of chips needed to win a round
     public Voucher[] voucherHolder;                                                //VoucherHolder contains the current Ante's Vouchers
     public SpecialBlind currentSpecialBlind;                                       //CurrentSpecialBlind contains this Ante's Special Blind
     public Player thePlayer;                                                       //The Player is a refrence to the Player class 
-    private int index;                                                             //This variable will hold a value that we would use to index into our deck
-    public Consumable previousConsumable = null;                                   //Stores name of last used consumable
+    private int index;                                                             //This variable will hold a value that we could use to index into our deck
+    public Consumable previousConsumable = null;                                   //Stores the name of last used consumable
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
 
 

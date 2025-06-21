@@ -1,3 +1,7 @@
+//This script is used for creating the functionality of the pause menu.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Threading.Tasks;
-//This script is used for creating the functionality of the pause menu.
-//Current Devs:
-//Fredrick Bouloute (bouloutef04)
+
 public class PauseMenuManager : MonoBehaviour
 {
     private Button continueButton;

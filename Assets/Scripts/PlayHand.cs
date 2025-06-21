@@ -1,4 +1,6 @@
-
+// This class handles the logic for moving the selected cards from the players hand
+// to the play area where the hands are usually scored. This class also handles deleting
+// and retrieving new cards from the deck to the players hand so the player can continue playing.
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +30,7 @@ public class PlayHand : MonoBehaviour
         if (deckManager == null)
             Debug.LogError("PlayHand: DeckManager script not found in scene!");
     }
+
 
     void PlaySelectedCards()
     {
@@ -76,6 +79,10 @@ public class PlayHand : MonoBehaviour
             StartCoroutine(MoveCard(card, targetPosition));
         }
 
+        //Call a function here to Calculate the score of the hand that was played.
+        //selectedCards is a list of cards that were selected by the player and these
+        //cards have been moved to the PlayArea.
+        
         yield return new WaitForSeconds(displayDuration);
 
         // ✅ Remove cards and draw new ones

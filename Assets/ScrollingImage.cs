@@ -1,10 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
-
 //Script is used ot create a scrolling effect on 
 //background images. 
 //Current Devs:
 //Fredrick Bouloute (bouloutef04)
+
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrollingImage : MonoBehaviour
 {

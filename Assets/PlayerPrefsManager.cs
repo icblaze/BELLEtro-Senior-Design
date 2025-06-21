@@ -1,11 +1,13 @@
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 //Script is used as a manager for the PlayerPrefs for the game.
 //This includes the setters, the getters, and the intial values for the
 //PlayerPrefs.
 //Current Devs:
 //Fredrick Bouloute (bouloutef04)
+
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
 public class PlayerPrefsManager
 {
     private const string MONEY = "money";
@@ -19,7 +21,7 @@ public class PlayerPrefsManager
     }
     public static int GetMoney()
     {
-        return PlayerPrefs.GetInt(CHIPS);
+        return PlayerPrefs.GetInt(MONEY);
     }
 
     public static void SetChips(int chips)

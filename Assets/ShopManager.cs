@@ -1,3 +1,9 @@
+//Script is used to create the functionality of the shop. This includes
+//buying Mentors/mentors, buying ante vouchers, buying packs, rerolling,
+//going to the next round and calling functions for cards as necessary.
+//Current Devs:
+//Fredrick Bouloute (bouloutef04)
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +14,6 @@ using System.Threading.Tasks;
 
 using TMPro;
 
-
-//Script is used to create the functionality of the shop. This includes
-//buying Mentors/mentors, buying ante vouchers, buying packs, rerolling,
-//going to the next round and calling functions for cards as necessary.
-//Current Devs:
-//Fredrick Bouloute (bouloutef04)
 public class ShopManager : MonoBehaviour
 {
     //All UI Components Below

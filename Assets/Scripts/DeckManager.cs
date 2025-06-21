@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DeckManager : MonoBehaviour
 {
+    private int deckIndex;          
     [Header("Prefabs & Transforms")]
     public GameObject cardPrefab;                                           // Assign your card prefab asset
     public Transform playingCardGroup;                                      // Assign PlayingCardGroup in Inspector
@@ -22,7 +23,7 @@ public class DeckManager : MonoBehaviour
     }
     void Start()
     {
-        //Deck deck = Deck.access();
+        Deck deck = Deck.access();
 
         // //In the future we might change this so we can modify the hand size based off the selected deck.
         // setMaxHandCount(8);
@@ -88,9 +89,12 @@ public class DeckManager : MonoBehaviour
             return;
         }
 
-        // remove top card from deck list
-        GameObject prefab = deckCards[0];
-        deckCards.RemoveAt(0);
+        // remove random card from deck list
+        Game game = Game.access();
+        deckIndex = game.randomizer(0, deckCards.Count);
+
+        GameObject prefab = deckCards[deckIndex];
+        deckCards.RemoveAt(deckIndex);
 
         // instantiate it at deck position, then reparent into the slot
         GameObject drawn = Instantiate(prefab, deckPosition);
@@ -98,7 +102,7 @@ public class DeckManager : MonoBehaviour
         drawn.transform.SetParent(emptySlot, false);
         drawn.transform.localScale = Vector3.one;
 
-        //Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
+        Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
     }
 
     /// <summary>
@@ -112,8 +116,10 @@ public class DeckManager : MonoBehaviour
             return;
         }
 
-        GameObject prefab = deckCards[0];
-        deckCards.RemoveAt(0);
+        Game game = Game.access();
+        deckIndex = game.randomizer(0, deckCards.Count);
+        GameObject prefab = deckCards[deckIndex];
+        deckCards.RemoveAt(deckIndex);
 
         // parent it straight under playingCardGroup
         GameObject c = Instantiate(prefab, playingCardGroup, false);

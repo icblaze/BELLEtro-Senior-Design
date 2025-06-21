@@ -1,3 +1,9 @@
+// This class handles the functionality of the delete button, and it handles removing the cards
+// from the players hand. This class also retrieves cards from the deck into the empty slots that
+// are in the players hand.
+// Van Phan(trieu1852000): Implemented the DeleteCard class
+// Zacharia Alaoui(ZachariaAlaoui): Added comments throughout the class for better readibility
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
@@ -9,7 +15,7 @@ public class DeleteCard : MonoBehaviour
     [SerializeField] private Transform playingCardGroup;
 
     private DeckManager deckManager;
-    private List<GameObject> selectedCards = new List<GameObject>();
+    private List<GameObject> selectedCards = new List<GameObject>();    //List of the selected cards the player has selected.
 
     void Start()
     {
