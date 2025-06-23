@@ -302,6 +302,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         this.pcard = pcard;
         termName = pcard.term.ToString();
+        LinguisticTermSymbol.unicodeMap.TryGetValue(pcard.term, out termSymbol);
         suitName = pcard.suit.ToString();
         enhancementName = pcard.enhancement.ToString();
         sealName = pcard.seal.ToString();
