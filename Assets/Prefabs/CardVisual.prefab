@@ -347,31 +347,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7310339964073049012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73809c3b87e04a6dae1308b12ab4749, type: 3}
+  m_Script: {fileID: 11500000, guid: 0050656b972dd4a1281ce855fd59555a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentCard: {fileID: 0}
+  parentCard: {fileID: 133173175211647385, guid: 38aa6ba35be5144dc931edb1e6e43818, type: 3}
   visualShadow: {fileID: 9157190824811683565}
   shakeParent: {fileID: 3449025543118524474}
   tiltParent: {fileID: 5862976466474931636}
   cardImage: {fileID: 7697484841366769644}
-  followSpeed: 25
-  rotationAmount: 70
-  rotationSpeed: 50
-  autoTiltAmount: 15
-  manualTiltAmount: 30
-  tiltSpeed: 40
+  followSpeed: 30
+  rotationAmount: 20
+  rotationSpeed: 20
+  autoTiltAmount: 30
+  manualTiltAmount: 20
+  tiltSpeed: 20
   scaleAnimations: 1
-  scaleOnHover: 1.07
-  scaleOnSelect: 1.2
+  scaleOnHover: 1.15
+  scaleOnSelect: 1.25
   scaleTransition: 0.15
   scaleEase: 27
   selectPunchAmount: 20
   hoverPunchAngle: 5
   hoverTransition: 0.15
   swapAnimations: 1
-  swapRotationAngle: 20
-  swapTransition: 0.2
+  swapRotationAngle: 30
+  swapTransition: 0.15
   swapVibrato: 5
   curve: {fileID: 11400000, guid: d4dd399fb2dab44429d866dc2259bb4b, type: 2}
 --- !u!223 &4132845374223140069

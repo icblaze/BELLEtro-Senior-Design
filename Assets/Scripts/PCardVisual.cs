@@ -7,7 +7,7 @@ using Unity.Collections;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 
-public class CardVisual : MonoBehaviour
+public class PCardVisual : MonoBehaviour
 {
     private bool initalize = false;
 

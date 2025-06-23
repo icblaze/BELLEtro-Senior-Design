@@ -392,6 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4607654618537338827}
   - component: {fileID: 6322252363747449735}
+  - component: {fileID: 4082383031823332801}
   m_Layer: 0
   m_Name: CardLayers
   m_TagString: Untagged
@@ -434,6 +435,22 @@ MonoBehaviour:
   baseLayer: {fileID: 1145312962996155630}
   suitLayer: {fileID: 2269645481705047812}
   enhancementLayer: {fileID: 128702730578500787}
+--- !u!114 &4082383031823332801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5310543454362328082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e2ea486754a458190f8f9f44bd5ee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suitLayer: {fileID: 5049528254823105660}
+  termLayer: {fileID: 3264955093581039343}
+  sealLayer: {fileID: 4534371419057774797}
+  enhancementLayer: {fileID: 8964215766829235234}
 --- !u!1 &5434269512320548843
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,31 +553,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 7310339964073049012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c73809c3b87e04a6dae1308b12ab4749, type: 3}
+  m_Script: {fileID: 11500000, guid: 0050656b972dd4a1281ce855fd59555a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentCard: {fileID: 0}
+  parentCard: {fileID: 133173175211647385, guid: 38aa6ba35be5144dc931edb1e6e43818, type: 3}
   visualShadow: {fileID: 9157190824811683565}
   shakeParent: {fileID: 3449025543118524474}
   tiltParent: {fileID: 5862976466474931636}
   cardImage: {fileID: 7697484841366769644}
-  followSpeed: 25
-  rotationAmount: 70
-  rotationSpeed: 50
+  followSpeed: 30
+  rotationAmount: 10
+  rotationSpeed: 5
   autoTiltAmount: 15
   manualTiltAmount: 30
-  tiltSpeed: 40
+  tiltSpeed: 10
   scaleAnimations: 1
-  scaleOnHover: 1.07
-  scaleOnSelect: 1.2
+  scaleOnHover: 1.15
+  scaleOnSelect: 1.25
   scaleTransition: 0.15
   scaleEase: 27
   selectPunchAmount: 20
   hoverPunchAngle: 5
   hoverTransition: 0.15
   swapAnimations: 1
-  swapRotationAngle: 20
-  swapTransition: 0.2
+  swapRotationAngle: 30
+  swapTransition: 0.15
   swapVibrato: 5
   curve: {fileID: 11400000, guid: d4dd399fb2dab44429d866dc2259bb4b, type: 2}
 --- !u!223 &4132845374223140069
@@ -610,7 +627,7 @@ GameObject:
   - component: {fileID: 4565789390780903906}
   - component: {fileID: 4534371419057774797}
   m_Layer: 5
-  m_Name: Stamp
+  m_Name: Seal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

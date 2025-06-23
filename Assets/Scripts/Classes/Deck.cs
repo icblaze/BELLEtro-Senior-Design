@@ -98,6 +98,7 @@ public class Deck
                 enhancement = CardEnhancement.Base,
                 seal = CardSeal.Base,
                 isDisabled = false,
+                replayCounter = 0
               };
 
               counter++;
@@ -124,6 +125,7 @@ public class Deck
                   enhancement = CardEnhancement.Base,
                   seal = CardSeal.Base,
                   isDisabled = false,
+                  replayCounter = 0
                 });
                 counter++;
                 Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
@@ -143,12 +145,14 @@ public class Deck
 
   //This function is responsible for drawing a certain amount of cards into the players hand.
   //PlayerHandCount represents how many missing cards are missing from the players hand.
-  public PCard[] drawCards(Game game, int playerHandCount)
+  public PCard[] drawCards(int playerHandCount)
   {
     if (deckCards.Count == 0)
     {
       return null;
     }
+
+    Game game = Game.access();
 
     //This calls the random draw function with the entire deck and playerhandcount
     PCard[] list = game.randomDraw(deckCards, playerHandCount);

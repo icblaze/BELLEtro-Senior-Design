@@ -7,7 +7,7 @@ public class ShaderCode : MonoBehaviour
 
     Image image;
     Material m;
-    CardVisual visual;
+    PCardVisual visual;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class ShaderCode : MonoBehaviour
         image = GetComponent<Image>();
         m = new Material(image.material);
         image.material = m;
-        visual = GetComponentInParent<CardVisual>();
+        visual = GetComponentInParent<PCardVisual>();
 
         string[] editions = new string[4];
         editions[0] = "REGULAR";

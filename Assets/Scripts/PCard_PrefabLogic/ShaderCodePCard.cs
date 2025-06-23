@@ -16,10 +16,10 @@ public class ShaderCodePCard : MonoBehaviour
     Material suit_m;
     Material enhancement_m;
 
-    CardVisual visual;
+    PCardVisual visual;
+    string[] editions = { "REGULAR", "POLYCHROME", "FOIL"};  //  Playing cards can't be negative
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         base_img = baseLayer.GetComponent<Image>();
         base_m = new Material(base_img.material);
@@ -32,30 +32,6 @@ public class ShaderCodePCard : MonoBehaviour
         enhancement_img = enhancementLayer.GetComponent<Image>();
         enhancement_m = new Material(enhancement_img.material);
         enhancement_img.material = enhancement_m;
-
-
-        visual = GetComponentInParent<CardVisual>();
-
-        string[] editions = new string[3];
-        editions[0] = "REGULAR";
-        editions[1] = "POLYCHROME";
-        editions[2] = "FOIL";
-        //editions[3] = "NEGATIVE"; //  Playing cards can't be negative
-
-        for (int i = 0; i < base_img.material.enabledKeywords.Length; i++)
-        {
-            base_img.material.DisableKeyword(base_img.material.enabledKeywords[i]);
-            suit_img.material.DisableKeyword(suit_img.material.enabledKeywords[i]);
-            enhancement_img.material.DisableKeyword(enhancement_img.material.enabledKeywords[i]);
-        }
-
-        //  Eventually add code for choosing based on edition
-
-        string chosenEdition = editions[Random.Range(0, editions.Length)];
-
-        base_img.material.EnableKeyword("_EDITION_" + chosenEdition);
-        suit_img.material.EnableKeyword("_EDITION_" + chosenEdition);
-        enhancement_img.material.EnableKeyword("_EDITION_" + chosenEdition);
     }
 
     // Update is called once per frame
@@ -91,5 +67,31 @@ public class ShaderCodePCard : MonoBehaviour
         if (angle > 180f)
             angle -= 360f;
         return Mathf.Clamp(angle, min, max);
+    }
+
+    //  When Edition of PCard is updated, change shaders
+    public void UpdateEdition(CardEdition edition)
+    {
+        for (int i = 0; i < base_img.material.enabledKeywords.Length; i++)
+        {
+            base_img.material.DisableKeyword(base_img.material.enabledKeywords[i]);
+            suit_img.material.DisableKeyword(suit_img.material.enabledKeywords[i]);
+            enhancement_img.material.DisableKeyword(enhancement_img.material.enabledKeywords[i]);
+        }
+
+        string chosenEdition = editions[0];
+        switch (edition)
+        {
+            case CardEdition.Polychrome:
+                chosenEdition = editions[1];
+                break;
+            case CardEdition.Foil:
+                chosenEdition = editions[2];
+                break;
+        }
+
+        base_img.material.EnableKeyword("_EDITION_" + chosenEdition);
+        suit_img.material.EnableKeyword("_EDITION_" + chosenEdition);
+        enhancement_img.material.EnableKeyword("_EDITION_" + chosenEdition);
     }
 }

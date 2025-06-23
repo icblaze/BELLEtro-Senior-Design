@@ -36,7 +36,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
     [Header("Visual")]
     [SerializeField] private GameObject cardVisualPrefab;
-    [HideInInspector] public CardVisual cardVisual;
+    [HideInInspector] public PCardVisual cardVisual;
 
     [Header("States")]
     public bool isHovering;
@@ -52,30 +52,19 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public UnityEvent<Card> EndDragEvent;
     [HideInInspector] public UnityEvent<Card, bool> SelectEvent;
 
+    
+    public PCard pcard;
+    [Header("PCard Object")]
+    [SerializeField] private string termName = "";
+    [SerializeField] private string termSymbol = "";
+    [SerializeField] private string suitName = "";
+    [SerializeField] private string enhancementName = "";
+    [SerializeField] private string sealName = "";
+    [SerializeField] private string editionName = "";
+
     void Start()
     {
-         if (infoPanel == null)
-        {
-            infoPanel = GameObject.Find("CardInfoPanel");
-            if (infoPanel != null)
-            {
-                infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
-                infoPanel.SetActive(false); // Ensure it's hidden at the start
-            }
-            else
-            {
-                Debug.LogError("Could not find 'CardInfoPanel' in the scene. Make sure it is named correctly and exists in your Hierarchy.");
-            }
-        }
-        canvas = GetComponentInParent<Canvas>();
-        imageComponent = GetComponent<Image>();
 
-        if (!instantiateVisual)
-            return;
-
-        visualHandler = FindObjectOfType<VisualCardsHandler>();
-        cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<CardVisual>();
-        cardVisual.Initialize(this);
     }
 
     void Update()
@@ -285,4 +274,105 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         if(cardVisual != null)
         Destroy(cardVisual.gameObject);
     }
+
+    //  Instantiate card visual and sets up card info panel
+    private void InstantiateCardVisual()
+    {
+        if (infoPanel == null)
+        {
+            infoPanel = GameObject.Find("CardInfoPanel");
+            if (infoPanel != null)
+            {
+                infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
+                infoPanel.SetActive(false); // Ensure it's hidden at the start
+            }
+            else
+            {
+                Debug.LogError("Could not find 'CardInfoPanel' in the scene. Make sure it is named correctly and exists in your Hierarchy.");
+            }
+        }
+        canvas = GetComponentInParent<Canvas>();
+        imageComponent = GetComponent<Image>();
+
+        if (!instantiateVisual)
+            return;
+
+        visualHandler = FindObjectOfType<VisualCardsHandler>();
+        cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<PCardVisual>();
+        cardVisual.Initialize(this);
+    }
+
+    //  Assigns the PCard object to Card and assigns attributes from PCard
+    public void AssignPCard(PCard pcard)
+    {
+        if (pcard == null)
+        {
+            return;
+        }
+        this.pcard = pcard;
+
+        //  Instantiate card visual before you can access components of it
+        if(cardVisual == null)
+        {
+            InstantiateCardVisual();
+        }
+
+        //  Get object to modify appearance of PCard 
+        AppearancePCard appearance = cardVisual.GetComponentInChildren<AppearancePCard>();
+        ShaderCodePCard shaderAppearance = cardVisual.GetComponentInChildren<ShaderCodePCard>();
+
+        //  Update Card Term Name
+        termName = pcard.term.ToString();
+
+        //  Update Card Symbol if different
+        string newSymbol;
+        LinguisticTermSymbol.unicodeMap.TryGetValue(pcard.term, out newSymbol);
+        if (termSymbol != newSymbol)
+        {
+            termSymbol = newSymbol;
+            appearance.UpdateTerm(newSymbol);
+        }
+
+        //  Update Suit if different
+        string newSuit = pcard.suit.ToString();
+        if (suitName != newSuit)
+        {
+            suitName = newSuit;
+            appearance.UpdateSuit(newSuit);
+        }
+
+        //  Update Suit if different
+        string newEnhancement = pcard.enhancement.ToString();
+        if (enhancementName != newEnhancement)
+        {
+            enhancementName = newEnhancement;
+            appearance.UpdateEnhancement(newEnhancement);
+        }
+
+        //  Update Seal if different
+        string newSeal = pcard.seal.ToString();
+        if (sealName != newSeal)
+        {
+            sealName = newSeal;
+            appearance.UpdateSeal(newSeal);
+        }
+
+        //  Update Edition if different
+        string newEdition = pcard.edition.ToString();
+        if (editionName != newEdition)
+        {
+            editionName = newEdition;
+            shaderAppearance.UpdateEdition(pcard.edition);
+        }
+
+        //  Description shows these attributes (for now just term and suit)
+        cardDescription = pcard.ToString(); 
+    }
+
+    //  Temporary method to instantiate for Mentors
+    public void InstantiateMentors()
+    {
+        InstantiateCardVisual();
+    }
+
 }
