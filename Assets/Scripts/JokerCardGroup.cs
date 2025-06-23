@@ -15,7 +15,7 @@ public class JokerCardHolder : MonoBehaviour
     private RectTransform rect;
 
     [Header("Spawn Settings")]
-    [SerializeField] private int cardsToSpawn = 7;
+    [SerializeField] private int cardsToSpawn = 5;
     public List<Card> cards;
 
     bool isCrossing = false;
@@ -40,6 +40,7 @@ public class JokerCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.name = $"Card {cardCount + 1}"; // Assign names sequentially
+            card.InstantiateMentors();
             cardCount++;
         }
 
