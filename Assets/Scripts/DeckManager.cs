@@ -15,44 +15,48 @@ public class DeckManager : MonoBehaviour
 
     [Header("Settings")]
     private int maxCardsInHand;                                             //This variable will store the maximum cards in a hand for the round
-
+     void Awake()
+    {
+        // This will run before any Start() method and clear the old "ghost" reference.
+        Card.ResetStaticPanel();
+    }
     void Start()
     {
-        //Deck deck = Deck.access();
+        Deck deck = Deck.access();
 
-        // //In the future we might change this so we can modify the hand size based off the selected deck.
-        // setMaxHandCount(8);
-        // maxCardsInHand = getMaxHandCount();
+        //In the future we might change this so we can modify the hand size based off the selected deck.
+        setMaxHandCount(8);
+        maxCardsInHand = getMaxHandCount();
 
-        // //Debug.LogError($"Deck Counter Updated: {Deck.counter}");
+        //Debug.LogError($"Deck Counter Updated: {Deck.counter}");
 
-        // if (deck.deckCards.Count < 56)
-        // {
-        //     Debug.LogError("Not enough cards in deckCardsData! Check deck initialization.");
-        //     return;
-        // }
+        if (deck.deckCards.Count < 56)
+        {
+            Debug.LogError("Not enough cards in deckCardsData! Check deck initialization.");
+            return;
+        }
 
 
-        // // Fill the deck with maxCardsInHand placeholder cards
-        // for (int i = 0; i < maxCardsInHand; i++)
-        // {
-        //     //Don't spawn all 56 cards, have one face down card in the deck
-        //     GameObject newCard = Instantiate(cardPrefab, deckPosition);
-        //     CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
+        // Fill the deck with maxCardsInHand placeholder cards
+        for (int i = 0; i < maxCardsInHand; i++)
+        {
+            //Don't spawn all 56 cards, have one face down card in the deck
+            GameObject newCard = Instantiate(cardPrefab, deckPosition);
+            //CardObject cardComponent = newCard.AddComponent<CardObject>(); //Attach the CardObject script to the GameObject for each card.
+            Card card = newCard.GetComponent<Card>();
+            newCard.name = $"DeckCard_{i}";
+            newCard.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
+            newCard.transform.localPosition = new Vector3(
+                Random.Range(-0.1f, 0.1f),
+                i * -0.05f,
+                0f
+            );
+            //newCard.GetComponent<Card>().cardDescription = "This is Card Number " + i + ". Its data comes from cardData.";   
+            //Assign a random card from the deck and assign it to the cardComponent
+            //cardComponent.cardData = deck.deckCards[i];
 
-        //     newCard.name = $"DeckCard_{i}";
-        //     newCard.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
-        //     newCard.transform.localPosition = new Vector3(
-        //         Random.Range(-0.1f, 0.1f),
-        //         i * -0.05f,
-        //         0f
-        //     );
-
-        //     //Assign a random card from the deck and assign it to the cardComponent
-        //     cardComponent.cardData = deck.deckCards[i];
-
-        //     deckCards.Add(newCard);
-        // }
+            deckCards.Add(newCard);
+        }
         pinkCardImage.SetAsLastSibling();
 
         
@@ -94,7 +98,7 @@ public class DeckManager : MonoBehaviour
         drawn.transform.SetParent(emptySlot, false);
         drawn.transform.localScale = Vector3.one;
 
-        //Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
+        Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
     }
 
     /// <summary>

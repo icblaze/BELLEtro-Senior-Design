@@ -58,6 +58,12 @@ public class DeleteCard : MonoBehaviour
     //This function also starts a coroutine to fill the player hand with new cards
     void RemoveSelectedCards()
     {
+        if (selectedCards.Count > 5)
+        {
+            Debug.LogWarning("You cannot discard more than 5 cards at a time!");
+            // Stop the function here so no cards are deleted.
+            return;
+        }
         if (selectedCards.Count == 0)
         {
             Debug.LogWarning("No cards selected for deletion!");

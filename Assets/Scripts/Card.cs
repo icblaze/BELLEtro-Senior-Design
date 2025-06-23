@@ -32,7 +32,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     private float pointerDownTime;
     private float pointerUpTime;
     private bool loggedMissingParent = false;
-
+    public static void ResetStaticPanel()
+    {
+        infoPanel = null;
+        infoText = null;
+    }
 
     [Header("Visual")]
     [SerializeField] private GameObject cardVisualPrefab;
