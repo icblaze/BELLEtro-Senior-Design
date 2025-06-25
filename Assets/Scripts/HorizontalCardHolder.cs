@@ -8,24 +8,24 @@ using System.Linq;
 
 public class HorizontalCardHolder : MonoBehaviour
 {
-    [SerializeField] private Card selectedCard;            // This variable holds the current selected card 
-    [SerializeReference] private Card hoveredCard;         // This variable holds the current hovered card
+    [SerializeField] private Card selectedCard;
+    [SerializeReference] private Card hoveredCard;
 
-    [SerializeField] private GameObject slotPrefab;        // This holds a gameobject
+    [SerializeField] private GameObject slotPrefab;
     private RectTransform rect;
 
     [Header("Spawn Settings")]
     [SerializeField] private int handSize = 8;
-    public List<Card> cards;                               // List of Card Objects
+    public List<Card> cards;
 
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
-    private Deck deck = Deck.access();                    // Access to the deck 
+    private Deck deck = Deck.access();
 
+    //  Beginning of blind, draw cards from deck
     void Start()
     {
-        // This creates the card slots for the gameObjects
         for (int i = 0; i < handSize; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
@@ -35,7 +35,8 @@ public class HorizontalCardHolder : MonoBehaviour
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
-        // Draw PCards from the deck for each Card intially 
+        //  Draw PCards from the deck for each Card intially
+        deck.resetDeck();
         PCard[] pcardArray = deck.drawCards(handSize);
 
         int cardCount = 0;
@@ -46,7 +47,6 @@ public class HorizontalCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.name = $"Card {cardCount + 1}"; // Assign names sequentially
-            //Debug.Log($"{pcardArray[cardCount].term}");
             card.AssignPCard(pcardArray[cardCount]); //  Assign PCard object to each card
             cardCount++;
         }
@@ -103,7 +103,6 @@ public class HorizontalCardHolder : MonoBehaviour
             }
         }
 
-        //This deselects all the cards that are currently selected with a right click.
         if (Input.GetMouseButtonDown(1))
         {
             foreach (Card card in cards)
@@ -118,7 +117,6 @@ public class HorizontalCardHolder : MonoBehaviour
         if (isCrossing)
             return;
 
-        //Reorder cards based on moving the selected card somewhere else in the players hand
         for (int i = 0; i < cards.Count; i++)
         {
             if (selectedCard.transform.position.x > cards[i].transform.position.x)
@@ -141,7 +139,6 @@ public class HorizontalCardHolder : MonoBehaviour
         }
     }
 
-    //Reorder the cards when a card is dragged before or after other cards in the players hand
     void Swap(int index)
     {
         isCrossing = true;

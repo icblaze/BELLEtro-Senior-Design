@@ -31,7 +31,7 @@ public class Deck
   public static int deckSize = 56;  // This variable holds the original deck size
   public static int counter = 0;  
 
-  public List<PCard> deckCards = new List<PCard>();  //This will hold all of the cards that have the card info attach to them.
+  public List<PCard> deckCards = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
   public List<PCard> cardsDrawn = new List<PCard>(); //This should store all the cards that were drawn
   public List<PCard> playerHand = new List<PCard>(); //This variable will hold the hand of the player.
 
@@ -143,7 +143,7 @@ public class Deck
     counter = 0; //Set the counter back to 0
   }
 
-  //This function is responsible for drawing a certain amount of cards for the players hand.
+  //This function is responsible for drawing a certain amount of cards into the players hand.
   //PlayerHandCount represents how many missing cards are missing from the players hand.
   public PCard[] drawCards(int playerHandCount)
   {
@@ -206,4 +206,12 @@ public class Deck
 
   }
 
+    //  After every blind, add the drawn cards back to main deck 
+    public void resetDeck()
+    {
+        deckCards.AddRange(cardsDrawn);
+    }
+
 }
+
+
