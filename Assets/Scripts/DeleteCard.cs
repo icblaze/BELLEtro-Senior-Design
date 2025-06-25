@@ -10,6 +10,10 @@ public class DeleteCard : MonoBehaviour
 
     private DeckManager deckManager;
     private List<GameObject> selectedCards = new List<GameObject>();
+    private List<PCard> selectedPCards = new List<PCard>();
+
+    //  For detecting current hand
+    CurrentHandManager currentHandManager = new CurrentHandManager();
 
     void Start()
     {
@@ -37,7 +41,17 @@ public class DeleteCard : MonoBehaviour
     {
         if (card == null) return;
         if (!selectedCards.Contains(card))
+        {
+            //  Extract PCard object from Card
+            PCard pcard = card.GetComponent<Card>().pcard;
+            selectedPCards.Add(pcard);
+
             selectedCards.Add(card);
+
+            //  Debug hand check
+            Debug.Log(selectedPCards.Count);
+            Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
+        }
     }
 
     //This removes the card the player unselected from the selectedCards list
@@ -45,7 +59,17 @@ public class DeleteCard : MonoBehaviour
     {
         if (card == null) return;
         if (selectedCards.Contains(card))
+        {
+            //  Extract PCard object from Card
+            PCard pcard = card.GetComponent<Card>().pcard;
+            selectedPCards.Remove(pcard);
+
             selectedCards.Remove(card);
+
+            //  Debug hand check
+            Debug.Log(selectedPCards.Count);
+            Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
+        }
     }
     
     //This returns the selected cards that the player currently has selected

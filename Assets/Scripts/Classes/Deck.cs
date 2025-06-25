@@ -154,13 +154,17 @@ public class Deck
 
     Game game = Game.access();
 
-    //This calls the random draw function with the entire deck and playerhandcount
-    PCard[] list = game.randomDraw(deckCards, playerHandCount);
+    PCard[] list = new PCard[playerHandCount];
 
-    //Remove cards from the deck
+    // Remove cards from the deck
     for (int i = 0; i < playerHandCount; i++)
     {
-      PCard removed = removeCard(list[i]);
+      // This calls the random draw function with the deck
+      PCard pcard = game.randomDraw(deckCards);
+      list[i] = pcard;
+
+      // Remove from deck, add to cardsDrawn
+      PCard removed = removeCard(pcard);
       if (removed != null)
       {
         cardsDrawn.Add(removed);
@@ -206,4 +210,12 @@ public class Deck
 
   }
 
+    //  After every blind, add the drawn cards back to main deck 
+    public void resetDeck()
+    {
+        deckCards.AddRange(cardsDrawn);
+    }
+
 }
+
+

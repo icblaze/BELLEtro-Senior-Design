@@ -1,3 +1,6 @@
+//This script handles on click inputs on cards in the player hand.
+//This script helps keep track which cards are currently selected.
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +15,7 @@ public class CardSelection : MonoBehaviour, IPointerClickHandler
         deleteCardScript = FindFirstObjectByType<DeleteCard>(); // ✅ Fix: Use FindFirstObjectByType instead
     }
 
+    //This handles keeping track of the selected cards that are in the players hand.
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!isSelected)

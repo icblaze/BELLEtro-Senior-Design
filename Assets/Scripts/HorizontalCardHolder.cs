@@ -23,6 +23,7 @@ public class HorizontalCardHolder : MonoBehaviour
 
     private Deck deck = Deck.access();
 
+    //  Beginning of blind, draw cards from deck
     void Start()
     {
         for (int i = 0; i < handSize; i++)
@@ -34,7 +35,8 @@ public class HorizontalCardHolder : MonoBehaviour
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
-        //  Draw PCards from the deck for each Card intially 
+        //  Draw PCards from the deck for each Card intially
+        deck.resetDeck();
         PCard[] pcardArray = deck.drawCards(handSize);
 
         int cardCount = 0;

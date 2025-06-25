@@ -2,7 +2,7 @@
 // This class is used as an interface for all of the cards in BELLEtro
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
-// Zacharia Alaoui I added a abstract property that provides derived classes to provide their own implementation
+// Zacharia Alaoui(ZachariaAlaoui): I added a abstract property that provides derived classes to provide their own implementation
 
 using System.Collections;
 using UnityEngine;

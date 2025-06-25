@@ -106,3 +106,4 @@ dkms.conf
 #=========== Extra Files that should be ignored ======
 EditorUserSettings.asset
 packages-lock.json
+Search.settings
