@@ -1,11 +1,9 @@
+using TMPro;
+using UnityEngine;
 //Script is made to control and manage the UI of the game excluding the 
 //card playing area and the shop. This includes the side bar and any pop-ups.
 //Current Devs:
 //Fredrick Bouloute (bouloutef04)
-
-using TMPro;
-using UnityEngine;
-
 public class UIManager : MonoBehaviour
 {
     public CanvasGroup runInfo;
@@ -23,6 +21,7 @@ public class UIManager : MonoBehaviour
     {
         runInfo.alpha = 1;
         runInfo.blocksRaycasts = true;
+        runInfo.interactable = true;
     }
 
     //Function called to go back to regular gameplay. Make run info menu
@@ -31,6 +30,7 @@ public class UIManager : MonoBehaviour
     {
         runInfo.alpha = 0;
         runInfo.blocksRaycasts = false;
+        runInfo.interactable = false;
     }
 
     public void ChangeMoneyText(int money)
