@@ -55,7 +55,7 @@ public class LinguisticTermSymbol
         //High Vowels
         { LinguisticTerms.Voiced_High_Front_Tense, "ij" },
         { LinguisticTerms.Voiced_High_Back_Tense, "uw" },
-        { LinguisticTerms.Voiced_High_Front_Lax, "I" },
+        { LinguisticTerms.Voiced_High_Front_Lax, "ɪ" },
         { LinguisticTerms.Voiced_High_Back_Lax, "ʊ" },
 
         //Mid vowels          

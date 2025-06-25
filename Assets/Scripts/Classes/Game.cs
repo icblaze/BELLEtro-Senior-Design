@@ -58,21 +58,11 @@ public class Game
         return Random.Range(start, Size);
     }
 
-    //This will randomly draw cards from the deck after a player plays a hand or removes cards from the deck.
-    public PCard[] randomDraw(List<PCard> deckCards, int drawCount)
+    //This will randomly draw a card from the deck after a player plays a hand or removes cards from the deck.
+    public PCard randomDraw(List<PCard> deckCards)
     {
-        PCard[] list = new PCard[drawCount];
-
-        for (int i = 0; i < drawCount; i++)
-        {
-            //Call the randomizer function so that we can get a random number so that we can get a random card from the deck.
-            index = randomizer(0, deckCards.Count);
-
-            //Next we should index into our deck so that we can get a card from our deck.
-            list[i] = deckCards[index];
-        }
-
-        return list;
+        index = randomizer(0, deckCards.Count);
+        return deckCards[index];
     }
 
     //This function is responsible for generating a list of cards, useful for when we want to retrieve a random cards for packs.
