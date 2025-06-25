@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     {
         runInfo.alpha = 1;
         runInfo.blocksRaycasts = true;
+        runInfo.interactable = true;
     }
 
     //Function called to go back to regular gameplay. Make run info menu
@@ -29,6 +30,7 @@ public class UIManager : MonoBehaviour
     {
         runInfo.alpha = 0;
         runInfo.blocksRaycasts = false;
+        runInfo.interactable = false;
     }
 
     public void ChangeMoneyText(int money)
