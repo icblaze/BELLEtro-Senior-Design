@@ -1,3 +1,6 @@
+//This script handles on click inputs on cards in the player hand.
+//This script helps keep track which cards are currently selected.
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

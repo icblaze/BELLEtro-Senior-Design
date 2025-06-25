@@ -6,24 +6,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
-
+using TMPro;
 public class PlayHand : MonoBehaviour
 {
     public Button playHandButton; // Assign in Inspector
     public RectTransform playArea; // Assign a UI GameObject at the center
     public Text cardCountText; // Assign a UI text to display the count
     public float displayDuration = 2.0f; // Time before cards disappear
-
     private List<GameObject> selectedCards = new List<GameObject>(); // Cards that are selected
     private DeleteCard deleteCardScript;                             // Reference to DeleteCard
     private DeckManager deckManager;                                 // Reference to DeckManager
+    public TextMeshProUGUI handsLeft;
+
+    // Look into incorporating a save system
+    void Awake()
+    {
+        ResetRoundValues();
+    }
 
     void Start()
     {
         playHandButton.onClick.AddListener(PlaySelectedCards);
         deleteCardScript = FindFirstObjectByType<DeleteCard>(); // Find DeleteCard in the scene
-        deckManager = FindFirstObjectByType<DeckManager>(); // Find DeckManager in the scene
-
+        deckManager = FindFirstObjectByType<DeckManager>();     // Find DeckManager in the scene
+        handsLeft = GameObject.Find("Hands Number Text").GetComponent<TextMeshProUGUI>();
+        Player player = Player.access();
+        Debug.Log($"{player.handCount}");
         if (deleteCardScript == null)
             Debug.LogError("PlayHand: DeleteCard script not found in scene!");
 
@@ -31,7 +39,8 @@ public class PlayHand : MonoBehaviour
             Debug.LogError("PlayHand: DeckManager script not found in scene!");
     }
 
-
+    //This function initiates moving the selected cards to the play area 
+    //after the player clicks on the play hand button
     void PlaySelectedCards()
     {
         selectedCards = deleteCardScript.GetSelectedCards(); // Get selected cards
@@ -41,6 +50,11 @@ public class PlayHand : MonoBehaviour
             Debug.LogWarning("No cards selected to play!");
             return;
         }
+
+        Debug.Log($"{gameObject.name} called PlaySelectedCards()");
+
+        int handCount = Round.access().DecreaseHandCount();      //Decrease Hand count of the player
+        handsLeft.text = handCount.ToString("0");
 
         // Move selected cards to the play area
         StartCoroutine(MoveCardsToPlayArea());
@@ -82,7 +96,7 @@ public class PlayHand : MonoBehaviour
         //Call a function here to Calculate the score of the hand that was played.
         //selectedCards is a list of cards that were selected by the player and these
         //cards have been moved to the PlayArea.
-        
+
         yield return new WaitForSeconds(displayDuration);
 
         // ✅ Remove cards and draw new ones
@@ -129,5 +143,12 @@ public class PlayHand : MonoBehaviour
         }
 
         cardRect.anchoredPosition = targetPosition; // Ensure exact final position
+    }
+
+    //This function resets the necessary variables for the player when a new round starts
+    public void ResetRoundValues()
+    {
+        Player.access().handCount = 4;
+        Player.access().discards = 4;
     }
 }

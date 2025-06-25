@@ -36,12 +36,33 @@ public class Player
     public int handCount;                                        //The amoung of hands the player can play.
     public int moneyCount;                                       //Money count for player.
     public BigInteger chipCount;                                 //Current chip count for the player.
-    public int maxConsumables;                                   
-    public int maxMentors;              
+    public int maxConsumables;
+    public int maxMentors;
     public List<Voucher> vouchers;                               //List of vouchers that the player has.
     public Dictionary<TextbookName, HandInfo> handTable = new(); //This table contains the table that contains all the info for each textbook card.
-    public float discount;                                              //Discount that can be used in store.
+    public float discount;                                       //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
+
+
+    //Save player state in the game
+     public void SaveState()
+    {
+        PlayerPrefsManager.SetMoney(moneyCount);
+        PlayerPrefsManager.SetHandCount(handCount);
+        PlayerPrefsManager.SetDiscardCount(discards);
+        PlayerPrefsManager.SetRound(Game.access().roundValue);
+        PlayerPrefsManager.SetAnte(Game.access().ante);
+    }
+
+    //Load players saved data to the game
+    public void LoadState()
+    {
+        moneyCount = PlayerPrefsManager.GetMoney();
+        Game.access().roundValue = PlayerPrefsManager.GetRound();
+        handCount = PlayerPrefsManager.GetHandCount();                 
+        discards = PlayerPrefsManager.GetDiscardCount();
+        Game.access().ante = PlayerPrefsManager.GetAnte();
+    }
 
     //  The player constructor
     private Player()
@@ -56,7 +77,7 @@ public class Player
         moneyCount = 4;
         chipCount = 0;
         discount = 1.0f;    //  100% price initially
-        InitializeHandTable();  
+        InitializeHandTable();
     }
 
     //This removes a card from the player hand list if it is contained within the list
@@ -89,14 +110,14 @@ public class Player
     {
         sellValue = (int)math.max(1, math.floor(consumable.price / 2));
         Player currPlayer = access();
-        currPlayer.moneyCount += sellValue;  
+        currPlayer.moneyCount += sellValue;
         currPlayer.consumables.Remove(consumable);
     }
 
-    //  This function initializes the player's handTable
+    //  This function initializes the player's handTable, and this defines the data for a specific hand.
     public void InitializeHandTable()
     {
-        foreach(TextbookName handName in Enum.GetValues(typeof(TextbookName)))
+        foreach (TextbookName handName in Enum.GetValues(typeof(TextbookName)))
         {
             if (!handTable.ContainsKey(handName))
             {
@@ -104,4 +125,5 @@ public class Player
             }
         }
     }
+
 }

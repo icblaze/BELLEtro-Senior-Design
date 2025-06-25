@@ -38,9 +38,9 @@ public class Game
     }
 
     public GameObject cardPrefab;
-    private int ante;                                                              //Ante variable holds the current ante that the player is on
-    private int roundValue;                                                        //RoundValue is the Round within the current Ante
-    public BigInteger baseChips;                                                   //BaseChips are a calculation point for the value in each round, these are the blue chips.
+    public int ante;                                                              //Ante variable holds the current ante that the player is on
+    public int roundValue;                                                        //RoundValue is the Round within the current Ante
+    public BigInteger currentChipAmount;                                           //currentChipAmount contains the number of chips the player currently has
     private int ChipTotal;                                                         //ChipTotal is the number of chips needed to win a round
     public Voucher[] voucherHolder;                                                //VoucherHolder contains the current Ante's Vouchers
     public SpecialBlind currentSpecialBlind;                                       //CurrentSpecialBlind contains this Ante's Special Blind
@@ -267,7 +267,7 @@ public class Game
 
         while (count < numCardBuffs)
         {
-            index = randomizer(1,System.Enum.GetValues(typeof(CardBuffName)).Length);    // Select a random number that is in the range of the cardBuffName enum 
+            index = randomizer(1, System.Enum.GetValues(typeof(CardBuffName)).Length);    // Select a random number that is in the range of the cardBuffName enum 
             CardBuff cardBuffCard = CardBuff.CardBuffFactory((CardBuffName)index);     // Create a new cardbuff card with the card buff factory
 
             bool alreadyExists = System.Array.Exists(cardBuffCards, cardBuff => cardBuff != null && cardBuff.name == cardBuffCard.name);    //Check to see if the cardbuff already exists within the cardBuffCards array
@@ -295,8 +295,8 @@ public class Game
 
         while (count < pack.packSize)
         {
-            int mentorNameIndex = randomizer(1,System.Enum.GetValues(typeof(MentorName)).Length);
-            int mentorEditionIndex = randomizer(0,System.Enum.GetValues(typeof(CardEdition)).Length);
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);
+            int mentorEditionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);
 
             PCard newMentorCard = new PCard();
 
@@ -357,7 +357,7 @@ public class Game
         int count = 0;
         while (count < pack.packSize)
         {
-            int index = randomizer(1,System.Enum.GetValues(typeof(CardBuffName)).Length);
+            int index = randomizer(1, System.Enum.GetValues(typeof(CardBuffName)).Length);
 
             PCard newCardBuff = new PCard();
 
@@ -429,7 +429,7 @@ public class Game
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0,System.Enum.GetValues(typeof(SpecialBlindNames)).Length);
+            index = randomizer(0, System.Enum.GetValues(typeof(SpecialBlindNames)).Length);
             blind = new SpecialBlind((SpecialBlindNames)index);
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
 
@@ -453,6 +453,11 @@ public class Game
         return ChipTotal;
     }
 
+    public BigInteger SetChipTotal(int chipTotal)
+    {
+        ChipTotal = chipTotal;
+        return ChipTotal;
+    }
+
 
 }
-

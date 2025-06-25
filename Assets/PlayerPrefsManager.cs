@@ -14,7 +14,30 @@ public class PlayerPrefsManager
     private const string CHIPS = "chips";
     private const string ANTE = "ante";
     private const string ROUND = "round";
+    private const string HandCount = "hands";
+    private const string DiscardCount = "discards";
 
+    public static void SetHandCount(int hand)
+    {
+        PlayerPrefs.SetInt(HandCount, hand);
+    }
+    public static int GetHandCount()
+    {
+        return PlayerPrefs.GetInt(HandCount);
+    }
+    public static bool HasHandCount()
+    {
+        return PlayerPrefs.HasKey("HandCount");
+    }
+
+    public static void SetDiscardCount(int discard)
+    {
+        PlayerPrefs.SetInt(DiscardCount, discard);
+    }
+    public static int GetDiscardCount()
+    {
+        return PlayerPrefs.GetInt(DiscardCount);
+    }
     public static void SetMoney(int money)
     {
         PlayerPrefs.SetInt(MONEY, money);
@@ -56,6 +79,9 @@ public class PlayerPrefsManager
         PlayerPrefs.SetInt(CHIPS, 0);
         PlayerPrefs.SetInt(ANTE, 1);
         PlayerPrefs.SetInt(ROUND, 1);
+        PlayerPrefs.SetInt(HandCount, 4);
+        PlayerPrefs.SetInt(DiscardCount, 4);
         PlayerPrefs.Save();
     }
 }
+
