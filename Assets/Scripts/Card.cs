@@ -73,7 +73,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [Header("Consumable Object")]
     public ConsumableType consumableType;
     [SerializeField] private string consumableName = "";
-    [SerializeField] private string consumableEditionName = "";
+    [SerializeField] private string consumableEditionName = "Base";
     [SerializeField] private int consumableSellValue = 0;
     [SerializeField] private bool consumableDisabled = false;
 
@@ -392,6 +392,71 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
         //  Description shows these attributes (for now just term and suit)
         cardDescription = pcard.ToString(); 
+    }
+
+    //  Assigns Consumable object to Card and assigns its attributes
+    public void AssignConsumable(Consumable consumable)
+    {
+        if (consumable == null)
+        {
+            return;
+        }
+        this.consumable = consumable;
+
+        //  Specifiy this is of PCard type
+        cardType = CardType.Consumable;
+
+        //  Instantiate card visual before you can access components of it
+        if (cardVisual == null)
+        {
+            InstantiateCardVisual();
+        }
+
+        //  Assign consumable type
+        consumableType = consumable.type;
+
+        //  Assign name based on consumableType
+        if (consumableType == ConsumableType.CardBuff)
+        {
+            CardBuff cardBuff = (CardBuff) consumable;
+            consumableName = cardBuff.name.ToString();
+        }
+        else
+        {
+            Textbook textbook = (Textbook) consumable;
+            consumableName = textbook.name.ToString();
+        }
+
+        //  Get object to modify appearance Card (shares PCard Logic)
+        AppearancePCard appearance = cardVisual.GetComponentInChildren<AppearancePCard>();
+        ShaderCodePCard shaderAppearance = cardVisual.GetComponentInChildren<ShaderCodePCard>();
+
+        //  Fetches sprite for card
+        appearance.UpdateConsumable(consumableType, consumableName);
+        shaderAppearance.UpdateEdition(CardEdition.Base);
+
+        //  Assign other fields
+        consumableSellValue = consumable.sellValue;
+        consumableDisabled = consumable.isDisabled;
+    }
+
+    //  Assigns Mentor object to Card and assigns its attributes
+    public void AssignMentor(Mentor mentor)
+    {
+        if (mentor == null)
+        {
+            return;
+        }
+        this.mentor = mentor;
+
+        //  Specifiy this is of PCard type
+        cardType = CardType.Mentor;
+
+        //  Instantiate card visual before you can access components of it
+        if (cardVisual == null)
+        {
+            InstantiateCardVisual();
+        }
     }
 
     //  Temporary method to instantiate for Mentors
