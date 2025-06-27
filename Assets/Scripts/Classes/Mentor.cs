@@ -18,6 +18,7 @@ public class Mentor
     public CardEdition edition;
     public UseLocation[] locations;
     public string description;
+    public bool isDisabled;
 
     //  This will construct the appropiate Mentor subclass with passed card edition
     public static Mentor MentorFactory(MentorName name, CardEdition cardEdition)
@@ -71,6 +72,7 @@ public class Mentor
         this.name = name;
         this.edition = edition;
         locations = new UseLocation[]{};    // Create empty locations array
+        isDisabled = false;
 
         //  Calculate price based on edition, and have sell value be half that amount
         price = basePrice + CardModifier.EditionPrice(edition);

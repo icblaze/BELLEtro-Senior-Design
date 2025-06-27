@@ -78,6 +78,12 @@ public class DeleteCard : MonoBehaviour
         return new List<GameObject>(selectedCards);
     }
 
+    //This returns the selected PCards that the player currently has selected
+    public List<PCard> GetSelectedPCards()
+    {
+        return new List<PCard>(selectedPCards);
+    }
+
     //This function removes the cards that the player played, and clears the selectedCards list.
     //This function also starts a coroutine to fill the player hand with new cards
     void RemoveSelectedCards()

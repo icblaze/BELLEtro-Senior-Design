@@ -427,7 +427,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             consumableName = textbook.name.ToString();
         }
 
-        //  Get object to modify appearance Card (shares PCard Logic)
+        //  Get object to modify appearance of Consumable (shares PCard Logic)
         AppearancePCard appearance = cardVisual.GetComponentInChildren<AppearancePCard>();
         ShaderCodePCard shaderAppearance = cardVisual.GetComponentInChildren<ShaderCodePCard>();
 
@@ -457,6 +457,24 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         {
             InstantiateCardVisual();
         }
+
+        //  Assign mentor name
+        mentorName = mentor.name.ToString();
+
+        //  Assign mentor edition
+        mentorEditionName = mentor.edition.ToString();
+
+        //  Get object to modify appearance of Mentor (shares PCard Logic)
+        AppearancePCard appearance = cardVisual.GetComponentInChildren<AppearancePCard>();
+        ShaderCodePCard shaderAppearance = cardVisual.GetComponentInChildren<ShaderCodePCard>();
+
+        //  Fetches sprite/appearance for card
+        appearance.UpdateMentor(mentorName);
+        shaderAppearance.UpdateEdition(mentor.edition);
+
+        //  Assign other fields
+        mentorSellValue = mentor.sellValue;
+        mentorDisabled = mentor.isDisabled;
     }
 
     //  Temporary method to instantiate for Mentors

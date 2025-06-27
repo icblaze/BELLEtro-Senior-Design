@@ -63,12 +63,18 @@ public class PlayHand : MonoBehaviour
             return;
         }
 
+        if (selectedCards.Count > 5)
+        {
+            Debug.LogWarning("Can't play more than 5 cards!");
+            return;
+        }
+
         //  Trying to play a card that isn't part of your hand
         foreach (GameObject card in selectedCards)
         {
             if (!card.transform.IsChildOf(playingCardGroup))
             {
-                Debug.LogWarning($"Cannot delete {card?.name}; not a child of playingCardGroup.");
+                Debug.LogWarning($"Cannot play {card?.name}; not a child of playingCardGroup.");
                 return;
             }
         }

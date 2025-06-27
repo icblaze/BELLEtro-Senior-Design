@@ -1,3 +1,9 @@
+// This Document contains the code for the playing card holder and consumable holder 
+// This class draws cards at start of blind, and will take care of the consumables
+// Current Devs:
+// Van: setup initial code
+// Andy: connected it to draw from Deck class
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,11 +26,38 @@ public class HorizontalCardHolder : MonoBehaviour
 
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
+    [SerializeField] private bool isCardHand = true;
 
     private Deck deck = Deck.access();
 
-    //  Beginning of blind, draw cards from deck
     void Start()
+    {
+        if(isCardHand)
+        {
+            DrawHand();
+        }
+        else
+        {
+            //  Consider making this a separate script like JokerCardGroup?
+            Debug.Log("This is the consumable slots");
+        }
+
+        //  Draws the cards to the slots visually
+        StartCoroutine(Frame());
+
+        IEnumerator Frame()
+        {
+            yield return new WaitForSecondsRealtime(.1f);
+            for (int i = 0; i < cards.Count; i++)
+            {
+                if (cards[i].cardVisual != null)
+                    cards[i].cardVisual.UpdateIndex(transform.childCount);
+            }
+        }
+    }
+
+    //  Beginning of blind, draw cards from deck into hand
+    private void DrawHand()
     {
         for (int i = 0; i < handSize; i++)
         {
@@ -52,18 +85,6 @@ public class HorizontalCardHolder : MonoBehaviour
             card.name = $"Card {cardCount + 1}"; // Assign names sequentially
             card.AssignPCard(pcardArray[cardCount]); //  Assign PCard object to each card
             cardCount++;
-        }
-
-        StartCoroutine(Frame());
-
-        IEnumerator Frame()
-        {
-            yield return new WaitForSecondsRealtime(.1f);
-            for (int i = 0; i < cards.Count; i++)
-            {
-                if (cards[i].cardVisual != null)
-                    cards[i].cardVisual.UpdateIndex(transform.childCount);
-            }
         }
     }
 
