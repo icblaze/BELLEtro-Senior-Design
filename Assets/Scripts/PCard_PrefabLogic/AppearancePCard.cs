@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 public class AppearancePCard : MonoBehaviour
 {
+    [SerializeField] private Image baseLayer;
     [SerializeField] private Image suitLayer;
     [SerializeField] private TextMeshProUGUI termLayer;
     [SerializeField] private Image sealLayer;
@@ -35,7 +36,7 @@ public class AppearancePCard : MonoBehaviour
         else
         {
             enhancementLayer.sprite = sprite;
-            enhancementLayer.color = new Color(1f, 1f, 1f, 1f); // fully transparent
+            enhancementLayer.color = new Color(1f, 1f, 1f, 1f); // fully opaque
         }
     }
 
@@ -51,7 +52,7 @@ public class AppearancePCard : MonoBehaviour
         else
         {
             suitLayer.sprite = sprite;
-            suitLayer.color = new Color(1f, 1f, 1f, 1f); // fully transparent
+            suitLayer.color = new Color(1f, 1f, 1f, 1f); // fully opaque
         }
     }
 
@@ -73,7 +74,39 @@ public class AppearancePCard : MonoBehaviour
         else
         {
             sealLayer.sprite = sprite;
-            sealLayer.color = new Color(1f, 1f, 1f, 1f); // fully transparent
+            sealLayer.color = new Color(1f, 1f, 1f, 1f); // fully opaque
         }
+    }
+
+    //  Update base layer for Mentor, disable other layers
+    public void UpdateMentor(string mentorName)
+    {
+        baseLayer.sprite = Resources.Load<Sprite>($"Mentor/" + mentorName);
+
+        //  Hide other layers since not relevant to this card type
+        suitLayer.color = new Color(1f, 1f, 1f, 0f);
+        sealLayer.color = new Color(1f, 1f, 1f, 0f); 
+        enhancementLayer.color = new Color(1f, 1f, 1f, 0f);
+        termLayer.text = "";
+    }
+
+    //  Update base layer for Consumable, disable other layers
+    public void UpdateConsumable(ConsumableType type, string consumableName)
+    {
+        //  Get sprite from appropiate folder
+        if(type == ConsumableType.CardBuff)
+        {
+            baseLayer.sprite = Resources.Load<Sprite>($"CardBuff/food_" + consumableName);
+        }
+        else
+        {
+            baseLayer.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + consumableName);
+        }
+
+        //  Hide other layers since not relevant to this card type
+        suitLayer.color = new Color(1f, 1f, 1f, 0f);
+        sealLayer.color = new Color(1f, 1f, 1f, 0f);
+        enhancementLayer.color = new Color(1f, 1f, 1f, 0f);
+        termLayer.text = "";
     }
 }
