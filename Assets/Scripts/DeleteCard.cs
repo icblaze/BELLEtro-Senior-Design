@@ -110,6 +110,7 @@ public class DeleteCard : MonoBehaviour
             Destroy(card);
         }
 
+        selectedPCards.Clear(); //  Clear PCard list as well
         selectedCards.Clear();
         StartCoroutine(RefillNextFrame(removedCount));
     }

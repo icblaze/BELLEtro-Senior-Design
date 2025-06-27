@@ -56,7 +56,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public UnityEvent<Card> EndDragEvent;
     [HideInInspector] public UnityEvent<Card, bool> SelectEvent;
 
-    
+    [Header("Card Type Name")]
+    public CardType cardType;
+
     public PCard pcard;
     [Header("PCard Object")]
     [SerializeField] private string termName = "";
@@ -65,6 +67,22 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [SerializeField] private string enhancementName = "";
     [SerializeField] private string sealName = "";
     [SerializeField] private string editionName = "";
+    [SerializeField] private bool disabled = false;
+
+    public Consumable consumable;
+    [Header("Consumable Object")]
+    public ConsumableType consumableType;
+    [SerializeField] private string consumableName = "";
+    [SerializeField] private string consumableEditionName = "";
+    [SerializeField] private int consumableSellValue = 0;
+    [SerializeField] private bool consumableDisabled = false;
+
+    public Mentor mentor;
+    [Header("Mentor Object")]
+    [SerializeField] private string mentorName = "";
+    [SerializeField] private string mentorEditionName = "";
+    [SerializeField] private int mentorSellValue = 0;
+    [SerializeField] private bool mentorDisabled = false;
 
     void Start()
     {
@@ -314,6 +332,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             return;
         }
         this.pcard = pcard;
+
+        //  Specifiy this is of PCard type
+        cardType = CardType.Card;
 
         //  Instantiate card visual before you can access components of it
         if(cardVisual == null)

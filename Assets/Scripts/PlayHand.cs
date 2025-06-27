@@ -18,6 +18,8 @@ public class PlayHand : MonoBehaviour
     private DeckManager deckManager;                                 // Reference to DeckManager
     public TextMeshProUGUI handsLeft;
 
+    private Transform playingCardGroup;
+
     // Look into incorporating a save system
     void Awake()
     {
@@ -31,6 +33,16 @@ public class PlayHand : MonoBehaviour
         deckManager = FindFirstObjectByType<DeckManager>();     // Find DeckManager in the scene
         handsLeft = GameObject.Find("Hands Number Text").GetComponent<TextMeshProUGUI>();
         Player player = Player.access();
+
+        if (playingCardGroup == null)
+        {
+            var go = GameObject.Find("PlayingCardGroup");
+            if (go != null)
+                playingCardGroup = go.transform;
+            else
+                Debug.LogError("DeleteCard: playingCardGroup not assigned AND no GameObject named 'PlayingCardGroup' found!");
+        }
+
         Debug.Log($"{player.handCount}");
         if (deleteCardScript == null)
             Debug.LogError("PlayHand: DeleteCard script not found in scene!");
@@ -49,6 +61,16 @@ public class PlayHand : MonoBehaviour
         {
             Debug.LogWarning("No cards selected to play!");
             return;
+        }
+
+        //  Trying to play a card that isn't part of your hand
+        foreach (GameObject card in selectedCards)
+        {
+            if (!card.transform.IsChildOf(playingCardGroup))
+            {
+                Debug.LogWarning($"Cannot delete {card?.name}; not a child of playingCardGroup.");
+                return;
+            }
         }
 
         Debug.Log($"{gameObject.name} called PlaySelectedCards()");

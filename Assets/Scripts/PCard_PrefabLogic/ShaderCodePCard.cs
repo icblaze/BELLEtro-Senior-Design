@@ -17,7 +17,7 @@ public class ShaderCodePCard : MonoBehaviour
     Material enhancement_m;
 
     PCardVisual visual;
-    string[] editions = { "REGULAR", "POLYCHROME", "FOIL"};  //  Playing cards can't be negative
+    string[] editions = { "REGULAR", "POLYCHROME", "FOIL", "NEGATIVE"};
 
     void Awake()
     {
@@ -87,6 +87,9 @@ public class ShaderCodePCard : MonoBehaviour
                 break;
             case CardEdition.Foil:
                 chosenEdition = editions[2];
+                break;
+            case CardEdition.Negative:
+                chosenEdition = editions[3];
                 break;
         }
 
