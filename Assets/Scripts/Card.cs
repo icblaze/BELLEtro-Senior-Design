@@ -415,16 +415,19 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         //  Assign consumable type
         consumableType = consumable.type;
 
-        //  Assign name based on consumableType
+        //  Assign name and description based on consumableType
         if (consumableType == ConsumableType.CardBuff)
         {
             CardBuff cardBuff = (CardBuff) consumable;
             consumableName = cardBuff.name.ToString();
+            cardDescription = cardBuff.GetDescription();
+
         }
         else
         {
             Textbook textbook = (Textbook) consumable;
             consumableName = textbook.name.ToString();
+            cardDescription = textbook.GetDescription();
         }
 
         //  Get object to modify appearance of Consumable (shares PCard Logic)
@@ -438,6 +441,9 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         //  Assign other fields
         consumableSellValue = consumable.sellValue;
         consumableDisabled = consumable.isDisabled;
+
+        //  Reformat the consumable name
+        consumableName = SplitCase.Split(consumableName);
     }
 
     //  Assigns Mentor object to Card and assigns its attributes
@@ -472,15 +478,14 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         appearance.UpdateMentor(mentorName);
         shaderAppearance.UpdateEdition(mentor.edition);
 
+        //  Reformat the mentor name
+        mentorName = SplitCase.Split(mentorName);
+
         //  Assign other fields
         mentorSellValue = mentor.sellValue;
         mentorDisabled = mentor.isDisabled;
-    }
 
-    //  Temporary method to instantiate for Mentors
-    public void InstantiateMentors()
-    {
-        InstantiateCardVisual();
+        //  Assign description using GetDescription method of Mentor
+        cardDescription = mentorName + ": " + mentor.GetDescription();
     }
-
 }

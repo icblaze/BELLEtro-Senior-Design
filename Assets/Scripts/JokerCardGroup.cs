@@ -21,6 +21,8 @@ public class JokerCardHolder : MonoBehaviour
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
+    Player player = Player.access();
+
     void Start()
     {
         for (int i = 0; i < cardsToSpawn; i++)
@@ -32,6 +34,10 @@ public class JokerCardHolder : MonoBehaviour
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
+        //  Plan here is to fetch the mentorDeck and have the correspond to what's inside the list
+
+        //  This means that when swapping between slots it'll have to modify the mentorDeck ordering as well
+
         int cardCount = 0;
         foreach (Card card in cards)
         {
@@ -40,7 +46,8 @@ public class JokerCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.name = $"Card {cardCount + 1}"; // Assign names sequentially
-            card.InstantiateMentors();
+            // For now, temporarily generate same mentors
+            card.AssignMentor(Mentor.MentorFactory(MentorName.LabGlasses, CardEdition.Polychrome)); 
             cardCount++;
         }
 

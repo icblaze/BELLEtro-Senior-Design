@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CardBuff_Pack_Jumbo_Pack_0: 2587213738974703414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
