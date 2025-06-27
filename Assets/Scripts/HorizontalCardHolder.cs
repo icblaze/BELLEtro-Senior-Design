@@ -39,6 +39,9 @@ public class HorizontalCardHolder : MonoBehaviour
         deck.resetDeck();
         PCard[] pcardArray = deck.drawCards(handSize);
 
+        // Assign drawn cards to playerHand in Deck class
+        deck.playerHand = pcardArray.ToList<PCard>();
+
         int cardCount = 0;
         foreach (Card card in cards)
         {

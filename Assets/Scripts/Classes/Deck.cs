@@ -214,6 +214,7 @@ public class Deck
     public void resetDeck()
     {
         deckCards.AddRange(cardsDrawn);
+        cardsDrawn.Clear();
     }
 
 }
