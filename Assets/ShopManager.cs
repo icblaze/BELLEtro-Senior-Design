@@ -94,8 +94,9 @@ public class ShopManager : MonoBehaviour
         pack2 = packs[0];
         Debug.Log("Pack 1 Type: " + pack1.packType);
         Debug.Log("Pack 2 Type: " + pack2.packType);
-        pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack1.price.ToString());
-        pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/pack_" + pack2.price.ToString());
+        
+        pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
+        pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
     }
 
     private void NewCards()
@@ -474,7 +475,7 @@ public class ShopManager : MonoBehaviour
     //Function is used to show the details of what the Joker does
     private void ShowMentor1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.description.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.name.ToString() + "\n" + mentor1.description.ToString() + "\n$" + mentor1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -487,7 +488,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowMentor2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.description.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.name.ToString() + "\n" +  mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -501,7 +502,7 @@ public class ShopManager : MonoBehaviour
 
     private void ShowTextbook1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = textbook1.name.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = textbook1.GetDescription() + "\n$" + textbook1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -514,7 +515,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowTextbook2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = textbook2.name.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = textbook2.GetDescription() + "\n$" + textbook2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -528,7 +529,7 @@ public class ShopManager : MonoBehaviour
 
     private void ShowCardBuff1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = cardBuff1.name.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = cardBuff1.name.ToString() + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -541,7 +542,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowCardBuff2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = cardBuff2.name.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = cardBuff2.name.ToString() + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -554,7 +555,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowVoucherDetails()
     {
-        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString();
+        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n$" + voucher.initialPrice.ToString();
         VoucherDetails.blocksRaycasts = true;
         VoucherDetails.interactable = true;
         StartCoroutine(FadeIn(VoucherDetails));
@@ -567,7 +568,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowPack1Details()
     {
-        Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.packType.ToString() + "\nChoose " + pack1.selectableCards.ToString() + " of " + pack1.packSize.ToString() + " cards";
+        Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.packType.ToString() + "\nChoose " + pack1.selectableCards.ToString() + " of " + pack1.packSize.ToString() + " cards" + "\n" + "$" + pack1.price.ToSafeString();
 
         Pack1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack1Details));
@@ -581,7 +582,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowPack2Details()
     {
-        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.packType.ToString() + "\nChoose " + pack2.selectableCards.ToString() + " of " + pack2.packSize.ToString() + " cards";
+        Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.packType.ToString() + "\nChoose " + pack2.selectableCards.ToString() + " of " + pack2.packSize.ToString() + " cards" + "\n" + "$" + pack2.price.ToSafeString();
         Pack2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack2Details));
         Pack2Details.interactable = true;
