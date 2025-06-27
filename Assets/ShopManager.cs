@@ -382,6 +382,8 @@ public class ShopManager : MonoBehaviour
         //Reset Reroll price to 5
         reroll = 5;
 
+        GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>().ChangeToRoundMusic();
+
         //Make shop UI disappear
         StartCoroutine(FadeOut(shopUI));
         shopUI.blocksRaycasts = false;

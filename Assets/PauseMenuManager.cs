@@ -48,6 +48,8 @@ public class PauseMenuManager : MonoBehaviour
     //the scene should change soon after.
     public void QuitClick()
     {
+        AudioManager audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        audioManager.ChangeToMainMenuMusic();
         StartCoroutine(FadeToBlack());
 
         Debug.Log("QuitButton Was Clicked");

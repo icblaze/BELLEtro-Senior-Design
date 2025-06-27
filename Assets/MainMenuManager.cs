@@ -61,9 +61,7 @@ public class MainMenuManager : MonoBehaviour
     //function call to transition to the playable space
     public void StartClick()
     {
-        //audioManager.PlaySFX(audioManager.);
         StartCoroutine(FadeToBlack());
-        //StartCoroutine(DelayedTransition());
         Debug.Log("StartButton Was Clicked");
     }
 
@@ -105,6 +103,7 @@ public class MainMenuManager : MonoBehaviour
     public void DelayedLoad()
     {
         SceneManager.LoadScene("Balatro-Feel");
+        audioManager.ChangeToRoundMusic();
     }
 
     private IEnumerator FadeToBlack()//Fade the scene when the quit button is clikced
