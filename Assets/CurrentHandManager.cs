@@ -12,7 +12,7 @@ public class CurrentHandManager : MonoBehaviour
     bool fullhouse;
     bool straight;
     bool flush;
-    bool fiveofakind;
+    bool fiveOfAKind;
     //Function is used to detect the current hand. When called,
     //the current hand of PCards will be given and it will 
     //use the count to go through different tests for 
@@ -50,12 +50,12 @@ public class CurrentHandManager : MonoBehaviour
             case 5:
                 //Do all FIve Card functions to test if they are flushes
                 //five of a kinds, etc.
-                FiveKindCheck(selectedCards);
-                FullHouseCheck(selectedCards);
-                FlushCheck(selectedCards);
-                StraightCheck(selectedCards);
+                fiveOfAKind = FiveKindCheck(selectedCards);
+                fullhouse = FullHouseCheck(selectedCards);
+                flush = FlushCheck(selectedCards);
+                straight = StraightCheck(selectedCards);
                 //Group the different booleans to place them into the correct hand type
-                if (fiveofakind == true)
+                if (fiveOfAKind == true)
                 {
                     if (flush == true)
                     {
@@ -184,29 +184,14 @@ public class CurrentHandManager : MonoBehaviour
     //Check if four cards share the same term.
     public bool FourKindCheck(List<PCard> pCards)
     {
-        //Check if the first four cards are the same. If not, check if the
-        //last four are the same.
-        if (pCards[0].term == pCards[1].term && pCards[0].term == pCards[2].term
-        && pCards[0].term == pCards[3].term)
-        {
-            return true;
-        }
-        if (pCards.Count > 4)
-        {
-            if (pCards[1].term == pCards[4].term && pCards[0].term == pCards[2].term
-        && pCards[1].term == pCards[3].term)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        //The following check , checks if there are 4 cards that have the same term inside the list
+        return pCards.GroupBy(card => card.term).Any(group => group.Count() == 4);
     }
 
     //Five cards
     //Sort array and check to see if each place of articulation 
     //differs.
-    public void StraightCheck(List<PCard> pCards)
+    public bool StraightCheck(List<PCard> pCards)
     {
         //Sort array based on place of articulation
         List<PCard> sortedCards = pCards;
@@ -219,14 +204,14 @@ public class CurrentHandManager : MonoBehaviour
             {
                 if (sortedCards[i].placeArt == sortedCards[j].placeArt)
                 {
-                    straight = false;
+                    return false;
                 }
             }
         }
-        straight = true;
+        return true;
     }
     //Sort through array and check if each suit is the same.
-    public void FlushCheck(List<PCard> pCards)
+    public bool FlushCheck(List<PCard> pCards)
     {
         //Sort array based on suits
         List<PCard> sortedCards = pCards;
@@ -239,15 +224,15 @@ public class CurrentHandManager : MonoBehaviour
                 {
                     if (pCards[i].suit != pCards[j].suit)
                     {
-                        flush = false;
+                        return false;
                     }
                 }
             }
-        flush = true;
+        return true;
     }
     //Find a pair. Then check to see if the remaining cards are
     //a three of a kind.
-    public void FullHouseCheck(List<PCard> pCards)
+    public bool FullHouseCheck(List<PCard> pCards)
     {
         int firstPairCard1 = 100;//Used to break if pair not found
         int firstPairCard2 = 0;
@@ -266,7 +251,7 @@ public class CurrentHandManager : MonoBehaviour
         //If no pair found, return null
         if (firstPairCard1 == 100)
         {
-            fullhouse = false;
+            return false;
         }
         //Check to see if next cards are three of a kind
         List<PCard> threePCards = pCards;
@@ -275,19 +260,20 @@ public class CurrentHandManager : MonoBehaviour
 
         if (ThreeKindCheck(threePCards) == false)
         {
-            fullhouse = false;
+            return false;
         }
-        fullhouse = true;
+
+        return true;
     }
     //Check to see if each card shares the same term.
-    public void FiveKindCheck(List<PCard> pCards)
+    public bool FiveKindCheck(List<PCard> pCards)
     {
         //Check if all five cards of the same term
         if (pCards[0].term == pCards[1].term && pCards[0].term == pCards[2].term
         && pCards[0].term == pCards[3].term && pCards[0].term == pCards[4].term)
         {
-            fiveofakind = true;
+            return true;
         }
-        fiveofakind = false;
+        return false;
     }
 }

@@ -75,6 +75,7 @@ Thumbs.db
 *.map
 *.gch
 *.pch
+*.dwlt
 
 # ========== DOTween Exceptions ==========
 # Keep this one to preserve DOTween settings!
