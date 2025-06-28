@@ -10,6 +10,9 @@ using System.Numerics;
 
 public class Curve : Mentor
 {
+    private Round round = Round.access();
+    private Player player = Player.access();
+
     //  Mentor name and basePrice are preset
     public Curve(CardEdition edition) : base(MentorName.Curve, edition, 5)
     {
@@ -19,24 +22,24 @@ public class Curve : Mentor
     }
 
     //  Prevents loss if chips scored at least required 25%. Disappears after use.
-    //  TODO change variable for remaining hands in round
     public override void UseMentor()
     {
-        ////  If final hand 
-        //if (remainingHands == 1)
-        //{
-        //    //  Find percentage of scored chips this round that 
-        //    float goal = (float)Game.access().BaseChips / (float)Game.access().GetChipTotal();
 
-        //    //  If at least 25% and not passed
-        //    if (goal >= 0.25 && goal < 1)
-        //    {
-        //        //  Let the player win by setting to goal
-        //        Game.access().BaseChips = Game.access().GetChipTotal();
+        //  If final hand 
+        if (player.handCount == 0)
+        {
+            //  Find percentage of scored chips this round relative to target score 
+            float goal = (float) Game.access().currentChipAmount / (float) round.targetScore;
 
-        //        //  Remove from player's mentorDeck after effect used
-        //        Player.access().mentorDeck.Remove(this);
-        //    }
-        //}
+            //  If at least 25% and not passed
+            if (goal >= 0.25 && goal < 1)
+            {
+                //  Let the player win by setting to goal
+                Game.access().currentChipAmount = (BigInteger) round.targetScore;
+
+                //  Remove from player's mentorDeck after effect used
+                player.mentorDeck.Remove(this);
+            }
+        }
     }
 }

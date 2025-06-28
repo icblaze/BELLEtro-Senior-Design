@@ -32,7 +32,7 @@ public class Mentor
             case MentorName.BonusPoints:
                 return new BonusPoints(cardEdition);
             case MentorName.Curve:
-                return new Curve(cardEdition); //  TODO change variable for remaining hands in round
+                return new Curve(cardEdition); //  TODO Delete Mentor in UI
             case MentorName.HelpingHand:
                 return new HelpingHand(cardEdition);
             case MentorName.Brainstorm:
@@ -40,7 +40,7 @@ public class Mentor
             case MentorName.LabGlasses:
                 return new LabGlasses(cardEdition); //  TODO Assign the mult to the variable in round
             case MentorName.Extension:
-                return new Extension(cardEdition); // TODO Be able to access ShopManager's variables
+                return new Extension(cardEdition); 
             case MentorName.LibraryCard:
                 return new LibraryCard(cardEdition);
             case MentorName.TwelveCredits:
@@ -49,6 +49,10 @@ public class Mentor
                 return new Valentine(cardEdition); //  TODO add +3 to Mult variable of round
             case MentorName.NoVoice:
                 return new NoVoice(cardEdition); //  TODO add +3 to Mult variable of round
+            case MentorName.Eyes:
+                return new Eyes(cardEdition);   //  TODO add +8 to Mult variable of round
+            case MentorName.Astronaut:
+                return new Astronaut(cardEdition);
             default:
                 return new Mentor();
         }

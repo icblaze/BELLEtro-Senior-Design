@@ -957,4 +957,54 @@ public class ShopManager : MonoBehaviour
                 return null;
         }
     }
+
+    //  Used for mentors that modify the price of reroll or items
+    public void mentorShopEffect(Mentor mentor)
+    {
+        if(mentor.name == MentorName.Extension)
+        {
+           if(mentor1 != null)
+           {
+                mentor1.price = (mentor1.price < 3 ? 0 : mentor1.price - 3);
+           }
+           else if(mentor2 != null)
+           {
+                mentor2.price = (mentor2.price < 3 ? 0 : mentor2.price - 3);
+           }
+        }
+        else if(mentor.name == MentorName.Astronaut)
+        {
+            if(textbook1 != null)
+            {
+                textbook1.price = 0;
+            }
+            if(textbook2 != null)
+            {
+                textbook2.price = 0;
+            }
+            if(pack1 != null && pack1.packType == PackType.Textbook_Pack)
+            {
+                pack1.price = 0;
+            }
+            if(pack2 != null && pack2.packType == PackType.Textbook_Pack)
+            {
+                pack2.price = 0;
+            }
+        }
+    }
+
+    //  Reset certain mentors at end of shop
+    private void resetShopMentor()
+    {
+        //  Check for certain mentors that need to reset after shop
+        foreach(Mentor mentor in playerInst.mentorDeck)
+        {
+            //  Reset first mentor discount for next shop
+            if(mentor.name == MentorName.Extension)
+            {
+                Extension extension = (Extension) mentor;
+                extension.hasDiscounted = false;
+            }
+        }
+    }
 }

@@ -9,6 +9,11 @@ using System.Collections;
 
 public class Extension : Mentor
 {
+    private ShopManager shop;
+
+    //  Flag to only discount once per shop
+    public bool hasDiscounted = false;
+
     //  Mentor name and basePrice are preset
     public Extension(CardEdition edition) : base(MentorName.Extension, edition, 7)
     {
@@ -19,8 +24,12 @@ public class Extension : Mentor
     //  Next purchased Mentor is $3 off
     public override void UseMentor()
     {
-        // TODO Be able to access ShopManager's variables
-
         // Set the next available Mentor to be $3 off once shop screen is reached
+        if(!hasDiscounted)
+        {
+            shop = Object.FindFirstObjectByType<ShopManager>();
+            shop.mentorShopEffect(this);
+            hasDiscounted = true; //    Only activate once per shop
+        }
     }
 }
