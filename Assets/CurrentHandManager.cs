@@ -8,6 +8,10 @@ using UnityEngine;
 //Current Devs:
 //Fredrick Bouloute (bouloutef04)
 
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
 public class CurrentHandManager : MonoBehaviour
 {
     bool fullhouse;

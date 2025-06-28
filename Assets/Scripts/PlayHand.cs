@@ -18,6 +18,7 @@ public class PlayHand : MonoBehaviour
     private DeckManager deckManager;                                 // Reference to DeckManager
     public TextMeshProUGUI handsLeft;
 
+    private static int currHandCount;
     private Transform playingCardGroup;
 
     // Look into incorporating a save system
@@ -63,9 +64,10 @@ public class PlayHand : MonoBehaviour
             return;
         }
 
-        if (selectedCards.Count > 5)
+        currHandCount = Player.access().handCount;
+        if (currHandCount == 0)
         {
-            Debug.LogWarning("Can't play more than 5 cards!");
+            Debug.LogWarning("Cannot play cards since you have reached zero hands!");
             return;
         }
 
@@ -74,15 +76,15 @@ public class PlayHand : MonoBehaviour
         {
             if (!card.transform.IsChildOf(playingCardGroup))
             {
-                Debug.LogWarning($"Cannot play {card?.name}; not a child of playingCardGroup.");
+                Debug.LogWarning($"Cannot delete {card?.name}; not a child of playingCardGroup.");
                 return;
             }
         }
 
         Debug.Log($"{gameObject.name} called PlaySelectedCards()");
 
-        int handCount = Round.access().DecreaseHandCount();      //Decrease Hand count of the player
-        handsLeft.text = handCount.ToString("0");
+        currHandCount = Round.access().DecreaseHandCount();      //Decrease Hand count of the player
+        handsLeft.text = currHandCount.ToString("0");
 
         // Move selected cards to the play area
         StartCoroutine(MoveCardsToPlayArea());

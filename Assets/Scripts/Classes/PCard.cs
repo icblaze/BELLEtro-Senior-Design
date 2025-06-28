@@ -1,8 +1,9 @@
 // This Document contains the code for the Card class.
 // This class is used to hold information about the cards that
-// the player has in their deck or are going to choose from a pack
+// the player has in their deck or are going to choose from a pack.
 // Current Devs:
 // Robert (momomonkeyman): made base class with the variables
+// Zacharia Alaoui (ZachariaAlaoui): Made the functions and Copy constructor
 
 using System.Collections;
 using UnityEngine;
@@ -26,14 +27,12 @@ public class PCard : BaseCard
 
     public Mentor mentor;                       // Mentor card
     public Textbook textbook;                   // Textbook card
-    public CardBuff cardBuff;                       // Card buff card
+    public CardBuff cardBuff;                   // Card buff card
 
 
     //Default constructor for PCard
     public PCard()
-    {
-
-    }
+    {}
 
     //Copy constructor for PCard
     public PCard(PCard original)
