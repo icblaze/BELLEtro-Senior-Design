@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 //Script is used to detect the different types of hands
@@ -13,40 +14,59 @@ public class CurrentHandManager : MonoBehaviour
     bool straight;
     bool flush;
     bool fiveOfAKind;
+    public GameObject currentHandText = GameObject.Find("Current Hand Text");
     //Function is used to detect the current hand. When called,
     //the current hand of PCards will be given and it will 
     //use the count to go through different tests for 
     //each hand.
     public string findCurrentHand(List<PCard> selectedCards)
     {
+        string result;
         switch (selectedCards.Count)
         {
             case 0:
+                currentHandText.GetComponent<TMP_Text>().text = "";
                 return "";
             case 1:
+                currentHandText.GetComponent<TMP_Text>().text = "High Card";
                 return "HighCard";
             case 2://If pair, return pair. If not highcard
-                return PairCheck(selectedCards);
+
+                result = PairCheck(selectedCards);
+                currentHandText.GetComponent<TMP_Text>().text = result;
+                return result;
             case 3://Check if pair, three of a kind, or highcard.
                 if (ThreeKindCheck(selectedCards) == true)
                 {
-                    return "Three Of A Kind";
+                    result = "Three Of A Kind";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
-                return PairCheck(selectedCards);
+                result = PairCheck(selectedCards);
+                currentHandText.GetComponent<TMP_Text>().text = result;
+                return result;
             case 4://Check pair, three of a kind, four of a kind, two pair, highcard.
                 if (FourKindCheck(selectedCards) == true)
                 {
-                    return "Four Of A Kind";
+                    result = "Four Of A Kind";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (ThreeKindCheck(selectedCards) == true)
                 {
-                    return "Three Of A Kind";
+                    result = "Three Of A Kind";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (TwoPairCheck(selectedCards) == true)
                 {
-                    return "Two Pair";
+                    result = "Two Pair";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
-                return PairCheck(selectedCards);
+                result = PairCheck(selectedCards);
+                currentHandText.GetComponent<TMP_Text>().text = result;
+                return result;
             case 5:
                 //Do all FIve Card functions to test if they are flushes
                 //five of a kinds, etc.
@@ -59,46 +79,70 @@ public class CurrentHandManager : MonoBehaviour
                 {
                     if (flush == true)
                     {
-                        return "Flush Five";
+                        result = "Flush Five";
+                        currentHandText.GetComponent<TMP_Text>().text = result;
+                        return result;
                     }
-                    return "Five of A Kind";
+                    result = "Five Of A Kind";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (fullhouse == true && flush == true)
                 {
-                    return "Flush House";
+                    result = "Flush House";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (flush == true && straight == true)
                 {
-                    return "Straight Flush";
+                    result = "Straight Flush";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (FourKindCheck(selectedCards) == true)
                 {
-                    return "Four Of A Kind";
+                    result = "Four Of A Kind";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (fullhouse == true)
                 {
-                    return "Full House";
+                    result = "Full House";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (flush == true)
                 {
-                    return "Flush";
+                    result = "Flush";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (straight == true)
                 {
-                    return "Straight";
+                    result = "Straight";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (ThreeKindCheck(selectedCards) == true)
                 {
-                    return "Three Of A Kind";
+                    result = "Three Of A Kind";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
                 if (TwoPairCheck(selectedCards) == true)
                 {
-                    return "Two Pair";
+                    result = "Two Pair";
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    return result;
                 }
-                return PairCheck(selectedCards);
+                result = PairCheck(selectedCards);
+                currentHandText.GetComponent<TMP_Text>().text = result;
+                return result;
             default:
                 Debug.LogWarning("Something went wrong. Card Size: " + selectedCards.Count);
-                return "";
+                result = "";
+                currentHandText.GetComponent<TMP_Text>().text = result;
+                return result;
         }
     }
     //Loop through cards to check if a pair exists
