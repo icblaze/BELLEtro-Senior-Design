@@ -531,7 +531,7 @@ public class ShopManager : MonoBehaviour
 
     private void ShowCardBuff1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = cardBuff1.name.ToString() + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = cardBuff1.name.ToString() + "\n" + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -544,7 +544,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowCardBuff2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = cardBuff2.name.ToString() + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = cardBuff2.name.ToString() + "\n" + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
