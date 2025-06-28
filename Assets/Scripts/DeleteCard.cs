@@ -2,18 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class DeleteCard : MonoBehaviour
 {
-    [SerializeField] private Button deleteButton;
-    [SerializeField] private Transform playingCardGroup;
-
-    private DeckManager deckManager;
-    private List<GameObject> selectedCards = new List<GameObject>();
-    private List<PCard> selectedPCards = new List<PCard>();
-
-    //  For detecting current hand
-    CurrentHandManager currentHandManager = new CurrentHandManager();
+    [SerializeField] private Button deleteButton;           //Delete button
+    [SerializeField] private Transform playingCardGroup;    //Transform 
+    [HideInInspector] private TextMeshProUGUI discardsLeft;
+    [HideInInspector] private static int discardCount;
+    private DeckManager deckManager;                        //Instance of the Deck Manager
+    private List<GameObject> selectedCards = new List<GameObject>();        //List of the current Gameobjects that the user has selected
+    private List<PCard> selectedPCards = new List<PCard>();                 //List of the selected cards that the user has selected
+    CurrentHandManager currentHandManager = new CurrentHandManager();       //  For detecting current hand
 
     void Start()
     {
@@ -31,9 +31,15 @@ public class DeleteCard : MonoBehaviour
         }
 
         if (deleteButton != null)
+        {
+            discardCount = Player.access().discards;
+            discardsLeft = GameObject.Find("Discards Number Text").GetComponent<TextMeshProUGUI>();
             deleteButton.onClick.AddListener(RemoveSelectedCards);
+        }
         else
+        {
             Debug.LogError("DeleteCard: deleteButton not assigned in Inspector!");
+        }
     }
 
     //Adds the card to the selectedCards list
@@ -71,7 +77,7 @@ public class DeleteCard : MonoBehaviour
             Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
         }
     }
-    
+
     //This returns the selected cards that the player currently has selected
     public List<GameObject> GetSelectedCards()
     {
@@ -86,7 +92,7 @@ public class DeleteCard : MonoBehaviour
 
     //This function removes the cards that the player played, and clears the selectedCards list.
     //This function also starts a coroutine to fill the player hand with new cards
-    void RemoveSelectedCards()
+    public void RemoveSelectedCards()
     {
         if (selectedCards.Count > 5)
         {
@@ -100,6 +106,12 @@ public class DeleteCard : MonoBehaviour
             return;
         }
 
+        if (discardCount == 0)
+        {
+            Debug.LogWarning("You don't have anymore discards left!");
+            return;
+        }
+
         var cardsToRemove = new List<GameObject>();
         foreach (var card in selectedCards)
         {
@@ -109,12 +121,17 @@ public class DeleteCard : MonoBehaviour
                 Debug.LogWarning($"Cannot delete {card?.name}; not a child of playingCardGroup.");
         }
 
+        
         int removedCount = cardsToRemove.Count;
         foreach (var card in cardsToRemove)
         {
             Debug.Log($"Deleting card: {card.name}");
             Destroy(card);
         }
+        
+        discardCount = Round.access().DecreaseDiscardCount();      //Decrease Hand count of the player
+        discardsLeft.text = discardCount.ToString("0");
+
 
         selectedPCards.Clear(); //  Clear PCard list as well
         selectedCards.Clear();

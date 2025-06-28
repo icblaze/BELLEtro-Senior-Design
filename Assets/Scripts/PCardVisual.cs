@@ -15,9 +15,9 @@ public class PCardVisual : MonoBehaviour
     private bool initalize = false;
 
     [Header("Card")]
-    public Card parentCard;
-    private Transform cardTransform;
-    private Vector3 rotationDelta;
+    public Card parentCard;                         //This holds the current card object
+    private Transform cardTransform;                //Transform component of the Card
+    private Vector3 rotationDelta;      
     private int savedIndex;
     Vector3 movementDelta;
     private Canvas canvas;
@@ -73,6 +73,8 @@ public class PCardVisual : MonoBehaviour
         shadowDistance = visualShadow.localPosition;
     }
 
+    //This function initalizes all the variables for the current Card object that was passed in.
+    //This function sets up event listing for the card object
     public void Initialize(Card target, int index = 0)
     {
         //Declarations
@@ -94,6 +96,7 @@ public class PCardVisual : MonoBehaviour
         initalize = true;
     }
 
+    //This line updates the index where the card sits under the player
     public void UpdateIndex(int length)
     {
         transform.SetSiblingIndex(parentCard.transform.parent.GetSiblingIndex());
