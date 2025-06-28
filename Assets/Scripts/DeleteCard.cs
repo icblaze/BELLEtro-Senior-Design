@@ -14,7 +14,7 @@ public class DeleteCard : MonoBehaviour
     private List<GameObject> selectedCards = new List<GameObject>();        //List of the current Gameobjects that the user has selected
     private List<PCard> selectedPCards = new List<PCard>();                 //List of the selected cards that the user has selected
     CurrentHandManager currentHandManager = new CurrentHandManager();       //  For detecting current hand
-
+    private CardType cardType;
     void Start()
     {
         deckManager = FindObjectOfType<DeckManager>();
@@ -46,6 +46,12 @@ public class DeleteCard : MonoBehaviour
     public void AddSelectedCard(GameObject card)
     {
         if (card == null) return;
+        if (card.GetComponent<Card>().cardType == CardType.Mentor || card.GetComponent<Card>().cardType == CardType.Consumable)
+        {
+            Debug.LogWarning("Can't add a mentor or consumable to the selected cards list!");
+            return;
+        }
+        
         if (!selectedCards.Contains(card))
         {
             //  Extract PCard object from Card

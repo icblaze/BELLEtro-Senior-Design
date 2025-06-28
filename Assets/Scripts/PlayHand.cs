@@ -119,7 +119,7 @@ public class PlayHand : MonoBehaviour
 
             card.GetComponent<Card>().isPlayed = true;
 
-            Vector2 targetPosition = new Vector2(offsetX + (i * 100f), 0);
+            Vector2 targetPosition = new Vector2(offsetX + (i * 150f), 0);
             StartCoroutine(MoveCard(card, targetPosition));
         }
 

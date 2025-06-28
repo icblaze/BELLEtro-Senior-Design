@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ShaderCodePCard : MonoBehaviour
 {
-    [SerializeField] private GameObject baseLayer;
-    [SerializeField] private GameObject suitLayer;
-    [SerializeField] private GameObject enhancementLayer;
+    [SerializeField] private GameObject baseLayer;              //Base layer of the card
+    [SerializeField] private GameObject suitLayer;              //Suit layer of the card
+    [SerializeField] private GameObject enhancementLayer;       //Enhancement layer of the card 
 
     Image base_img;
     Image suit_img;
