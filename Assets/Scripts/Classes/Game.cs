@@ -49,7 +49,7 @@ public class Game
     public Consumable previousConsumable = null;                                   //Stores the name of last used consumable
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
 
-
+    public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.     
 
     //This function is used to create a seed, so that we can get a random card from the deck.
     //This randomizer will also be used to retrieve a random index so we can select a random consumable/pack.

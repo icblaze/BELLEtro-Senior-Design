@@ -1,3 +1,8 @@
+//This class handles putting the correct images/data on each card in the game.
+//This class is used to add the correct visual aspects for a card in the game.
+//Current Devs:
+//Andy Van
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

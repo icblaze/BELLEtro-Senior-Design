@@ -59,6 +59,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [Header("Card Type Name")]
     public CardType cardType;
 
+    //The following fields sets the Cards info
     public PCard pcard;
     [Header("PCard Object")]
     [SerializeField] private string termName = "";
@@ -93,6 +94,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     {
         ClampPosition();
 
+        //This handles changing the transform values when the card is being dragged
         if (isDragging)
         {
             Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - offset;
@@ -143,6 +145,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         }
     }
 
+    //This shows the card details in the info panel when the card is being hovered or clicked by the mouse
     public void OnPointerEnter(PointerEventData eventData)
     {
         PointerEnterEvent.Invoke(this);
@@ -177,10 +180,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
 
             // Show the panel
             infoPanel.SetActive(true);
-            
+
         }
     }
 
+    //This hides the text that describes the card when the card is not being hovered anymore
     public void OnPointerExit(PointerEventData eventData)
     {
         PointerExitEvent.Invoke(this);
@@ -202,6 +206,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         pointerDownTime = Time.time;
     }
 
+    //This moves the card up when selected
     public void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left)
@@ -226,6 +231,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             transform.localPosition = Vector3.zero;
     }
 
+    //This moves the card back to its original position
     public void Deselect()
     {
         if (selected)
