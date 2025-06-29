@@ -53,6 +53,8 @@ public class Mentor
                 return new Eyes(cardEdition);   //  TODO add +8 to Mult variable of round
             case MentorName.Astronaut:
                 return new Astronaut(cardEdition);
+            case MentorName.FishBait:
+                return new FishBait(cardEdition);   //  TODO add +100 to Chip variable of round
             default:
                 return new Mentor();
         }

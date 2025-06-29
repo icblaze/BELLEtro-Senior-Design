@@ -30,6 +30,7 @@ public class Round
     public double targetScore;  //Target score for the current Ante and round
     public int[] baseAnteChips = { 0, 300, 800, 2000, 5000, 11000, 20000, 35000, 50000 };  //This contains the base chip amount per Ante in the game.
     public bool endGame;        //This bool indicates if the game has ended
+    public string currentHand = ""; //  This is the current hand that gets updated by currentHandManager
     private Player player;
 
     

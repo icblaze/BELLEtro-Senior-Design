@@ -15,9 +15,12 @@ public class DeleteCard : MonoBehaviour
     //  For detecting current hand
     CurrentHandManager currentHandManager = new CurrentHandManager();
 
+    //  Access to Round
+    Round round = Round.access();
+
     void Start()
     {
-        deckManager = FindObjectOfType<DeckManager>();
+        deckManager = FindFirstObjectByType<DeckManager>();
         if (deckManager == null)
             Debug.LogError("DeleteCard: no DeckManager in scene!");
 
@@ -50,7 +53,7 @@ public class DeleteCard : MonoBehaviour
 
             //  Debug hand check
             Debug.Log(selectedPCards.Count);
-            Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
+            //Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
         }
     }
 
@@ -68,7 +71,7 @@ public class DeleteCard : MonoBehaviour
 
             //  Debug hand check
             Debug.Log(selectedPCards.Count);
-            Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
+            //Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
         }
     }
     
