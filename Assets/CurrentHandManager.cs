@@ -14,7 +14,12 @@ public class CurrentHandManager : MonoBehaviour
     bool straight;
     bool flush;
     bool fiveOfAKind;
-    public GameObject currentHandText = GameObject.Find("Current Hand Text");
+    public GameObject currentHandText;
+    public void Start()
+    {
+        currentHandText = GameObject.Find("Current Hand Text");
+    }
+
     //Function is used to detect the current hand. When called,
     //the current hand of PCards will be given and it will 
     //use the count to go through different tests for 

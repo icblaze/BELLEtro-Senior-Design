@@ -477,7 +477,7 @@ public class ShopManager : MonoBehaviour
     //Function is used to show the details of what the Joker does
     private void ShowMentor1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = mentor1.name.ToString() + "\n" + mentor1.description.ToString() + "\n$" + mentor1.price.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = SplitCase.Split(mentor1.name.ToString()) + "\n" + mentor1.description.ToString() + "\n$" + mentor1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -490,7 +490,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowMentor2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = mentor2.name.ToString() + "\n" +  mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitCase.Split(mentor2.name.ToString()) + "\n" +  mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -531,7 +531,7 @@ public class ShopManager : MonoBehaviour
 
     private void ShowCardBuff1Details()
     {
-        Mentor1Details.GetComponentInChildren<TMP_Text>().text = cardBuff1.name.ToString() + "\n" + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
+        Mentor1Details.GetComponentInChildren<TMP_Text>().text = SplitCase.Split(cardBuff1.name.ToString()) + "\n" + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
@@ -544,7 +544,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowCardBuff2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = cardBuff2.name.ToString() + "\n" + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitCase.Split(cardBuff2.name.ToString()) + "\n" + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
