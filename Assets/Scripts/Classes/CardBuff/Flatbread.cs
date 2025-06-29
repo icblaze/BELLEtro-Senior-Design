@@ -25,13 +25,15 @@ public class Flatbread : CardBuff
     {
         //  Check if at least 1 card is selected, max 3
 
-        description = "Converts up to 3 selected cards into random Voiceless cards.";
+        description = "Raise +1 Mult for up to 3 selected cards";
         return description;
     }
 
     //  TODO Converts up to 3 selected cards into random Voiceless cards
     public override void applyCardBuff ()
     {
+
+        //  Raises +Mult value by 1 for up to 3 selected cards
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

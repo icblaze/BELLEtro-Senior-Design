@@ -11,7 +11,7 @@ using UnityEngine;
 public class Bagel : CardBuff
 {
     Game game = Game.access();
-    Player player = Player.access();
+    Deck deck = Deck.access();
 
     //  Construct CardBuff consumable with enum for name
     public Bagel() : base(CardBuffName.Bagel)
@@ -23,15 +23,20 @@ public class Bagel : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        //  Disabled until at least 1 card selected, but 3 max
+        //  Must have 1 card selected to be enabled
 
-        description = "Converts up to 3 selected cards into random Voiced cards";
+        description = "Add a copy of 1 selected card to your deck";
         return description;
     }
 
-    //  TODO Converts up to 3 selected cards into random Voiced cards
+    //  TODO Add a copy of 1 selected card to your deck
     public override void applyCardBuff ()
     {
+        //  Find index of PCard selected
+        //int index = deck.deckCards.FindIndex();
+
+        //  Add copy to deckCards list
+        //deck.deckCards.Add(deck.deckCards[index]);
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);
