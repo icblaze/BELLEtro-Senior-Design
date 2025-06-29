@@ -65,6 +65,18 @@ public class ShopManager : MonoBehaviour
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
+    private static ShopManager instance;  //ShopManager instance varaiable
+
+    //Singleton for the ShopManager
+    public static ShopManager access()
+    {
+        if (instance == null)
+        {
+            instance = new ShopManager();
+        }
+
+        return instance;
+    }
 
     public void Start()
     {
@@ -389,9 +401,11 @@ public class ShopManager : MonoBehaviour
         shopUI.blocksRaycasts = false;
 
         // //Possibly change shop title screen back to the Ante screen.
-        //StartCoroutine(FadeIn(ante));
-        // ante.alpha = 1;
-        // ante.blocksRaycasts = true;
+        TransitionManager transitionMan = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+        transitionMan.TransitionToRoundSelect();
+
+        //Set a new shop in the background
+        NewShop();
     }
     //Function causes the Mentors to reset. 
     public void Reroll()
@@ -992,7 +1006,10 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
-
+    public void TransitionToShop()
+    {
+        NewCards();
+    }
     //  Reset certain mentors at end of shop
     private void resetShopMentor()
     {

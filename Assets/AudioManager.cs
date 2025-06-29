@@ -12,6 +12,18 @@ using UnityEngine.SceneManagement;
 //Fredrick Bouloute (bouloutef04)
 public class AudioManager : MonoBehaviour
 {
+    private static AudioManager instance;  //AudioManager instance varaiable
+
+    //Singleton for the AudioManager
+    public static AudioManager access()
+    {
+        if (instance == null)
+        {
+            instance = new AudioManager();
+        }
+
+        return instance;
+    }
     // Start is called before the first frame update
     [SerializeField] AudioSource mainMenuSource;
     [SerializeField] AudioSource roundSource;
@@ -104,8 +116,11 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeToShopMusic()
     {
+        if (mainMenuSource.volume >= .9f){
+            changeMusic(mainMenuSource, shopSource);
+        }
         //If player finished round, go to shop
-        if (roundSource.volume >= .9f)
+        else if (roundSource.volume >= .9f)
         {
             changeMusic(roundSource, shopSource);
         }

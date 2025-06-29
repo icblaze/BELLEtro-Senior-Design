@@ -19,6 +19,8 @@ public class FadeScript
     }
     public IEnumerator FadeIn(CanvasGroup fadeInObject)//Fade the scene when the quit button is clicked
     {
+        fadeInObject.blocksRaycasts = true;
+        fadeInObject.interactable = true;
         float timeToFade = .2f;
         float timeElapsed = 0;
         while (fadeInObject.alpha < 1)
@@ -28,9 +30,12 @@ public class FadeScript
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 1;
+        
     }
     public IEnumerator FadeOut(CanvasGroup fadeInObject)//Fade the scene when the quit button is clicked
     {
+        fadeInObject.blocksRaycasts = false;
+        fadeInObject.interactable = false;
         float timeToFade = .2f;
         float timeElapsed = 0;
         while (fadeInObject.alpha > 0)
@@ -40,5 +45,6 @@ public class FadeScript
             yield return new WaitForSecondsRealtime(.01f);
         }
         fadeInObject.alpha = 0;
+
     }
 }

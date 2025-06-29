@@ -8,6 +8,8 @@ TagManager:
   - TransitionImage
   - Slot
   - PCard
+  - ShopManager
+  - TransitionManager
   layers:
   - Default
   - TransparentFX
