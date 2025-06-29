@@ -55,6 +55,8 @@ public class Mentor
                 return new Astronaut(cardEdition);
             case MentorName.FishBait:
                 return new FishBait(cardEdition);   //  TODO add +100 to Chip variable of round
+            case MentorName.Triplets:
+                return new Triplets(cardEdition);   //  TODO add +12 Mult variable of round
             default:
                 return new Mentor();
         }

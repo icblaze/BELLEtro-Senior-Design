@@ -122,14 +122,14 @@ public class HandInfo
     //  Get the current chips (using base chips, increment, and level)
     public int GetCurrChips()
     {
-        int currChips = baseChips + (incrementChips * level);
+        int currChips = baseChips + (incrementChips * (level - 1));
         return currChips;
     }
 
     //  Get the current mult (using base mult, increment, and level)
     public int GetCurrMult()
     {
-        int currMult = baseMult + (incrementMult * level);
+        int currMult = baseMult + (incrementMult * (level - 1));
         return currMult;
     }
 

@@ -88,11 +88,11 @@ public class CardBuff : Consumable
             case CardBuffName.Potato:
                 return new Potato();
 
-            //  TODO Converts up to 3 selected cards into random Voiceless cards
+            //  TODO Increase Mult by 1 for up to 3 selected cards
             case CardBuffName.Flatbread:
                 return new Flatbread();
 
-            //  TODO Converts up to 3 selected cards into random Voiced cards
+            //  TODO Add a copy of 1 selected card to your deck
             case CardBuffName.Bagel:
                 return new Bagel();
 
