@@ -42,6 +42,7 @@ public class Player
     public Dictionary<TextbookName, HandInfo> handTable = new(); //This table contains the table that contains all the info for each textbook card.
     public float discount;                                       //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
+    public int handSize;
 
 
     //Save player state in the game
@@ -77,6 +78,7 @@ public class Player
         moneyCount = 4;
         chipCount = 0;
         discount = 1.0f;    //  100% price initially
+        handSize = 8;
         InitializeHandTable();
     }
 

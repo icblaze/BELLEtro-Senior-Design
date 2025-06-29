@@ -1,0 +1,28 @@
+﻿// This Document contains the code for the Graduate mentor
+// Effect is Diphthongs Played get plus 20 chips and 4 Mult when scored.
+// Current Devs:
+// Andy (flakkid): Created mentor
+
+using UnityEngine;
+using System.Collections;
+
+
+public class Graduate : Mentor
+{
+    //  Mentor name and basePrice are preset
+    public Graduate(CardEdition edition) : base(MentorName.Graduate, edition, 4)
+    {
+        locations = new UseLocation[] { UseLocation.PreCard };
+        description = "+20 Chips and +4 Mult when Dipthongs are scored";
+    }
+
+    //  TODO +20 Chips and +4 Mult when Dipthongs are scored
+    public override void UseMentor(PCard pcard)
+    {
+        //  Check if PCard is Dipthong
+        if(pcard.isDiphthong)
+        {
+            //  Add +20 to Chips, add +4 to Mult
+        }
+    }
+}

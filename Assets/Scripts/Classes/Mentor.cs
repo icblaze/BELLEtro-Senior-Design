@@ -57,6 +57,14 @@ public class Mentor
                 return new FishBait(cardEdition);   //  TODO add +100 to Chip variable of round
             case MentorName.Triplets:
                 return new Triplets(cardEdition);   //  TODO add +12 Mult variable of round
+            case MentorName.Graduate:
+                return new Graduate(cardEdition);   //  TODO +20 Chips and +4 Mult when Dipthongs are scored
+            case MentorName.Vagabond:
+                return new Vagabond(cardEdition);
+            case MentorName.Turtle:
+                return new Turtle(cardEdition);
+            case MentorName.Consonant:
+                return new Consonant(cardEdition);  //  TODO +30 Chips to round variable
             default:
                 return new Mentor();
         }

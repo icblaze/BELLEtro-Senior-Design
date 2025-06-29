@@ -36,7 +36,7 @@ public class Bagel : CardBuff
         //int index = deck.deckCards.FindIndex();
 
         //  Add copy to deckCards list
-        //deck.deckCards.Add(deck.deckCards[index]);
+        //deck.addCard(deck.deckCards[index]);
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);
