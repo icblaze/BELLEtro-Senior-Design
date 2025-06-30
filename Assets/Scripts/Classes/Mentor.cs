@@ -65,6 +65,17 @@ public class Mentor
                 return new Turtle(cardEdition);
             case MentorName.Consonant:
                 return new Consonant(cardEdition);  //  TODO +30 Chips to round variable
+            case MentorName.Diphcotomy:
+                return new Diphcotomy(cardEdition); //  TODO Add +mult to the round variable
+            case MentorName.ELLEvation:
+                return new Ellevation(cardEdition); //  TODO Add +chips to round variable
+            case MentorName.MakeupExam:
+                return new MakeupExam(cardEdition);
+            case MentorName.EvenAirflow:
+                return new EvenAirflow(cardEdition); //  TODO Multiply the Round mult variable by 2
+            case MentorName.TheUsualSpot:
+                return new TheUsualSpot(cardEdition); //  TODO Gives +80 Chips if played hand matches by place of articulation
+
             default:
                 return new Mentor();
         }

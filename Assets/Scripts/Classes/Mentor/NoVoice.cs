@@ -13,15 +13,15 @@ public class NoVoice : Mentor
     public NoVoice(CardEdition edition) : base(MentorName.NoVoice, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.PreCard };
-        description = "Played cards with Voiced/Tense suit give +3 Mult when scored";
+        description = "Played cards with Voiceless/Lax suit give +3 Mult when scored";
     }
 
     //  Played card will add +3 Mult if Voiceless/Lax suit
     public override void UseMentor(PCard card)
     {
-        if(card.suit == SuitName.Voiceless)
+        if(card.suit == SuitName.Voiceless || card.enhancement == CardEnhancement.WildCard)
         {
-            Debug.Log("+3 Mult since Voiceless");
+            Debug.Log("+3 Mult since Voiceless/Lax");
             //  TODO add +3 to Mult variable of round
         }
     }

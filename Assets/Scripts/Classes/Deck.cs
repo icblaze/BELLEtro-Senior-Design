@@ -34,6 +34,7 @@ public class Deck
   public List<PCard> deckCards = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
   public List<PCard> cardsDrawn = new List<PCard>(); //This should store all the cards that were drawn
   public List<PCard> playerHand = new List<PCard>(); //This variable will hold the hand of the player.
+  public List<PCard> heldHand = new List<PCard>(); //This variable will cards in player held hand that weren't played
 
 
   //This constructor sets up the initial deck in the game

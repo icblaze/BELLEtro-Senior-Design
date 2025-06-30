@@ -19,9 +19,9 @@ public class Valentine : Mentor
     //  Played card will add +3 Mult if Voiced/Tense suit
     public override void UseMentor(PCard card)
     {
-        if(card.suit == SuitName.Voiced)
+        if(card.suit == SuitName.Voiced || card.enhancement == CardEnhancement.WildCard)
         {
-            Debug.Log("+3 Mult since Voiced");
+            Debug.Log("+3 Mult since Voiced/Tense");
             //  TODO add +3 to Mult variable of round
         }
     }
