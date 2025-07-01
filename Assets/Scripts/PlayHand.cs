@@ -141,18 +141,26 @@ public class PlayHand : MonoBehaviour
             }
         }
 
-        selectedCards.Clear();
+        selectedCards.Clear();  //  might be redundant
 
         //  Draw from deck equal to amount played
         PCard[] newCards = Deck.access().drawCards(cardsPlayed);
 
-        // ✅ Only draw new cards equal to the number of played cards
-        for (int i = 0; i < cardsPlayed; i++)
+        StartCoroutine(RefillNextFrame(newCards));
+    }
+
+    private IEnumerator RefillNextFrame(PCard[] newCards)
+    {
+        // wait one frame so the Slots are truly empty
+        yield return null;
+
+        // here’s the only change: use DrawCard() so it honors your Slot layout
+        for (int i = 0; i < newCards.Length; i++)
         {
+            yield return new WaitForSecondsRealtime(0.1f);
             deckManager.DrawCard(newCards[i]);
         }
     }
-
 
     IEnumerator MoveCard(GameObject card, Vector2 targetPosition)
     {

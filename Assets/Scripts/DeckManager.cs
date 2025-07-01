@@ -13,7 +13,7 @@ public class DeckManager : MonoBehaviour
     public Transform deckPosition;                                          // Where the deck sits
     public RectTransform pinkCardImage;
 
-    private HorizontalCardHolder horizontalCardHolder;
+    public HorizontalCardHolder horizontalCardHolder;
 
      void Awake()
     {
@@ -67,7 +67,7 @@ public class DeckManager : MonoBehaviour
     {
         if(horizontalCardHolder == null)
         {
-            horizontalCardHolder = GameObject.FindFirstObjectByType<HorizontalCardHolder>();
+            horizontalCardHolder = playingCardGroup.GetComponentInParent<HorizontalCardHolder>();
         }
 
         // find all children tagged "Slot"
@@ -101,6 +101,9 @@ public class DeckManager : MonoBehaviour
         drawn.transform.localScale = Vector3.one;
 
         Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
+
+        //  Set player's hand to match new cards
+        horizontalCardHolder.RefreshVisual();
     }
 
 

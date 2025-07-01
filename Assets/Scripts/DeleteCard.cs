@@ -162,6 +162,7 @@ public class DeleteCard : MonoBehaviour
         // here’s the only change: use DrawCard() so it honors your Slot layout
         for (int i = 0; i < newCards.Length; i++)
         {
+            yield return new WaitForSecondsRealtime(0.1f);
             deckManager.DrawCard(newCards[i]);
         }
     }

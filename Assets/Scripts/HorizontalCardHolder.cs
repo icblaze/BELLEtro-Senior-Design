@@ -40,7 +40,7 @@ public class HorizontalCardHolder : MonoBehaviour
         //  Initial draw from deck to hand
         DrawHand(handSize);
 
-        //  Draws the cards to the slots visually
+        //  Draws the cards to the slots visually and assign hand
         RefreshVisual();
     }
 
@@ -60,9 +60,6 @@ public class HorizontalCardHolder : MonoBehaviour
         deck.resetDeck();
         PCard[] pcardArray = deck.drawCards(handSize);
 
-        // Assign drawn cards to playerHand in Deck class
-        deck.playerHand = pcardArray.ToList<PCard>();
-
         int cardCount = 0;
         foreach (Card card in cards)
         {
@@ -78,13 +75,15 @@ public class HorizontalCardHolder : MonoBehaviour
 
     public void BeginDrag(Card card)
     {
-        cards = GetComponentsInChildren<Card>().ToList();   //  Refresh card list
+        //cards = GetComponentsInChildren<Card>().ToList();   //  Refresh card list
         selectedCard = card;
     }
 
     public void EndDrag(Card card)
     {
         cards = GetComponentsInChildren<Card>().ToList(); //  Refresh card list
+        deck.playerHand = cards.Select(card => card.pcard).ToList();
+
         if (selectedCard == null)
             return;
 
@@ -185,6 +184,8 @@ public class HorizontalCardHolder : MonoBehaviour
     //  Refresh visual index
     public void RefreshVisual()
     {
+        cards = GetComponentsInChildren<Card>().ToList(); //  Refresh card list
+        deck.playerHand = cards.Select(card => card.pcard).ToList();
 
         StartCoroutine(Frame());
 
