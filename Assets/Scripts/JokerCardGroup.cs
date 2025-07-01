@@ -28,13 +28,28 @@ public class JokerCardHolder : MonoBehaviour
         for (int i = 0; i < cardsToSpawn; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
-            newSlot.name = $"JokerCard {i + 1}"; // Assign meaningful names
+            newSlot.name = $"MentorSlot {i + 1}"; // Assign meaningful names
         }
 
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
         //  Plan here is to fetch the mentorDeck and have the correspond to what's inside the list
+        // For now, temporarily generate same mentors
+
+        player.mentorDeck.Clear();  //  temporary for reset sceen
+        for (int i = 0; i < player.maxMentors; i++)
+        {
+            if (i % 2 == 0)
+            {
+                player.mentorDeck.Add(Mentor.MentorFactory(MentorName.LabGlasses, CardEdition.Foil));
+            }
+            else
+            {
+                player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Valentine, CardEdition.Polychrome));
+            }
+        }
+        Debug.Log("Mentors in list: " + player.mentorDeck.Count);
 
         //  This means that when swapping between slots it'll have to modify the mentorDeck ordering as well
 
@@ -45,9 +60,8 @@ public class JokerCardHolder : MonoBehaviour
             card.PointerExitEvent.AddListener(CardPointerExit);
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
-            card.name = $"Card {cardCount + 1}"; // Assign names sequentially
-            // For now, temporarily generate same mentors
-            card.AssignMentor(Mentor.MentorFactory(MentorName.LabGlasses, CardEdition.Polychrome)); 
+            card.name = $"Mentor {cardCount + 1}"; // Assign names sequentially
+            card.AssignMentor(player.mentorDeck[cardCount]); 
             cardCount++;
         }
 

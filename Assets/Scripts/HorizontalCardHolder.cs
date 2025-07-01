@@ -1,5 +1,5 @@
-// This Document contains the code for the playing card holder and consumable holder 
-// This class draws cards at start of blind, and will take care of the consumables
+// This Document contains the code for the playing card holder
+// This class draws cards at start of blind
 // Current Devs:
 // Van: setup initial code
 // Andy: connected it to draw from Deck class
@@ -26,21 +26,13 @@ public class HorizontalCardHolder : MonoBehaviour
 
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
-    [SerializeField] private bool isCardHand = true;
 
     private Deck deck = Deck.access();
 
     void Start()
     {
-        if(isCardHand)
-        {
-            DrawHand();
-        }
-        else
-        {
-            //  Consider making this a separate script like JokerCardGroup?
-            Debug.Log("This is the consumable slots");
-        }
+        //  Initial draw from deck to hand
+        DrawHand(handSize);
 
         //  Draws the cards to the slots visually
         StartCoroutine(Frame());
@@ -57,7 +49,7 @@ public class HorizontalCardHolder : MonoBehaviour
     }
 
     //  Beginning of blind, draw cards from deck into hand
-    private void DrawHand()
+    private void DrawHand(int handSize)
     {
         for (int i = 0; i < handSize; i++)
         {

@@ -149,8 +149,32 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         isHovering = true;
         if (infoPanel != null && infoText != null)
         {
+            //  Update specific description for card type
+            if(cardType == CardType.Card)
+            {
+                cardDescription = pcard.ToString();
+            }
+            else if(cardType == CardType.Mentor)
+            {
+                cardDescription = mentor.GetDescription();
+            }
+            else
+            {
+                if(consumableType == ConsumableType.CardBuff)
+                {
+                    CardBuff cardBuff = (CardBuff) consumable;
+                    cardDescription = cardBuff.GetDescription();
+                }
+                else
+                {
+                    Textbook tbook = (Textbook) consumable;
+                    cardDescription = tbook.GetDescription();
+                }
+            }
+
             // Update the text with this card's specific description
             infoText.text = cardDescription;
+
             // Show the panel
             infoPanel.SetActive(true);
             

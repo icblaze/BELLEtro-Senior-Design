@@ -9,7 +9,7 @@ public class DeleteCard : MonoBehaviour
     [SerializeField] private Transform playingCardGroup;
 
     private DeckManager deckManager;
-    private List<GameObject> selectedCards = new List<GameObject>();
+    private List<GameObject> selectedCards = new List<GameObject>();    //  Exclude non-playing cards 
     private List<PCard> selectedPCards = new List<PCard>();
 
     //  For detecting current hand
@@ -42,7 +42,7 @@ public class DeleteCard : MonoBehaviour
     //Adds the card to the selectedCards list
     public void AddSelectedCard(GameObject card)
     {
-        if (card == null) return;
+        if (card == null || card.GetComponent<Card>().cardType != CardType.Card) return;
         if (!selectedCards.Contains(card))
         {
             //  Extract PCard object from Card
@@ -60,7 +60,7 @@ public class DeleteCard : MonoBehaviour
     //This removes the card the player unselected from the selectedCards list
     public void RemoveSelectedCard(GameObject card)
     {
-        if (card == null) return;
+        if (card == null || card.GetComponent<Card>().cardType != CardType.Card) return;
         if (selectedCards.Contains(card))
         {
             //  Extract PCard object from Card
