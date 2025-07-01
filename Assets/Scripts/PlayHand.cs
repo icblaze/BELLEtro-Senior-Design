@@ -143,10 +143,13 @@ public class PlayHand : MonoBehaviour
 
         selectedCards.Clear();
 
+        //  Draw from deck equal to amount played
+        PCard[] newCards = Deck.access().drawCards(cardsPlayed);
+
         // ✅ Only draw new cards equal to the number of played cards
         for (int i = 0; i < cardsPlayed; i++)
         {
-            deckManager.DrawCard();
+            deckManager.DrawCard(newCards[i]);
         }
     }
 

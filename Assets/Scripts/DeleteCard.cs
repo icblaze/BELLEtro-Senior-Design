@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using TMPro;
 
@@ -121,6 +122,9 @@ public class DeleteCard : MonoBehaviour
             return;
         }
 
+        //  Draw from deck equal to amount played
+        PCard[] newCards = Deck.access().drawCards(selectedCards.Count);
+
         var cardsToRemove = new List<GameObject>();
         foreach (var card in selectedCards)
         {
@@ -144,16 +148,21 @@ public class DeleteCard : MonoBehaviour
 
         selectedPCards.Clear(); //  Clear PCard list as well
         selectedCards.Clear();
-        StartCoroutine(RefillNextFrame(removedCount));
+
+        
+
+        StartCoroutine(RefillNextFrame(newCards));
     }
 
-    private IEnumerator RefillNextFrame(int count)
+    private IEnumerator RefillNextFrame(PCard[] newCards)
     {
         // wait one frame so the Slots are truly empty
         yield return null;
 
         // here’s the only change: use DrawCard() so it honors your Slot layout
-        for (int i = 0; i < count; i++)
-            deckManager.DrawCard();
+        for (int i = 0; i < newCards.Length; i++)
+        {
+            deckManager.DrawCard(newCards[i]);
+        }
     }
 }

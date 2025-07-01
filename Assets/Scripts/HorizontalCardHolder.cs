@@ -14,8 +14,8 @@ using System.Linq;
 
 public class HorizontalCardHolder : MonoBehaviour
 {
-    [SerializeField] private Card selectedCard;
-    [SerializeReference] private Card hoveredCard;
+    [SerializeField] public Card selectedCard;
+    [SerializeReference] public Card hoveredCard;
 
     [SerializeField] private GameObject slotPrefab;
     private RectTransform rect;
@@ -29,23 +29,19 @@ public class HorizontalCardHolder : MonoBehaviour
 
     private Deck deck = Deck.access();
 
+    void Awake()
+    {
+        if (rect == null)
+            rect = GetComponent<RectTransform>();
+    }
+
     void Start()
     {
         //  Initial draw from deck to hand
         DrawHand(handSize);
 
         //  Draws the cards to the slots visually
-        StartCoroutine(Frame());
-
-        IEnumerator Frame()
-        {
-            yield return new WaitForSecondsRealtime(.1f);
-            for (int i = 0; i < cards.Count; i++)
-            {
-                if (cards[i].cardVisual != null)
-                    cards[i].cardVisual.UpdateIndex(transform.childCount);
-            }
-        }
+        RefreshVisual();
     }
 
     //  Beginning of blind, draw cards from deck into hand
@@ -80,13 +76,15 @@ public class HorizontalCardHolder : MonoBehaviour
         }
     }
 
-    private void BeginDrag(Card card)
+    public void BeginDrag(Card card)
     {
+        cards = GetComponentsInChildren<Card>().ToList();   //  Refresh card list
         selectedCard = card;
     }
 
-    void EndDrag(Card card)
+    public void EndDrag(Card card)
     {
+        cards = GetComponentsInChildren<Card>().ToList(); //  Refresh card list
         if (selectedCard == null)
             return;
 
@@ -98,12 +96,12 @@ public class HorizontalCardHolder : MonoBehaviour
         selectedCard = null;
     }
 
-    void CardPointerEnter(Card card)
+    public void CardPointerEnter(Card card)
     {
         hoveredCard = card;
     }
 
-    void CardPointerExit(Card card)
+    public void CardPointerExit(Card card)
     {
         hoveredCard = null;
     }
@@ -135,6 +133,9 @@ public class HorizontalCardHolder : MonoBehaviour
 
         for (int i = 0; i < cards.Count; i++)
         {
+            if (cards[i].Equals(null))
+                return;
+
             if (selectedCard.transform.position.x > cards[i].transform.position.x)
             {
                 if (selectedCard.ParentIndex() < cards[i].ParentIndex())
@@ -178,6 +179,23 @@ public class HorizontalCardHolder : MonoBehaviour
         foreach (Card card in cards)
         {
             card.cardVisual.UpdateIndex(transform.childCount);
+        }
+    }
+
+    //  Refresh visual index
+    public void RefreshVisual()
+    {
+
+        StartCoroutine(Frame());
+
+        IEnumerator Frame()
+        {
+            yield return new WaitForSecondsRealtime(.1f);
+            for (int i = 0; i < cards.Count; i++)
+            {
+                if (cards[i].cardVisual != null)
+                    cards[i].cardVisual.UpdateIndex(transform.childCount);
+            }
         }
     }
 }

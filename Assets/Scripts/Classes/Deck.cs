@@ -146,19 +146,25 @@ public class Deck
 
   //This function is responsible for drawing a certain amount of cards into the players hand.
   //PlayerHandCount represents how many missing cards are missing from the players hand.
-  public PCard[] drawCards(int playerHandCount)
+  public PCard[] drawCards(int cardAmount)
   {
     if (deckCards.Count == 0)
     {
       return null;
     }
 
+    //  If deck has less than card amount, give remaining 
+    if (deckCards.Count - cardAmount < 0)
+    {
+        cardAmount = deckCards.Count;
+    }
+
     Game game = Game.access();
 
-    PCard[] list = new PCard[playerHandCount];
+    PCard[] list = new PCard[cardAmount];
 
     // Remove cards from the deck
-    for (int i = 0; i < playerHandCount; i++)
+    for (int i = 0; i < cardAmount; i++)
     {
       // This calls the random draw function with the deck
       PCard pcard = game.randomDraw(deckCards);

@@ -82,4 +82,15 @@ public class CardModifier
         }
     }
 
+    // Return description for given card enhancement
+
+    // Return description for given card edition
+
+    // Return description for given card seal
+
+    // Use enhancement effect with given use location
+
+    // Use edition effect with given use location
+
+    // Use seal effect with given use location
 }

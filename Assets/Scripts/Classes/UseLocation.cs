@@ -11,6 +11,7 @@ public enum UseLocation
 {
   Initial,
   PreCard,
+  PlayCard,
   PostCard,
   PreFromDraw,
   PostFromDraw,

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;            // ← for Linq helpers
 using Unity.VisualScripting;
@@ -11,16 +12,15 @@ public class DeckManager : MonoBehaviour
     public Transform playingCardGroup;                                      // Assign PlayingCardGroup in Inspector
     public Transform deckPosition;                                          // Where the deck sits
     public RectTransform pinkCardImage;
-    [Header("Deck Data")]
-    public List<GameObject> deckCards = new List<GameObject>();             //List of GameObject cards
 
-    [Header("Settings")]
-    private int maxCardsInHand;                                             //This variable will store the maximum cards in a hand for the round
+    private HorizontalCardHolder horizontalCardHolder;
+
      void Awake()
     {
         // This will run before any Start() method and clear the old "ghost" reference.
         Card.ResetStaticPanel();
     }
+
     void Start()
     {
         //Deck deck = Deck.access();
@@ -60,19 +60,14 @@ public class DeckManager : MonoBehaviour
         // }
         pinkCardImage.SetAsLastSibling();
 
-        
     }
 
-    /// <summary>
-    /// Draws one card into the first empty "Slot" under playingCardGroup.
-    /// Honors your maxCardsInHand if you want to gate it.
-    /// </summary>
-    public void DrawCard()
+    // Draws given card into the first empty "Slot" under playingCardGroup.
+    public void DrawCard(PCard pcard)
     {
-        if (deckCards.Count == 0)
+        if(horizontalCardHolder == null)
         {
-            Debug.LogWarning("Deck is empty!");
-            return;
+            horizontalCardHolder = GameObject.FindFirstObjectByType<HorizontalCardHolder>();
         }
 
         // find all children tagged "Slot"
@@ -89,72 +84,65 @@ public class DeckManager : MonoBehaviour
             return;
         }
 
-        // remove random card from deck list
-        Game game = Game.access();
-        deckIndex = game.randomizer(0, deckCards.Count);
+        // instantiate it at deck position
+        GameObject drawn = Instantiate(cardPrefab, deckPosition);
 
-        GameObject prefab = deckCards[deckIndex];
-        deckCards.RemoveAt(deckIndex);
+        //  Get Card component and assign PCard
+        Card cardComponent = drawn.GetComponent<Card>();
+        cardComponent.AssignPCard(pcard);
+        cardComponent.PointerEnterEvent.AddListener(horizontalCardHolder.CardPointerEnter);
+        cardComponent.PointerExitEvent.AddListener(horizontalCardHolder.CardPointerExit);
+        cardComponent.BeginDragEvent.AddListener(horizontalCardHolder.BeginDrag);
+        cardComponent.EndDragEvent.AddListener(horizontalCardHolder.EndDrag);
 
-        // instantiate it at deck position, then reparent into the slot
-        GameObject drawn = Instantiate(prefab, deckPosition);
-        drawn.name = prefab.name; // strip the "(Clone)" if you like
+        //  Reparent into empty slot
+        drawn.name = cardPrefab.name; // strip the "(Clone)" if you like
         drawn.transform.SetParent(emptySlot, false);
         drawn.transform.localScale = Vector3.one;
 
-        //Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
+        Debug.Log($"Drew {drawn.name} into slot {emptySlot.name}");
     }
+
 
     /// <summary>
     /// Draws one card directly into the playingCardGroup—ignores slots and hand-size limits.
     /// </summary>
-    public void DrawCardNoLimit()
-    {
-        if (deckCards.Count == 0)
-        {
-            Debug.LogWarning("Deck is empty!");
-            return;
-        }
+    //public void DrawCardNoLimit()
+    //{
+    //    if (deckCards.Count == 0)
+    //    {
+    //        Debug.LogWarning("Deck is empty!");
+    //        return;
+    //    }
 
-        Game game = Game.access();
-        deckIndex = game.randomizer(0, deckCards.Count);
-        GameObject prefab = deckCards[deckIndex];
-        deckCards.RemoveAt(deckIndex);
+    //    Game game = Game.access();
+    //    deckIndex = game.randomizer(0, deckCards.Count);
+    //    GameObject prefab = deckCards[deckIndex];
+    //    deckCards.RemoveAt(deckIndex);
 
-        // parent it straight under playingCardGroup
-        GameObject c = Instantiate(prefab, playingCardGroup, false);
-        c.name = prefab.name;
-        c.transform.localScale = Vector3.one;
+    //    // parent it straight under playingCardGroup
+    //    GameObject c = Instantiate(prefab, playingCardGroup, false);
+    //    c.name = prefab.name;
+    //    c.transform.localScale = Vector3.one;
 
-        Debug.Log($"Drew {c.name} (no-limit) into hand");
-    }
+    //    Debug.Log($"Drew {c.name} (no-limit) into hand");
+    //}
 
     /// <summary>
     /// (Optional) If you ever want to reshuffle/re-layout the remaining deck.
     /// </summary>
-    private void RearrangeDeckCards()
-    {
-        for (int i = 0; i < deckCards.Count; i++)
-        {
-            var t = deckCards[i].transform;
-            t.localPosition = new Vector3(
-                Random.Range(-0.1f, 0.1f),
-                i * -0.05f,
-                0f
-            );
-            t.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
-        }
-    }
+    //private void RearrangeDeckCards()
+    //{
+    //    for (int i = 0; i < deckCards.Count; i++)
+    //    {
+    //        var t = deckCards[i].transform;
+    //        t.localPosition = new Vector3(
+    //            Random.Range(-0.1f, 0.1f),
+    //            i * -0.05f,
+    //            0f
+    //        );
+    //        t.localRotation = Quaternion.Euler(0, 0, Random.Range(-5f, 5f));
+    //    }
+    //}
 
-    //Set the maximum hand count for the round.
-    public void setMaxHandCount(int handCount)
-    {
-        maxCardsInHand = handCount;
-    }
-
-    //Getter to retrieve the max hand count for the round.
-    public int getMaxHandCount()
-    {
-        return maxCardsInHand;
-    }
 }
