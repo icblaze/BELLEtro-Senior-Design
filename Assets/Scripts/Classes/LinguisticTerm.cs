@@ -15,42 +15,42 @@ public enum LinguisticTerms
     //Consonants
 
     //Stop Consonants         
-    Voiceless_Labial_Stop,                        //(p)
-    Voiced_Labial_Stop,                           //(b)
-    Voiced_Alveolar_Stop,                         //(d)
-    Voiced_Velar_Stop,                            //(g)
-    Voiceless_Alveolar_Stop,                      //(t)
-    Voiceless_Velar_Stop,                         //(k)
-    Voiceless_Glottal_Stop,                       //(ʔ)  
+    Voiceless_Stop_Labial,                        //(p)
+    Voiced_Stop_Labial,                           //(b)
+    Voiced_Stop_Alveolar,                         //(d)
+    Voiced_Stop_Velar,                            //(g)
+    Voiceless_Stop_Alveolar,                      //(t)
+    Voiceless_Stop_Velar,                         //(k)
+    Voiceless_Stop_Glottal,                       //(ʔ)  
     
     //Fricative Consonants        
-    Voiceless_Labiodental_Fricative,              //(f)
-    Voiceless_Interdental_Fricative,              //(θ̼)
-    Voiceless_Alveolar_Fricative,                 //(s)
-    Voiceless_AlveoPalatal_Fricative,             //(ʃ)
-    Voiceless_Glottal_Fricative,                  //(h)
-    Voiced_Labiodental_Fricative,                 //(v)
-    Voiced_Interdental_Fricative,                 //(ð)
-    Voiced_Alveolar_Fricative,                    //(z)  
-    Voiced_AlveoPalatal_Fricative,                //(ʒ)
+    Voiceless_Fricative_Labiodental,              //(f)
+    Voiceless_Fricative_Interdental,              //(θ̼)
+    Voiceless_Fricative_Alveolar,                 //(s)
+    Voiceless_Fricative_AlveoPalatal,             //(ʃ)
+    Voiceless_Fricative_Glottal,                  //(h)
+    Voiced_Fricative_Labiodental,                 //(v)
+    Voiced_Fricative_Interdental,                 //(ð)
+    Voiced_Fricative_Alveolar,                    //(z)  
+    Voiced_Fricative_AlveoPalatal,                //(ʒ)
     
     //Affricate Consonants        
-    Voiceless_AlveoPalatal_Affricate,             //(tʃ)
-    Voiced_AlveoPalatal_Affricate,                //(dʒ)
+    Voiceless_Affricate_AlveoPalatal,             //(tʃ)
+    Voiced_Affricate_AlveoPalatal,                //(dʒ)
     
     //Nasal Consonants        
-    Voiced_Alveolar_Nasal,                        //(n)
-    Voiced_Velar_Nasal,                           //(ŋ)
-    Voiced_Labial_Nasal,                          //(m)
+    Voiced_Nasal_Alveolar,                        //(n)
+    Voiced_Nasal_Velar,                           //(ŋ)
+    Voiced_Nasal_Labial,                          //(m)
     
     //Liquid Consonants       
-    Voiced_Alveolar_Liquid_Lateral,               //(l)
-    Voiced_Alveolar_Liquid_Retroflex,             //(ɹ)
+    Voiced_Liquid_Alveolar_Lateral,               //(l)
+    Voiced_Liquid_Alveolar_Retroflex,             //(ɹ)
     
     //Glide Consonants        
-    Voiced_AlveoPalatal_Glide,                    //(j)
-    Voiced_Velar_Glide,                           //(w)
-    Voiceless_Velar_Glide,                        //((ʍ))
+    Voiced_Glide_AlveoPalatal,                    //(j)
+    Voiced_Glide_Velar,                           //(w)
+    Voiceless_Glide_Velar,                        //((ʍ))
 
 
     //Following terms are vowels
@@ -58,24 +58,24 @@ public enum LinguisticTerms
     //Lax vowels don't require much muscular effort from the vocal tract.
 
     //High Vowels
-    Voiced_High_Front_Tense,                             //(ij)
-    Voiced_High_Back_Tense,                              //(uw)
-    Voiced_High_Front_Lax,                               //(I)
-    Voiced_High_Back_Lax,                                //(ʊ)
+    Tense_High_Front,                             //(ij)
+    Tense_High_Back,                              //(uw)
+    Lax_High_Front,                               //(I)
+    Lax_High_Back,                                //(ʊ)
     
     //Mid vowels          
-    Voiced_Mid_Front_Tense_Diphthong,                    //(ej)
-    Voiced_Mid_Central_Rounded_Diphthong,                //(ow)
-    Voiced_Mid_Back_Rounded_Diphthong,                   //(oj)
-    Voiced_Mid_Front_Lax,                                //(ɛ)
-    Voiced_Mid_Central_Vowel_Schwa,                      //(ə)
-    Voiced_Mid_Central_Vowel,                            //(ʌ)
-    Voiced_Mid_Back_Rounded_Vowel,                       //(ɔ)
+    Tense_Mid_Front_Diphthong,                          //(ej)
+    Tense_Mid_Back_Rounded_Diphthong_ow,                //(ow)
+    Tense_Mid_Back_Rounded_Diphthong_oj,                //(oj)
+    Lax_Mid_Front,                                      //(ɛ)
+    Tense_Mid_Central_Vowel_Schwa,                      //(ə)
+    Lax_Mid_Central_Vowel,                              //(ʌ)
+    Lax_Mid_Back_Rounded_Vowel,                         //(ɔ)
           
     //Low vowels          
-    Voiced_Low_Central_Diphthong,                        //(aj)
-    Voiced_Low_Back_Diphthong,                           //(aw)
-    Voiced_Low_Back_Tense_Vowel,                         //(a)
-    Voiced_Low_Front_Lax,                                //(æ)
+    Tense_Low_Central_Diphthong_aj,                     //(aj)
+    Tense_Low_Central_Diphthong_aw,                     //(aw)
+    Tense_Low_Back_Vowel,                               //(a)
+    Lax_Low_Front,                                      //(æ)
 
 }   

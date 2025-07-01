@@ -7,7 +7,8 @@
 using System.Collections;
 using UnityEngine;
 
-// Holds the Manner of Articulation which is a way of saying a sound
+// Manner of Articulation refers to the way of how the airflow flows through
+// the vocal tract to produce a sound.
 public enum MannerArticulation
 {
     None,
@@ -17,7 +18,9 @@ public enum MannerArticulation
     Nasal,
     Liquid,
     Glide,
-    High,
+
+//The following terms describe the tongue height when pronouncing a vowel
+    High,                           
     Mid,
     Low
 }

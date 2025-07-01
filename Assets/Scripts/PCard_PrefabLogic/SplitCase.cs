@@ -3,25 +3,36 @@
 
 using System.Text;
 
-public class SplitCase
+namespace SplitString
 {
-    //  Add space before capital letters in string (not including the first)
-    public static string Split(string pascalCase)
+    public static class SplitCase
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.Append(pascalCase[0]); 
-
-        //  Goes through input and check if each character after the first is capital
-        for (int i = 1; i < pascalCase.Length; i++)
+        //  Add space before capital letters in string (not including the first)
+        public static string Split(string pascalCase)
         {
-            //  Add space before appending character if capital
-            if(char.IsUpper(pascalCase[i]))
-            {
-                stringBuilder.Append(" ");
-            }
-            stringBuilder.Append(pascalCase[i]);
-        }
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append(pascalCase[0]);
 
-        return stringBuilder.ToString();
+            //  Goes through input and check if each character after the first is 
+            //  This also checks to see if a underscore exists the string and adds a space
+            for (int i = 1; i < pascalCase.Length; i++)
+            {
+                if (pascalCase[i].Equals('_'))
+                {
+                    stringBuilder.Append("");
+                    continue;
+                }
+                
+                //  Add space before appending character if capital
+                if (char.IsUpper(pascalCase[i]))
+                {
+                    stringBuilder.Append(" ");
+                }
+
+                stringBuilder.Append(pascalCase[i]);
+            }
+
+            return stringBuilder.ToString();
+        }
     }
 }

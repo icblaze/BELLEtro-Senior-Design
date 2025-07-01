@@ -13,7 +13,6 @@ public class DeleteCard : MonoBehaviour
     private DeckManager deckManager;                        //Instance of the Deck Manager
     private List<GameObject> selectedCards = new List<GameObject>();        //List of the current Gameobjects that the user has selected
     private List<PCard> selectedPCards = new List<PCard>();                 //List of the selected cards that the user has selected
-    CurrentHandManager currentHandManager = new CurrentHandManager();       //  For detecting current hand
     private CardType cardType;
     void Start()
     {
@@ -62,7 +61,7 @@ public class DeleteCard : MonoBehaviour
 
             //  Debug hand check
             Debug.Log(selectedPCards.Count);
-            //Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
+            Debug.Log(CurrentHandManager.Instance.findCurrentHand(selectedPCards));
         }
     }
 
@@ -80,7 +79,7 @@ public class DeleteCard : MonoBehaviour
 
             //  Debug hand check
             Debug.Log(selectedPCards.Count);
-            //Debug.Log(currentHandManager.findCurrentHand(selectedPCards));
+            Debug.Log(CurrentHandManager.Instance.findCurrentHand(selectedPCards));
         }
     }
 

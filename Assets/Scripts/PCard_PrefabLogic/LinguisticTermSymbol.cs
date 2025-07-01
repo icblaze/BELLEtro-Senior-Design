@@ -15,63 +15,63 @@ public class LinguisticTermSymbol
         { LinguisticTerms.None, ""},
 
         //Stop Consonants         
-        { LinguisticTerms.Voiceless_Labial_Stop, "p" },
-        { LinguisticTerms.Voiced_Labial_Stop, "b" },
-        { LinguisticTerms.Voiced_Alveolar_Stop, "d" },
-        { LinguisticTerms.Voiced_Velar_Stop, "g" },
-        { LinguisticTerms.Voiceless_Alveolar_Stop, "t" },
-        { LinguisticTerms.Voiceless_Velar_Stop, "k" },
-        { LinguisticTerms.Voiceless_Glottal_Stop, "ʔ" },
+        { LinguisticTerms.Voiceless_Stop_Labial, "p" },
+        { LinguisticTerms.Voiced_Stop_Labial, "b" },
+        { LinguisticTerms.Voiced_Stop_Alveolar, "d" },
+        { LinguisticTerms.Voiced_Stop_Velar, "g" },
+        { LinguisticTerms.Voiceless_Stop_Alveolar, "t" },
+        { LinguisticTerms.Voiceless_Stop_Velar, "k" },
+        { LinguisticTerms.Voiceless_Stop_Glottal, "ʔ" },
 
         //Fricative Consonants        
-        { LinguisticTerms.Voiceless_Labiodental_Fricative, "f" },
-        { LinguisticTerms.Voiceless_Interdental_Fricative, "θ" },
-        { LinguisticTerms.Voiceless_Alveolar_Fricative, "s" },
-        { LinguisticTerms.Voiceless_AlveoPalatal_Fricative, "ʃ" },
-        { LinguisticTerms.Voiceless_Glottal_Fricative, "h" },
-        { LinguisticTerms.Voiced_Labiodental_Fricative, "v" },
-        { LinguisticTerms.Voiced_Interdental_Fricative, "ð" },
-        { LinguisticTerms.Voiced_Alveolar_Fricative, "z" },
-        { LinguisticTerms.Voiced_AlveoPalatal_Fricative, "ʒ" },
+        { LinguisticTerms.Voiceless_Fricative_Labiodental, "f" },
+        { LinguisticTerms.Voiceless_Fricative_Interdental, "θ" },
+        { LinguisticTerms.Voiceless_Fricative_Alveolar, "s" },
+        { LinguisticTerms.Voiceless_Fricative_AlveoPalatal, "ʃ" },
+        { LinguisticTerms.Voiceless_Fricative_Glottal, "h" },
+        { LinguisticTerms.Voiced_Fricative_Labiodental, "v" },
+        { LinguisticTerms.Voiced_Fricative_Interdental, "ð" },
+        { LinguisticTerms.Voiced_Fricative_Alveolar, "z" },
+        { LinguisticTerms.Voiced_Fricative_AlveoPalatal, "ʒ" },
 
         //Affricate Consonants        
-        { LinguisticTerms.Voiceless_AlveoPalatal_Affricate, "tʃ" },
-        { LinguisticTerms.Voiced_AlveoPalatal_Affricate, "dʒ" },
+        { LinguisticTerms.Voiceless_Affricate_AlveoPalatal, "tʃ" },
+        { LinguisticTerms.Voiced_Affricate_AlveoPalatal, "dʒ" },
 
         //Nasal Consonants        
-        { LinguisticTerms.Voiced_Alveolar_Nasal, "n" },
-        { LinguisticTerms.Voiced_Velar_Nasal, "ŋ" },
-        { LinguisticTerms.Voiced_Labial_Nasal, "m" },
+        { LinguisticTerms.Voiced_Nasal_Alveolar, "n" },
+        { LinguisticTerms.Voiced_Nasal_Velar, "ŋ" },
+        { LinguisticTerms.Voiced_Nasal_Labial, "m" },
 
         //Liquid Consonants       
-        { LinguisticTerms.Voiced_Alveolar_Liquid_Lateral, "l" },
-        { LinguisticTerms.Voiced_Alveolar_Liquid_Retroflex, "ɹ" },
+        { LinguisticTerms.Voiced_Liquid_Alveolar_Lateral, "l" },
+        { LinguisticTerms.Voiced_Liquid_Alveolar_Retroflex, "ɹ" },
 
         //Glide Consonants        
-        { LinguisticTerms.Voiced_AlveoPalatal_Glide, "j" },
-        { LinguisticTerms.Voiced_Velar_Glide, "w" },
-        { LinguisticTerms.Voiceless_Velar_Glide, "ʍ" },
+        { LinguisticTerms.Voiced_Glide_AlveoPalatal, "j" },
+        { LinguisticTerms.Voiced_Glide_Velar, "w" },
+        { LinguisticTerms.Voiceless_Glide_Velar, "ʍ" },
 
         //High Vowels
-        { LinguisticTerms.Voiced_High_Front_Tense, "ij" },
-        { LinguisticTerms.Voiced_High_Back_Tense, "uw" },
-        { LinguisticTerms.Voiced_High_Front_Lax, "ɪ" },
-        { LinguisticTerms.Voiced_High_Back_Lax, "ʊ" },
+        { LinguisticTerms.Tense_High_Front, "ij" },
+        { LinguisticTerms.Tense_High_Back, "uw" },
+        { LinguisticTerms.Lax_High_Front, "ɪ" },
+        { LinguisticTerms.Lax_High_Back, "ʊ" },
 
         //Mid vowels          
-        { LinguisticTerms.Voiced_Mid_Front_Tense_Diphthong, "ej" },
-        { LinguisticTerms.Voiced_Mid_Central_Rounded_Diphthong, "ow" },
-        { LinguisticTerms.Voiced_Mid_Back_Rounded_Diphthong, "oj" },
-        { LinguisticTerms.Voiced_Mid_Front_Lax, "ɛ" },
-        { LinguisticTerms.Voiced_Mid_Central_Vowel_Schwa, "ə" },
-        { LinguisticTerms.Voiced_Mid_Central_Vowel, "ʌ" },
-        { LinguisticTerms.Voiced_Mid_Back_Rounded_Vowel, "ɔ" },
+        { LinguisticTerms.Tense_Mid_Front_Diphthong, "ej" },
+        { LinguisticTerms.Tense_Mid_Back_Rounded_Diphthong_ow, "ow" },
+        { LinguisticTerms.Tense_Mid_Back_Rounded_Diphthong_oj, "oj" },
+        { LinguisticTerms.Lax_Mid_Front, "ɛ" },
+        { LinguisticTerms.Tense_Mid_Central_Vowel_Schwa, "ə" },
+        { LinguisticTerms.Lax_Mid_Central_Vowel, "ʌ" },
+        { LinguisticTerms.Lax_Mid_Back_Rounded_Vowel, "ɔ" },
 
         //Low vowels          
-        { LinguisticTerms.Voiced_Low_Central_Diphthong, "aj" },
-        { LinguisticTerms.Voiced_Low_Back_Diphthong, "aw" },
-        { LinguisticTerms.Voiced_Low_Back_Tense_Vowel, "a" },
-        { LinguisticTerms.Voiced_Low_Front_Lax, "æ" },
+        { LinguisticTerms.Tense_Low_Central_Diphthong_aj, "aj" },
+        { LinguisticTerms.Tense_Low_Central_Diphthong_aw, "aw" },
+        { LinguisticTerms.Tense_Low_Back_Vowel, "a" },
+        { LinguisticTerms.Lax_Low_Front, "æ" },
     };
 
 }   

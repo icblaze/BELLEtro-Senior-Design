@@ -69,7 +69,7 @@ public class Round
 
     }
 
-    //Have a function that updates the UI for available hands and discards
+    //This function is responsible for decreasing the amount of hands a player can play
     public int DecreaseHandCount()
     {
         player = Player.access();
@@ -93,5 +93,5 @@ public class Round
         PlayerPrefsManager.ClearAll();
     }
 
-    //The round should also have a way where players can sell their
+    //The round should also have a way where players can sell their Mentors/Consumables
 }

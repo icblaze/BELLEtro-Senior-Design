@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using SplitString;
 
 public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
-{   
+{
     [Header("Hover Information")]
     [Tooltip("This is the specific information for this card. Set this from DeckManager.")]
     [TextArea(3, 5)]
@@ -367,7 +368,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         cardType = CardType.Card;
 
         //  Instantiate card visual before you can access components of it
-        if(cardVisual == null)
+        if (cardVisual == null)
         {
             InstantiateCardVisual();
         }
@@ -421,7 +422,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         }
 
         //  Description shows these attributes (for now just term and suit)
-        cardDescription = pcard.ToString(); 
+        cardDescription = pcard.ToString();
     }
 
     //  Assigns Consumable object to Card and assigns its attributes
@@ -448,14 +449,14 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         //  Assign name and description based on consumableType
         if (consumableType == ConsumableType.CardBuff)
         {
-            CardBuff cardBuff = (CardBuff) consumable;
+            CardBuff cardBuff = (CardBuff)consumable;
             consumableName = cardBuff.name.ToString();
             cardDescription = cardBuff.GetDescription();
 
         }
         else
         {
-            Textbook textbook = (Textbook) consumable;
+            Textbook textbook = (Textbook)consumable;
             consumableName = textbook.name.ToString();
             cardDescription = textbook.GetDescription();
         }

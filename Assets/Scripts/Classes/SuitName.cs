@@ -10,5 +10,7 @@ public enum SuitName
 {
     None,
     Voiced,
-    Voiceless
+    Voiceless,
+    Tense,
+    Lax
 }

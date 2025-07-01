@@ -18,6 +18,8 @@ public enum PlaceArticulation
     AlveoPalatal,
     Velar,
     Glottal,
+
+//The following terms refer to the place of the tongue when producing a vowel sound
     Front,
     Central,
     Back
