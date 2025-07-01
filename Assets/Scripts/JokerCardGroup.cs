@@ -22,10 +22,11 @@ public class JokerCardHolder : MonoBehaviour
     [SerializeField] private bool tweenCardReturn = true;
 
     Player player = Player.access();
+    Game game = Game.access();
 
     void Start()
     {
-        for (int i = 0; i < cardsToSpawn; i++)
+        for (int i = 0; i < player.maxMentors; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
             newSlot.name = $"MentorSlot {i + 1}"; // Assign meaningful names
@@ -34,24 +35,21 @@ public class JokerCardHolder : MonoBehaviour
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
-        //  Plan here is to fetch the mentorDeck and have the correspond to what's inside the list
-        // For now, temporarily generate same mentors
+        //  Plan here is to fetch the mentorDeck and have visuals correspond to what's inside the list
 
+        // For now, temporarily generate some mentors
         player.mentorDeck.Clear();  //  temporary for reset sceen
-        for (int i = 0; i < player.maxMentors; i++)
-        {
-            if (i % 2 == 0)
-            {
-                player.mentorDeck.Add(Mentor.MentorFactory(MentorName.LabGlasses, CardEdition.Foil));
-            }
-            else
-            {
-                player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Valentine, CardEdition.Polychrome));
-            }
-        }
-        Debug.Log("Mentors in list: " + player.mentorDeck.Count);
+        player.mentorDeck.AddRange(game.randomMentorShop(player.maxMentors));
+        MentorBufferManager.AssignToBuffer();
 
-        //  This means that when swapping between slots it'll have to modify the mentorDeck ordering as well
+        //  Debug mentors in the list, order from left to right
+        int count = 1;
+        Debug.Log("Mentors in list:\n");
+        foreach (Mentor mentor in player.mentorDeck)
+        {
+            Debug.Log("Mentor " + count + ": " +  mentor.name.ToString());
+            count++;
+        }
 
         int cardCount = 0;
         foreach (Card card in cards)
@@ -60,8 +58,8 @@ public class JokerCardHolder : MonoBehaviour
             card.PointerExitEvent.AddListener(CardPointerExit);
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
-            card.name = $"Mentor {cardCount + 1}"; // Assign names sequentially
-            card.AssignMentor(player.mentorDeck[cardCount]); 
+            card.AssignMentor(player.mentorDeck[cardCount]);
+            card.name = card.mentor.name.ToString(); 
             cardCount++;
         }
 
@@ -163,6 +161,17 @@ public class JokerCardHolder : MonoBehaviour
         cards[index].transform.SetParent(focusedParent);
         cards[index].transform.localPosition = cards[index].selected ? new Vector3(0, cards[index].selectionOffset, 0) : Vector3.zero;
         selectedCard.transform.SetParent(crossedParent);
+
+        //  This means that when swapping between slots it'll have to modify the mentorDeck ordering as well
+        int focusedIndex = selectedCard.ParentIndex();
+        int crossedIndex = cards[index].ParentIndex();
+
+        Mentor tempMentor = player.mentorDeck[focusedIndex];
+        player.mentorDeck[focusedIndex] = player.mentorDeck[crossedIndex];
+        player.mentorDeck[crossedIndex] = tempMentor;
+
+        //  Reassign Mentor buffers
+        MentorBufferManager.AssignToBuffer();
 
         isCrossing = false;
 

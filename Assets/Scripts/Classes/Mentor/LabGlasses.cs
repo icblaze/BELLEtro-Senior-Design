@@ -9,6 +9,8 @@ using System.Collections;
 
 public class LabGlasses : Mentor
 {
+    int multipleCount = 0;
+
     //  Mentor name and basePrice are preset
     public LabGlasses(CardEdition edition) : base(MentorName.LabGlasses, edition, 7)
     {
@@ -16,10 +18,18 @@ public class LabGlasses : Mentor
         description = "Give +2 Mult for every $5 you have";
     }
 
+    //  Update description based on player's money
+    public override string GetDescription()
+    {
+        multipleCount = Player.access().moneyCount / 5;
+        description = "Give +2 Mult for every $5 you have ( +" + (multipleCount * 2) + " Mult)";
+        return description;
+    }
+
     //  Give +2 Mult for every $5 you have
     public override void UseMentor()
     {
-        int multipleCount = Player.access().moneyCount / 5;
+        multipleCount = Player.access().moneyCount / 5;
         int mult = multipleCount * 2;
 
         //  TODO Assign the mult to the variable in round
