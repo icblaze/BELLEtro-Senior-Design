@@ -12,8 +12,9 @@ public class DeleteCard : MonoBehaviour
     [HideInInspector] private TextMeshProUGUI discardsLeft;
     [HideInInspector] private static int discardCount;
     private DeckManager deckManager;                        //Instance of the Deck Manager
-    private List<GameObject> selectedCards = new List<GameObject>();        //List of the current Gameobjects that the user has selected
+    [SerializeField] private List<GameObject> selectedCards = new List<GameObject>();        //List of the current Gameobjects that the user has selected
     private List<PCard> selectedPCards = new List<PCard>();                 //List of the selected cards that the user has selected
+    [SerializeField] private int pcardCount;
     private CardType cardType;
     void Start()
     {
@@ -60,7 +61,7 @@ public class DeleteCard : MonoBehaviour
             selectedCards.Add(card);
 
             //  Debug hand check
-            Debug.Log(selectedPCards.Count);
+            pcardCount = selectedPCards.Count;
             CurrentHandManager.Instance.findCurrentHand(selectedPCards);
         }
     }
@@ -75,17 +76,17 @@ public class DeleteCard : MonoBehaviour
 
 
         if (selectedCards.Contains(card))
-            {
-                //  Extract PCard object from Card
-                PCard pcard = card.GetComponent<Card>().pcard;
-                selectedPCards.Remove(pcard);
+        {
+            //  Extract PCard object from Card
+            PCard pcard = card.GetComponent<Card>().pcard;
+            selectedPCards.Remove(pcard);
 
-                selectedCards.Remove(card);
+            selectedCards.Remove(card);
 
-                //  Debug hand check
-                Debug.Log(selectedPCards.Count);
+            //  Debug hand check
+            pcardCount = selectedPCards.Count;
             CurrentHandManager.Instance.findCurrentHand(selectedPCards);
-            }
+        }
     }
 
     //This returns the selected cards that the player currently has selected
@@ -139,16 +140,12 @@ public class DeleteCard : MonoBehaviour
         foreach (var card in cardsToRemove)
         {
             Debug.Log($"Deleting card: {card.name}");
+            RemoveSelectedCard(card);
             Destroy(card);
         }
         
         discardCount = Round.access().DecreaseDiscardCount();      //Decrease Hand count of the player
         discardsLeft.text = discardCount.ToString("0");
-
-
-        selectedPCards.Clear(); //  Clear PCard list as well
-        selectedCards.Clear();
-
         
 
         StartCoroutine(RefillNextFrame(newCards));

@@ -64,6 +64,12 @@ public class PlayHand : MonoBehaviour
             return;
         }
 
+        if (selectedCards.Count > 5)
+        {
+            Debug.LogWarning("Cannot play more than 5 cards!");
+            return;
+        }
+
         currHandCount = Player.access().handCount;
         if (currHandCount == 0)
         {
