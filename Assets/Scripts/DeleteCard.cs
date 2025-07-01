@@ -45,12 +45,11 @@ public class DeleteCard : MonoBehaviour
     public void AddSelectedCard(GameObject card)
     {
         if (card == null) return;
-        if (card.GetComponent<Card>().cardType == CardType.Mentor || card.GetComponent<Card>().cardType == CardType.Consumable)
-        {
-            Debug.LogWarning("Can't add a mentor or consumable to the selected cards list!");
-            return;
-        }
-        
+
+        Card cardComponent = card.GetComponent<Card>();
+        if (cardComponent == null || cardComponent.cardType != CardType.Card) return;
+
+
         if (!selectedCards.Contains(card))
         {
             //  Extract PCard object from Card
@@ -68,11 +67,12 @@ public class DeleteCard : MonoBehaviour
     //This removes the card the player unselected from the selectedCards list
     public void RemoveSelectedCard(GameObject card)
     {
-        if (card == null)
-        {
-            Debug.Log("Card is null!");
-            return;
-        }
+        if (card == null) return;
+
+        Card cardComponent = card.GetComponent<Card>();
+        if (cardComponent == null || cardComponent.cardType != CardType.Card) return;
+
+
         if (selectedCards.Contains(card))
             {
                 //  Extract PCard object from Card
