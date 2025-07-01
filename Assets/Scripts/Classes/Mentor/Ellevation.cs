@@ -29,7 +29,7 @@ public class Ellevation : Mentor
     public override void UseMentor(PCard pcard)
     {
         // /ɛ/ or /l/
-        if (pcard.term == LinguisticTerms.Voiced_Mid_Front_Lax || pcard.term == LinguisticTerms.Voiced_Alveolar_Liquid_Lateral)
+        if (pcard.term == LinguisticTerms.Lax_Mid_Front || pcard.term == LinguisticTerms.Voiced_Liquid_Alveolar_Lateral)
         {
             chips += 8;
         }

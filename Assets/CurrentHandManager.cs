@@ -58,12 +58,6 @@ public class CurrentHandManager : MonoBehaviour
     //the current hand of PCards will be given and it will 
     //use the count to go through different tests for 
     //each hand.
-
-    void Awake()
-    {
-        currentHandText = GameObject.Find("Current Hand Text");
-    }
-
     public string findCurrentHand(List<PCard> selectedCards)
     {
         if (selectedCards == null)
