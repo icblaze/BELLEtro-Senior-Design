@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 //Script is used to create a screen shake effect when called. 
 //This can be used in instances such as scoring, deleting cards, rerolls,
@@ -28,14 +29,15 @@ public class ShakeScreen : MonoBehaviour
         if (shake)
         {
             shake = false;
-            StartCoroutine(Shaking());
+            // StartCoroutine(Shaking());
+            StartShake();
         }
     }
     public void StartShake()
     {
-        StartCoroutine(Shaking());
+        OnShake(1f, .05f);
     }
-    IEnumerator Shaking()
+    private IEnumerator Shaking()
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f;
@@ -47,5 +49,13 @@ public class ShakeScreen : MonoBehaviour
             yield return null;
         }
         transform.position = startPosition;
+    }
+
+    private void OnShake(float duration, float strength)
+    {
+        Vector3 startPosition = transform.position;
+        transform.DOShakePosition(duration, strength);
+        transform.position = startPosition;
+        
     }
 }
