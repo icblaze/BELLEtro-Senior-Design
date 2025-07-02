@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
-
+using UnityEngine.UI;
 public class JokerCardHolder : MonoBehaviour
 {
     [SerializeField] private Card selectedCard;
@@ -13,7 +13,10 @@ public class JokerCardHolder : MonoBehaviour
 
     [SerializeField] private GameObject slotPrefab;
     private RectTransform rect;
-
+    [Header("Sell Button")]
+    [SerializeField] private GameObject sellButtonPrefab; // Holds the button template
+    private GameObject currentSellButton; // The active sell button in the scene
+    private Card cardToSell; // The card we want to sell
     [Header("Spawn Settings")]
     [SerializeField] private int cardsToSpawn = 5;
     public List<Card> cards;
@@ -59,8 +62,9 @@ public class JokerCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.AssignMentor(player.mentorDeck[cardCount]);
-            card.name = card.mentor.name.ToString(); 
+            card.name = card.mentor.name.ToString();
             cardCount++;
+            card.PointerClickEvent.AddListener(OnCardClicked);
         }
 
         StartCoroutine(Frame());
@@ -75,7 +79,41 @@ public class JokerCardHolder : MonoBehaviour
             }
         }
     }
+    void OnCardClicked(Card clickedCard)
+    {
+        if (currentSellButton != null)
+        {
+            Destroy(currentSellButton);
+        }
 
+        cardToSell = clickedCard;
+        currentSellButton = Instantiate(sellButtonPrefab, clickedCard.transform);
+        
+        currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
+        // This resets the button's position to the center of the card.
+        
+        Button sellBtn = currentSellButton.GetComponent<Button>();
+        sellBtn.onClick.AddListener(SellCard);
+    }
+    void SellCard()
+    {
+        if (cardToSell != null)
+        {
+            // Example: Give the player money for the card.
+            // player.money += cardToSell.sellValue;
+
+            // Remove the card from our list and destroy its game object.
+            cards.Remove(cardToSell);
+            Destroy(cardToSell.gameObject);
+
+            // Destroy the sell button itself.
+            Destroy(currentSellButton);
+
+            // Clear our variables.
+            cardToSell = null;
+            currentSellButton = null;
+        }
+    }
     private void BeginDrag(Card card)
     {
         selectedCard = card;

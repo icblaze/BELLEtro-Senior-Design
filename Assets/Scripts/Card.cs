@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using TMPro;
 using SplitString;
 
-public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
+public class Card : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
 {
     [Header("Hover Information")]
     [Tooltip("This is the specific information for this card. Set this from DeckManager.")]
@@ -85,7 +85,13 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [SerializeField] private string mentorEditionName = "";
     [SerializeField] private int mentorSellValue = 0;
     [SerializeField] private bool mentorDisabled = false;
+    public UnityEvent<Card> PointerClickEvent = new UnityEvent<Card>();
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Card was clicked! Name: " + this.gameObject.name); // <-- ADD THIS LINE
+        PointerClickEvent.Invoke(this);
+    }
     void Start()
     {
 
