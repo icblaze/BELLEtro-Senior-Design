@@ -22,6 +22,7 @@ public class CheatSheet : Mentor
     //  Dynamically change the effect of Cheat Sheet based on rightMentor, call in JokerCard group
     public void ChangeEffect ()
     {
+        Debug.Log("mic check cheat sheet");
         Player player = Player.access();
 
         //  Get index of Cheat Sheet mentor

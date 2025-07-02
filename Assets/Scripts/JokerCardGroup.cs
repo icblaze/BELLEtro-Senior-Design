@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
+using UnityEngine.UI;
 
 public class JokerCardHolder : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class JokerCardHolder : MonoBehaviour
     [SerializeField] private int cardsToSpawn = 5;
     public List<Card> cards;
 
+    [Header("Sell Button")]
+    [SerializeField] private GameObject sellButtonPrefab; // Holds the button template
+    private GameObject currentSellButton; // The active sell button in the scene
+    [SerializeField] private Card cardToSell; // The card we want to sell
+
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
@@ -26,7 +32,21 @@ public class JokerCardHolder : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < player.maxMentors; i++)
+        //  Add 1 random mentor at each rerun of scene for testing purposes!
+        //  Order should persist if correct, selling should remove from mentorDeck  
+        //  Comment out eventually
+        player.mentorDeck.AddRange(game.randomMentorShop(1));
+
+        //  Debug mentors in the list, order from left to right
+        int count = 1;
+        Debug.Log("Mentors in list:\n");
+        foreach (Mentor mentor in player.mentorDeck)
+        {
+            Debug.Log("Mentor " + count + ": " + mentor.name.ToString());
+            count++;
+        }
+
+        for (int i = 0; i < player.mentorDeck.Count; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
             newSlot.name = $"MentorSlot {i + 1}"; // Assign meaningful names
@@ -35,22 +55,6 @@ public class JokerCardHolder : MonoBehaviour
         rect = GetComponent<RectTransform>();
         cards = GetComponentsInChildren<Card>().ToList();
 
-        //  Plan here is to fetch the mentorDeck and have visuals correspond to what's inside the list
-
-        // For now, temporarily generate some mentors
-        player.mentorDeck.Clear();  //  temporary for reset sceen
-        player.mentorDeck.AddRange(game.randomMentorShop(player.maxMentors));
-        MentorBufferManager.AssignToBuffer();
-
-        //  Debug mentors in the list, order from left to right
-        int count = 1;
-        Debug.Log("Mentors in list:\n");
-        foreach (Mentor mentor in player.mentorDeck)
-        {
-            Debug.Log("Mentor " + count + ": " +  mentor.name.ToString());
-            count++;
-        }
-
         int cardCount = 0;
         foreach (Card card in cards)
         {
@@ -58,22 +62,19 @@ public class JokerCardHolder : MonoBehaviour
             card.PointerExitEvent.AddListener(CardPointerExit);
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
+            card.PointerClickEvent.AddListener(OnCardClicked);  //  For sell function
             card.AssignMentor(player.mentorDeck[cardCount]);
             card.name = card.mentor.name.ToString(); 
             cardCount++;
         }
 
-        StartCoroutine(Frame());
+        StartCoroutine(RefreshFrame());
+    }
 
-        IEnumerator Frame()
-        {
-            yield return new WaitForSecondsRealtime(.1f);
-            for (int i = 0; i < cards.Count; i++)
-            {
-                if (cards[i].cardVisual != null)
-                    cards[i].cardVisual.UpdateIndex(transform.childCount);
-            }
-        }
+    IEnumerator RefreshFrame()
+    {
+        yield return new WaitForSecondsRealtime(.1f);
+        RefreshMentors();
     }
 
     private void BeginDrag(Card card)
@@ -92,6 +93,9 @@ public class JokerCardHolder : MonoBehaviour
         rect.sizeDelta -= Vector2.right;
 
         selectedCard = null;
+
+        //  When mentors get rearranged, reassign mentor buffers, change mentorDeck
+        RefreshMentors();
     }
 
     void CardPointerEnter(Card card)
@@ -182,6 +186,102 @@ public class JokerCardHolder : MonoBehaviour
         cards[index].cardVisual.Swap(swapIsRight ? -1 : 1);
 
         //Updated Visual Indexes
+        foreach (Card card in cards)
+        {
+            card.cardVisual.UpdateIndex(transform.childCount);
+        }
+    }
+
+    void OnCardClicked(Card clickedCard)
+    {
+        if (currentSellButton != null)
+        {
+            Destroy(currentSellButton);
+        }
+
+        cardToSell = clickedCard;
+        currentSellButton = Instantiate(sellButtonPrefab, clickedCard.transform);
+
+        currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
+        // This resets the button's position to the center of the card.
+
+        Button sellBtn = currentSellButton.GetComponent<Button>();
+        sellBtn.onClick.AddListener(SellCard);
+    }
+
+    void SellCard()
+    {
+        if (cardToSell != null)
+        {
+            // Get the Player and ShopManager instances
+            ShopManager shopManager = ShopManager.access();
+
+            // Get the Card component to access its sellValue
+            Card cardComponent = cardToSell.GetComponent<Card>();
+
+            // Make sure everything exists before proceeding
+            if (player != null && cardComponent != null && shopManager != null)
+            {
+                Debug.Log("--- Selling Card ---");
+                Debug.Log("Money BEFORE sale: " + player.moneyCount);
+                Debug.Log("Card sell value: " + cardComponent.mentor.sellValue);
+
+                // Add the card's value to the player's money
+                player.moneyCount += cardComponent.mentor.sellValue;
+
+                Debug.Log("Money AFTER sale: " + player.moneyCount);
+
+                // Tell the ShopManager to update the UI display
+                shopManager.UpdateMoneyDisplay();
+            }
+
+            // Remove the card from our list, associated slot, and destroy its game object
+
+            //  Remove mentor from player's mentor deck first
+            player.mentorDeck.Remove(cardComponent.mentor);
+
+            cards.Remove(cardToSell);
+
+            Transform parentSlot = cardToSell.transform.parent;
+
+            Destroy(cardToSell.gameObject);      // Destroy the card
+            if (parentSlot != null)
+                Destroy(parentSlot.gameObject);  // Destroy the parent slot
+
+            // Destroy the sell button itself
+            Destroy(currentSellButton);
+
+            // Clear our variables
+            cardToSell = null;
+            currentSellButton = null;
+
+            //  Wait for GameObject deletion before refreshing
+            StartCoroutine(RefreshFrame());
+        }
+    }
+
+    //  When mentors get rearranged, reassign mentor buffers, change mentorDeck
+    void RefreshMentors()
+    {
+        cards = GetComponentsInChildren<Card>().ToList();
+        player.mentorDeck = cards.Select(card => card.mentor).ToList();
+
+        //  Some mentors rely on position to copy effect
+        foreach (Mentor mentor in player.mentorDeck)
+        {
+            if(mentor.name == MentorName.CheatSheet)
+            {
+                CheatSheet cheatSheet = (CheatSheet) mentor;
+                cheatSheet.ChangeEffect();
+            }
+            else if(mentor.name == MentorName.Brainstorm)
+            {
+                Brainstorm brainstorm = (Brainstorm) mentor;
+                brainstorm.ChangeEffect();
+            }
+        }
+
+        MentorBufferManager.AssignToBuffer();
         foreach (Card card in cards)
         {
             card.cardVisual.UpdateIndex(transform.childCount);

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7486306067316991545}
   - component: {fileID: 8562604021319485591}
   - component: {fileID: -3148967189081000219}
-  - component: {fileID: 6352447403124542680}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -61,9 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d103f73c46c407db068681e2811968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardDescription: Default card information.
   instantiateVisual: 1
   moveSpeedLimit: 50
   selected: 0
+  isPlayed: 0
   selectionOffset: 25
   cardVisualPrefab: {fileID: 7310339964073049012, guid: 0fb7e7dd5a1fa4a34847033e11641ead, type: 3}
   cardVisual: {fileID: 0}
@@ -91,6 +92,23 @@ MonoBehaviour:
   SelectEvent:
     m_PersistentCalls:
       m_Calls: []
+  cardType: 0
+  termName: 
+  termSymbol: 
+  suitName: 
+  enhancementName: 
+  sealName: 
+  editionName: 
+  disabled: 0
+  consumableType: 0
+  consumableName: 
+  consumableEditionName: Base
+  consumableSellValue: 0
+  consumableDisabled: 0
+  mentorName: 
+  mentorEditionName: 
+  mentorSellValue: 0
+  mentorDisabled: 0
 --- !u!114 &7486306067316991545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,15 +195,3 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 8, y: 8}
   m_UseGraphicAlpha: 0
---- !u!114 &6352447403124542680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8994356602663114153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82f97d75668294f94ab4bb9acf9af6cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using TMPro;
 using SplitString;
 
-public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
+public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler, IPointerDownHandler
 {
     [Header("Hover Information")]
     [Tooltip("This is the specific information for this card. Set this from DeckManager.")]
@@ -56,6 +56,7 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [HideInInspector] public UnityEvent<Card> BeginDragEvent;
     [HideInInspector] public UnityEvent<Card> EndDragEvent;
     [HideInInspector] public UnityEvent<Card, bool> SelectEvent;
+    [HideInInspector] public UnityEvent<Card> PointerClickEvent;
 
     [Header("Card Type Name")]
     public CardType cardType;
@@ -239,6 +240,12 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
             deleteCardScript.RemoveSelectedCard(gameObject);
             transform.localPosition = Vector3.zero;
         }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Card was clicked! Name: " + gameObject.name); // <-- ADD THIS LINE
+        PointerClickEvent.Invoke(this);
     }
 
     //This moves the card back to its original position

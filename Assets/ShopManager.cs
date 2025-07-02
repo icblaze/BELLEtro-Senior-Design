@@ -62,25 +62,36 @@ public class ShopManager : MonoBehaviour
     public CanvasGroup PackGroupPlus;//Canvas group for Cards 4 and 5
     int cardsSelected = 0;//Cards currently selected in pack
     int packSelected = 0;//Used to tell which pack was selected
+
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
-    private static ShopManager instance;  //ShopManager instance varaiable
+
+    public static ShopManager instance { get; private set; }  //ShopManager instance varaiable
 
     //Singleton for the ShopManager
     public static ShopManager access()
     {
-        if (instance == null)
-        {
-            instance = new ShopManager();
-        }
-
         return instance;
     }
+
+    // Enforce singleton instance
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // Optional: prevent duplicates
+            return;
+        }
+
+        instance = this;
+    }
+
 
     public void Start()
     {
         NewShop();
+        UpdateMoneyDisplay();
     }
 
     //Function called when  shopUI is opened. This intiallizes the 
@@ -1024,4 +1035,19 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
+
+    //  Method to update shop's moneyCount text (for example after selling)
+    public void UpdateMoneyDisplay()
+    {
+        if (moneyText != null && playerInst != null)
+        {
+            Debug.Log("ShopManager received update call. New money to display: " + playerInst.moneyCount);
+            moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
+        }
+        else
+        {
+            Debug.LogError("ShopManager could not update UI! moneyText or Player was null!");
+        }
+    }
+
 }
