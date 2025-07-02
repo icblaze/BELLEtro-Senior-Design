@@ -99,17 +99,37 @@ public class JokerCardHolder : MonoBehaviour
     {
         if (cardToSell != null)
         {
-            // Example: Give the player money for the card.
-            // player.money += cardToSell.sellValue;
+            // Get the Player and ShopManager instances
+            Player playerInst = Player.access();
+            ShopManager shopManager = ShopManager.access();
+            
+            // Get the Card component to access its sellValue
+            Card cardComponent = cardToSell.GetComponent<Card>();
 
-            // Remove the card from our list and destroy its game object.
+            // Make sure everything exists before proceeding
+            if (playerInst != null && cardComponent != null && shopManager != null)
+            {
+                Debug.Log("--- Selling Card ---");
+                Debug.Log("Money BEFORE sale: " + playerInst.moneyCount);
+                Debug.Log("Card sell value: " + cardComponent.sellValue);
+
+                // Add the card's value to the player's money
+                playerInst.moneyCount += cardComponent.sellValue;
+
+                Debug.Log("Money AFTER sale: " + playerInst.moneyCount);
+
+                // Tell the ShopManager to update the UI display
+                shopManager.UpdateMoneyDisplay();
+            }
+
+            // Remove the card from our list and destroy its game object
             cards.Remove(cardToSell);
             Destroy(cardToSell.gameObject);
 
-            // Destroy the sell button itself.
+            // Destroy the sell button itself
             Destroy(currentSellButton);
 
-            // Clear our variables.
+            // Clear our variables
             cardToSell = null;
             currentSellButton = null;
         }

@@ -14,7 +14,7 @@ public class Card : MonoBehaviour, IPointerClickHandler, IDragHandler, IBeginDra
     [Tooltip("This is the specific information for this card. Set this from DeckManager.")]
     [TextArea(3, 5)]
     public string cardDescription = "Default card information.";
-
+    public int sellValue = 5;
     private static GameObject infoPanel;
     private static TextMeshProUGUI infoText;
     private Canvas canvas;

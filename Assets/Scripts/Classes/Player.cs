@@ -15,20 +15,9 @@ using System.Linq;
 
 // The Player class will contain the information about each of the things the
 // player has and deals with selling
-public class Player
+public class Player : MonoBehaviour
 {
-    private static Player instance;  //Player instance varaiable
-
-    //Singleton for the player
-    public static Player access()
-    {
-        if (instance == null)
-        {
-            instance = new Player();
-        }
-
-        return instance;
-    }
+    
 
     public List<Mentor> mentorDeck;                              //List of Mentors that the player currently has.
     public List<Consumable> consumables;                         //List of consumables that the player currently has. Consumables are also called Textbooks.
@@ -66,22 +55,57 @@ public class Player
     }
 
     //  The player constructor
-    private Player()
+    //private Player()
+    //{
+      /// maxMentors = 5;
+      //  maxConsumables = 2;
+      //  mentorDeck = new List<Mentor>(maxMentors);
+      //  consumables = new List<Consumable>(maxConsumables);
+      //  vouchers = new List<Voucher>();
+      //  discards = 4;
+      //  handCount = 4;
+      //  moneyCount = 4;
+      //  chipCount = 0;
+      //  discount = 1.0f;    //  100% price initially
+      //  handSize = 8;
+       // InitializeHandTable();
+    //}
+    
+    public static Player instance { get; private set; }
+
+    // Awake is called when the script instance is being loaded.
+    private void Awake()
     {
-        maxMentors = 5;
-        maxConsumables = 2;
-        mentorDeck = new List<Mentor>(maxMentors);
-        consumables = new List<Consumable>(maxConsumables);
-        vouchers = new List<Voucher>();
-        discards = 4;
-        handCount = 4;
-        moneyCount = 4;
-        chipCount = 0;
-        discount = 1.0f;    //  100% price initially
-        handSize = 8;
-        InitializeHandTable();
+    // Standard singleton setup
+    if (instance != null && instance != this)
+    {
+        Destroy(this.gameObject);
+    }
+    else
+    {
+        instance = this;
     }
 
+    // This is the initialization code from your old constructor
+    maxMentors = 5;
+    maxConsumables = 2;
+    mentorDeck = new List<Mentor>(maxMentors);
+    consumables = new List<Consumable>(maxConsumables);
+    vouchers = new List<Voucher>();
+    discards = 4;
+    handCount = 4;
+    moneyCount = 4;
+    chipCount = 0;
+    discount = 1.0f;
+    handSize = 8;
+    InitializeHandTable();
+    }
+
+    // Keep this so your other scripts don't break
+    public static Player access()
+    {
+        return instance;
+    }
     //This removes a card from the player hand list if it is contained within the list
     public void removeCard(PCard card)
     {
