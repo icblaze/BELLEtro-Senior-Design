@@ -35,7 +35,7 @@ public class PlayHand : MonoBehaviour
         deckManager = FindFirstObjectByType<DeckManager>();     // Find DeckManager in the scene
         handsLeft = GameObject.Find("Hands Number Text").GetComponent<TextMeshProUGUI>();
         Player player = Player.access();
-
+    
         if (playingCardGroup == null)
         {
             var go = GameObject.Find("PlayingCardGroup");
@@ -106,7 +106,7 @@ public class PlayHand : MonoBehaviour
         for (int i = 0; i < selectedCards.Count; i++)
         {
             GameObject card = selectedCards[i];
-
+            
             if (card == null)
             {
                 Debug.LogError($"Card at index {i} is NULL!");

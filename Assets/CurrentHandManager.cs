@@ -450,11 +450,12 @@ public class CurrentHandManager : MonoBehaviour
         var vowelPairs = new HashSet<string>();
         var consonantPlaces = new HashSet<string>();
 
-        foreach (var card in pCards)
+        //This checks if the vowels have the same place of articulation and manner of articulation
+        for (int i = 0; i < pCards.Count; i++)
         {
-            string suit = card.suit.ToString();
-            string place = card.placeArt.ToString();
-            string manner = card.mannerArt.ToString();
+            string suit = pCards[i].suit.ToString();
+            string place = pCards[i].placeArt.ToString();
+            string manner = pCards[i].mannerArt.ToString();
 
             bool isVowel = suit == "Lax" || suit == "Tense";
 
@@ -466,8 +467,28 @@ public class CurrentHandManager : MonoBehaviour
             }
             else
             {
-                if (!consonantPlaces.Add(place))
-                    return false; // Duplicate consonant place
+                return false; // If any consonant is present, we cannot have a straight with vowels
+            }
+        }
+
+        //This checks if the consonants have the same place of articulation
+        for (int i = 0; i < pCards.Count; i++)
+        {
+            string place = pCards[i].placeArt.ToString();
+            string manner = pCards[i].mannerArt.ToString();
+
+            string combo = place;
+            //Check if the combo is a place of articulation
+            if (isAPlaceOfArticulation(place))
+            {
+                if (!consonantPlaces.Add(combo))
+                {
+                    return false; // Duplicate consonant combo
+                }
+            }
+            else
+            { 
+                return false; // If any non-place of articulation is present, we cannot have a straight with consonants
             }
         }
 
@@ -494,6 +515,7 @@ public class CurrentHandManager : MonoBehaviour
 
         return cardTerms.GroupBy(cardTerm => cardTerm[0]).Any(g => g.Count() == 5);
     }
+    
     //Find a pair. Then check to see if the remaining cards are
     //a three of a kind.
     public bool FullHouseCheck(List<PCard> pCards)
@@ -666,6 +688,14 @@ public class CurrentHandManager : MonoBehaviour
                 redScoreText.text = "0";
                 return;
         }
+    }
+    
+    public bool isAPlaceOfArticulation(string place)
+    {
+        // Check if the place is one of the valid places of articulation
+        return place == "Labial" || place == "Labiodental" || place == "Interdental" ||
+               place == "Alveolar" || place == "AlveoPalatal" || place == "Velar" ||
+               place == "Glottal";
     }
 
 }

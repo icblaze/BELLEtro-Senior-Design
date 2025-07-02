@@ -17,7 +17,7 @@ public class DeleteCard : MonoBehaviour
     [SerializeField] private int pcardCount;
     private CardType cardType;
     void Start()
-    {
+    {    
         deckManager = FindFirstObjectByType<DeckManager>();
         if (deckManager == null)
             Debug.LogError("DeleteCard: no DeckManager in scene!");
