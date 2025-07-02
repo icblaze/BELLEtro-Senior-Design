@@ -24,18 +24,18 @@ public class ShakeScreen : MonoBehaviour
 
         return instance;
     }
-    public void Update()
-    {
-        if (shake)
-        {
-            shake = false;
-            // StartCoroutine(Shaking());
-            StartShake();
-        }
-    }
+    // public void Update()
+    // {
+    //     if (shake)
+    //     {
+    //         shake = false;
+    //         // StartCoroutine(Shaking());
+    //         StartShake();
+    //     }
+    // }
     public void StartShake()
     {
-        OnShake(1f, .05f);
+        OnShake(1f, .025f);
     }
     private IEnumerator Shaking()
     {

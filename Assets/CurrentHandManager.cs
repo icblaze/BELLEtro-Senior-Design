@@ -1,7 +1,7 @@
 //Script is used to detect the different types of hands
 //that the current selected cards make.
 //Current Devs:
-//Fredrick Bouloute (bouloutef04)
+//Fredrick Bouloute (bouloutef04) - Implemented the base logic and text changes for the Hand Types.
 //Zacharia Alaoui (ZachariaAlaoui) - Implemented the logic for detecting and updating the UI based on the hand the player currently has selected.
 
 using System.Collections.Generic;
@@ -76,50 +76,71 @@ public class CurrentHandManager : MonoBehaviour
                 return "";
             case 1:
                 currentHandText.GetComponent<TMP_Text>().text = "High Card";
-                updateBaseAndMult("High Card");
+                updateBaseAndMult("HighCard");
                 return "HighCard";
             case 2://If pair, return pair. If not highcard
 
                 result = PairCheck(selectedCards);
-                currentHandText.GetComponent<TMP_Text>().text = result;
+                if (result.CompareTo("HighCard") == 0)
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                }
+                else
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                }
                 updateBaseAndMult(result);
                 return result;
             case 3://Check if pair, three of a kind, or highcard.
                 if (ThreeKindCheck(selectedCards) == true)
                 {
-                    result = "Three Of A Kind";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "ThreeKind";
+                    currentHandText.GetComponent<TMP_Text>().text = "Three Of A Kind";
                     updateBaseAndMult(result);
                     return result;
                 }
                 result = PairCheck(selectedCards);
-                currentHandText.GetComponent<TMP_Text>().text = result;
+                if (result.CompareTo("HighCard") == 0)
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                }
+                else
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                }
                 updateBaseAndMult(result);
                 return result;
             case 4://Check pair, three of a kind, four of a kind, two pair, highcard.
                 if (FourKindCheck(selectedCards) == true)
                 {
-                    result = "Four Of A Kind";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "FourKind";
+                    currentHandText.GetComponent<TMP_Text>().text = "Four Of A Kind";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (ThreeKindCheck(selectedCards) == true)
                 {
-                    result = "Three Of A Kind";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "ThreeKind";
+                    currentHandText.GetComponent<TMP_Text>().text = "Three Of A Kind";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (TwoPairCheck(selectedCards) == true)
                 {
-                    result = "Two Pair";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "TwoPair";
+                    currentHandText.GetComponent<TMP_Text>().text = "Two Pair";
                     updateBaseAndMult(result);
                     return result;
                 }
                 result = PairCheck(selectedCards);
-                currentHandText.GetComponent<TMP_Text>().text = result;
+                if (result.CompareTo("HighCard") == 0)
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                }
+                else
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                }
                 updateBaseAndMult(result);
                 return result;
             case 5:
@@ -134,41 +155,41 @@ public class CurrentHandManager : MonoBehaviour
                 {
                     if (flush == true)
                     {
-                        result = "Flush Five";
-                        currentHandText.GetComponent<TMP_Text>().text = result;
+                        result = "FlushFive";
+                        currentHandText.GetComponent<TMP_Text>().text = "Flush Five";
                         updateBaseAndMult(result);
                         return result;
                     }
-                    result = "Five Of A Kind";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "FiveKind";
+                    currentHandText.GetComponent<TMP_Text>().text = "Five Of A Kind";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (fullhouse == true && flush == true)
                 {
-                    result = "Flush House";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "FlushHouse";
+                    currentHandText.GetComponent<TMP_Text>().text = "Flush House";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (flush == true && straight == true)
                 {
-                    result = "Straight Flush";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "StraightFlush";
+                    currentHandText.GetComponent<TMP_Text>().text = "Straight Flush";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (FourKindCheck(selectedCards) == true)
                 {
-                    result = "Four Of A Kind";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "FourKind";
+                    currentHandText.GetComponent<TMP_Text>().text = "Four Of A Kind";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (fullhouse == true)
                 {
-                    result = "Full House";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "FullHouse";
+                    currentHandText.GetComponent<TMP_Text>().text = "Full House";
                     updateBaseAndMult(result);
                     return result;
                 }
@@ -188,20 +209,27 @@ public class CurrentHandManager : MonoBehaviour
                 }
                 if (ThreeKindCheck(selectedCards) == true)
                 {
-                    result = "Three Of A Kind";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "ThreeKind";
+                    currentHandText.GetComponent<TMP_Text>().text = "Three Of A Kind";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (TwoPairCheck(selectedCards) == true)
                 {
-                    result = "Two Pair";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "TwoPair";
+                    currentHandText.GetComponent<TMP_Text>().text = "Two Pair";
                     updateBaseAndMult(result);
                     return result;
                 }
                 result = PairCheck(selectedCards);
-                currentHandText.GetComponent<TMP_Text>().text = result;
+                if (result.CompareTo("HighCard") == 0)
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                }
+                else
+                {
+                    currentHandText.GetComponent<TMP_Text>().text = result;
+                }
                 updateBaseAndMult(result);
                 return result;
             default:
@@ -259,7 +287,7 @@ public class CurrentHandManager : MonoBehaviour
             }
         }
 
-        return "High Card";
+        return "HighCard";
     }
 
     public bool ThreeKindCheck(List<PCard> pCards)
@@ -452,7 +480,7 @@ public class CurrentHandManager : MonoBehaviour
     {
         if (pCards.Count < 5)
         {
-            return false; 
+            return false;
         }
 
         string[][] cardTerms = new string[pCards.Count][];
@@ -498,8 +526,8 @@ public class CurrentHandManager : MonoBehaviour
                             (cardTerms[i][2] == cardTerms[k][2]))
                         {
                             listOfCards.RemoveAt(i);
-                            listOfCards.RemoveAt(j-1);
-                            listOfCards.RemoveAt(k-2);
+                            listOfCards.RemoveAt(j - 1);
+                            listOfCards.RemoveAt(k - 2);
 
                             Debug.LogWarning("Potential Full house!");
                             isThreeKind = true;
@@ -511,8 +539,8 @@ public class CurrentHandManager : MonoBehaviour
                     else if ((cardTerms[i][1] == cardTerms[j][1]) && (cardTerms[i][1] == cardTerms[k][1]))
                     {
                         listOfCards.RemoveAt(i);
-                        listOfCards.RemoveAt(j-1);
-                        listOfCards.RemoveAt(k-2);
+                        listOfCards.RemoveAt(j - 1);
+                        listOfCards.RemoveAt(k - 2);
                         Debug.LogWarning("Potential Full house!");
                         isThreeKind = true;
                         break;
@@ -521,8 +549,8 @@ public class CurrentHandManager : MonoBehaviour
                     else if ((cardTerms[i][2] == cardTerms[j][2]) && (cardTerms[i][2] == cardTerms[k][2]))
                     {
                         listOfCards.RemoveAt(i);
-                        listOfCards.RemoveAt(j-1);
-                        listOfCards.RemoveAt(k-2);
+                        listOfCards.RemoveAt(j - 1);
+                        listOfCards.RemoveAt(k - 2);
                         Debug.LogWarning("Potential Full house!");
                         isThreeKind = true;
                         break;
@@ -585,7 +613,7 @@ public class CurrentHandManager : MonoBehaviour
     {
         switch (handType)
         {
-            case "High Card":
+            case "HighCard":
                 blueScoreText.text = Player.access().handTable[TextbookName.HighCard].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.HighCard].GetCurrMult().ToString();
                 break;
@@ -593,11 +621,11 @@ public class CurrentHandManager : MonoBehaviour
                 blueScoreText.text = Player.access().handTable[TextbookName.Pair].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.Pair].GetCurrMult().ToString();
                 break;
-            case "Two Pair":
+            case "TwoPair":
                 blueScoreText.text = Player.access().handTable[TextbookName.TwoPair].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.TwoPair].GetCurrMult().ToString();
                 break;
-            case "Three Of A Kind":
+            case "ThreeKind":
                 blueScoreText.text = Player.access().handTable[TextbookName.ThreeKind].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.ThreeKind].GetCurrMult().ToString();
                 break;
@@ -609,27 +637,27 @@ public class CurrentHandManager : MonoBehaviour
                 blueScoreText.text = Player.access().handTable[TextbookName.Flush].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.Flush].GetCurrMult().ToString();
                 break;
-            case "Full House":
+            case "FullHouse":
                 blueScoreText.text = Player.access().handTable[TextbookName.FullHouse].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.FullHouse].GetCurrMult().ToString();
                 break;
-            case "Four Of A Kind":
+            case "FourKind":
                 blueScoreText.text = Player.access().handTable[TextbookName.FourKind].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.FourKind].GetCurrMult().ToString();
                 break;
-            case "Straight Flush":
+            case "StraightFlush":
                 blueScoreText.text = Player.access().handTable[TextbookName.StraightFlush].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.StraightFlush].GetCurrMult().ToString();
                 break;
-            case "Five Of A Kind":
+            case "FiveKind":
                 blueScoreText.text = Player.access().handTable[TextbookName.FiveKind].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.FiveKind].GetCurrMult().ToString();
                 break;
-            case "Flush House":
+            case "FlushHouse":
                 blueScoreText.text = Player.access().handTable[TextbookName.FlushHouse].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.FlushHouse].GetCurrMult().ToString();
                 break;
-            case "Flush Five":
+            case "FlushFive":
                 blueScoreText.text = Player.access().handTable[TextbookName.FlushFive].GetCurrChips().ToString();
                 redScoreText.text = Player.access().handTable[TextbookName.FlushFive].GetCurrMult().ToString();
                 break;
