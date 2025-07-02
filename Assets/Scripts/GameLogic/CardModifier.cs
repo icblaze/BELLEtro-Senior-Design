@@ -83,10 +83,40 @@ public class CardModifier
     }
 
     // Return description for given card enhancement
+    public static string EnhancementDesc(CardEnhancement enhancement)
+    {
+        switch(enhancement)
+        {
+            case CardEnhancement.Base:
+                return "";  
+        }
+
+        return "";
+    }
 
     // Return description for given card edition
+    public static string EditionDesc(CardEdition edition)
+    {
+        switch (edition)
+        {
+            case CardEdition.Base:
+                return "";  
+        }
+
+        return "";
+    }
 
     // Return description for given card seal
+    public static string SealDesc(CardSeal seal)
+    {
+        switch (seal)
+        {
+            case CardSeal.Base:
+                return "";  
+        }
+
+        return "";
+    }
 
     // Use enhancement effect with given use location
 

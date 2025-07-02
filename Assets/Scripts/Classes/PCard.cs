@@ -74,11 +74,15 @@ public class PCard : BaseCard
         set { _kindOfCard = value; }
     } //Getter and setter for typeOfCard
 
-    //  Return attributes of the PCard
+    //  Return attributes of the PCard (chips, mult, and card modifiers if any)
     public override string ToString()
     {
-        return "Linguistic Term: " + term.ToString() + "\nSuit:" + suit.ToString();
-        
+        //  For testing/debugging
+        string description = "Linguistic Term: " + term.ToString() + "\nSuit:" + suit.ToString();
+
+        //description += $"Chips: {chips}\nMult: {multiplier}\n";
+
+        return description;
     }
 }
 

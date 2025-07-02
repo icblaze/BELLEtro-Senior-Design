@@ -86,9 +86,11 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
     [SerializeField] private int mentorSellValue = 0;
     [SerializeField] private bool mentorDisabled = false;
 
+    private DeleteCard deleteCardScript;
+
     void Start()
     {
-
+        deleteCardScript = FindFirstObjectByType<DeleteCard>();
     }
 
     void Update()
@@ -226,23 +228,30 @@ public class Card : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHand
         selected = !selected;
         SelectEvent.Invoke(this, selected);
 
+        //  Call select cards here instead of separate CardSelection script
         if (selected)
+        {
+            deleteCardScript.AddSelectedCard(gameObject);
             transform.localPosition += (cardVisual.transform.up * selectionOffset);
+        }
         else
+        {
+            deleteCardScript.RemoveSelectedCard(gameObject);
             transform.localPosition = Vector3.zero;
+        }
     }
 
     //This moves the card back to its original position
     public void Deselect()
     {
-        if (selected)
-        {
-            selected = false;
-            if (selected)
-                transform.localPosition += (cardVisual.transform.up * 50);
-            else
-                transform.localPosition = Vector3.zero;
-        }
+        //if (selected)
+        //{
+        //    selected = false;
+        //    if (selected)
+        //        transform.localPosition += (cardVisual.transform.up * 50);
+        //    else
+        //        transform.localPosition = Vector3.zero;
+        //}
     }
 
 
