@@ -35,7 +35,7 @@ public class JokerCardHolder : MonoBehaviour
         //  Add 1 random mentor at each rerun of scene for testing purposes!
         //  Order should persist if correct, selling should remove from mentorDeck  
         //  Comment out eventually
-        player.mentorDeck.AddRange(game.randomMentorShop(1));
+        //player.mentorDeck.AddRange(game.randomMentorShop(1));
 
         //  Debug mentors in the list, order from left to right
         int count = 1;
@@ -258,6 +258,28 @@ public class JokerCardHolder : MonoBehaviour
             //  Wait for GameObject deletion before refreshing
             StartCoroutine(RefreshFrame());
         }
+    }
+
+    //  Visually update mentor deck when added
+    public void AddMentor(Mentor newMentor)
+    {
+        //  Instatiate a new slot
+        GameObject newSlot = Instantiate(slotPrefab, transform);
+        newSlot.name = $"New MentorSlot";
+
+        //  Assign mentor to card in new slot
+        Card card = newSlot.GetComponentInChildren<Card>();
+
+        card.PointerEnterEvent.AddListener(CardPointerEnter);
+        card.PointerExitEvent.AddListener(CardPointerExit);
+        card.BeginDragEvent.AddListener(BeginDrag);
+        card.EndDragEvent.AddListener(EndDrag);
+        card.PointerClickEvent.AddListener(OnCardClicked);  //  For sell function
+        card.AssignMentor(newMentor);
+        card.name = card.mentor.name.ToString();
+
+        //  Refresh mentor list
+        StartCoroutine(RefreshFrame());
     }
 
     //  When mentors get rearranged, reassign mentor buffers, change mentorDeck

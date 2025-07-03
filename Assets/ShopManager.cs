@@ -67,6 +67,10 @@ public class ShopManager : MonoBehaviour
     Game inst = Game.access();
     Player playerInst = Player.access();
 
+    // To visually update the Mentors and Consumables Card Group when items added
+    GameObject mentorCardHolder;
+    GameObject consumableCardHolder;
+
     public static ShopManager instance { get; private set; }  //ShopManager instance varaiable
 
     //Singleton for the ShopManager
@@ -237,8 +241,8 @@ public class ShopManager : MonoBehaviour
     private void BuyMentor(Mentor mentor, Button mentorButton)
     {
         //If Joker threshold is hit, do not purchase.
-        if (playerInst.mentorDeck.Count >= playerInst.maxMentors ||
-        playerInst.moneyCount < mentor.price)
+        if (mentor.edition != CardEdition.Negative && (playerInst.mentorDeck.Count >= playerInst.maxMentors ||
+        playerInst.moneyCount < mentor.price))
         {
             Debug.Log("Not Enough Space In Mentors or Money Insufficient");
             return;
@@ -735,7 +739,7 @@ public class ShopManager : MonoBehaviour
         //If Mentor Card, check if count is not max then add if not
         if (PackCard1.mentor != null)
         {
-            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            if (PackCard1.mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors)
             {
                 Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
                 return;
@@ -775,7 +779,7 @@ public class ShopManager : MonoBehaviour
         //If Mentor Card, check if count is not max then add if not
         if (PackCard2.mentor != null)
         {
-            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            if (PackCard2.mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors)
             {
                 Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
                 return;
@@ -814,7 +818,7 @@ public class ShopManager : MonoBehaviour
         //If Mentor Card, check if count is not max then add if not
         if (PackCard3.mentor != null)
         {
-            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            if (PackCard3.mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors)
             {
                 Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
                 return;
@@ -853,7 +857,7 @@ public class ShopManager : MonoBehaviour
         //If Mentor Card, check if count is not max then add if not
         if (PackCard4.mentor != null)
         {
-            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            if (PackCard4.mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors)
             {
                 Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
                 return;
@@ -892,7 +896,7 @@ public class ShopManager : MonoBehaviour
         //If Mentor Card, check if count is not max then add if not
         if (PackCard5.mentor != null)
         {
-            if (playerInst.mentorDeck.Count >= playerInst.maxMentors)
+            if (PackCard5.mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors)
             {
                 Debug.Log("Mentors Is Maxed. Please Sell A Mentor To Add.");
                 return;
