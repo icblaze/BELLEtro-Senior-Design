@@ -36,7 +36,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         //Get current hand Manager
         currentHandManager = FindFirstObjectByType<CurrentHandManager>();
-        if (deleteCardScript == null)
+        if (currentHandManager == null)
             Debug.LogError("PlayHand: CurrentHandManager script not found in scene!");
 
         //Get score UI components
