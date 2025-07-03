@@ -90,7 +90,7 @@ public class Mentor
 
         price = 2;
         sellValue = 1;
-        description = "This is a test mentor";
+        description = "This is a test mentor with a really long description to test the bounds of this description box. This is a test mentor with a long description! long description! long description!";
     }
 
     //  Constructor that each Mentor will use as the base, locations filled out in specific mentor
