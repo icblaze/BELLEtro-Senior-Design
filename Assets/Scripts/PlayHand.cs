@@ -17,6 +17,7 @@ public class PlayHand : MonoBehaviour
     private DeleteCard deleteCardScript;                             // Reference to DeleteCard
     private DeckManager deckManager;                                 // Reference to DeckManager
     public TextMeshProUGUI handsLeft;
+    private ScoringManager ScoringManager;
 
     private static int currHandCount;
     private Transform playingCardGroup;
@@ -132,6 +133,9 @@ public class PlayHand : MonoBehaviour
         //Call a function here to Calculate the score of the hand that was played.
         //selectedCards is a list of cards that were selected by the player and these
         //cards have been moved to the PlayArea.
+        ScoringManager scoringManager = FindFirstObjectByType<ScoringManager>();
+        scoringManager.GetScoring();
+
 
         yield return new WaitForSeconds(displayDuration);
 

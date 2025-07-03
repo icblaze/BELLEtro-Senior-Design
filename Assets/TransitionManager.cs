@@ -63,6 +63,8 @@ public class TransitionManager : MonoBehaviour
     {
         StartCoroutine(fadeScript.FadeOut(roundScreen));
         StartCoroutine(fadeScript.FadeIn(endOfRoundScreen));
+        EndOfRoundManager endOfRoundManager = GameObject.FindGameObjectWithTag("EndOfRoundManager").GetComponent<EndOfRoundManager>();
+        endOfRoundManager.EndScreenOpened();
     }
     public void TransitionToShopScreen()
     {

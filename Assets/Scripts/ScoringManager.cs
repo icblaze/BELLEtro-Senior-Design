@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 //Script is used to complete the scoring aspect of the game.
 //This includes the chips/mults gained from the cards in addition
 //to the mentors.
 
-public class NewMonoBehaviourScript : MonoBehaviour
+public class ScoringManager : MonoBehaviour
 {
     private DeleteCard deleteCardScript;
     private List<PCard> playedPCards;
@@ -24,7 +26,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
     private TMP_Text blueScoreText;
     private TMP_Text redScoreText;
     private TMP_Text roundScoreText;
-    private int totalScore;
+    private BigInteger totalScore;
+    private BigInteger neededScore;
+
 
     public void Start()
     {
@@ -40,7 +44,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             Debug.LogError("PlayHand: CurrentHandManager script not found in scene!");
 
         //Get score UI components
-        roundScore = GameObject.Find("Round Score");
+        roundScore = GameObject.Find("Round Score Number");
         roundScoreText = roundScore.GetComponent<TMP_Text>();
 
         blueScore = GameObject.Find("Blue Score Text");
@@ -49,11 +53,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
         redScore = GameObject.Find("Red Score Text");
         redScoreText = redScore.GetComponent<TMP_Text>();
     }
-    
+
     //Public function to start the scoring process
     public void GetScoring()
     {
-        //Get P Cards and Regular Crads
+        //Get P Cards and Regular Cards
         playedPCards = deleteCardScript.GetSelectedPCards();
         selectedCards = deleteCardScript.GetSelectedCards();
 
@@ -61,7 +65,25 @@ public class NewMonoBehaviourScript : MonoBehaviour
         handType = currentHandManager.findCurrentHand(playedPCards);
         SetHandScore(handType);
 
+        int ante = Game.access().ante;
+        int round = Game.access().roundValue;
+        neededScore = (int)Round.access().GetTargetScore(ante, round);
+
+        //Start the card scoring process
         StartCoroutine(CardScoring());
+    }
+
+    //Resets the different variables and texts once round is finished
+    public void EndOfRound()
+    {
+        Game.access().currentChipAmount = 0;
+        roundScoreText.text = "0";
+        redScoreText.text = "0";
+        blueScoreText.text = "0"; 
+        currentChips = 0;
+        currentMult = 0;
+        totalScore = 0;
+        handType = "";
     }
 
     private IEnumerator CardScoring()
@@ -70,14 +92,20 @@ public class NewMonoBehaviourScript : MonoBehaviour
         //before going to the next card
         int numCards = playedPCards.Count;
         int i = 0;
+        // if (handType.CompareTo("HighCard") == 0)
+        // {
+        //     numCards = 1;
+        // }
         while (i < numCards)
         {
             currentChips += playedPCards[i].chips;
             currentMult += playedPCards[i].multiplier;
+            Debug.Log("Current Chips: " + currentChips.ToString());
+            Debug.Log("Current Mult: " + currentMult.ToString());
 
             //Update the text UI.
             //Should have a UI element that is shown in realtime
-            shakeScreen.StartShake();
+            // shakeScreen.StartShake();
             blueScoreText.text = currentChips.ToString();
             redScoreText.text = currentMult.ToString();
 
@@ -90,6 +118,18 @@ public class NewMonoBehaviourScript : MonoBehaviour
         SetTotal();
         yield return new WaitForSecondsRealtime(.5f);
 
+        //Start next round proceedings
+        if (neededScore < totalScore)
+        {
+            TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+            transitionManager.TransitionToEndOfRoundScreen();
+        }
+        //If player runs out of hands, game over
+        else if (Player.access().handCount <= 0)
+        {
+            TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+            transitionManager.TransitionToDefeatScreen();
+        }
     }
     //Calculate the totalChips earned from hand, add it to player chipCount
     //and display change in the UI.
