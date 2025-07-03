@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using System.Linq;
@@ -193,6 +194,7 @@ public class JokerCardHolder : MonoBehaviour
         currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
         // This resets the button's position to the center of the card.
 
+        currentSellButton.GetComponentInChildren<TMP_Text>().text = "Sell $" + cardToSell.GetComponent<Card>().mentor.sellValue.ToString();
         Button sellBtn = currentSellButton.GetComponent<Button>();
         sellBtn.onClick.AddListener(SellCard);
     }

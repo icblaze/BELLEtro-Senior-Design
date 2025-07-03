@@ -14,6 +14,7 @@ using UnityEngine;
 public class CardBuff : Consumable
 {
     public CardBuffName name;
+    public ConsumableCardHolder consumableHolder;
 
     //  This will construct the appropiate CardBuff subclass
     public static CardBuff CardBuffFactory(CardBuffName name)
@@ -121,6 +122,7 @@ public class CardBuff : Consumable
     {
         name = CardBuffName.Leftovers;
         price = 3;
+        sellValue = 1;
         isInstant = true;
         type = ConsumableType.CardBuff;
         isDisabled = false;
@@ -132,15 +134,10 @@ public class CardBuff : Consumable
     {
         this.name = name;
         price = 3;
+        sellValue = 1;
         type = ConsumableType.CardBuff;
         isDisabled = false;
         isNegative = false;
-    }
-
-    //  If CardBuff was used in the consumables group, then remove it from here
-    public void RemoveConsumable()
-    {
-        player.consumables.Remove(this);
     }
 
     //  Set if the card buff can be used to set isDisabled, and return details
@@ -149,15 +146,24 @@ public class CardBuff : Consumable
         return description;
     }
 
+    //  Set if the card buff can be used to set isDisabled and return it
+    public virtual bool CheckDisabled()
+    {
+        return isDisabled;
+    }
+
     //  Will apply the card's specific buff, overridden in subclasses
     public virtual void applyCardBuff ()
     {
 
     }
 
-    //  TODO Generates up to 2 consuables of given type FIX RANDOM (Used for Almonds and Panackes)
     protected void GenerateConsumables(ConsumableType consumableType)
     {
+        if(consumableHolder == null)
+        {
+            consumableHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
+        }
         
         int space = player.maxConsumables - player.consumables.Count;
 
@@ -170,16 +176,18 @@ public class CardBuff : Consumable
             }
         }
 
-        RemoveConsumable();
-
         //  Add random consumables 
         if (consumableType == ConsumableType.Textbook)
         {
-            //player.consumables.AddRange(game.randomTextbook(Math.Min(space, 2)));
+            Textbook[] tbookList = game.randomTextbookShop(Math.Min(space, 2));
+            consumableHolder.AddConsumable(tbookList[0]);
+            consumableHolder.AddConsumable(tbookList[1]);
         }
         else
         {
-            //player.consumables.AddRange(game.randomCardBuff(Math.Min(space, 2)));
+            Consumable[] consumableList = game.randomCardBuffShop(Math.Min(space, 2));
+            consumableHolder.AddConsumable(consumableList[0]);
+            consumableHolder.AddConsumable(consumableList[1]);
         }
     }
 }

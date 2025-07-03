@@ -22,6 +22,7 @@ public class Brainstorm : Mentor
     //  Dynamically change the effect of Cheat Sheet based on mentorDeck, call in JokerCard group
     public void ChangeEffect ()
     {
+        //Debug.Log("mic check brainstorm");
         Player player = Player.access();
 
         //  Get index of Brainstorm mentor

@@ -66,6 +66,7 @@ public class ShopManager : MonoBehaviour
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
+    Deck deck = Deck.access();
 
     // To visually update the Mentors and Consumables Card Group when items added
     GameObject mentorCardHolder;
@@ -694,18 +695,24 @@ public class ShopManager : MonoBehaviour
         if (setCard.textbook != null)
         {
             setButton.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + setCard.textbook.name.ToString());
+            setButton.GetComponentInChildren<TMP_Text>().text = "";
         }
         else if (setCard.mentor != null)
         {
             setButton.image.sprite = Resources.Load<Sprite>($"Mentor/" + setCard.mentor.name.ToString());
+            setButton.GetComponentInChildren<TMP_Text>().text = "";
         }
         else if (setCard.cardBuff != null)
         {
             setButton.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + setCard.cardBuff.name.ToString());
+            setButton.GetComponentInChildren<TMP_Text>().text = "";
             Debug.Log("CardBuff Name: " + setCard.cardBuff.name.ToString());
         }
         else
         {
+            //  For Regular Playing Cards set to card base and change text element of button
+            setButton.image.sprite = Resources.Load<Sprite>($"PCard/card_base");
+            setButton.GetComponentInChildren<TMP_Text>().text = LinguisticTermSymbol.unicodeMap[setCard.term];
             Debug.Log("Regular Card: " + setCard.term);
         }
 
@@ -770,6 +777,10 @@ public class ShopManager : MonoBehaviour
             playerInst.consumables.Add(PackCard1.cardBuff);
             cardsSelected++;
         }
+
+        //  If regular playing card, add to player's deck
+        deck.AddCard(PackCard1);
+
         PackCardButton1.interactable = false;
         checkPackAmountSelected();
 
@@ -810,6 +821,10 @@ public class ShopManager : MonoBehaviour
             playerInst.consumables.Add(PackCard2.cardBuff);
             cardsSelected++;
         }
+
+        //  If regular playing card, add to player's deck
+        deck.AddCard(PackCard2);
+
         PackCardButton2.interactable = false;
         checkPackAmountSelected();
     }
@@ -849,6 +864,10 @@ public class ShopManager : MonoBehaviour
             playerInst.consumables.Add(PackCard3.cardBuff);
             cardsSelected++;
         }
+
+        //  If regular playing card, add to player's deck
+        deck.AddCard(PackCard3);
+
         PackCardButton3.interactable = false;
         checkPackAmountSelected();
     }
@@ -888,6 +907,10 @@ public class ShopManager : MonoBehaviour
             playerInst.consumables.Add(PackCard4.cardBuff);
             cardsSelected++;
         }
+
+        //  If regular playing card, add to player's deck
+        deck.AddCard(PackCard4);
+
         PackCardButton4.interactable = false;
         checkPackAmountSelected();
     }
@@ -927,6 +950,10 @@ public class ShopManager : MonoBehaviour
             playerInst.consumables.Add(PackCard5.cardBuff);
             cardsSelected++;
         }
+
+        //  If regular playing card, add to player's deck
+        deck.AddCard(PackCard5);
+
         PackCardButton5.interactable = false;
         checkPackAmountSelected();
     }

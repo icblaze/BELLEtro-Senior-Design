@@ -48,20 +48,28 @@ public class Leftovers : CardBuff
     //  Generates the last used consumable
     public override void applyCardBuff ()
     {
+        //  If no previous consumable eligible
         Consumable lastUsed = game.previousConsumable;
+        if (lastUsed == null)
+        {
+            return;
+        }
+
+        if (consumableHolder == null)
+        {
+            consumableHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
+        }
+
         if (lastUsed.type == ConsumableType.Textbook)
         {
             Textbook prevTextbook = (Textbook) lastUsed;
-            player.consumables.Add(new Textbook(prevTextbook.name));
+            consumableHolder.AddConsumable(prevTextbook);
         }
         else
         {
             CardBuff prevCardBuff = (CardBuff) lastUsed;
-            player.consumables.Add(CardBuffFactory(prevCardBuff.name));
+            consumableHolder.AddConsumable(prevCardBuff);
         }
-
-        //  After adding copy of previous, remove Leftovers if in slot
-        RemoveConsumable();
 
         //  Set prev used consumable to current consumable (except for Leftovers)
     }

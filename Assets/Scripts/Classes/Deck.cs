@@ -182,13 +182,12 @@ public class Deck
   //Adds a card to the deck
   public void AddCard(PCard card)
   {
-    // Increment the unique ID when adding to card
-    counter++;
-    card.cardID = counter;
-
     if (card != null)
     {
-      deckCards.Add(card);
+        // Increment the unique ID when adding to card
+        counter++;
+        card.cardID = counter;
+        deckCards.Add(card);
     }
   }
 

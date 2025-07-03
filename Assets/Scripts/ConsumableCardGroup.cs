@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using DG.Tweening;
@@ -19,12 +20,14 @@ public class ConsumableCardHolder : MonoBehaviour
     public List<Card> cards;
 
     [Header("Sell Button")]
-    [SerializeField] private GameObject sellButtonPrefab; // Holds the button template
+    [SerializeField] private GameObject sellButtonPrefab; // Holds the sell button template
     private GameObject currentSellButton; // The active sell button in the scene
     [SerializeField] private Card cardToSell; // The card we want to sell
 
     [Header("Use Button")]
-    [SerializeField] private GameObject useButtonPrefab; // Holds the button template
+    [SerializeField] private GameObject useButtonPrefab; // Holds the use button template
+    private GameObject currentUseButton; // The active use button in the scene
+    [SerializeField] private Card cardToUse; // The card we want to use
 
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
@@ -34,10 +37,11 @@ public class ConsumableCardHolder : MonoBehaviour
 
     void Start()
     {
-        //  Add 1 consumable at each rerun of scene for testing purposes!
+        //  Add 2 consumable at each rerun of scene for testing purposes!
         //  Order should persist if correct, selling should remove from consumables  
         //  Comment out eventually
-        player.consumables.AddRange(game.randomTextbookShop(1));
+        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Leftovers));
+        player.consumables.Add(new Textbook(TextbookName.Straight));
 
         //  Debug consumables in the list, order from left to right
         Debug.Log("Consumables in list:");
@@ -174,18 +178,7 @@ public class ConsumableCardHolder : MonoBehaviour
 
         cards[index].transform.SetParent(focusedParent);
         cards[index].transform.localPosition = cards[index].selected ? new Vector3(0, cards[index].selectionOffset, 0) : Vector3.zero;
-        selectedCard.transform.SetParent(crossedParent);
-
-        //  This means that when swapping between slots it'll have to modify the mentorDeck ordering as well
-        int focusedIndex = selectedCard.ParentIndex();
-        int crossedIndex = cards[index].ParentIndex();
-
-        Mentor tempMentor = player.mentorDeck[focusedIndex];
-        player.mentorDeck[focusedIndex] = player.mentorDeck[crossedIndex];
-        player.mentorDeck[crossedIndex] = tempMentor;
-
-        //  Reassign Mentor buffers
-        MentorBufferManager.AssignToBuffer();
+        selectedCard.transform.SetParent(crossedParent);    
 
         isCrossing = false;
 
@@ -215,8 +208,64 @@ public class ConsumableCardHolder : MonoBehaviour
         currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
         // This resets the button's position to the center of the card.
 
+        currentSellButton.GetComponentInChildren<TMP_Text>().text = "Sell $" + cardToSell.GetComponent<Card>().consumable.sellValue.ToString();
         Button sellBtn = currentSellButton.GetComponent<Button>();
         sellBtn.onClick.AddListener(SellCard);
+
+        //  For use consumables
+        if (currentUseButton != null)
+        {
+            Destroy(currentUseButton);
+        }
+
+        cardToUse = clickedCard;
+        currentUseButton = Instantiate(useButtonPrefab, clickedCard.transform);
+
+        currentUseButton.transform.localPosition = new Vector3(0, -150, 0);
+        Button useBtn = currentUseButton.GetComponent<Button>();
+        useBtn.onClick.AddListener(UseCard);
+    }
+
+    void UseCard()
+    {
+        if (cardToUse != null)
+        {
+            // Get the Card component to access its sellValue
+            Card cardComponent = cardToUse.GetComponent<Card>();
+
+            //  Use effect
+            if (cardComponent.consumable.type == ConsumableType.Textbook)
+            {
+                Textbook tbook = (Textbook)cardComponent.consumable;
+                tbook.applyTextbook();
+            }
+            else
+            {
+                CardBuff cardBuff = (CardBuff)cardComponent.consumable;
+                cardBuff.applyCardBuff();
+            }
+
+            //  Remove consumable from player's consuamble list first
+            player.consumables.Remove(cardComponent.consumable);
+
+            cards.Remove(cardToUse);
+
+            Transform parentSlot = cardToUse.transform.parent;
+
+            Destroy(cardToUse.gameObject);      // Destroy the card
+            if (parentSlot != null)
+                Destroy(parentSlot.gameObject);  // Destroy the parent slot
+
+            // Destroy the sell button itself
+            Destroy(currentUseButton);
+
+            // Clear our variables
+            cardToUse = null;
+            currentUseButton = null;
+
+            //  Wait for GameObject deletion before refreshing
+            StartCoroutine(RefreshFrame());
+        }
     }
 
     void SellCard()
@@ -234,10 +283,10 @@ public class ConsumableCardHolder : MonoBehaviour
             {
                 Debug.Log("--- Selling Card ---");
                 Debug.Log("Money BEFORE sale: " + player.moneyCount);
-                Debug.Log("Card sell value: " + cardComponent.mentor.sellValue);
+                Debug.Log("Card sell value: " + cardComponent.consumable.sellValue);
 
                 // Add the card's value to the player's money
-                player.moneyCount += cardComponent.mentor.sellValue;
+                player.moneyCount += cardComponent.consumable.sellValue;
 
                 Debug.Log("Money AFTER sale: " + player.moneyCount);
 
@@ -247,8 +296,8 @@ public class ConsumableCardHolder : MonoBehaviour
 
             // Remove the card from our list, associated slot, and destroy its game object
 
-            //  Remove mentor from player's mentor deck first
-            player.mentorDeck.Remove(cardComponent.mentor);
+            //  Remove consumable from player's consuamble list first
+            player.consumables.Remove(cardComponent.consumable);
 
             cards.Remove(cardToSell);
 
@@ -286,6 +335,7 @@ public class ConsumableCardHolder : MonoBehaviour
         card.EndDragEvent.AddListener(EndDrag);
         card.PointerClickEvent.AddListener(OnCardClicked);  //  For sell function
         card.AssignConsumable(newConsumable);
+        card.name = card.consumableName;
 
         //  Refresh mentor list
         StartCoroutine(RefreshFrame());

@@ -46,19 +46,16 @@ public class Textbook : Consumable
 
         //  Set previous consumable to used Textbook
         Game.access().previousConsumable = new Textbook(name);
-
-        //  Remove from consumable slot if used here
-        player.consumables.Remove(this);
     }
 
     //  Return description of textbook including it's current level
     public string GetDescription()
     {
         string handName = name.ToString();
-        //int level = player.handTable[name].level;
-        //int incrementMult = player.handTable[name].incrementMult;
-        //int incrementChips = player.handTable[name].incrementChips;
-        //return "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + " Mult and" + "+" + incrementChips + " Chips";
-        return handName;
+        int level = player.handTable[name].level;
+        int incrementMult = player.handTable[name].incrementMult;
+        int incrementChips = player.handTable[name].incrementChips;
+        return "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + " Mult and" + "+" + incrementChips + " Chips";
+        //return handName;
     }
 }
