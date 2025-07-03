@@ -25,14 +25,14 @@ public class Milk : CardBuff
     public override string GetDescription()
     {
         //  Calculate total sell value of Mentors
-        int totalSell = 0;
+        totalSell = 0;
         foreach (Mentor mentor in player.mentorDeck)
         {
             totalSell += mentor.sellValue;
         }
 
         description = "Gives total sell value of current Mentors";
-        description += " ($" + totalSell + ")";
+        description += $" (${totalSell})";
 
         return description;
     }
@@ -41,6 +41,7 @@ public class Milk : CardBuff
     public override void applyCardBuff ()
     {
         player.moneyCount += totalSell;
+        ShopManager.access().UpdateMoneyDisplay();
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

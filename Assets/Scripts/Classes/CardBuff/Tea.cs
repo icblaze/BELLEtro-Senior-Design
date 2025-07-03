@@ -12,6 +12,7 @@ public class Tea : CardBuff
 {
     Game game = Game.access();
     Player player = Player.access();
+    DeleteCard deleteScript;
 
     //  Construct CardBuff consumable with enum for name
     public Tea() : base(CardBuffName.Tea)
@@ -23,15 +24,53 @@ public class Tea : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        //  Disable if one card isn't selected
-
         description = "Add a Study seal to 1 selected card.";
         return description;
     }
 
-    //  TODO Add "Study" seal to 1 card
+    //  Disables if 1 card isn't selected
+    public override bool CheckDisabled()
+    {
+        deleteScript = GameObject.FindFirstObjectByType<DeleteCard>();
+        if (deleteScript == null)
+        {
+            isDisabled = true;
+            return isDisabled;
+        }
+
+        deleteScript.GetSelectedCards();
+
+        if (deleteScript.GetSelectedCards().Count == 1)
+        {
+            isDisabled = false;
+            return isDisabled;
+        }
+        else
+        {
+            isDisabled = true;
+            return isDisabled;
+        }
+    }
+
+    //  Add "Study" seal to 1 card
     public override void applyCardBuff ()
     {
+        //  Change seal to Retake, update visual
+        Card studyCard = deleteScript.GetSelectedCards()[0].GetComponent<Card>();
+        studyCard.pcard.seal = CardSeal.Study;
+        studyCard.AssignPCard(studyCard.pcard);
+
+        //  Apply to it in cardsDrawn so that'll it be in deck
+        Deck deck = Deck.access();
+        for (int i = 0; i < deck.cardsDrawn.Count; i++)
+        {
+            if (deck.cardsDrawn[i].cardID == studyCard.pcard.cardID)
+            {
+                deck.cardsDrawn[i] = studyCard.pcard;
+                break;
+            }
+
+        }
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

@@ -12,6 +12,7 @@ public class Toast : CardBuff
 {
     Game game = Game.access();
     Player player = Player.access();
+    DeleteCard deleteScript;
 
     //  Construct CardBuff consumable with enum for name
     public Toast() : base(CardBuffName.Toast)
@@ -23,15 +24,58 @@ public class Toast : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        //  Checks if at least one card is selected, max 3
-
         description = "Increase chips by 10 for up to 3 selected cards";
         return description;
     }
 
-    //  TODO Increase chips by 10 for up to 3 selected cards
-    public override void applyCardBuff ()
+    //  Checks if at least 1 card is selected, at max 3
+    public override bool CheckDisabled()
     {
+        deleteScript = GameObject.FindFirstObjectByType<DeleteCard>();
+        if (deleteScript == null)
+        {
+            isDisabled = true;
+            return isDisabled;
+        }
+
+        deleteScript.GetSelectedCards();
+
+        if (deleteScript.GetSelectedCards().Count >= 1 && deleteScript.GetSelectedCards().Count <= 3)
+        {
+            isDisabled = false;
+            return isDisabled;
+        }
+        else
+        {
+            isDisabled = true;
+            return isDisabled;
+        }
+    }
+
+    //  Increase chips by 10 for up to 3 selected cards
+    public override void applyCardBuff()
+    {
+        Deck deck = Deck.access();
+
+        //  Raises +Mult value by 1 for up to 3 selected cards
+
+        for (int i = 0; i < deleteScript.GetSelectedCards().Count; i++)
+        {
+            //  We don't have to use AssignPCard here since visual don't have to update
+            Card chipCard = deleteScript.GetSelectedCards()[i].GetComponent<Card>();
+            chipCard.pcard.chips += 10;
+
+            //  Apply to it in cardsDrawn so that'll it be in deck
+            for (int j = 0; j < deck.cardsDrawn.Count; j++)
+            {
+                if (deck.cardsDrawn[j].cardID == chipCard.pcard.cardID)
+                {
+                    deck.cardsDrawn[j] = chipCard.pcard;
+                    break;
+                }
+            }
+        }
+
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

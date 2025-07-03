@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using SplitString;
 
 public class Pretzel : CardBuff
 {
@@ -38,25 +39,51 @@ public class Pretzel : CardBuff
             }
         }
 
-        //  Disable if no room
-        if(player.consumables.Count >= player.maxConsumables)
+        description = "Generates Textbook for most played hand";
+        description += " (" + SplitCase.Split(mostPlayedHand.ToString()) + ")";
+        return description;
+    }
+
+    //  Either have space or be the card in consumable slots be the free space
+    public override bool CheckDisabled()
+    {
+        int space = player.maxConsumables - player.consumables.Count;
+
+        //  Check if in player's consumables, free slot made
+        //  Check if in player's consumables, free slot made
+        foreach (Consumable consumable in player.consumables)
         {
-            isDisabled = true;
+            if (consumable.type == ConsumableType.CardBuff)
+            {
+                CardBuff inSlot = (CardBuff)consumable;
+                if (inSlot == this)
+                {
+                    space++;
+                }
+            }
+        }
+
+        if (space > 0)
+        {
+            isDisabled = false;
+            return isDisabled;
         }
         else
         {
-            isDisabled = false;
+            isDisabled = true;
+            return isDisabled;
         }
-
-        description = "Generates Textbook for most played hand";
-        description += " (" + mostPlayedHand.ToString() + ")";
-        return description;
     }
 
     //  Generates Textbook for most played Textbook hand
     public override void applyCardBuff ()
     {
-        player.consumables.Add(new Textbook(mostPlayedHand));
+        if (consumableHolder == null)
+        {
+            consumableHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
+        }
+
+        consumableHolder.AddConsumable(new Textbook(mostPlayedHand));
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

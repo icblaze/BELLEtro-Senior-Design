@@ -45,11 +45,11 @@ public class CardBuff : Consumable
             case CardBuffName.Chips:
                 return new Chips();
 
-            //  TODO Enhanced 1 card to "Wild" Card
+            //  Enhanced 1 card to "Wild" Card
             case CardBuffName.Popcorn:
                 return new Popcorn();
 
-            //  TODO Enhances 1 card to "Steel" Card
+            //  Enhances 1 card to "Steel" Card
             case CardBuffName.Spinach:
                 return new Spinach();
 
@@ -85,7 +85,7 @@ public class CardBuff : Consumable
             case CardBuffName.Cheese:
                 return new Cheese();
 
-            //  TODO Add "Funding" seal to 1 card
+            //  Add "Funding" seal to 1 card
             case CardBuffName.Potato:
                 return new Potato();
 
@@ -168,11 +168,15 @@ public class CardBuff : Consumable
         int space = player.maxConsumables - player.consumables.Count;
 
         //  Check if in player's consumables, free slot made
-        foreach (CardBuff cardbuff in player.consumables)
+        foreach (Consumable consumable in player.consumables)
         {
-            if (cardbuff.name == name)
+            if (consumable.type == ConsumableType.CardBuff)
             {
-                space++;
+                CardBuff inSlot = (CardBuff)consumable;
+                if(inSlot == this)
+                {
+                    space++;
+                }
             }
         }
 
