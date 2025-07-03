@@ -12,6 +12,7 @@ public class Banana : CardBuff
 {
     Game game = Game.access();
     Player player = Player.access();
+    JokerCardHolder mentorHolder;
 
     //  Construct CardBuff consumable with enum for name
     public Banana() : base(CardBuffName.Banana)
@@ -23,25 +24,47 @@ public class Banana : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        //  If no space available, then disable
-        if(player.mentorDeck.Count >= player.maxMentors)
+        description = "Generate a random Mentor (must have room)";
+        return description;
+    }
+
+    //  Check Mentor capacity
+    public override bool CheckDisabled()
+    {
+        //  Accounting for negatives, check if there is room for a mentor
+        int nonNegativeCount = 0;
+        foreach (Mentor mentor in player.mentorDeck)
+        {
+            if(mentor.edition != CardEdition.Negative)
+            {
+                nonNegativeCount++;
+            }
+        }
+
+        if(nonNegativeCount >= player.maxMentors)
         {
             isDisabled = true;
+            return isDisabled;
         }
         else
         {
             isDisabled = false;
+            return isDisabled;
         }
-
-        description = "Generate a random Mentor (must have room)";
-        return description;
     }
 
     //  Generate a random Mentor (must have room) 
     public override void applyCardBuff ()
     {
-        //  Liable to change depending on random function
-        player.mentorDeck.AddRange(game.randomMentorShop(1));
+        if(mentorHolder == null)
+        {
+            mentorHolder = GameObject.FindFirstObjectByType<JokerCardHolder>();
+        }
+
+        //  Generate random mentor that is base edition
+        Mentor newMentor = game.randomMentorShop(1)[0];
+        newMentor.edition = CardEdition.Base;   
+        mentorHolder.AddMentor(newMentor);
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

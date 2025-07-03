@@ -73,7 +73,7 @@ public class CardBuff : Consumable
             case CardBuffName.IceCream:
                 return new IceCream();
 
-            //  TODO Select 2 cards, converts the left card into right
+            //  Select 2 cards, converts the left card into right
             case CardBuffName.Cherry:
                 return new Cherry();
 
@@ -81,7 +81,7 @@ public class CardBuff : Consumable
             case CardBuffName.Milk:
                 return new Milk();
 
-            //  TODO Enhances 1 card to "Gold" Card
+            //  Enhances 1 card to "Gold" Card
             case CardBuffName.Cheese:
                 return new Cheese();
 
@@ -93,7 +93,7 @@ public class CardBuff : Consumable
             case CardBuffName.Flatbread:
                 return new Flatbread();
 
-            //  TODO Add a copy of 1 selected card to your deck
+            //  Add a copy of 1 selected card to your deck
             case CardBuffName.Bagel:
                 return new Bagel();
 
@@ -180,14 +180,18 @@ public class CardBuff : Consumable
         if (consumableType == ConsumableType.Textbook)
         {
             Textbook[] tbookList = game.randomTextbookShop(Math.Min(space, 2));
-            consumableHolder.AddConsumable(tbookList[0]);
-            consumableHolder.AddConsumable(tbookList[1]);
+            foreach (Textbook tbook in tbookList)
+            {
+                consumableHolder.AddConsumable(tbook);
+            }
         }
         else
         {
-            Consumable[] consumableList = game.randomCardBuffShop(Math.Min(space, 2));
-            consumableHolder.AddConsumable(consumableList[0]);
-            consumableHolder.AddConsumable(consumableList[1]);
+            CardBuff[] cardBuffList = game.randomCardBuffShop(Math.Min(space, 2));
+            foreach (CardBuff cardBuff in cardBuffList)
+            {
+                consumableHolder.AddConsumable(cardBuff);
+            }
         }
     }
 }

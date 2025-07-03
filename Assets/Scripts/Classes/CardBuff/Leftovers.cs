@@ -38,8 +38,8 @@ public class Leftovers : CardBuff
         }
         else if(lastUsed.type == ConsumableType.CardBuff)
         {
-            Textbook prevTextbook = (Textbook)lastUsed;
-            description += " (" + prevTextbook.name.ToString() + ")";
+            CardBuff prevCardBuff = (CardBuff) lastUsed;
+            description += " (" + prevCardBuff.name.ToString() + ")";
         }
 
         return description;
