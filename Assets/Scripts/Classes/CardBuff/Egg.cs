@@ -30,7 +30,9 @@ public class Egg : CardBuff
     //  Doubles current money (up to $20)
     public override void applyCardBuff ()
     {
-        player.moneyCount += Math.Min(player.moneyCount * 2, 20);
+        player.moneyCount += Math.Min(player.moneyCount, 20);
+        ShopManager shop = ShopManager.access();
+        shop.UpdateMoneyDisplay();
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

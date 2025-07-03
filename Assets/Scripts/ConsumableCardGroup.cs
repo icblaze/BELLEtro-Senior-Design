@@ -41,7 +41,7 @@ public class ConsumableCardHolder : MonoBehaviour
         //  Order should persist if correct, selling should remove from consumables  
         //  Comment out eventually
         player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Leftovers));
-        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Cherry));
+        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.IceCream));
 
         //  Debug consumables in the list, order from left to right
         Debug.Log("Consumables in list:");

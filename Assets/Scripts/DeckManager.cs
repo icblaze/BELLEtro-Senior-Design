@@ -9,6 +9,7 @@ public class DeckManager : MonoBehaviour
     private int deckIndex;          
     [Header("Prefabs & Transforms")]
     public GameObject cardPrefab;                                           // Assign your card prefab asset
+    public GameObject slotPrefab;
     public Transform playingCardGroup;                                      // Assign PlayingCardGroup in Inspector
     public Transform deckPosition;                                          // Where the deck sits
     public RectTransform pinkCardImage;
@@ -104,6 +105,38 @@ public class DeckManager : MonoBehaviour
 
         //  Set player's hand to match new cards
         horizontalCardHolder.RefreshVisual();
+    }
+
+    //  When more slots are needed, draw card into new slot
+    public void DrawNewSlot(PCard pcard)
+    {
+        if (horizontalCardHolder == null)
+        {
+            horizontalCardHolder = playingCardGroup.GetComponentInParent<HorizontalCardHolder>();
+        }
+
+        GameObject newSlot = Instantiate(slotPrefab, horizontalCardHolder.transform);
+
+        //  Get Card component and assign PCard
+        Card cardComponent = newSlot.GetComponentInChildren<Card>();
+        cardComponent.AssignPCard(pcard);
+        cardComponent.PointerEnterEvent.AddListener(horizontalCardHolder.CardPointerEnter);
+        cardComponent.PointerExitEvent.AddListener(horizontalCardHolder.CardPointerExit);
+        cardComponent.BeginDragEvent.AddListener(horizontalCardHolder.BeginDrag);
+        cardComponent.EndDragEvent.AddListener(horizontalCardHolder.EndDrag);
+
+        //  Set player's hand to match new cards
+        horizontalCardHolder.RefreshVisual();
+    }
+
+    public int GetSlotCount()
+    {
+        int slotTransforms = playingCardGroup
+            .GetComponentsInChildren<Transform>(true)
+            .Where(t => t.CompareTag("Slot"))
+            .ToList().Count;
+
+        return slotTransforms;
     }
 
 

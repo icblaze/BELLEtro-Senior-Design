@@ -25,7 +25,7 @@ public class CardBuff : Consumable
             case CardBuffName.Leftovers:
                 return new Leftovers();
                 
-            //  TODO Add "Retake" seal to 1 card
+            //  Add "Retake" seal to 1 card
             case CardBuffName.Coffee:
                 return new Coffee();
 
@@ -33,7 +33,7 @@ public class CardBuff : Consumable
             case CardBuffName.Almonds:
                 return new Almonds();
 
-            //  TODO Enhances up to 2 selected cards to "Mult" cards
+            //  Enhances up to 2 selected cards to "Mult" cards
             case CardBuffName.Cookies:
                 return new Cookies();
 
@@ -41,7 +41,7 @@ public class CardBuff : Consumable
             case CardBuffName.Pancakes:
                 return new Pancakes();
 
-            //  TODO Enhances up to 2 selected cards to "Bonus" cards
+            //  Enhances up to 2 selected cards to "Bonus" cards
             case CardBuffName.Chips:
                 return new Chips();
 
@@ -53,7 +53,7 @@ public class CardBuff : Consumable
             case CardBuffName.Spinach:
                 return new Spinach();
 
-            //  TODO Enhances 1 card to "Glass" Card
+            //  Enhances 1 card to "Glass" Card
             case CardBuffName.ChiliPepper:
                 return new ChiliPepper();
 
@@ -69,7 +69,7 @@ public class CardBuff : Consumable
             case CardBuffName.Tea:
                 return new  Tea();
 
-            //  TODO Destroys up to 2 selected cards
+            //  Destroys up to 2 selected cards
             case CardBuffName.IceCream:
                 return new IceCream();
 
@@ -89,7 +89,7 @@ public class CardBuff : Consumable
             case CardBuffName.Potato:
                 return new Potato();
 
-            //  TODO Increase Mult by 1 for up to 3 selected cards
+            //  Increase Mult by 1 for up to 3 selected cards
             case CardBuffName.Flatbread:
                 return new Flatbread();
 

@@ -166,6 +166,19 @@ public class PlayHand : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.1f);
             deckManager.DrawCard(newCards[i]);
         }
+
+        //  Draw additional to make up for missing slots
+        int extraSlots = Player.access().handSize - deckManager.GetSlotCount();
+
+        if (extraSlots > 0)
+        {
+            PCard[] extraCards = Deck.access().drawCards(extraSlots);
+
+            foreach (PCard extra in extraCards)
+            {
+                deckManager.DrawNewSlot(extra);
+            }
+        }
     }
 
     IEnumerator MoveCard(GameObject card, Vector2 targetPosition)

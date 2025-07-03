@@ -199,4 +199,25 @@ public class HorizontalCardHolder : MonoBehaviour
             }
         }
     }
+
+    public void DestroyCardsRefresh()
+    {
+        StartCoroutine(WaitFrame());
+
+        IEnumerator WaitFrame()
+        {
+            yield return null;
+
+            cards = GetComponentsInChildren<Card>().ToList(); //  Refresh card list
+            deck.playerHand = cards.Select(card => card.pcard).ToList();
+
+            yield return null;
+
+            for (int i = 0; i < cards.Count; i++)
+            {
+                if (cards[i].cardVisual != null)
+                    cards[i].cardVisual.UpdateIndex(transform.childCount);
+            }
+        }
+    }
 }
