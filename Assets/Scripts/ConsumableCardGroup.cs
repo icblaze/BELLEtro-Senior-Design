@@ -108,13 +108,25 @@ public class ConsumableCardHolder : MonoBehaviour
 
         selectedCard = null;
 
-        //  When mentors get rearranged, reassign mentor buffers, change mentorDeck
+        //  When consumables get rearranged, update consumable list
         RefreshConsumables();
     }
 
     void CardPointerEnter(Card card)
     {
         hoveredCard = card;
+
+        //  Update interactable status of use button
+        if (cardToUse != null)
+        {
+            if(card.consumable.type == ConsumableType.CardBuff && cardToUse.Equals(card))
+            {
+                CardBuff cardBuff = (CardBuff)card.consumable;
+                Button useBtn = currentUseButton.GetComponent<Button>();
+
+                useBtn.interactable = !cardBuff.CheckDisabled();
+            }
+        }
     }
 
     void CardPointerExit(Card card)
@@ -224,6 +236,13 @@ public class ConsumableCardHolder : MonoBehaviour
         currentUseButton.transform.localPosition = new Vector3(0, -150, 0);
         Button useBtn = currentUseButton.GetComponent<Button>();
         useBtn.onClick.AddListener(UseCard);
+
+        //  Check interactability status if Card Buff
+        if (clickedCard.consumable.type == ConsumableType.CardBuff)
+        {
+            CardBuff cardBuff = (CardBuff)clickedCard.consumable;
+            useBtn.interactable = !cardBuff.CheckDisabled();
+        }
     }
 
     void UseCard()
