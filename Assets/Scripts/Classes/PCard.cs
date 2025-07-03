@@ -24,6 +24,7 @@ public class PCard : BaseCard
     public CardSeal seal;                           // Card seal on the card
     public bool isDisabled;                         // isDisabled is used to indicate if a card is able to be used
     public int replayCounter;                       // Number of times card is replayed, modified by seal or Mentors
+    public int cardID;                                  // Unique identification for each PCard
 
     public Mentor mentor;                       // Mentor card
     public Textbook textbook;                   // Textbook card

@@ -64,6 +64,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     //The following fields sets the Cards info
     public PCard pcard;
     [Header("PCard Object")]
+    [SerializeField] private int cardID;
     [SerializeField] private string termName = "";
     [SerializeField] private string termSymbol = "";
     [SerializeField] private string suitName = "";
@@ -75,7 +76,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     public Consumable consumable;
     [Header("Consumable Object")]
     public ConsumableType consumableType;
-    [SerializeField] private string consumableName = "";
+    [SerializeField] public string consumableName = "";
     [SerializeField] private string consumableEditionName = "Base";
     [SerializeField] private int consumableSellValue = 0;
     [SerializeField] private bool consumableDisabled = false;
@@ -392,6 +393,9 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         //  Get object to modify appearance of PCard 
         AppearancePCard appearance = cardVisual.GetComponentInChildren<AppearancePCard>();
         ShaderCodePCard shaderAppearance = cardVisual.GetComponentInChildren<ShaderCodePCard>();
+
+        //  Assign Card ID
+        cardID = pcard.cardID;
 
         //  Update Card Term Name
         termName = pcard.term.ToString();

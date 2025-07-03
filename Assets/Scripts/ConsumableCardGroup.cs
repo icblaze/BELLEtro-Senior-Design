@@ -7,7 +7,7 @@ using DG.Tweening;
 using System.Linq;
 using UnityEngine.UI;
 
-public class JokerCardHolder : MonoBehaviour
+public class ConsumableCardHolder : MonoBehaviour
 {
     [SerializeField] private Card selectedCard;
     [SerializeReference] private Card hoveredCard;
@@ -15,13 +15,16 @@ public class JokerCardHolder : MonoBehaviour
     [SerializeField] private GameObject slotPrefab;
     private RectTransform rect;
 
-    [Header("Mentor List")]
+    [Header("Consumable Card List")]
     public List<Card> cards;
 
     [Header("Sell Button")]
     [SerializeField] private GameObject sellButtonPrefab; // Holds the button template
     private GameObject currentSellButton; // The active sell button in the scene
     [SerializeField] private Card cardToSell; // The card we want to sell
+
+    [Header("Use Button")]
+    [SerializeField] private GameObject useButtonPrefab; // Holds the button template
 
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
@@ -31,24 +34,32 @@ public class JokerCardHolder : MonoBehaviour
 
     void Start()
     {
-        //  Add 1 random mentor at each rerun of scene for testing purposes!
-        //  Order should persist if correct, selling should remove from mentorDeck  
+        //  Add 1 consumable at each rerun of scene for testing purposes!
+        //  Order should persist if correct, selling should remove from consumables  
         //  Comment out eventually
-        player.mentorDeck.AddRange(game.randomMentorShop(1));
+        player.consumables.AddRange(game.randomTextbookShop(1));
 
-        //  Debug mentors in the list, order from left to right
-        int count = 1;
-        Debug.Log("Mentors in list:\n");
-        foreach (Mentor mentor in player.mentorDeck)
+        //  Debug consumables in the list, order from left to right
+        Debug.Log("Consumables in list:");
+        foreach (Consumable consumable in player.consumables)
         {
-            Debug.Log("Mentor " + count + ": " + mentor.name.ToString());
-            count++;
+            //  Realize that it might be better to just have the name be in Consumable
+            if(consumable.type == ConsumableType.Textbook)
+            {
+                Textbook tbook = (Textbook) consumable;
+                Debug.Log($"Textbook: {tbook.name}");
+            }
+            else
+            {
+                CardBuff cardBuff = (CardBuff) consumable;
+                Debug.Log($"Card Buff: {cardBuff.name}");
+            }
         }
 
-        for (int i = 0; i < player.mentorDeck.Count; i++)
+        for (int i = 0; i < player.consumables.Count; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
-            newSlot.name = $"MentorSlot {i + 1}"; // Assign meaningful names
+            newSlot.name = $"ConsumableSlot {i + 1}"; // Assign meaningful names
         }
 
         rect = GetComponent<RectTransform>();
@@ -62,8 +73,8 @@ public class JokerCardHolder : MonoBehaviour
             card.BeginDragEvent.AddListener(BeginDrag);
             card.EndDragEvent.AddListener(EndDrag);
             card.PointerClickEvent.AddListener(OnCardClicked);  //  For sell function
-            card.AssignMentor(player.mentorDeck[cardCount]);
-            card.name = card.mentor.name.ToString(); 
+            card.AssignConsumable(player.consumables[cardCount]);
+            card.name = card.consumableName;
             cardCount++;
         }
 
@@ -73,7 +84,7 @@ public class JokerCardHolder : MonoBehaviour
     IEnumerator RefreshFrame()
     {
         yield return new WaitForSecondsRealtime(.1f);
-        RefreshMentors();
+        RefreshConsumables();
     }
 
     private void BeginDrag(Card card)
@@ -94,7 +105,7 @@ public class JokerCardHolder : MonoBehaviour
         selectedCard = null;
 
         //  When mentors get rearranged, reassign mentor buffers, change mentorDeck
-        RefreshMentors();
+        RefreshConsumables();
     }
 
     void CardPointerEnter(Card card)
@@ -164,6 +175,17 @@ public class JokerCardHolder : MonoBehaviour
         cards[index].transform.SetParent(focusedParent);
         cards[index].transform.localPosition = cards[index].selected ? new Vector3(0, cards[index].selectionOffset, 0) : Vector3.zero;
         selectedCard.transform.SetParent(crossedParent);
+
+        //  This means that when swapping between slots it'll have to modify the mentorDeck ordering as well
+        int focusedIndex = selectedCard.ParentIndex();
+        int crossedIndex = cards[index].ParentIndex();
+
+        Mentor tempMentor = player.mentorDeck[focusedIndex];
+        player.mentorDeck[focusedIndex] = player.mentorDeck[crossedIndex];
+        player.mentorDeck[crossedIndex] = tempMentor;
+
+        //  Reassign Mentor buffers
+        MentorBufferManager.AssignToBuffer();
 
         isCrossing = false;
 
@@ -248,12 +270,12 @@ public class JokerCardHolder : MonoBehaviour
         }
     }
 
-    //  Visually update mentor deck when added
-    public void AddMentor(Mentor newMentor)
+    //  Visually update consumable deck when added
+    public void AddConsumable(Consumable newConsumable)
     {
         //  Instatiate a new slot
         GameObject newSlot = Instantiate(slotPrefab, transform);
-        newSlot.name = $"New MentorSlot";
+        newSlot.name = $"New ConsumableSlot";
 
         //  Assign mentor to card in new slot
         Card card = newSlot.GetComponentInChildren<Card>();
@@ -263,35 +285,18 @@ public class JokerCardHolder : MonoBehaviour
         card.BeginDragEvent.AddListener(BeginDrag);
         card.EndDragEvent.AddListener(EndDrag);
         card.PointerClickEvent.AddListener(OnCardClicked);  //  For sell function
-        card.AssignMentor(newMentor);
-        card.name = card.mentor.name.ToString();
+        card.AssignConsumable(newConsumable);
 
         //  Refresh mentor list
         StartCoroutine(RefreshFrame());
     }
 
     //  When mentors get rearranged, reassign mentor buffers, change mentorDeck
-    void RefreshMentors()
+    void RefreshConsumables()
     {
         cards = GetComponentsInChildren<Card>().ToList();
-        player.mentorDeck = cards.Select(card => card.mentor).ToList();
+        player.consumables = cards.Select(card => card.consumable).ToList();
 
-        //  Some mentors rely on position to copy effect
-        foreach (Mentor mentor in player.mentorDeck)
-        {
-            if(mentor.name == MentorName.CheatSheet)
-            {
-                CheatSheet cheatSheet = (CheatSheet) mentor;
-                cheatSheet.ChangeEffect();
-            }
-            else if(mentor.name == MentorName.Brainstorm)
-            {
-                Brainstorm brainstorm = (Brainstorm) mentor;
-                brainstorm.ChangeEffect();
-            }
-        }
-
-        MentorBufferManager.AssignToBuffer();
         foreach (Card card in cards)
         {
             card.cardVisual.UpdateIndex(transform.childCount);

@@ -102,7 +102,6 @@ public class Deck
                 replayCounter = 0
               };
 
-              counter++;
 
               if (IsVowel(suit, placeArticulation, mannerArticulation, linguisticterm) == true)
               {
@@ -112,7 +111,7 @@ public class Deck
                 {
                   newCard.isDiphthong = true;
                 }
-                deckCards.Add(new PCard
+                AddCard(new PCard
                 {
                   kindOfCard = CardType.Card,
                   term = linguisticterm,
@@ -128,11 +127,10 @@ public class Deck
                   isDisabled = false,
                   replayCounter = 0
                 });
-                counter++;
                 Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
 
               }
-              deckCards.Add(newCard);
+              AddCard(newCard);
               Debug.LogWarning($"Card {counter}: {newCard.kindOfCard}, {newCard.term}, {newCard.suit}, {newCard.placeArt}, {newCard.mannerArt}, Diphthong: {newCard.isDiphthong}, Chips: {newCard.chips}");
 
             }
@@ -141,7 +139,6 @@ public class Deck
       }
 
     }
-    counter = 0; //Set the counter back to 0
   }
 
   //This function is responsible for drawing a certain amount of cards into the players hand.
@@ -183,8 +180,12 @@ public class Deck
   }
 
   //Adds a card to the deck
-  public void addCard(PCard card)
+  public void AddCard(PCard card)
   {
+    // Increment the unique ID when adding to card
+    counter++;
+    card.cardID = counter;
+
     if (card != null)
     {
       deckCards.Add(card);
