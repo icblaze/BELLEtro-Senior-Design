@@ -121,12 +121,14 @@ public class ScoringManager : MonoBehaviour
         //Start next round proceedings
         if (neededScore < totalScore)
         {
+            EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
             transitionManager.TransitionToEndOfRoundScreen();
         }
         //If player runs out of hands, game over
         else if (Player.access().handCount <= 0)
         {
+            EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
             transitionManager.TransitionToDefeatScreen();
         }

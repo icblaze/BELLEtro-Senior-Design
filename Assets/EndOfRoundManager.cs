@@ -17,7 +17,7 @@ public class EndOfRoundManager : MonoBehaviour
     Game inst = Game.access();
     Player player = Player.access();
     int roundReward = 0;
-    int totalCashOut = 0;
+    static int totalCashOut = 0;
     int interest = 0;
 
     private static EndOfRoundManager instance;  //EndOfRoundManager instance varaiable
@@ -81,6 +81,10 @@ public class EndOfRoundManager : MonoBehaviour
     private void CalculateInterest()
     {
         interest = player.moneyCount/5;
+        if (interest > 5)
+        {
+            interest = 5;
+        }
         interestNumber.GetComponent<TMP_Text>().text = interest.ToString();
         totalCashOut += interest;
     }
@@ -94,12 +98,11 @@ public class EndOfRoundManager : MonoBehaviour
     }
     private void SetCashOut()
     {
-        cashOutButton.GetComponentInChildren<TMP_Text>().text = "Cash Out:" + totalCashOut.ToString();
+        cashOutButton.GetComponentInChildren<TMP_Text>().text = "Cash Out: $" + totalCashOut.ToString();
     }
 
     public void CashOut()
     {
-        
         Debug.Log("Total CashOut: $" + totalCashOut);
         //Add cash out to player's cash and change text
         player.moneyCount += totalCashOut;
