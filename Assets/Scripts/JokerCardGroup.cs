@@ -293,7 +293,7 @@ public class JokerCardHolder : MonoBehaviour
             }
         }
 
-        MentorBufferManager.AssignToBuffer();
+        MentorBufferManager.access().AssignToBuffer();
         foreach (Card card in cards)
         {
             card.cardVisual.UpdateIndex(transform.childCount);

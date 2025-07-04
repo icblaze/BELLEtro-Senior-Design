@@ -29,6 +29,11 @@ public class ScoringManager : MonoBehaviour
     private BigInteger totalScore;
     private BigInteger neededScore;
 
+    //  Adjust time of scoring manager between each score increment
+    private readonly float waitIncrement= 0.25f;
+
+    //  Call to MentorBufferManager
+    private MentorBufferManager mentorBuffer = MentorBufferManager.access();
 
     public void Start()
     {
@@ -113,7 +118,7 @@ public class ScoringManager : MonoBehaviour
 
             //Increment and wait to go to next card
             i++;
-            yield return new WaitForSecondsRealtime(.25f);
+            yield return new WaitForSecondsRealtime(waitIncrement);
         }
         SetTotal();
         yield return new WaitForSecondsRealtime(.5f);

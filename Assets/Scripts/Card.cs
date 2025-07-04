@@ -367,7 +367,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         if (!instantiateVisual)
             return;
 
-        visualHandler = FindObjectOfType<VisualCardsHandler>();
+        visualHandler = FindFirstObjectByType<VisualCardsHandler>();
         cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<PCardVisual>();
         cardVisual.Initialize(this);
     }

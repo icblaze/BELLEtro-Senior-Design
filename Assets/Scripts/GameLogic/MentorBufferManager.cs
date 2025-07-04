@@ -11,12 +11,22 @@ using UnityEngine;
 public class MentorBufferManager
 {
     public static Dictionary<UseLocation, List<Mentor>> mentorBuffers = new();
-    private static Player player = Player.access();
-    private static Game game = Game.access();
+    private Player player = Player.access();
+    private Game game = Game.access();
 
+    //  Make this a singleton
+    private static MentorBufferManager instance;
+    public static MentorBufferManager access()
+    {
+        if (instance == null)
+        {
+            instance = new MentorBufferManager();
+        }
+        return instance;
+    }
 
     //  Assigns each Mentor of the Player's mentorDeck to their buffer
-    public static void AssignToBuffer ()
+    public void AssignToBuffer ()
     {
         //This creates a list of mentors for each location that is in the UseLocation enum
         foreach (UseLocation location in System.Enum.GetValues(typeof(UseLocation)))
@@ -36,7 +46,7 @@ public class MentorBufferManager
     }
 
     //  Execute buffer of specified location
-    public static void RunBuffer (UseLocation buffer)
+    public void RunBuffer (UseLocation buffer)
     {
         foreach (Mentor mentor in mentorBuffers[buffer])
         {
@@ -45,7 +55,7 @@ public class MentorBufferManager
     }
 
     //  Execute buffer of specified location that require a specific card
-    public static void RunBuffer(UseLocation buffer, PCard card)
+    public void RunBuffer(UseLocation buffer, PCard card)
     {
         foreach (Mentor mentor in mentorBuffers[buffer])
         {
@@ -53,8 +63,8 @@ public class MentorBufferManager
         }
     }
 
-    //  Playing hand buffer execution
-    public static void PlayHand ()
+    //  Playing hand buffer execution (Plan to just move parts of this to ScoringManager leaving code here as reference)
+    private void PlayHand ()
     {
         //  Putting effect cards in their assigned buffer
         AssignToBuffer();

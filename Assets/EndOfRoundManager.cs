@@ -106,7 +106,7 @@ public class EndOfRoundManager : MonoBehaviour
         Debug.Log("Total CashOut: $" + totalCashOut);
         //Add cash out to player's cash and change text
         player.moneyCount += totalCashOut;
-        moneyText.GetComponent<TMP_Text>().text = "$" + player.moneyCount.ToString();
+        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + player.moneyCount.ToString();
 
         //Set everything to default/0
         totalCashOut = 0;
