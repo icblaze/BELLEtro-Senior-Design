@@ -360,7 +360,7 @@ public class ConsumableCardHolder : MonoBehaviour
         StartCoroutine(RefreshFrame());
     }
 
-    //  When mentors get rearranged, reassign mentor buffers, change mentorDeck
+    //  When mentors get rearranged, refresh visual index, and change consumables list of Player
     void RefreshConsumables()
     {
         cards = GetComponentsInChildren<Card>().ToList();

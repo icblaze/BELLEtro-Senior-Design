@@ -69,8 +69,8 @@ public class ShopManager : MonoBehaviour
     Deck deck = Deck.access();
 
     // To visually update the Mentors and Consumables Card Group when items added
-    GameObject mentorCardHolder;
-    GameObject consumableCardHolder;
+    [SerializeField] private JokerCardHolder mentorCardHolder;
+    [SerializeField] private ConsumableCardHolder consumableCardHolder;
 
     public static ShopManager instance { get; private set; }  //ShopManager instance varaiable
 
@@ -250,6 +250,10 @@ public class ShopManager : MonoBehaviour
         }
         //Add Mentor to user's collection
         playerInst.mentorDeck.Add(mentor);
+        if(mentorCardHolder != null)
+        {
+            mentorCardHolder.AddMentor(mentor); //  Visually add to holder
+        }
 
         //Remove Mentor from Screen
         mentorButton.gameObject.SetActive(false);
@@ -266,6 +270,10 @@ public class ShopManager : MonoBehaviour
         {
             //Open pack and allow user to choose from cards
             playerInst.consumables.Add(textbook);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(textbook); //  Visually add to holder
+            }
 
             //Move pack disappear
             // textbookButton.interactable |= false;
@@ -294,6 +302,10 @@ public class ShopManager : MonoBehaviour
 
         //Add cardBuff to consumables
         playerInst.consumables.Add(cardBuff);
+        if (consumableCardHolder != null)
+        {
+            consumableCardHolder.AddConsumable(cardBuff); //  Visually add to holder
+        }
 
         //Make Pack Disappear
         cardBuffButton.gameObject.SetActive(false);
@@ -752,6 +764,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.mentorDeck.Add(PackCard1.mentor);
+            if (mentorCardHolder != null)
+            {
+                mentorCardHolder.AddMentor(PackCard1.mentor); //  Visually add to holder
+            }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
         }
@@ -764,6 +780,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard1.textbook);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard1.textbook); //  Visually add to holder
+            }
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
@@ -775,6 +795,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard1.cardBuff);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard1.cardBuff); //  Visually add to holder
+            }
             cardsSelected++;
         }
 
@@ -796,6 +820,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.mentorDeck.Add(PackCard2.mentor);
+            if (mentorCardHolder != null)
+            {
+                mentorCardHolder.AddMentor(PackCard2.mentor); //  Visually add to holder
+            }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
         }
@@ -808,6 +836,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard2.textbook);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard2.textbook); //  Visually add to holder
+            }
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
@@ -819,6 +851,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard2.cardBuff);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard2.cardBuff); //  Visually add to holder
+            }
             cardsSelected++;
         }
 
@@ -839,6 +875,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.mentorDeck.Add(PackCard3.mentor);
+            if (mentorCardHolder != null)
+            {
+                mentorCardHolder.AddMentor(PackCard3.mentor); //  Visually add to holder
+            }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
         }
@@ -851,6 +891,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard3.textbook);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard3.textbook); //  Visually add to holder
+            }
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
@@ -862,6 +906,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard3.cardBuff);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard3.cardBuff); //  Visually add to holder
+            }
             cardsSelected++;
         }
 
@@ -882,6 +930,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.mentorDeck.Add(PackCard4.mentor);
+            if (mentorCardHolder != null)
+            {
+                mentorCardHolder.AddMentor(PackCard4.mentor); //  Visually add to holder
+            }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
         }
@@ -894,6 +946,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard4.textbook);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard4.textbook); //  Visually add to holder
+            }
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
@@ -905,6 +961,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard4.cardBuff);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard4.cardBuff); //  Visually add to holder
+            }
             cardsSelected++;
         }
 
@@ -925,6 +985,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.mentorDeck.Add(PackCard5.mentor);
+            if (mentorCardHolder != null)
+            {
+                mentorCardHolder.AddMentor(PackCard5.mentor); //  Visually add to holder
+            }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
         }
@@ -937,6 +1001,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard5.textbook);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard5.textbook); //  Visually add to holder
+            }
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
@@ -948,6 +1016,10 @@ public class ShopManager : MonoBehaviour
                 return;
             }
             playerInst.consumables.Add(PackCard5.cardBuff);
+            if (consumableCardHolder != null)
+            {
+                consumableCardHolder.AddConsumable(PackCard5.cardBuff); //  Visually add to holder
+            }
             cardsSelected++;
         }
 
