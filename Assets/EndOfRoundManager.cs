@@ -13,6 +13,7 @@ public class EndOfRoundManager : MonoBehaviour
     public GameObject interestNumber;
     public GameObject roundRewardText;
     public GameObject moneyText;
+    public GameObject scoreAtLeastAmount;
     Game inst = Game.access();
     Player player = Player.access();
     int roundReward = 0;
@@ -34,10 +35,18 @@ public class EndOfRoundManager : MonoBehaviour
 
     public void EndScreenOpened()
     {
+        SetScoreAmount();
         CalculateRoundReward();
         CalculateHands();
         CalculateInterest();
         SetCashOut();
+    }
+    private void SetScoreAmount()
+    {
+        int ante = Game.access().ante;
+        int round = Game.access().roundValue;
+        int scoreNeeded = (int)Round.access().GetTargetScore(ante, round);
+        scoreAtLeastAmount.GetComponent<TMP_Text>().text = scoreNeeded.ToString();
     }
     private void CalculateRoundReward()
     {
@@ -46,9 +55,6 @@ public class EndOfRoundManager : MonoBehaviour
 
         switch (round)
         {
-            case 0:
-                roundReward = 0;
-                break;
             case 1:
                 roundReward = 3;
                 break;
@@ -74,7 +80,7 @@ public class EndOfRoundManager : MonoBehaviour
 
     private void CalculateInterest()
     {
-        interest = (int)player.moneyCount / 5;
+        interest = player.moneyCount/5;
         interestNumber.GetComponent<TMP_Text>().text = interest.ToString();
         totalCashOut += interest;
     }
@@ -82,16 +88,19 @@ public class EndOfRoundManager : MonoBehaviour
     private void CalculateHands()
     {
         int hands = player.handCount;
+        Debug.Log("Hands: " + hands);
         remainingHandsNumber.GetComponent<TMP_Text>().text = hands.ToString();
         totalCashOut += hands;
     }
     private void SetCashOut()
     {
-        cashOutButton.GetComponent<TMP_Text>().text = totalCashOut.ToString();
+        cashOutButton.GetComponentInChildren<TMP_Text>().text = "Cash Out:" + totalCashOut.ToString();
     }
 
     public void CashOut()
     {
+        
+        Debug.Log("Total CashOut: $" + totalCashOut);
         //Add cash out to player's cash and change text
         player.moneyCount += totalCashOut;
         moneyText.GetComponent<TMP_Text>().text = "$" + player.moneyCount.ToString();
