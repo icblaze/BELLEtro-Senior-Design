@@ -120,6 +120,7 @@ public class CurrentHandManager : MonoBehaviour
                 }
                 if (ThreeKindCheck(selectedCards) == true)
                 {
+                    Debug.LogWarning("Three of a kind detected in 4 card hand!");
                     result = "ThreeKind";
                     currentHandText.GetComponent<TMP_Text>().text = "Three Of A Kind";
                     updateBaseAndMult(result);
@@ -132,13 +133,14 @@ public class CurrentHandManager : MonoBehaviour
                     updateBaseAndMult(result);
                     return result;
                 }
-                result = PairCheck(selectedCards);
-                if (result.CompareTo("HighCard") == 0)
+                if (PairCheck(selectedCards) == "Pair")
                 {
-                    currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                    result = "Pair";
+                    currentHandText.GetComponent<TMP_Text>().text = "Pair";
                 }
                 else
                 {
+                    result = "High Card";
                     currentHandText.GetComponent<TMP_Text>().text = result;
                 }
                 updateBaseAndMult(result);
@@ -520,9 +522,16 @@ public class CurrentHandManager : MonoBehaviour
     //a three of a kind.
     public bool FullHouseCheck(List<PCard> pCards)
     {
+        if (pCards == null || pCards.Count < 5)
+        {
+            Debug.LogWarning("FullHouseCheck: Invalid card list provided.");
+            return false;
+        }
+    
 
         List<PCard> listOfCards = pCards;
         string[][] cardTerms = new string[pCards.Count][];
+        HashSet<int> usedIndexes = new HashSet<int>(); // Used to track the indexes
         bool isThreeKind = false;
 
         for (int i = 0; i < pCards.Count; i++)
@@ -538,41 +547,40 @@ public class CurrentHandManager : MonoBehaviour
                 for (int k = j + 1; k < cardTerms.Length; k++)
                 {
                     //In order to have a three of a kind with vowels they must all have the same height and placement
-                    if ((cardTerms[i][0] == "Lax" || cardTerms[i][0] == "Tense") &&
-                        (cardTerms[j][0] == "Lax" || cardTerms[j][0] == "Tense") &&
-                        (cardTerms[k][0] == "Lax" || cardTerms[k][0] == "Tense"))
+                    if ((pCards[i].suit == SuitName.Lax || pCards[i].suit == SuitName.Tense) &&
+                        (pCards[j].suit == SuitName.Lax || pCards[j].suit == SuitName.Tense) &&
+                        (pCards[k].suit == SuitName.Lax || pCards[k].suit == SuitName.Tense))
                     {
-                        if ((cardTerms[i][1] == cardTerms[j][1]) &&
-                            (cardTerms[i][1] == cardTerms[k][1]) &&
-                            (cardTerms[i][2] == cardTerms[j][2]) &&
-                            (cardTerms[i][2] == cardTerms[k][2]))
+                        if ((pCards[i].placeArt == pCards[j].placeArt) &&
+                            (pCards[i].placeArt == pCards[k].placeArt) &&
+                            (pCards[i].mannerArt == pCards[j].mannerArt) &&
+                            (pCards[i].mannerArt == pCards[k].mannerArt))
                         {
-                            listOfCards.RemoveAt(i);
-                            listOfCards.RemoveAt(j - 1);
-                            listOfCards.RemoveAt(k - 2);
+                            usedIndexes.Add(i);
+                            usedIndexes.Add(j);
+                            usedIndexes.Add(k);
 
                             Debug.LogWarning("Potential Full house!");
                             isThreeKind = true;
                             break;
                         }
-                        continue;
                     }
                     //Comparing the manner of articulation of the 3 Lingustic Term phrases
-                    else if ((cardTerms[i][1] == cardTerms[j][1]) && (cardTerms[i][1] == cardTerms[k][1]))
+                    else if ((pCards[i].mannerArt == pCards[j].mannerArt) && (pCards[i].mannerArt == pCards[k].mannerArt))
                     {
-                        listOfCards.RemoveAt(i);
-                        listOfCards.RemoveAt(j - 1);
-                        listOfCards.RemoveAt(k - 2);
+                        usedIndexes.Add(i);
+                        usedIndexes.Add(j);
+                        usedIndexes.Add(k);
                         Debug.LogWarning("Potential Full house!");
                         isThreeKind = true;
                         break;
                     }
                     //Comparing the place of articulation of the 3 Lingustic Term phrases
-                    else if ((cardTerms[i][2] == cardTerms[j][2]) && (cardTerms[i][2] == cardTerms[k][2]))
+                    else if ((pCards[i].placeArt == pCards[j].placeArt) && (pCards[i].placeArt == pCards[k].placeArt))
                     {
-                        listOfCards.RemoveAt(i);
-                        listOfCards.RemoveAt(j - 1);
-                        listOfCards.RemoveAt(k - 2);
+                        usedIndexes.Add(i);
+                        usedIndexes.Add(j);
+                        usedIndexes.Add(k);
                         Debug.LogWarning("Potential Full house!");
                         isThreeKind = true;
                         break;
@@ -580,6 +588,9 @@ public class CurrentHandManager : MonoBehaviour
                 }
             }
         }
+
+        //This removes all the indexes that were used to find the three of a kind from the list of cards.
+        listOfCards = listOfCards.Where((card, index) => !usedIndexes.Contains(index)).ToList();
 
         if ((PairCheck(listOfCards) == "Pair") && isThreeKind)
         {
