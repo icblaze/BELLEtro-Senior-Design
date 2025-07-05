@@ -1,3 +1,9 @@
+// This Document contains the code for managing the player's mentorDeck visually.
+// This includes the logic for mentor rearaangement.
+// Current Devs:
+// Van: created the class and sell button
+// Andy: linked Card visual and player's mentorDeck
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

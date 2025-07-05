@@ -1,3 +1,7 @@
+// This Document contains the code for the intial shader code for cards
+// Current Devs:
+// Van: created the class and intial randomization
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

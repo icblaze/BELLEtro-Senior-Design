@@ -1,3 +1,8 @@
+// This Document contains the code for instantiating a GameObject
+// that parents all the card visuals, needed to manage hierarchy
+// Current Devs:
+// Van: created the class
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

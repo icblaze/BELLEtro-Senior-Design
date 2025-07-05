@@ -88,7 +88,19 @@ public class CardModifier
         switch(enhancement)
         {
             case CardEnhancement.Base:
-                return "";  
+                return "";
+            case CardEnhancement.BonusCard:
+                return "+30 extra Chips";
+            case CardEnhancement.MultCard:
+                return "+4 Mult";
+            case CardEnhancement.WildCard:
+                return "Can be used as any suit";
+            case CardEnhancement.GoldCard:
+                return "Gain $3 if held in hand at end of round";
+            case CardEnhancement.SteelCard:
+                return "X1.5 Mult when held in hand";
+            case CardEnhancement.GlassCard:
+                return "X2 Mult when scored. 25% chance of being destroyed after scoring";
         }
 
         return "";

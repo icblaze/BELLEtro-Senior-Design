@@ -1,5 +1,6 @@
 // This class handles the movement of the cards in the game, and allows
 // players to click and drag cards around their deck.
+// Van: created class
 
 using System;
 using UnityEngine;

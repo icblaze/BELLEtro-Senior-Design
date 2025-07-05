@@ -54,15 +54,11 @@ public class DeleteCard : MonoBehaviour
 
         if (!selectedCards.Contains(card))
         {
-            //  Extract PCard object from Card
-            PCard pcard = card.GetComponent<Card>().pcard;
-            selectedPCards.Add(pcard);
-
             selectedCards.Add(card);
 
             //  Debug hand check
+            CurrentHandManager.Instance.findCurrentHand(GetSelectedPCards());
             pcardCount = selectedPCards.Count;
-            CurrentHandManager.Instance.findCurrentHand(selectedPCards);
         }
     }
 
@@ -77,28 +73,32 @@ public class DeleteCard : MonoBehaviour
 
         if (selectedCards.Contains(card))
         {
-            //  Extract PCard object from Card
-            PCard pcard = card.GetComponent<Card>().pcard;
-            selectedPCards.Remove(pcard);
-
             selectedCards.Remove(card);
 
             //  Debug hand check
+            CurrentHandManager.Instance.findCurrentHand(GetSelectedPCards());
             pcardCount = selectedPCards.Count;
-            CurrentHandManager.Instance.findCurrentHand(selectedPCards);
+
         }
     }
 
     //This returns the selected cards that the player currently has selected
     public List<GameObject> GetSelectedCards()
     {
-        return new List<GameObject>(selectedCards);
+        return selectedCards;
     }
 
-    //This returns the selected PCards that the player currently has selected
+    //This returns the selected PCards extracted from cards that the player currently has selected
     public List<PCard> GetSelectedPCards()
     {
-        return new List<PCard>(selectedPCards);
+        selectedPCards.Clear(); //  Refresh PCards
+
+        foreach(GameObject cardObject in selectedCards)
+        {
+            selectedPCards.Add(cardObject.GetComponent<Card>().pcard);
+        }
+
+        return selectedPCards;
     }
 
     //This function removes the cards that the player played, and clears the selectedCards list.

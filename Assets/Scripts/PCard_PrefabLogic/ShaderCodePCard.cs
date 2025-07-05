@@ -1,3 +1,7 @@
+//  This class changes the selected shader used for each Card object
+//  Not only does this work with PCard's, but also work with Mentors
+//  Andy (flakkid): created class
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

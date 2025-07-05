@@ -1,3 +1,9 @@
+// This Document contains the code for managing the player's consumables list visually.
+// This includes the logic for consumables rearaangement and using effect.
+// Current Devs:
+// Van: created the class and sell button
+// Andy: linked Card visual with player's consumables list, connected use button to effect
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +38,9 @@ public class ConsumableCardHolder : MonoBehaviour
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
+    //  DeleteCard to update current hand if cards changed
+    [SerializeField] private DeleteCard deleteScript; 
+
     Player player = Player.access();
     Game game = Game.access();
 
@@ -41,7 +50,7 @@ public class ConsumableCardHolder : MonoBehaviour
         //  Order should persist if correct, selling should remove from consumables  
         //  Comment out eventually
         player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Leftovers));
-        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Tea));
+        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Cherry));
 
         //  Debug consumables in the list, order from left to right
         Debug.Log("Consumables in list:");
@@ -252,6 +261,11 @@ public class ConsumableCardHolder : MonoBehaviour
             // Get the Card component to access its sellValue
             Card cardComponent = cardToUse.GetComponent<Card>();
 
+            if(deleteScript == null)
+            {
+                deleteScript = FindFirstObjectByType<DeleteCard>();
+            }
+
             //  Use effect
             if (cardComponent.consumable.type == ConsumableType.Textbook)
             {
@@ -262,6 +276,12 @@ public class ConsumableCardHolder : MonoBehaviour
             {
                 CardBuff cardBuff = (CardBuff)cardComponent.consumable;
                 cardBuff.applyCardBuff();
+
+                //  Refresh cards if possible hand changed
+                if(!cardBuff.isInstant)
+                {
+                    CurrentHandManager.Instance.findCurrentHand(deleteScript.GetSelectedPCards());
+                }
             }
 
             //  Remove consumable from player's consuamble list first
