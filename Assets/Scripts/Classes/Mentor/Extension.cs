@@ -1,5 +1,5 @@
 ﻿// This Document contains the code for the Extension mentor
-// Effect is to have the next purchased Mentor is $3 off
+// Effect is to have the next purchased Mentor to be $3 off
 // Current Devs:
 // Andy (flakkid): Created mentor
 

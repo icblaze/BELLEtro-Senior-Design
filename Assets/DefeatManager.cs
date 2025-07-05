@@ -21,17 +21,17 @@ public class DefeatManager : MonoBehaviour
 
     public void SetText()
     {
-        backgroundImage.GetComponent<ScrollingImage>().enabled = true;
+        //backgroundImage.GetComponent<ScrollingImage>().enabled = true;
         Game inst = Game.access();
         Player player = Player.access();
         String score = "Score of Last Round:" + player.chipCount + "\n";
-        String rounds = "Reached Ante: " + inst.ante + " Round: " + inst.roundValue + "\n";
+        String rounds = "Reached Ante: " + inst.anteValue + " Round: " + inst.roundValueTest + "\n";
         String defeated;
-        if (inst.roundValue == 1)
+        if (inst.roundValueTest == 1)
         {
             defeated = "Defeated By: Small Blind\n";
         }
-        else if (inst.roundValue == 2)
+        else if (inst.roundValueTest == 2)
         {
             defeated = "Defeated By: Big Blind\n";
         }

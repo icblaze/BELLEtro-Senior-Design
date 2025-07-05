@@ -24,7 +24,7 @@ public class Cherry : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Select 2 cards. Coverts the left card into the right card.";
+        description = "Select 2 cards. Converts the left card into the right card.";
         return description;
     }
 

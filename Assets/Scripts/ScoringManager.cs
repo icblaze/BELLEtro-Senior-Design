@@ -1,3 +1,7 @@
+//Script is used to complete the scoring aspect of the game.
+//This includes the chips/mults gained from the cards in addition
+//to the mentors.
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
@@ -5,29 +9,27 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-//Script is used to complete the scoring aspect of the game.
-//This includes the chips/mults gained from the cards in addition
-//to the mentors.
 
 public class ScoringManager : MonoBehaviour
 {
-    private DeleteCard deleteCardScript;
-    private List<PCard> playedPCards;
-    private List<GameObject> selectedCards = new List<GameObject>();
-    private CurrentHandManager currentHandManager;
-    ShakeScreen shakeScreen = ShakeScreen.access();
-    Player player = Player.access();
-    private int currentChips;
-    private int currentMult;
-    private string handType;
-    private GameObject roundScore;
-    private GameObject blueScore;
-    private GameObject redScore;
-    private TMP_Text blueScoreText;
-    private TMP_Text redScoreText;
-    private TMP_Text roundScoreText;
-    private BigInteger totalScore;
-    private BigInteger neededScore;
+    private DeleteCard deleteCardScript;                            
+    private List<PCard> playedPCards;                                //List of PCards played in the hand   
+    private PCard highCard;                                     //High card for the hand  
+    private List<GameObject> selectedCards = new List<GameObject>(); //list of selected cards
+    private CurrentHandManager currentHandManager;                   //Current hand manager to get the current hand
+    private ShakeScreen shakeScreen = ShakeScreen.access();          //ShakeScreen instance variable
+    private Player player = Player.access();                //Player instance variable
+    private int currentChips;                               //Current chips for the hand
+    private int currentMult;                                //Current multiplier for the hand 
+    private string handType;                                //Current hand type
+    private GameObject roundScore;                          //GameObject for the round score
+    private GameObject blueScore;                           //GameObject for the blue score 
+    private GameObject redScore;                            //GameObject for the red score  
+    private TMP_Text blueScoreText;                         //Text for the blue score   
+    private TMP_Text redScoreText;                          //Text for the red score
+    private TMP_Text roundScoreText;                        //Text for the round score
+    private BigInteger totalScore;                          //Total score for the hand   
+    private BigInteger neededScore;                         //Score needed to win the round
 
     //  Adjust time of scoring manager between each score increment
     private readonly float waitIncrement= 0.25f;
@@ -62,17 +64,45 @@ public class ScoringManager : MonoBehaviour
     //Public function to start the scoring process
     public void GetScoring()
     {
-        //Get P Cards and Regular Cards
+        //Get PCards and Regular Cards
         playedPCards = deleteCardScript.GetSelectedPCards();
+        Debug.Log("Played P Cards Count: " + playedPCards.Count);
+
         selectedCards = deleteCardScript.GetSelectedCards();
 
         //Get current hand and scores for it
         handType = currentHandManager.findCurrentHand(playedPCards);
         SetHandScore(handType);
 
-        int ante = Game.access().ante;
-        int round = Game.access().roundValue;
+        //Setting ante and round values for testing purposes
+        Game.access().anteValue = 1;
+        Game.access().roundValueTest = 1;
+
+        int ante = Game.access().anteValue;
+        int round = Game.access().roundValueTest;
         neededScore = (int)Round.access().GetTargetScore(ante, round);
+
+        //Call a function that passes the hand type, and the selected cards, and return only the cards that are part of a valid hand
+        //This will be used to calculate the score of the hand
+        if (handType == "")
+        {
+            Debug.LogWarning("No valid hand found. Please select a valid hand.");
+            return;
+        }
+        else if (handType == "HighCard")
+        {
+            // If the hand type is HighCard, we only need one card
+            highCard = currentHandManager.GetHighCard(playedPCards);
+            playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
+            playedPCards.Add(highCard); // Add the high card to the playedPCards list
+        }
+        else
+        { 
+            playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
+
+            //Get the list of cards from the current hand manager based on the hand type
+            playedPCards = currentHandManager.GetListOfCards(handType); 
+        }
 
         //Start the card scoring process
         StartCoroutine(CardScoring());
@@ -91,53 +121,72 @@ public class ScoringManager : MonoBehaviour
         handType = "";
     }
 
+
     private IEnumerator CardScoring()
     {
         //Go through cards and add their scores. Wait for a small time
         //before going to the next card
         int numCards = playedPCards.Count;
         int i = 0;
-        // if (handType.CompareTo("HighCard") == 0)
-        // {
-        //     numCards = 1;
-        // }
-        while (i < numCards)
+
+        if (numCards == 1)
         {
-            currentChips += playedPCards[i].chips;
-            currentMult += playedPCards[i].multiplier;
+            currentChips += playedPCards[0].chips;
+            currentMult += playedPCards[0].multiplier;
             Debug.Log("Current Chips: " + currentChips.ToString());
             Debug.Log("Current Mult: " + currentMult.ToString());
 
             //Update the text UI.
             //Should have a UI element that is shown in realtime
-            // shakeScreen.StartShake();
+            //shakeScreen.StartShake();
             blueScoreText.text = currentChips.ToString();
             redScoreText.text = currentMult.ToString();
+        }
+        else if (numCards > 0)
+        {
+            while (i < numCards)
+            {
+                currentChips += playedPCards[i].chips;
+                currentMult += playedPCards[i].multiplier;
+                Debug.Log("Current Chips: " + currentChips.ToString());
+                Debug.Log("Current Mult: " + currentMult.ToString());
 
-            //Should check for mentors and detect if they need to add any chips/mults/effects
+                //Update the text UI.
+                //Should have a UI element that is shown in realtime
+                //shakeScreen.StartShake();
+                blueScoreText.text = currentChips.ToString();
+                redScoreText.text = currentMult.ToString();
 
-            //Increment and wait to go to next card
-            i++;
-            yield return new WaitForSecondsRealtime(waitIncrement);
+                //Should check for mentors and detect if they need to add any chips/mults/effects
+
+                //Increment and wait to go to next card
+                i++;
+                yield return new WaitForSecondsRealtime(.5f);
+            }
         }
         SetTotal();
         yield return new WaitForSecondsRealtime(.5f);
 
-        //Start next round proceedings
-        if (neededScore < totalScore)
+        //Start next round proceedings if the player chip count is greater than or equal to the needed score
+        if (neededScore <= player.chipCount)
         {
             EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
             transitionManager.TransitionToEndOfRoundScreen();
         }
+
         //If player runs out of hands, game over
         else if (Player.access().handCount <= 0)
         {
             EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+
+            //Maybe implement a if statement here to check if the player has the amount of chips to continue
+            //If not, then transition to defeat screen
             transitionManager.TransitionToDefeatScreen();
         }
     }
+    
     //Calculate the totalChips earned from hand, add it to player chipCount
     //and display change in the UI.
     private void SetTotal()
@@ -146,6 +195,7 @@ public class ScoringManager : MonoBehaviour
         player.chipCount += totalScore;
         roundScoreText.text = player.chipCount.ToString();
     }
+
     //Takes in hand name and gets chips and mult of hand
     private void SetHandScore(string name)
     {

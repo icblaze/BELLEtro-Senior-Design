@@ -1,6 +1,9 @@
 // This class handles the logic for moving the selected cards from the players hand
 // to the play area where the hands are usually scored. This class also handles deleting
 // and retrieving new cards from the deck to the players hand so the player can continue playing.
+//Current Devs:
+//Zacharia Alaoui(Zacharia Alaoui)
+//Andy Van(Andy Van)
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,7 +58,7 @@ public class PlayHand : MonoBehaviour
 
     //This function initiates moving the selected cards to the play area 
     //after the player clicks on the play hand button
-    void PlaySelectedCards()
+    public void PlaySelectedCards()
     {
         selectedCards = deleteCardScript.GetSelectedCards(); // Get selected cards
 
@@ -92,12 +95,14 @@ public class PlayHand : MonoBehaviour
 
         currHandCount = Round.access().DecreaseHandCount();      //Decrease Hand count of the player
         handsLeft.text = currHandCount.ToString("0");
+        
+        //Call a function here that clears all the Lists from currentHandManager
 
         // Move selected cards to the play area
         StartCoroutine(MoveCardsToPlayArea());
     }
 
-    IEnumerator MoveCardsToPlayArea()
+    private IEnumerator MoveCardsToPlayArea()
     {
         Debug.Log("MoveCardsToPlayArea started");
 
@@ -185,7 +190,8 @@ public class PlayHand : MonoBehaviour
         }
     }
 
-    IEnumerator MoveCard(GameObject card, Vector2 targetPosition)
+    //This function moves the card to the target position with a smooth animation
+    private IEnumerator MoveCard(GameObject card, Vector2 targetPosition)
     {
         float duration = 0.5f; // Move animation duration
         float elapsed = 0f;
@@ -214,5 +220,9 @@ public class PlayHand : MonoBehaviour
     {
         Player.access().handCount = 4;
         Player.access().discards = 4;
+        Player.access().moneyCount = 0;
+        Player.access().chipCount = 0;
+        Player.access().discount = 1.0f; // Reset discount to 100%
+        Player.access().InitializeHandTable();
     }
 }

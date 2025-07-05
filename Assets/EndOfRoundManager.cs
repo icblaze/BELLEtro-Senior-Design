@@ -43,15 +43,15 @@ public class EndOfRoundManager : MonoBehaviour
     }
     private void SetScoreAmount()
     {
-        int ante = Game.access().ante;
-        int round = Game.access().roundValue;
+        int ante = Game.access().anteValue;
+        int round = Game.access().roundValueTest;
         int scoreNeeded = (int)Round.access().GetTargetScore(ante, round);
         scoreAtLeastAmount.GetComponent<TMP_Text>().text = scoreNeeded.ToString();
     }
     private void CalculateRoundReward()
     {
-        int round = inst.roundValue;
-        int ante = inst.ante;
+        int round = inst.roundValueTest;
+        int ante = inst.anteValue;
 
         switch (round)
         {

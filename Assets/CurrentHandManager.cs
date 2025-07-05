@@ -25,6 +25,16 @@ public class CurrentHandManager : MonoBehaviour
     private TMP_Text blueScoreText;
     private TMP_Text redScoreText;
 
+    public List<PCard> pairCards = new List<PCard>(); //List of PCards that are used to check for pairs
+    public List<PCard> twoPairCards = new List<PCard>(); //List of PCards that are used to check for two pairs
+    public List<PCard> threeOfAKindCards = new List<PCard>(); //List of PCards that are used to check for three of a kind
+    public List<PCard> fourOfAKindCards = new List<PCard>(); //List of PCards that are used to check for four of a kind
+    public List<PCard> fiveOfAKindCards = new List<PCard>(); //List of PCards that are used to check for five of a kind
+    public List<PCard> fullHouseCards = new List<PCard>(); //List of PCards that are used to check for full house
+    public List<PCard> flushCards = new List<PCard>(); //List of PCards that are used to check for flush    
+    public List<PCard> straightCards = new List<PCard>(); //List of PCards that are used to check for straigh
+    public PCard highCard; //High Card used to check for high card
+
     public static CurrentHandManager Instance { get; private set; }  //Player instance varaiable
 
     void Awake()
@@ -75,6 +85,7 @@ public class CurrentHandManager : MonoBehaviour
                 redScoreText.text = "0";
                 return "";
             case 1:
+                highCard = selectedCards[0];
                 currentHandText.GetComponent<TMP_Text>().text = "High Card";
                 updateBaseAndMult("HighCard");
                 return "HighCard";
@@ -152,6 +163,7 @@ public class CurrentHandManager : MonoBehaviour
                 fullhouse = FullHouseCheck(selectedCards);
                 flush = FlushCheck(selectedCards);
                 straight = StraightCheck(selectedCards);
+
                 //Group the different booleans to place them into the correct hand type
                 if (fiveOfAKind == true)
                 {
@@ -198,14 +210,14 @@ public class CurrentHandManager : MonoBehaviour
                 if (flush == true)
                 {
                     result = "Flush";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    currentHandText.GetComponent<TMP_Text>().text = "Flush";
                     updateBaseAndMult(result);
                     return result;
                 }
                 if (straight == true)
                 {
                     result = "Straight";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    currentHandText.GetComponent<TMP_Text>().text = "Straight";
                     updateBaseAndMult(result);
                     return result;
                 }
@@ -247,6 +259,7 @@ public class CurrentHandManager : MonoBehaviour
     public string PairCheck(List<PCard> pCards)
     {
         string[][] cardTerms = new string[pCards.Count][];       //This will hold all the card linguistic term names in a string format.
+        pairCards.Clear(); //Clear the pair cards list before checking for pairs
 
         //Convert the Enum lingustic terms into a string
         for (int i = 0; i < pCards.Count; i++)
@@ -266,6 +279,9 @@ public class CurrentHandManager : MonoBehaviour
                 {
                     if ((cardTerms[i][1] == cardTerms[j][1]) && (cardTerms[i][2] == cardTerms[j][2]))
                     {
+                        //Found a vowel pair
+                        pairCards.Add(pCards[i]);
+                        pairCards.Add(pCards[j]);
                         Debug.LogWarning("Pair using vowels!");
                         return "Pair";
                     }
@@ -277,12 +293,16 @@ public class CurrentHandManager : MonoBehaviour
                 //Comparing the manner of articulation of the 2 different Lingustic Term phrases
                 if (cardTerms[i][1] == cardTerms[j][1])
                 {
+                    pairCards.Add(pCards[i]);
+                    pairCards.Add(pCards[j]);
                     Debug.LogWarning("Pair with same manner of articulation!");
                     return "Pair";
                 }
                 //Comparing the place of articulation of the 2 different Lingustic Term phrases
                 else if (cardTerms[i][2] == cardTerms[j][2])
                 {
+                    pairCards.Add(pCards[i]);
+                    pairCards.Add(pCards[j]);
                     Debug.LogWarning("Pair with same place of articulation!");
                     return "Pair";
                 }
@@ -300,6 +320,7 @@ public class CurrentHandManager : MonoBehaviour
         }
 
         string[][] cardTerms = new string[pCards.Count][];
+        threeOfAKindCards.Clear(); //Clear the three of a kind cards list before checking for three of a kind
 
         //Convert the Enum lingustic terms into a string
         for (int i = 0; i < pCards.Count; i++)
@@ -324,6 +345,10 @@ public class CurrentHandManager : MonoBehaviour
                             (cardTerms[i][2] == cardTerms[j][2]) &&
                             (cardTerms[i][2] == cardTerms[k][2]))
                         {
+                            //Found a vowel three of a kind
+                            threeOfAKindCards.Add(pCards[i]);
+                            threeOfAKindCards.Add(pCards[j]);
+                            threeOfAKindCards.Add(pCards[k]);
                             Debug.LogWarning("Three Of A kind with vowels!");
                             return true;
                         }
@@ -332,12 +357,19 @@ public class CurrentHandManager : MonoBehaviour
                     //Comparing the manner of articulation of the 3 Lingustic Term phrases
                     if ((cardTerms[i][1] == cardTerms[j][1]) && (cardTerms[i][1] == cardTerms[k][1]))
                     {
+                        threeOfAKindCards.Add(pCards[i]);
+                        threeOfAKindCards.Add(pCards[j]);
+                        threeOfAKindCards.Add(pCards[k]);
                         Debug.LogWarning("Three Of A kind with consonants, same manner of articulation amongst the terms!");
                         return true;
                     }
                     //Comparing the place of articulation of the 3 Lingustic Term phrases
                     else if ((cardTerms[i][2] == cardTerms[j][2]) && (cardTerms[i][2] == cardTerms[k][2]))
                     {
+                        threeOfAKindCards.Add(pCards[i]);
+                        threeOfAKindCards.Add(pCards[j]);
+                        threeOfAKindCards.Add(pCards[k]);
+                        //Found a consonant three of a kind
                         Debug.LogWarning("Three Of A kind with consonants, same place of articulation amongst the terms!");
                         return true;
                     }
@@ -355,6 +387,7 @@ public class CurrentHandManager : MonoBehaviour
         int pairCount = 0;
         string[][] cardTerms = new string[pCards.Count][];
         HashSet<int> usedIndexes = new(); //Used to track the indexes where we found the pairs
+        twoPairCards.Clear(); //Clear the two pair cards list before checking for two pairs
 
         for (int i = 0; i < pCards.Count; i++)
         {
@@ -378,10 +411,12 @@ public class CurrentHandManager : MonoBehaviour
                     if ((cardTerms[i][1] == cardTerms[j][1]) &&
                         (cardTerms[i][2] == cardTerms[j][2]))
                     {
-                        //Found a vowel pair
-                        Debug.Log("Vowel Pair inside the TwoPairCheck!");
+                        twoPairCards.Add(pCards[i]);
+                        twoPairCards.Add(pCards[j]);
                         usedIndexes.Add(i);
                         usedIndexes.Add(j);
+                        //Found a vowel pair
+                        Debug.Log("Vowel Pair inside the TwoPairCheck!");
                         pairCount++;
                         break;
                     }
@@ -390,18 +425,22 @@ public class CurrentHandManager : MonoBehaviour
                 //Comparing the manner of articulation of the 2 different Lingustic Term phrases
                 else if (cardTerms[i][1] == cardTerms[j][1])
                 {
-                    Debug.LogWarning("Pair with same manner of articulation!");
+                    twoPairCards.Add(pCards[i]);
+                    twoPairCards.Add(pCards[j]);
                     usedIndexes.Add(i);
                     usedIndexes.Add(j);
+                    Debug.LogWarning("Pair with same manner of articulation!");
                     pairCount++;
                     break;
                 }
                 //Comparing the place of articulation of the 2 different Lingustic Term phrases
                 else if (cardTerms[i][2] == cardTerms[j][2])
                 {
-                    Debug.LogWarning("Pair with same place of articulation!");
+                    twoPairCards.Add(pCards[i]);
+                    twoPairCards.Add(pCards[j]);
                     usedIndexes.Add(i);
                     usedIndexes.Add(j);
+                    Debug.LogWarning("Pair with same place of articulation!");
                     pairCount++;
                     break;
                 }
@@ -411,6 +450,7 @@ public class CurrentHandManager : MonoBehaviour
 
         return pairCount == 2;
     }
+
     //Check if four cards share the same term.
     public bool FourKindCheck(List<PCard> pCards)
     {
@@ -433,11 +473,76 @@ public class CurrentHandManager : MonoBehaviour
         bool cardsPlaceOfManner = cardTerms.GroupBy(cardTerm => cardTerm[1]).Any(g => g.Count() == 4);
         bool cardsPlaceOfArt = cardTerms.GroupBy(cardTerm => cardTerm[2]).Any(g => g.Count() == 4);
 
-        if (cardsPlaceOfArt || cardsPlaceOfManner)
+
+        if (cardsPlaceOfArt && cardsPlaceOfManner)
         {
-            return true;
+            for (int i = 0; i < cardTerms.Length; i++)
+            {
+                fourOfAKindCards.Clear(); // Clear the four of a kind cards list before checking for four of a kind
+                fourOfAKindCards.Add(pCards[i]); // Add the first card to the four of a kind cards list
+                for (int j = i + 1; j < cardTerms.Length; j++)
+                {
+                    if (cardTerms[i][1] == cardTerms[j][1] && cardTerms[i][2] == cardTerms[j][2])
+                    {
+                        fourOfAKindCards.Add(pCards[j]);
+                    }
+                }
+
+                if (fourOfAKindCards.Count == 4)
+                {
+                    Debug.LogWarning("Four of a Kind with vowels!");
+                    return true; // Found a four of a kind
+                }
+            }
         }
 
+        //This checks if the consonants have the same manner of articulation
+        if (cardsPlaceOfManner && !cardsPlaceOfArt)
+        {
+            for (int i = 0; i < cardTerms.Length; i++)
+            {
+                fourOfAKindCards.Clear(); // Clear the four of a kind cards list before checking for four of a kind
+                fourOfAKindCards.Add(pCards[i]); // Add the first card to the four of a kind cards list
+                for (int j = i + 1; j < cardTerms.Length; j++)
+                {
+                    if (cardTerms[i][1] == cardTerms[j][1])
+                    {
+                        fourOfAKindCards.Add(pCards[j]);
+                    }
+                }
+
+                if (fourOfAKindCards.Count == 4)
+                {
+                    Debug.LogWarning("Four of a Kind with same manner of articulation detected!");
+                    return true; // Found a four of a kind
+                }
+            }
+        }
+
+        //This checks if the consonants have the same place of articulation
+        if (cardsPlaceOfArt)
+        {
+            for (int i = 0; i < cardTerms.Length; i++)
+            {
+                fourOfAKindCards.Clear(); // Clear the four of a kind cards list before checking for four of a kind
+                fourOfAKindCards.Add(pCards[i]); // Add the first card to the four of a kind cards list
+                for (int j = i + 1; j < cardTerms.Length; j++)
+                {
+                    if (cardTerms[i][2] == cardTerms[j][2])
+                    {
+                        fourOfAKindCards.Add(pCards[j]);
+                    }
+                }
+
+                if (fourOfAKindCards.Count == 4)
+                {
+                    Debug.LogWarning("Four of a Kind with same place of articulation detected!");
+                    return true; // Found a four of a kind
+                }
+            }
+        }
+
+        Debug.LogWarning("Four of a Kind not detected!");
         return false;
     }
 
@@ -451,6 +556,7 @@ public class CurrentHandManager : MonoBehaviour
 
         var vowelPairs = new HashSet<string>();
         var consonantPlaces = new HashSet<string>();
+        straightCards.Clear(); //Clear the straight cards list before checking for a straight
 
         //This checks if the vowels have the same place of articulation and manner of articulation
         for (int i = 0; i < pCards.Count; i++)
@@ -467,17 +573,21 @@ public class CurrentHandManager : MonoBehaviour
                 if (!vowelPairs.Add(combo))
                     return false; // Duplicate vowel combo
             }
-            else
-            {
-                return false; // If any consonant is present, we cannot have a straight with vowels
-            }
+        }
+
+        if (vowelPairs.Count == 5)
+        {
+            straightCards.AddRange(pCards.Where(card => card.suit == SuitName.Lax || card.suit == SuitName.Tense));
+            // All vowels are in a straight
+            Debug.LogWarning("Straight with Vowels detected!");
+            return true;
         }
 
         //This checks if the consonants have the same place of articulation
         for (int i = 0; i < pCards.Count; i++)
         {
             string place = pCards[i].placeArt.ToString();
-            string manner = pCards[i].mannerArt.ToString();
+            //string manner = pCards[i].mannerArt.ToString();
 
             string combo = place;
             //Check if the combo is a place of articulation
@@ -489,12 +599,22 @@ public class CurrentHandManager : MonoBehaviour
                 }
             }
             else
-            { 
+            {
                 return false; // If any non-place of articulation is present, we cannot have a straight with consonants
             }
         }
 
-        return true;
+        if (consonantPlaces.Count == 5)
+        {
+            straightCards.AddRange(pCards.Where(card => isAPlaceOfArticulation(card.placeArt.ToString())));
+            // All consonants are in a straight
+            Debug.LogWarning("Straight with Consonants detected!");
+            return true;
+        }
+
+        // Mixed or insufficient cards for a straight
+        Debug.LogWarning("No Straight detected!");
+        return false;
     }
 
 
@@ -507,6 +627,7 @@ public class CurrentHandManager : MonoBehaviour
         }
 
         string[][] cardTerms = new string[pCards.Count][];
+        flushCards.Clear(); //Clear the flush cards list before checking for a flush
 
         //Convert the Enum lingustic terms into a string
         for (int i = 0; i < pCards.Count; i++)
@@ -515,9 +636,37 @@ public class CurrentHandManager : MonoBehaviour
             cardTerms[i] = formatted.Split(' ');
         }
 
-        return cardTerms.GroupBy(cardTerm => cardTerm[0]).Any(g => g.Count() == 5);
+        for (int i = 0; i < cardTerms.Length; i++)
+        {
+            if (cardTerms[i] == null)
+                Debug.LogError($"cardTerms[{i}] is null!");
+            else if (cardTerms[i].Length == 0)
+                Debug.LogError($"cardTerms[{i}] is empty!");
+        }
+
+
+
+        bool isFlush = cardTerms.GroupBy(term => term[0]).Any(g => g.Count() >= 5);
+
+
+        if (isFlush)
+        {
+            // Add all cards with the same suit to the flushCards list
+            foreach (var card in pCards)
+            {
+                flushCards.Add(card);
+            }
+            Debug.LogWarning("Flush detected!");
+            return true; // Found a flush
+        }
+        else
+        {
+            Debug.LogWarning("Flush not detected!");
+        }
+
+        return false; // No flush found
     }
-    
+
     //Find a pair. Then check to see if the remaining cards are
     //a three of a kind.
     public bool FullHouseCheck(List<PCard> pCards)
@@ -527,12 +676,13 @@ public class CurrentHandManager : MonoBehaviour
             Debug.LogWarning("FullHouseCheck: Invalid card list provided.");
             return false;
         }
-    
+
 
         List<PCard> listOfCards = pCards;
         string[][] cardTerms = new string[pCards.Count][];
         HashSet<int> usedIndexes = new HashSet<int>(); // Used to track the indexes
         bool isThreeKind = false;
+        fullHouseCards.Clear(); //Clear the full house cards list before checking for a full house
 
         for (int i = 0; i < pCards.Count; i++)
         {
@@ -556,6 +706,12 @@ public class CurrentHandManager : MonoBehaviour
                             (pCards[i].mannerArt == pCards[j].mannerArt) &&
                             (pCards[i].mannerArt == pCards[k].mannerArt))
                         {
+                            //Found a vowel three of a kind
+                            fullHouseCards.Add(pCards[i]);
+                            fullHouseCards.Add(pCards[j]);
+                            fullHouseCards.Add(pCards[k]);
+
+                            //Add the indexes to the usedIndexes set    
                             usedIndexes.Add(i);
                             usedIndexes.Add(j);
                             usedIndexes.Add(k);
@@ -568,6 +724,10 @@ public class CurrentHandManager : MonoBehaviour
                     //Comparing the manner of articulation of the 3 Lingustic Term phrases
                     else if ((pCards[i].mannerArt == pCards[j].mannerArt) && (pCards[i].mannerArt == pCards[k].mannerArt))
                     {
+                        fullHouseCards.Add(pCards[i]);
+                        fullHouseCards.Add(pCards[j]);
+                        fullHouseCards.Add(pCards[k]);
+
                         usedIndexes.Add(i);
                         usedIndexes.Add(j);
                         usedIndexes.Add(k);
@@ -578,9 +738,15 @@ public class CurrentHandManager : MonoBehaviour
                     //Comparing the place of articulation of the 3 Lingustic Term phrases
                     else if ((pCards[i].placeArt == pCards[j].placeArt) && (pCards[i].placeArt == pCards[k].placeArt))
                     {
+                        fullHouseCards.Add(pCards[i]);
+                        fullHouseCards.Add(pCards[j]);
+                        fullHouseCards.Add(pCards[k]);
+
+                        //Found a consonant three of a kind
                         usedIndexes.Add(i);
                         usedIndexes.Add(j);
                         usedIndexes.Add(k);
+
                         Debug.LogWarning("Potential Full house!");
                         isThreeKind = true;
                         break;
@@ -594,6 +760,7 @@ public class CurrentHandManager : MonoBehaviour
 
         if ((PairCheck(listOfCards) == "Pair") && isThreeKind)
         {
+            fullHouseCards.AddRange(listOfCards);
             Debug.LogWarning("Full house!");
             return true;
         }
@@ -611,6 +778,7 @@ public class CurrentHandManager : MonoBehaviour
         }
 
         string[][] cardTerms = new string[pCards.Count][];
+        fiveOfAKindCards.Clear(); //Clear the five of a kind cards list before checking for five of a kind
 
         //Convert the Enum lingustic terms into a string
         for (int i = 0; i < pCards.Count; i++)
@@ -619,26 +787,81 @@ public class CurrentHandManager : MonoBehaviour
             cardTerms[i] = formatted.Split(' ');
         }
 
-        //This loop is used to make sure that we ignore all vowels, since we cannot get a five of a kind with vowels.
-        for (int i = 0; i < pCards.Count; i++)
-        {
-            if (cardTerms[i][0] == "Lax" || cardTerms[i][0] == "Tense")
-            {
-                return false;
-            }
-        }
 
         //These variable groups all the cards by having the same manner or place of articulation, and returns true if
         //there is 5 cards that have the same manner of articulation or place of articulation
         bool cardsPlaceOfManner = cardTerms.GroupBy(cardTerm => cardTerm[1]).Any(g => g.Count() == 5);
         bool cardsPlaceOfArt = cardTerms.GroupBy(cardTerm => cardTerm[2]).Any(g => g.Count() == 5);
 
+        if (cardsPlaceOfArt && cardsPlaceOfManner)
+        {
+            fiveOfAKindCards.AddRange(pCards);
+            Debug.LogWarning("Five of a Kind detected for vowels!");
+            return true;
+        }
+
         if (cardsPlaceOfArt || cardsPlaceOfManner)
         {
+
+            fiveOfAKindCards.AddRange(pCards);
+            Debug.LogWarning("Five of a Kind detected for consonants!");
             return true;
         }
 
         return false;
+    }
+
+    public PCard GetHighCard(List<PCard> selectedCards)
+    {
+        //Check if the selected cards are null or empty
+        if (selectedCards == null || selectedCards.Count == 0)
+        {
+            Debug.LogWarning("Selected cards list is null or empty.");
+            return null;
+        }
+
+        //Select the first card as the high card
+        //Might need to change this logic so only the highest card is selected
+        highCard = selectedCards[0];
+
+        //Debug log to show the high card found
+        Debug.Log("High Card Found: " + highCard.term.ToString());
+
+        return highCard;
+    }
+
+    public List<PCard> GetListOfCards(string handType)
+    {
+        //Returns the list of cards based on the hand type
+        switch (handType)
+        {
+
+            case "Pair":
+                return pairCards;
+            case "TwoPair":
+                return twoPairCards;
+            case "ThreeKind":
+                return threeOfAKindCards;
+            case "Straight":
+                return straightCards;
+            case "Flush":
+                return flushCards;
+            case "FullHouse":
+                return fullHouseCards;
+            case "FourKind":
+                return fourOfAKindCards;
+            case "StraightFlush":
+                return straightCards;
+            case "FiveKind":
+                return fiveOfAKindCards;
+            case "FlushHouse":
+                return flushCards;
+            case "FlushFive":
+                return fiveOfAKindCards;
+            default:
+                Debug.LogWarning("Invalid hand type: " + handType);
+                return new List<PCard>();
+        }
     }
 
     //This function updates the the blue chip and red chip text fields in the round UI based on the seleceted hand
@@ -700,7 +923,7 @@ public class CurrentHandManager : MonoBehaviour
                 return;
         }
     }
-    
+
     public bool isAPlaceOfArticulation(string place)
     {
         // Check if the place is one of the valid places of articulation

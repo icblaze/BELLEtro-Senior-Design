@@ -38,8 +38,8 @@ public class Game
     }
 
     public GameObject cardPrefab;
-    public int ante;                                                              //Ante variable holds the current ante that the player is on
-    public int roundValue;                                                        //RoundValue is the Round within the current Ante
+    public static int ante;                                                        //Ante variable holds the current ante that the player is on
+    public static int roundValue;                                                  //RoundValue is the Round within the current Ante
     public BigInteger currentChipAmount;                                           //currentChipAmount contains the number of chips the player currently has
     private int ChipTotal;                                                         //ChipTotal is the number of chips needed to win a round
     public Voucher[] voucherHolder;                                                //VoucherHolder contains the current Ante's Vouchers
@@ -50,6 +50,16 @@ public class Game
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
 
     public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.     
+
+    public int anteValue
+    {
+        get; set;   
+    }
+
+    public int roundValueTest
+    {
+        get; set;   
+    }
 
     //This function is used to create a seed, so that we can get a random card from the deck.
     //This randomizer will also be used to retrieve a random index so we can select a random consumable/pack.

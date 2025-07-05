@@ -1,9 +1,11 @@
-using UnityEngine;
 //Script is used a central place to transition between the different 
 //screens. This allows other members from being able to transition
 //to different scenes without worrying about its functionality.
 //Current Devs: 
 //Fredrick Bouloute (bouloutef04)
+
+using UnityEngine;
+
 public class TransitionManager : MonoBehaviour
 {
     private static TransitionManager instance;  //TransitionManager instance varaiable
@@ -20,9 +22,7 @@ public class TransitionManager : MonoBehaviour
     }
 
     public CanvasGroup roundSelectScreen;
-
     public CanvasGroup roundScreen;
-
     public CanvasGroup endOfRoundScreen;
     public CanvasGroup shopScreen;
     public CanvasGroup packScreen;
@@ -54,7 +54,7 @@ public class TransitionManager : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         StartCoroutine(fadeScript.FadeOut(roundSelectScreen));
         StartCoroutine(fadeScript.FadeIn(roundScreen));
-        if (inst.roundValue == 3)//If boss/special blind, set boss music
+        if (inst.roundValueTest == 3)//If boss/special blind, set boss music
         {
             audioManager.ChangeToBossMusic();
         }

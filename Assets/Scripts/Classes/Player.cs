@@ -51,18 +51,18 @@ public class Player
         PlayerPrefsManager.SetMoney(moneyCount);
         PlayerPrefsManager.SetHandCount(handCount);
         PlayerPrefsManager.SetDiscardCount(discards);
-        PlayerPrefsManager.SetRound(Game.access().roundValue);
-        PlayerPrefsManager.SetAnte(Game.access().ante);
+        PlayerPrefsManager.SetRound(Game.roundValue);
+        PlayerPrefsManager.SetAnte(Game.ante);
     }
 
     //Load players saved data to the game
     public void LoadState()
     {
         moneyCount = PlayerPrefsManager.GetMoney();
-        Game.access().roundValue = PlayerPrefsManager.GetRound();
+        Game.roundValue = PlayerPrefsManager.GetRound();
         handCount = PlayerPrefsManager.GetHandCount();                 
         discards = PlayerPrefsManager.GetDiscardCount();
-        Game.access().ante = PlayerPrefsManager.GetAnte();
+        Game.ante = PlayerPrefsManager.GetAnte();
     }
 
     //  The player constructor

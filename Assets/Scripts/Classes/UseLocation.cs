@@ -9,15 +9,16 @@ using UnityEngine;
 // Mentors are very diverse so they can be used in many locations, here are the locations
 public enum UseLocation
 {
-  Initial,
-  PreCard,
-  PlayCard,
-  PostCard,
-  PreFromDraw,
-  PostFromDraw,
-  Post,
-  Shop,
-  Blind,
-  PostBlind,
-  PostHand
+  Initial,            // Mentors that have this location will be used at the start of the game
+  PreCard,            // Mentors that have this location will be used before the card is played
+  PlayCard,           // Mentors that have this location will be used during the card play phase
+  PostCard,           // Mentors that have this location will be used after the card is played
+  PreFromDraw,        // Mentors that have this location will be used before the card is drawn
+  PostFromDraw,       // Mentors that have this location will be used after the card is drawn
+  Post,               // Mentors that have this location will be used after the hand is played
+  PreShop,            // Mentors that have this location will be used before the shop
+  Shop,               // Mentors that have this location will be used in the shop
+  Blind,              // Mentors that have this location will be used during the blind phase
+  PostBlind,          // Mentors that have this location will be used after the blind phase
+  PostHand            // Mentors that have this location will be used after the hand is played
 }
