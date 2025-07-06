@@ -247,7 +247,7 @@ public class CardModifier
     }
 
     //  Use edition effect of the mentors from (this will be called from left to right)
-    public IEnumerator UseMentorEdition(Mentor mentor)
+    public IEnumerator UseMentorEdition(Mentor mentor, bool checkPoly)
     {
         if(mentor.edition == CardEdition.Base || mentor.edition == CardEdition.Negative)
         {
@@ -261,7 +261,7 @@ public class CardModifier
         {
             scoringManager.IncrementCurrentMult(10); // +10 Mult
         }
-        else
+        else if(checkPoly && mentor.edition == CardEdition.Polychrome)
         {
             int xmult = (int)(scoringManager.GetCurrentMult() * 1.5f);  // X1.5 Mult
             scoringManager.SetCurrentMult(xmult);
@@ -292,6 +292,10 @@ public class CardModifier
         {
             if (card.seal == CardSeal.Study)
             {
+                if(consumableCardHolder == null)
+                {
+                    consumableCardHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
+                }
                 TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
                 consumableCardHolder.AddConsumable(new Textbook(handTextbook));
             }

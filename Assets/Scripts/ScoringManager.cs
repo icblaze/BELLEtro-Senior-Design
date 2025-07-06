@@ -322,6 +322,7 @@ public class ScoringManager : MonoBehaviour
         shakeScreen.StartShake();
         currentChips += chips;
         blueScoreText.text = currentChips.ToString();
+        Debug.Log("Current Chips: " + currentChips.ToString());
     }
 
     //  Returns the current mult
@@ -335,6 +336,7 @@ public class ScoringManager : MonoBehaviour
     {
         currentMult = mult;
         redScoreText.text = currentMult.ToString();
+        Debug.Log("Current Mult: " + currentMult.ToString());
     }
 
     public void IncrementCurrentMult(int mult)
@@ -342,6 +344,7 @@ public class ScoringManager : MonoBehaviour
         shakeScreen.StartShake();
         currentMult += mult;
         redScoreText.text = currentMult.ToString();
+        Debug.Log("Current Mult: " + currentMult.ToString());
     }
 
     //  Returns the current hand type of the hand being played as a string

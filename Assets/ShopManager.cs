@@ -1123,6 +1123,7 @@ public class ShopManager : MonoBehaviour
     public void TransitionToShop()
     {
         NewCards();
+        MentorBufferManager.access().RunBuffer(UseLocation.Shop);   //  Run shop Mentors
     }
     //  Reset certain mentors at end of shop
     private void resetShopMentor()
