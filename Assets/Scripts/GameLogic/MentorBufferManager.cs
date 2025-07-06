@@ -69,54 +69,13 @@ public class MentorBufferManager
         }
     }
 
-    //  Playing hand buffer execution (Plan to just move parts of this to ScoringManager leaving code here as reference)
-    private void PlayHand ()
+    //  Execute buffer for setting retriggers (don't wait here)
+    public IEnumerator RunRetriggerBuffer()
     {
-        //  Putting effect cards in their assigned buffer
-        AssignToBuffer();
-
-        //  Using Initial Effect Cards
-        RunBuffer(UseLocation.Initial);
-
-        //  Playing Each Card in Hand
-        //  TODO Differentiate between playHand and drawHand (change the outer foreach loop)
-        Deck deck = Deck.access();
-        foreach (PCard card in deck.playerHand)
+        foreach (Mentor mentor in mentorBuffers[UseLocation.Retrigger])
         {
-            if (card.isDisabled)
-            {
-                continue;
-            }
-
-            int replayCounter = 0;
-
-            do
-            {
-                RunBuffer(UseLocation.PreCard, card);
-                //  TODO Play Card call here
-                RunBuffer(UseLocation.PostCard, card);
-                replayCounter--;
-            }while(replayCounter >= 0);
+            mentor.UseMentor();
         }
-
-        //  Playing From-Draw Cards (could track "not selected"?)
-        foreach (PCard card in deck.playerHand)
-        {
-            if (card.isDisabled)
-            {
-                continue;
-            }
-
-            RunBuffer(UseLocation.PreFromDraw, card);
-            //  TODO Play From-Draw call here
-            // RunBuffer(UseLocation.PostFromDraw);
-        }
-
-        //  Using Post Effect Cards
-        RunBuffer(UseLocation.Post);
-
-        //  TODO Scoring phase here
+        yield return null;
     }
-
-    
 }

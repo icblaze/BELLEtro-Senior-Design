@@ -5,7 +5,7 @@
 
 using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 public class MakeupExam : Mentor
 {
@@ -15,7 +15,7 @@ public class MakeupExam : Mentor
     //  Mentor name and basePrice are preset
     public MakeupExam(CardEdition edition) : base(MentorName.MakeupExam, edition, 6)
     {
-        locations = new UseLocation[] { UseLocation.PreCard, UseLocation.PostHand};
+        locations = new UseLocation[] { UseLocation.Retrigger, UseLocation.PostHand};
         description = "Retrigger all cards for the next 10 hands";
     }
 
@@ -26,10 +26,13 @@ public class MakeupExam : Mentor
         return description;
     }
 
-    //  Add retrigger count to each scored pcard (PreCard)
-    public override void UseMentor(PCard pcard)
+    //  Add retrigger count to each scored pcard (Retrigger)
+    public void UseRetriggerMentor(List<PCard> scoredPCards)
     {
-        pcard.replayCounter++;
+        foreach(PCard pcard in scoredPCards)
+        {
+            pcard.replayCounter++;
+        }
     }
 
     //  Decrement uses left after each hand played (PostHand)

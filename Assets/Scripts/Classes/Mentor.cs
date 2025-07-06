@@ -6,6 +6,7 @@
 // Andy (flakkid): constructor and method to be overriden
 
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // Mentors can fundamentally alter the way a player will be able to play BELLEtro.
@@ -114,6 +115,12 @@ public class Mentor
 
     //  Method to override for Mentors with card specific criteria
     public virtual void UseMentor (PCard card)
+    {
+
+    }
+
+    //  Method to override for Mentors that deal with retriggers
+    public virtual void UseRetriggerMentor(List<PCard> scoredPCards)
     {
 
     }

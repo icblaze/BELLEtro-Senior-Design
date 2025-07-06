@@ -10,8 +10,9 @@ using UnityEngine;
 public enum UseLocation
 {
   Initial,            // Mentors that have this location will be used at the start of the game
+  Retrigger,          // Mentors that have this location will be used to set retrigger on scored cards
   PreCard,            // Mentors that have this location will be used before the card is played
-  PlayCard,           // Mentors that have this location will be used during the card play phase
+  PlayCard,           // Mentors that have this location will be used during the card play phase (might not be used)
   PostCard,           // Mentors that have this location will be used after the card is played
   PreFromDraw,        // Mentors that have this location will be used before the card is drawn
   PostFromDraw,       // Mentors that have this location will be used after the card is drawn

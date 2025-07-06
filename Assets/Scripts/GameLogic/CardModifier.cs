@@ -276,16 +276,16 @@ public class CardModifier
         {
             yield return null; //  Don't affect scoring
         }
+        else if(location == UseLocation.Initial)
+        {
+            card.replayCounter++;
+        }
         else if(location == UseLocation.PreCard)
         {
             if(card.seal == CardSeal.Funding)
             {
                 Player.access().moneyCount += 3;
                 ShopManager.access().UpdateMoneyDisplay();
-            }
-            else if(card.seal == CardSeal.Retake)
-            {
-                card.replayCounter++;
             }
         }
         else if(location == UseLocation.PostBlind)  //  "Held in hand" after round completed

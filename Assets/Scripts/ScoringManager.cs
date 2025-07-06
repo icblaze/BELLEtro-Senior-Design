@@ -16,6 +16,7 @@ public class ScoringManager : MonoBehaviour
     private List<PCard> playedPCards;                                //List of PCards played in the hand   
     private PCard highCard;                                     //High card for the hand  
     private List<GameObject> selectedCards = new List<GameObject>(); //list of selected cards
+    private List<PCard> heldHand;
     private CurrentHandManager currentHandManager;                   //Current hand manager to get the current hand
     private ShakeScreen shakeScreen;       //ShakeScreen instance variable
     private Player player = Player.access();                //Player instance variable
@@ -74,7 +75,7 @@ public class ScoringManager : MonoBehaviour
 
         //Set heldHand list (hand that exclude played PCards)
         Deck.access().SetHeldHand(playedPCards);
-
+        heldHand = Deck.access().heldHand;
 
         //Get current hand and scores for it
         handType = currentHandManager.findCurrentHand(playedPCards);
@@ -132,28 +133,27 @@ public class ScoringManager : MonoBehaviour
     {
         //Go through cards and add their scores. Wait for a small time
         //before going to the next card
-        int numCards = playedPCards.Count;
-        int i = 0;
 
-        if (numCards == 1)
-        {
-            currentChips += playedPCards[0].chips;
-            currentMult += playedPCards[0].multiplier;
-            Debug.Log("Current Chips: " + currentChips.ToString());
-            Debug.Log("Current Mult: " + currentMult.ToString());
+        //  Run the initial Mentor buffer
+        yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.Initial));
 
-            //Update the text UI.
-            //Should have a UI element that is shown in realtime
-            shakeScreen.StartShake();
-            blueScoreText.text = currentChips.ToString();
-            redScoreText.text = currentMult.ToString();
-        }
-        else if (numCards > 0)
+        //  Playing Each Scored Card in Hand
+        foreach (PCard playedCard in playedPCards)
         {
-            while (i < numCards)
+            if (playedCard.isDisabled)
             {
-                currentChips += playedPCards[i].chips;
-                currentMult += playedPCards[i].multiplier;
+                continue;
+            }
+
+            //  Handles retriggers
+            do
+            {
+                //  Pre Card
+                yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PreCard, playedCard));
+
+                //  Play Card
+                currentChips += playedCard.chips;
+                currentMult += playedCard.multiplier;
                 Debug.Log("Current Chips: " + currentChips.ToString());
                 Debug.Log("Current Mult: " + currentMult.ToString());
 
@@ -162,17 +162,38 @@ public class ScoringManager : MonoBehaviour
                 shakeScreen.StartShake();
                 blueScoreText.text = currentChips.ToString();
                 redScoreText.text = currentMult.ToString();
-
-                //Should check for mentors and detect if they need to add any chips/mults/effects
-
-                //Increment and wait to go to next card
-                i++;
                 yield return new WaitForSecondsRealtime(waitIncrement);
-            }
+
+                //Post Card (XMult usually)
+                yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PostCard, playedCard));
+
+                playedCard.replayCounter--;
+
+            } while (playedCard.replayCounter >= 0);
+
+            //  Reset playedCard replayCounter
+            playedCard.replayCounter = 0;
         }
 
+        //  Playing From Draw Cards
+        foreach (PCard heldCard in heldHand)
+        {
+            //  PreFromDraw (Mentors)
+            yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PreFromDraw, heldCard));
+
+            //  PostFromDraw (Enhancements/Seals)
+        }
+
+        //  Go through Post Mentor Buffer
+        yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.Post));
+
+
         SetTotal();
+
         yield return new WaitForSecondsRealtime(1f);
+
+        //   Run the PostHand Mentor buffer
+        yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PostHand));
 
         //Start next round proceedings if the player chip count is greater than or equal to the needed score
         if (neededScore <= player.chipCount)
