@@ -181,7 +181,7 @@ public class HorizontalCardHolder : MonoBehaviour
         }
     }
 
-    //  Refresh visual index
+    //  Refresh visual index and update playerHand
     public void RefreshVisual()
     {
         cards = GetComponentsInChildren<Card>().ToList(); //  Refresh card list
@@ -200,6 +200,7 @@ public class HorizontalCardHolder : MonoBehaviour
         }
     }
 
+    //  Need to add a little wait when card slots are destroyed before refreshing
     public void DestroyCardsRefresh()
     {
         StartCoroutine(WaitFrame());

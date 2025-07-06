@@ -12,6 +12,7 @@ using UnityEngine;
 public class CardModifier
 {
     private static System.Random rand = new System.Random();
+    private ScoringManager scoringManager; 
 
     //  Make this a singleton
     private static CardModifier instance;

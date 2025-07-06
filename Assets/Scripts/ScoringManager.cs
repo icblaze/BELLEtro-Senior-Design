@@ -170,6 +170,7 @@ public class ScoringManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(waitIncrement);
             }
         }
+
         SetTotal();
         yield return new WaitForSecondsRealtime(1f);
 
@@ -258,5 +259,56 @@ public class ScoringManager : MonoBehaviour
             default:
                 return;
         }
+    }
+
+    //  Return the current chips
+    public int GetCurrentChips()
+    {
+        return currentChips;
+    }
+
+    //  Set the current chips (blue score) and update text
+    public void SetCurrentChips(int chips)
+    {
+        currentChips = chips;
+        blueScoreText.text = currentChips.ToString();
+    }
+
+    //  Returns the current mult
+    public int GetCurrentMult()
+    {
+        return currentMult;
+    }
+
+    //  Set the current mult (red score) and update text
+    public void SetCurrentMult(int mult)
+    {
+        currentMult = mult;
+        redScoreText.text = currentMult.ToString();
+    }
+
+    //  Returns the current hand type of the hand being played as a string
+    public string GetCurrentHandType()
+    {
+        return handType;
+    }
+
+    //  Usually called from certain mentors, sequenced after filtering the selectedPCards
+    public List<PCard> GetScoredPCards()
+    {
+        return playedPCards;
+    }
+
+    //  Returns this round's needed score
+    public BigInteger GetNeededScore()
+    {
+        return neededScore;
+    }
+
+    //  For specific Mentors that trigger PostHand after SetTotal() is called
+    public void SetRoundScore(BigInteger bigInteger)
+    {
+        player.chipCount = bigInteger;
+        roundScoreText.text = bigInteger.ToString();
     }
 }
