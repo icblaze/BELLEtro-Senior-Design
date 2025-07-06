@@ -13,7 +13,7 @@ public class ExtraCredit : Mentor
     public ExtraCredit(CardEdition edition) : base(MentorName.ExtraCredit, edition, 5)
     {
         //  Might have to change this buffer location?
-        locations = new UseLocation[] { UseLocation.PostBlind };
+        locations = new UseLocation[] { UseLocation.PreShop };
         description = "Earn $1 at end of round";
     }
 

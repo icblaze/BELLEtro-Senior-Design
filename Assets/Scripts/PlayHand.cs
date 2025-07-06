@@ -15,7 +15,6 @@ public class PlayHand : MonoBehaviour
     public Button playHandButton; // Assign in Inspector
     public RectTransform playArea; // Assign a UI GameObject at the center
     public Text cardCountText; // Assign a UI text to display the count
-    public float displayDuration = 2.0f; // Time before cards disappear
     private List<GameObject> selectedCards = new List<GameObject>(); // Cards that are selected
     private DeleteCard deleteCardScript;                             // Reference to DeleteCard
     private DeckManager deckManager;                                 // Reference to DeckManager
@@ -139,10 +138,7 @@ public class PlayHand : MonoBehaviour
         //selectedCards is a list of cards that were selected by the player and these
         //cards have been moved to the PlayArea.
         ScoringManager scoringManager = FindFirstObjectByType<ScoringManager>();
-        scoringManager.GetScoring();
-
-
-        yield return new WaitForSeconds(displayDuration);
+        yield return scoringManager.GetScoring();
 
         // ✅ Remove cards and draw new ones
         int cardsPlayed = selectedCards.Count;

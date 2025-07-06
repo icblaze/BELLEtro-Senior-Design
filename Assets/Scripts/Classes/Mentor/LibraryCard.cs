@@ -12,7 +12,7 @@ public class LibraryCard : Mentor
     //  Mentor name and basePrice are preset
     public LibraryCard(CardEdition edition) : base(MentorName.LibraryCard, edition, 6)
     {
-        locations = new UseLocation[] { UseLocation.PostBlind };
+        locations = new UseLocation[] { UseLocation.PreShop };
         description = "Give $1 at end of round per unique Textbook used";
     }
 

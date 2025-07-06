@@ -17,7 +17,7 @@ public class CardModifier
     private ConsumableCardHolder consumableCardHolder;
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.5f;
+    private readonly float waitIncrement = 0.2f;
 
     //  Make this a singleton
     private static CardModifier instance;
@@ -276,7 +276,7 @@ public class CardModifier
         {
             yield return null; //  Don't affect scoring
         }
-        else if(location == UseLocation.Initial)
+        else if(location == UseLocation.Retrigger)
         {
             card.replayCounter++;
         }
@@ -290,8 +290,11 @@ public class CardModifier
         }
         else if(location == UseLocation.PostBlind)  //  "Held in hand" after round completed
         {
-            TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
-            consumableCardHolder.AddConsumable(new Textbook(handTextbook));
+            if (card.seal == CardSeal.Study)
+            {
+                TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
+                consumableCardHolder.AddConsumable(new Textbook(handTextbook));
+            }
         }
         yield return new WaitForSecondsRealtime(waitIncrement);
     }

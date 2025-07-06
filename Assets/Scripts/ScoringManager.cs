@@ -37,6 +37,7 @@ public class ScoringManager : MonoBehaviour
 
     //  Call to MentorBufferManager
     private MentorBufferManager mentorBuffer = MentorBufferManager.access();
+    private CardModifier cardModifier = CardModifier.access();
 
     public void Start()
     {
@@ -65,7 +66,7 @@ public class ScoringManager : MonoBehaviour
     }
 
     //Public function to start the scoring process
-    public void GetScoring()
+    public IEnumerator GetScoring()
     {
         //Get PCards and Regular Cards
         playedPCards = deleteCardScript.GetSelectedPCards();
@@ -94,7 +95,7 @@ public class ScoringManager : MonoBehaviour
         if (handType == "")
         {
             Debug.LogWarning("No valid hand found. Please select a valid hand.");
-            return;
+            yield return null;
         }
         else if (handType == "HighCard")
         {
@@ -112,7 +113,7 @@ public class ScoringManager : MonoBehaviour
         }
 
         //Start the card scoring process
-        StartCoroutine(CardScoring());
+        yield return StartCoroutine(CardScoring());
     }
 
     //Resets the different variables and texts once round is finished
@@ -135,21 +136,31 @@ public class ScoringManager : MonoBehaviour
         //before going to the next card
 
         //  Run the initial Mentor buffer
-        yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.Initial));
+        yield return mentorBuffer.RunBuffer(UseLocation.Initial);
+
+        //  Run the Retrigger mentors/seals
+        yield return mentorBuffer.RunRetriggerBuffer(playedPCards);
+        foreach (PCard playedCard in playedPCards)
+        {
+            yield return cardModifier.UseSeal(playedCard, UseLocation.Retrigger);
+        }
 
         //  Playing Each Scored Card in Hand
         foreach (PCard playedCard in playedPCards)
         {
             if (playedCard.isDisabled)
             {
+                playedCard.replayCounter = 0;
                 continue;
             }
 
-            //  Handles retriggers
             do
             {
                 //  Pre Card
-                yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PreCard, playedCard));
+                yield return cardModifier.UseEnhancement(playedCard, UseLocation.PreCard);
+                yield return cardModifier.UseSeal(playedCard, UseLocation.PreCard);
+                yield return cardModifier.UseEdition(playedCard, UseLocation.PreCard);
+                yield return mentorBuffer.RunBuffer(UseLocation.PreCard, playedCard);
 
                 //  Play Card
                 currentChips += playedCard.chips;
@@ -165,7 +176,9 @@ public class ScoringManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(waitIncrement);
 
                 //Post Card (XMult usually)
-                yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PostCard, playedCard));
+                yield return cardModifier.UseEnhancement(playedCard, UseLocation.PostCard);
+                yield return cardModifier.UseEdition(playedCard, UseLocation.PostCard);
+                yield return mentorBuffer.RunBuffer(UseLocation.PostCard, playedCard);
 
                 playedCard.replayCounter--;
 
@@ -179,13 +192,14 @@ public class ScoringManager : MonoBehaviour
         foreach (PCard heldCard in heldHand)
         {
             //  PreFromDraw (Mentors)
-            yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PreFromDraw, heldCard));
+            yield return mentorBuffer.RunBuffer(UseLocation.PreFromDraw, heldCard);
 
-            //  PostFromDraw (Enhancements/Seals)
+            //  PostFromDraw (Enhancement)
+            yield return cardModifier.UseEnhancement(heldCard, UseLocation.PostFromDraw);
         }
 
         //  Go through Post Mentor Buffer
-        yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.Post));
+        yield return mentorBuffer.RunBuffer(UseLocation.Post);
 
 
         SetTotal();
@@ -193,11 +207,19 @@ public class ScoringManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         //   Run the PostHand Mentor buffer
-        yield return StartCoroutine(mentorBuffer.RunBuffer(UseLocation.PostHand));
+        yield return mentorBuffer.RunBuffer(UseLocation.PostHand);
 
         //Start next round proceedings if the player chip count is greater than or equal to the needed score
         if (neededScore <= player.chipCount)
         {
+            //  Activate PostBlind buffer for held cards
+            foreach (PCard heldCard in heldHand)
+            {
+                yield return cardModifier.UseEnhancement(heldCard, UseLocation.PostBlind);
+                yield return cardModifier.UseSeal(heldCard, UseLocation.PostBlind);
+            }
+            yield return mentorBuffer.RunBuffer(UseLocation.PostBlind);
+
             EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
             transitionManager.TransitionToEndOfRoundScreen();
@@ -208,7 +230,7 @@ public class ScoringManager : MonoBehaviour
         {
             EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
-
+            
             //Maybe implement a if statement here to check if the player has the amount of chips to continue
             //If not, then transition to defeat screen
             transitionManager.TransitionToDefeatScreen();
@@ -297,6 +319,7 @@ public class ScoringManager : MonoBehaviour
 
     public void IncrementCurrentChips(int chips)
     {
+        shakeScreen.StartShake();
         currentChips += chips;
         blueScoreText.text = currentChips.ToString();
     }
@@ -316,6 +339,7 @@ public class ScoringManager : MonoBehaviour
 
     public void IncrementCurrentMult(int mult)
     {
+        shakeScreen.StartShake();
         currentMult += mult;
         redScoreText.text = currentMult.ToString();
     }

@@ -13,7 +13,7 @@ public class BonusPoints : Mentor
     public BonusPoints(CardEdition edition) : base(MentorName.BonusPoints, edition, 6)
     {
         //  Might have to change this buffer location?
-        locations = new UseLocation[] { UseLocation.PostBlind };
+        locations = new UseLocation[] { UseLocation.PreShop };
         description = "Earn extra $1 for every $5 at end of round";
     }
 

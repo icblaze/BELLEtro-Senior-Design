@@ -16,7 +16,7 @@ public class MentorBufferManager
     private Game game = Game.access();
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.5f;
+    private readonly float waitIncrement = 0.2f;
 
     //  Make this a singleton
     private static MentorBufferManager instance;
@@ -70,11 +70,11 @@ public class MentorBufferManager
     }
 
     //  Execute buffer for setting retriggers (don't wait here)
-    public IEnumerator RunRetriggerBuffer()
+    public IEnumerator RunRetriggerBuffer(List<PCard> selectedPCards)
     {
         foreach (Mentor mentor in mentorBuffers[UseLocation.Retrigger])
         {
-            mentor.UseMentor();
+            mentor.UseRetriggerMentor(selectedPCards);
         }
         yield return null;
     }
