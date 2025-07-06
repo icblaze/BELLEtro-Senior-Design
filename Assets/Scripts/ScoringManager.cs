@@ -70,6 +70,10 @@ public class ScoringManager : MonoBehaviour
 
         selectedCards = deleteCardScript.GetSelectedCards();
 
+        //Set heldHand list (hand that exclude played PCards)
+        Deck.access().SetHeldHand(playedPCards);
+
+
         //Get current hand and scores for it
         handType = currentHandManager.findCurrentHand(playedPCards);
         SetHandScore(handType);

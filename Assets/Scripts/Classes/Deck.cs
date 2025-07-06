@@ -3,6 +3,7 @@
 // that will effect these cards
 // Current Devs:
 // Robert (momomonkeyman): made class and variables
+// Andy (flakkid): updated function for drawn pile and and heldHand
 
 using System;
 using System.Collections;
@@ -206,6 +207,7 @@ public class Deck
   //This function is responsible for updating the card selected.
   //Update the card in the scene
   //Might need to return the update card so that we can attach it to the gameobject
+  //Not really used for anything right now as cards drawn in hand that would be updated are already in cardsDrawn pile
   public void updateCard(PCard originalCard, PCard updatedCard)
   {
     int index = deckCards.FindIndex(card => card == originalCard);
@@ -222,6 +224,16 @@ public class Deck
     {
         deckCards.AddRange(cardsDrawn);
         cardsDrawn.Clear();
+    }
+
+    //  Update the heldHand based on the selectedPCards when played (playerHand - selectedPCards = heldHand)
+    public void SetHeldHand(List<PCard> selectedPCards)
+    {
+        heldHand.Clear();
+
+        heldHand = playerHand.Except(selectedPCards, new PCardIDComparer()).ToList();
+
+        //Debug.Log("Held Hand Size: " + heldHand.Count);
     }
 
 }
