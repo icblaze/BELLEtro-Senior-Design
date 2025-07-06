@@ -136,6 +136,9 @@ public class AudioManager : MonoBehaviour
         {
             changeMusic(roundSource, defeatSource);
         }
+        else if (mainMenuSource.volume >= .9f){
+            changeMusic(mainMenuSource, defeatSource);
+        }
         else//If player lost in boss round
         {
             changeMusic(bossSource, defeatSource);

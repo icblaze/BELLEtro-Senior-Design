@@ -24,22 +24,22 @@ public class DefeatManager : MonoBehaviour
         //backgroundImage.GetComponent<ScrollingImage>().enabled = true;
         Game inst = Game.access();
         Player player = Player.access();
-        String score = "Score of Last Round:" + player.chipCount + "\n";
-        String rounds = "Reached Ante: " + inst.anteValue + " Round: " + inst.roundValueTest + "\n";
+        String score = "Score of Last Round:" + player.chipCount + "\n\n";
+        String rounds = "Reached Ante: " + inst.anteValue + " Round: " + inst.roundValueTest + "\n\n";
         String defeated;
         if (inst.roundValueTest == 1)
         {
-            defeated = "Defeated By: Small Blind\n";
+            defeated = "Defeated By: Small Blind <sprite name=\"SmallBlind\">\n";
         }
         else if (inst.roundValueTest == 2)
         {
-            defeated = "Defeated By: Big Blind\n";
+            defeated = "Defeated By: Big Blind <sprite name=\"BigBlind\">\n";
         }
         else
         {
-            defeated = "Defeated By: " + inst.currentSpecialBlind.ToString() + "\n";
+            defeated = "Defeated By: " + inst.currentSpecialBlind.ToString() + "<sprite name=\"" + inst.currentSpecialBlind.ToString() + "\">\n";
         }
-
+        defeatText = GameObject.Find("Defeat Text");
         defeatText.GetComponent<TMP_Text>().text = score + rounds + defeated;
         Round round = Round.access();
         round.RestartGame();

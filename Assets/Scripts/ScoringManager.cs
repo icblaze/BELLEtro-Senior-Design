@@ -17,7 +17,7 @@ public class ScoringManager : MonoBehaviour
     private PCard highCard;                                     //High card for the hand  
     private List<GameObject> selectedCards = new List<GameObject>(); //list of selected cards
     private CurrentHandManager currentHandManager;                   //Current hand manager to get the current hand
-    private ShakeScreen shakeScreen = ShakeScreen.access();          //ShakeScreen instance variable
+    private ShakeScreen shakeScreen;       //ShakeScreen instance variable
     private Player player = Player.access();                //Player instance variable
     private int currentChips;                               //Current chips for the hand
     private int currentMult;                                //Current multiplier for the hand 
@@ -39,6 +39,8 @@ public class ScoringManager : MonoBehaviour
 
     public void Start()
     {
+        shakeScreen = GameObject.FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();  
+
         //Get delete card script and do null check
         deleteCardScript = FindFirstObjectByType<DeleteCard>();
 
@@ -142,7 +144,7 @@ public class ScoringManager : MonoBehaviour
 
             //Update the text UI.
             //Should have a UI element that is shown in realtime
-            //shakeScreen.StartShake();
+            shakeScreen.StartShake();
             blueScoreText.text = currentChips.ToString();
             redScoreText.text = currentMult.ToString();
         }
@@ -157,7 +159,7 @@ public class ScoringManager : MonoBehaviour
 
                 //Update the text UI.
                 //Should have a UI element that is shown in realtime
-                //shakeScreen.StartShake();
+                shakeScreen.StartShake();
                 blueScoreText.text = currentChips.ToString();
                 redScoreText.text = currentMult.ToString();
 
@@ -169,7 +171,7 @@ public class ScoringManager : MonoBehaviour
             }
         }
         SetTotal();
-        yield return new WaitForSecondsRealtime(.5f);
+        yield return new WaitForSecondsRealtime(1f);
 
         //Start next round proceedings if the player chip count is greater than or equal to the needed score
         if (neededScore <= player.chipCount)

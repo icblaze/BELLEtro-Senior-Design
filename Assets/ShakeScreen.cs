@@ -24,31 +24,9 @@ public class ShakeScreen : MonoBehaviour
 
         return instance;
     }
-    // public void Update()
-    // {
-    //     if (shake)
-    //     {
-    //         shake = false;
-    //         // StartCoroutine(Shaking());
-    //         StartShake();
-    //     }
-    // }
     public void StartShake()
     {
         OnShake(1f, .025f);
-    }
-    private IEnumerator Shaking()
-    {
-        Vector3 startPosition = transform.position;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            transform.position = startPosition + Random.insideUnitSphere;
-            yield return null;
-        }
-        transform.position = startPosition;
     }
 
     private void OnShake(float duration, float strength)
@@ -56,6 +34,7 @@ public class ShakeScreen : MonoBehaviour
         Vector3 startPosition = transform.position;
         transform.DOShakePosition(duration, strength);
         transform.position = startPosition;
-        
+
     }
+
 }
