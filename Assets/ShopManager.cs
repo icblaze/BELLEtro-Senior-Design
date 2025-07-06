@@ -97,6 +97,17 @@ public class ShopManager : MonoBehaviour
     {
         NewShop();
         UpdateMoneyDisplay();
+        StartCoroutine(ActivateShopMentors());
+
+        IEnumerator ActivateShopMentors()
+        {
+            while(MentorBufferManager.access() != null)
+            {
+                yield return null;
+            }
+
+            MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);
+        }
     }
 
     //Function called when  shopUI is opened. This intiallizes the 
@@ -433,7 +444,9 @@ public class ShopManager : MonoBehaviour
         transitionMan.TransitionToRoundSelect();
 
         //Set a new shop in the background
+        resetShopMentor();
         NewShop();
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
     }
     //Function causes the Mentors to reset. 
     public void Reroll()
@@ -446,6 +459,7 @@ public class ShopManager : MonoBehaviour
         }
         //Refresh the Card slots with new random Cards
         NewCards();
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
 
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;
@@ -1120,11 +1134,13 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
+
+    //  Is this used for anything now?
     public void TransitionToShop()
     {
         NewCards();
-        MentorBufferManager.access().RunBuffer(UseLocation.Shop);   //  Run shop Mentors
     }
+
     //  Reset certain mentors at end of shop
     private void resetShopMentor()
     {

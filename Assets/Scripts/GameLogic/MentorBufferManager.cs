@@ -47,6 +47,17 @@ public class MentorBufferManager
                 mentorBuffers[location].Add(mentor);
             }
         }
+
+        //  Debug key-value pairs of mentorBuffers
+        foreach (var kvp in mentorBuffers)
+        {
+            string debugList = $"Mentors for {kvp.Key}: ";
+            foreach (var mentor in kvp.Value)
+            {
+                debugList += mentor.name + ", ";
+            }
+            Debug.Log(debugList);
+        }
     }
 
     //  Execute buffer of specified location
@@ -56,6 +67,15 @@ public class MentorBufferManager
         {
             mentor.UseMentor();
             yield return new WaitForSecondsRealtime(waitIncrement);
+        }
+    }
+
+    //  Execute buffer of specified location with no delay
+    public void RunBufferImmediate(UseLocation buffer)
+    {
+        foreach (Mentor mentor in mentorBuffers[buffer])
+        {
+            mentor.UseMentor();
         }
     }
 

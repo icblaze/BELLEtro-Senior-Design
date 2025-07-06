@@ -105,7 +105,7 @@ public class EndOfRoundManager : MonoBehaviour
     //  Run the buffers for economy Mentors that run in PreShop (after transition to end of round)
     private void CalculateMentors()
     {
-        MentorBufferManager.access().RunBuffer(UseLocation.PreShop);
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.PreShop);
 
         if (mentorReward > 0)
         {

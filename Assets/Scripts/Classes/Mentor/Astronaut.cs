@@ -9,8 +9,6 @@ using System.Collections;
 
 public class Astronaut : Mentor
 {
-    private ShopManager shop;
-
     //  Mentor name and basePrice are preset
     public Astronaut(CardEdition edition) : base(MentorName.Astronaut, edition, 6)
     {
@@ -21,8 +19,8 @@ public class Astronaut : Mentor
     //  All Textbook cards and Textbook packs in the shop are free.
     public override void UseMentor()
     {
+        Debug.LogWarning("Astronaut activate!");
         // In shop screen, set price of packs or textbooks to $0
-        shop = Object.FindFirstObjectByType<ShopManager>();
-        shop.mentorShopEffect(this);
+        ShopManager.access().mentorShopEffect(this);
     }
 }
