@@ -274,6 +274,12 @@ public class ScoringManager : MonoBehaviour
         blueScoreText.text = currentChips.ToString();
     }
 
+    public void IncrementCurrentChips(int chips)
+    {
+        currentChips += chips;
+        blueScoreText.text = currentChips.ToString();
+    }
+
     //  Returns the current mult
     public int GetCurrentMult()
     {
@@ -284,6 +290,12 @@ public class ScoringManager : MonoBehaviour
     public void SetCurrentMult(int mult)
     {
         currentMult = mult;
+        redScoreText.text = currentMult.ToString();
+    }
+
+    public void IncrementCurrentMult(int mult)
+    {
+        currentMult += mult;
         redScoreText.text = currentMult.ToString();
     }
 

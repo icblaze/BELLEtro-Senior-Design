@@ -37,6 +37,8 @@ public class Deck
   public List<PCard> playerHand = new List<PCard>(); //This variable will hold the hand of the player.
   public List<PCard> heldHand = new List<PCard>(); //This variable will cards in player held hand that weren't played
 
+  public Stack<int> glassToBreak = new Stack<int>();  // This stack holds PCard ID's that we need to remove if the associated glass card "breaks"
+
 
   //This constructor sets up the initial deck in the game
   public Deck()
@@ -236,6 +238,29 @@ public class Deck
         //Debug.Log("Held Hand Size: " + heldHand.Count);
     }
 
+    //  Destroy glass cards marked for deletion in the drawnPile
+    public void DestroyGlassCards()
+    {
+        while(glassToBreak.Count != 0)
+        {
+            int breakID = glassToBreak.Pop();
+
+            for (int i = 0; i < cardsDrawn.Count; i++)
+            {
+                if (cardsDrawn[i].cardID == breakID)
+                {
+                    cardsDrawn.RemoveAt(i);
+                    break; 
+                }
+            }
+        }
+    }
+
+    //  Mark as breaked glass
+    public void MarkGlass(int cardID)
+    {
+        glassToBreak.Push(cardID);
+    }
 }
 
 

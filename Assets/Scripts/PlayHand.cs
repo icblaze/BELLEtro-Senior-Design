@@ -160,6 +160,8 @@ public class PlayHand : MonoBehaviour
 
         //  Draw from deck equal to amount played
         PCard[] newCards = Deck.access().drawCards(cardsPlayed);
+        //  Break glass cards that were marked after put into drawnCards pile
+        Deck.access().DestroyGlassCards();
 
         StartCoroutine(RefillNextFrame(newCards));
     }

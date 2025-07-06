@@ -6,13 +6,18 @@
 // Zacharia Alaoui: Added the functions and implemented the dictionaries
 
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class CardModifier
 {
     private static System.Random rand = new System.Random();
-    private ScoringManager scoringManager; 
+    private ScoringManager scoringManager;
+    private ConsumableCardHolder consumableCardHolder;
+
+    //  Adjust time of scoring manager between each score increment
+    private readonly float waitIncrement = 0.5f;
 
     //  Make this a singleton
     private static CardModifier instance;
@@ -157,76 +162,170 @@ public class CardModifier
     }
 
     // Use enhancement effect with given use location
-    public void UseEnhancement(PCard card, UseLocation location)
+    public IEnumerator UseEnhancement(PCard card, UseLocation location)
     {
-        //  Ignore, part of check in currentHandManager or no enhancement
-        if(card.enhancement == CardEnhancement.Base || card.enhancement == CardEnhancement.WildCard)
+        if (scoringManager == null)
         {
-            return;
+            scoringManager = GameObject.FindFirstObjectByType<ScoringManager>();
         }
 
-        if(location == UseLocation.PreCard)
+        if (card.enhancement == CardEnhancement.Base || card.enhancement == CardEnhancement.WildCard)   
         {
-
+            yield return null; //  Don't affect scoring
         }
-
-        //  XMult before the +Mult
-        if(location == UseLocation.PostCard)
+        else if (location == UseLocation.PreCard)
         {
-
+            if (card.enhancement == CardEnhancement.BonusCard)
+            {
+                scoringManager.IncrementCurrentChips(30); // +30 chips
+            }
+            else if (card.enhancement == CardEnhancement.MultCard)
+            {
+                scoringManager.IncrementCurrentMult(4); // +4 Mult
+            }
         }
-
-        //  "Held in hand" enhancement effects
-        if (location == UseLocation.PostFromDraw)
+        else if (location == UseLocation.PostCard)   //  XMult after the +Mult
         {
+            if (card.enhancement == CardEnhancement.GlassCard)
+            {
+                int xmult = scoringManager.GetCurrentMult() * 2; // X2 Mult
+                scoringManager.SetCurrentMult(xmult);
 
+                //  1 in 4 chance to break
+                if (Random.Range(0, 4) == 0)
+                {
+                    Deck.access().MarkGlass(card.cardID);  //  Add to break stack
+                }
+            }
         }
+        else if (location == UseLocation.PostFromDraw)  //  "Held in hand" enhancement effects
+        {
+            if (card.enhancement == CardEnhancement.SteelCard)
+            {
+                int xmult = (int) (scoringManager.GetCurrentMult() * 1.5f); // X1.5 Mult
+                scoringManager.SetCurrentMult(xmult);
+            }
+        }
+        else if (location == UseLocation.PostBlind)  //  "Held in hand" after round completed
+        {
+            if (card.enhancement == CardEnhancement.GoldCard)
+            {
+                Player.access().moneyCount += 3;
+                ShopManager.access().UpdateMoneyDisplay();
+            }
+        }
+        yield return new WaitForSecondsRealtime(waitIncrement);
     }
 
     // Use edition effect with given use location
-    public void UseEdition(PCard card, UseLocation location)
+    public IEnumerator UseEdition(PCard card, UseLocation location)
     {
-        //  Do nothing as they don't affect scoring
-        if(card.edition == CardEdition.Base || card.edition == CardEdition.Negative)
+        if (card.edition == CardEdition.Base || card.edition == CardEdition.Negative)    
         {
-            return;
+            yield return null; //  Don't affect scoring
         }
-
-        if(location == UseLocation.PreCard)
+        else if (location == UseLocation.PreCard)
         {
-
+            if (card.edition == CardEdition.Foil)
+            {
+                scoringManager.IncrementCurrentChips(50); // +50 chips
+            }
+            else if (card.edition == CardEdition.Holographic)
+            {
+                scoringManager.IncrementCurrentMult(10); // +10 Mult
+            }
         }
-
-        //  XMult before the +Mult
-        if (location == UseLocation.PostCard)
+        else if (location == UseLocation.PostCard)  //  XMult after the +Mult
         {
-
+            if (card.edition == CardEdition.Polychrome)
+            {
+                int xmult = (int)(scoringManager.GetCurrentMult() * 1.5f); // X1.5 Mult
+                scoringManager.SetCurrentMult(xmult);
+            }
         }
+        yield return new WaitForSecondsRealtime(waitIncrement);
+    }
 
-        //  This is for Editions that are are on Jokers
-        if (location == UseLocation.Post)
+    //  Use edition effect of the mentors from (this will be called from left to right)
+    public IEnumerator UseMentorEdition(Mentor mentor)
+    {
+        if(mentor.edition == CardEdition.Base || mentor.edition == CardEdition.Negative)
         {
-
+            yield return null; //  Don't affect scoring
         }
+        else if(mentor.edition == CardEdition.Foil)
+        {
+            scoringManager.IncrementCurrentChips(50); // +50 chips
+        }
+        else if(mentor.edition == CardEdition.Holographic)
+        {
+            scoringManager.IncrementCurrentMult(10); // +10 Mult
+        }
+        else
+        {
+            int xmult = (int)(scoringManager.GetCurrentMult() * 1.5f);  // X1.5 Mult
+            scoringManager.SetCurrentMult(xmult);
+        }
+        yield return new WaitForSecondsRealtime(waitIncrement);
     }
 
     // Use seal effect with given use location
-    public void UseSeal(PCard card, UseLocation location)
+    public IEnumerator UseSeal(PCard card, UseLocation location)
     {
-        //  Do nothing
         if(card.seal == CardSeal.Base)
         {
-            return;
+            yield return null; //  Don't affect scoring
         }
-
-        if(location == UseLocation.PreCard)
+        else if(location == UseLocation.PreCard)
         {
-
+            if(card.seal == CardSeal.Funding)
+            {
+                Player.access().moneyCount += 3;
+                ShopManager.access().UpdateMoneyDisplay();
+            }
+            else if(card.seal == CardSeal.Retake)
+            {
+                card.replayCounter++;
+            }
         }
-
-        if(location == UseLocation.PostFromDraw)
+        else if(location == UseLocation.PostBlind)  //  "Held in hand" after round completed
         {
-
+            TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
+            consumableCardHolder.AddConsumable(new Textbook(handTextbook));
         }
+        yield return new WaitForSecondsRealtime(waitIncrement);
+    }
+
+    private TextbookName GetTextbookFromString(string handName)
+    {
+        switch(handName)
+        {
+            case "HighCard":
+                return TextbookName.HighCard;
+            case "Pair":
+                return TextbookName.Pair;
+            case "TwoPair":
+                return TextbookName.TwoPair;
+            case "ThreeKind":
+                return TextbookName.ThreeKind;
+            case "Straight":
+                return TextbookName.Straight;
+            case "Flush":
+                return TextbookName.Flush;
+            case "FullHouse":
+                return TextbookName.FullHouse;
+            case "FourKind":
+                return TextbookName.FourKind;
+            case "StraightFlush":
+                return TextbookName.StraightFlush;
+            case "FiveKind":
+                return TextbookName.FiveKind;
+            case "FlushHouse":
+                return TextbookName.FlushHouse;
+            case "FlushFive":
+                return TextbookName.FlushFive;
+        }
+
+        return TextbookName.HighCard;
     }
 }
