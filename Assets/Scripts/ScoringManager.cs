@@ -230,10 +230,20 @@ public class ScoringManager : MonoBehaviour
         {
             EndOfRound();
             TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
-            
-            //Maybe implement a if statement here to check if the player has the amount of chips to continue
-            //If not, then transition to defeat screen
-            transitionManager.TransitionToDefeatScreen();
+
+            //  Possible that mentors change the chip value before game over check
+            yield return mentorBuffer.RunBuffer(UseLocation.PostBlind);
+
+            //  Check with chips as a last chance
+            if (neededScore <= player.chipCount)
+            {
+                EndOfRound();
+                transitionManager.TransitionToEndOfRoundScreen();
+            }
+            else
+            {
+                transitionManager.TransitionToDefeatScreen();   //  Transition to Game Over Defeat screen
+            }
         }
     }
     
