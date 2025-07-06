@@ -29,12 +29,19 @@ public class EndOfRoundManager : MonoBehaviour
     //Singleton for the EndOfRoundManager
     public static EndOfRoundManager access()
     {
-        if (instance == null)
+        return instance;
+    }
+
+    // Enforce singleton instance
+    private void Awake()
+    {
+        if (instance != null && instance != this)
         {
-            instance = new EndOfRoundManager();
+            Destroy(gameObject); // Optional: prevent duplicates
+            return;
         }
 
-        return instance;
+        instance = this;
     }
 
     public void EndScreenOpened()

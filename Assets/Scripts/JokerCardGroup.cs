@@ -41,6 +41,7 @@ public class JokerCardHolder : MonoBehaviour
         //  Add 1 random mentor at each rerun of scene for testing purposes!
         //  Order should persist if correct, selling should remove from mentorDeck  
         //  Comment out eventually
+        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.BonusPoints, CardEdition.Holographic));
         player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Astronaut, CardEdition.Polychrome));
 
         //  Debug mentors in the list, order from left to right

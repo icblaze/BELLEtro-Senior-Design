@@ -19,7 +19,6 @@ public class Astronaut : Mentor
     //  All Textbook cards and Textbook packs in the shop are free.
     public override void UseMentor()
     {
-        Debug.LogWarning("Astronaut activate!");
         // In shop screen, set price of packs or textbooks to $0
         ShopManager.access().mentorShopEffect(this);
     }

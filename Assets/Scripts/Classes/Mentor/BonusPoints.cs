@@ -5,7 +5,7 @@
 
 using UnityEngine;
 using System.Collections;
-
+using System;
 
 public class BonusPoints : Mentor
 {
@@ -14,14 +14,15 @@ public class BonusPoints : Mentor
     {
         //  Might have to change this buffer location?
         locations = new UseLocation[] { UseLocation.PreShop };
-        description = "Earn extra $1 for every $5 at end of round";
+        description = "Earn extra $1 for every $5 at end of round (max $5)";
     }
 
-    //  Earn an extra $1 for every $5 at end of round
+    //  Earn an extra $1 for every $5 at end of round, maximum $5
     public override void UseMentor()
     {
         int extraCount = Player.access().moneyCount / 5;
+        extraCount = Math.Min(extraCount, 5);   //  maximum $5
 
-        Player.access().moneyCount += extraCount;
+        EndOfRoundManager.access().IncrementMentorReward(extraCount);
     }
 }
