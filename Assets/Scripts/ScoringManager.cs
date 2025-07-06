@@ -198,8 +198,8 @@ public class ScoringManager : MonoBehaviour
             yield return cardModifier.UseEnhancement(heldCard, UseLocation.PostFromDraw);
         }
 
-        //  Go through Post Mentor Buffer
-        yield return mentorBuffer.RunBuffer(UseLocation.Post);
+        //  Go through Post Mentor Buffer and consider editions
+        yield return mentorBuffer.RunPostBuffer();
 
 
         SetTotal();

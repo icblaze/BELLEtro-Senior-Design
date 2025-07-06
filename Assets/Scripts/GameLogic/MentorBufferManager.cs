@@ -78,4 +78,23 @@ public class MentorBufferManager
         }
         yield return null;
     }
+
+    //  Go through Post Buffer in left to right order, considering the edition of the mentors
+    public IEnumerator RunPostBuffer()
+    {
+        //  Go thorugh player's mentor deck from left to right
+        foreach (Mentor mentor in player.mentorDeck)
+        {
+            CardModifier.access().UseMentorEdition(mentor, false);
+
+            //  Use mentor's effect if in Post UseLocation
+            if(mentorBuffers[UseLocation.Post].Contains(mentor))
+            {
+                mentor.UseMentor();
+                yield return new WaitForSecondsRealtime(waitIncrement);
+            }
+
+            CardModifier.access().UseMentorEdition(mentor, false);
+        }
+    }
 }
