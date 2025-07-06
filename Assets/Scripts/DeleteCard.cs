@@ -85,7 +85,7 @@ public class DeleteCard : MonoBehaviour
     //This returns the selected cards that the player currently has selected
     public List<GameObject> GetSelectedCards()
     {
-        return selectedCards;
+        return new List<GameObject>(selectedCards);
     }
 
     //This returns the selected PCards extracted from cards that the player currently has selected
@@ -98,7 +98,7 @@ public class DeleteCard : MonoBehaviour
             selectedPCards.Add(cardObject.GetComponent<Card>().pcard);
         }
 
-        return selectedPCards;
+        return new List<PCard>(selectedPCards);
     }
 
     //This function removes the cards that the player played, and clears the selectedCards list.

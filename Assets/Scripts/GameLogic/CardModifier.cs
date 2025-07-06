@@ -13,8 +13,19 @@ public class CardModifier
 {
     private static System.Random rand = new System.Random();
 
+    //  Make this a singleton
+    private static CardModifier instance;
+    public static CardModifier access()
+    {
+        if (instance == null)
+        {
+            instance = new CardModifier();
+        }
+        return instance;
+    }
+
     //  Rates of editions out of 100 
-    public static Dictionary<int, CardEdition> editionRates = new()
+    public Dictionary<int, CardEdition> editionRates = new()
     {
         { 60, CardEdition.Base },
         { 18, CardEdition.Foil },
@@ -23,7 +34,7 @@ public class CardModifier
         { 5, CardEdition.Negative }
     };
 
-    public static Dictionary<int, CardEnhancement> enhancementRates = new()
+    public Dictionary<int, CardEnhancement> enhancementRates = new()
     {
         { 40, CardEnhancement.Base },
         { 18, CardEnhancement.BonusCard },
@@ -34,7 +45,7 @@ public class CardModifier
         { 3, CardEnhancement.GoldCard }
     };
 
-    public static Dictionary<int, CardSeal> sealRates = new()
+    public Dictionary<int, CardSeal> sealRates = new()
     {
         { 50, CardSeal.Base },
         { 20, CardSeal.Funding },
@@ -44,7 +55,7 @@ public class CardModifier
 
     //This function is used to retrieve a card modifier based on weighted values.
     //This function will return the card modifier based on the weighted values.
-    public static T GetWeightedModifier<T>(Dictionary<int, T> weightedPool)
+    public T GetWeightedModifier<T>(Dictionary<int, T> weightedPool)
     {
         int totalWeight = weightedPool.Sum(kvp => kvp.Key);
         int randomValue = Random.Range(0, totalWeight);
@@ -65,7 +76,7 @@ public class CardModifier
 
 
     //  Return additional price based on edition, 0 if base
-    public static int EditionPrice(CardEdition edition)
+    public int EditionPrice(CardEdition edition)
     {
         switch (edition)
         {
@@ -83,56 +94,138 @@ public class CardModifier
     }
 
     // Return description for given card enhancement
-    public static string EnhancementDesc(CardEnhancement enhancement)
+    public string EnhancementDesc(CardEnhancement enhancement)
     {
         switch(enhancement)
         {
             case CardEnhancement.Base:
                 return "";
             case CardEnhancement.BonusCard:
-                return "+30 extra Chips";
+                return "Bonus Card: +30 extra Chips";
             case CardEnhancement.MultCard:
-                return "+4 Mult";
+                return "Mult Card: +4 Mult";
             case CardEnhancement.WildCard:
-                return "Can be used as any suit";
+                return "Wild Card: Can be used as any suit";
             case CardEnhancement.GoldCard:
-                return "Gain $3 if held in hand at end of round";
+                return "Gold Card: Gain $3 if held in hand at end of round";
             case CardEnhancement.SteelCard:
-                return "X1.5 Mult when held in hand";
+                return "Steel Card: X1.5 Mult when held in hand";
             case CardEnhancement.GlassCard:
-                return "X2 Mult when scored. 25% chance of being destroyed after scoring";
+                return "Glass Card: X2 Mult when scored. 25% chance of being destroyed after scoring";
         }
 
         return "";
     }
 
     // Return description for given card edition
-    public static string EditionDesc(CardEdition edition)
+    public string EditionDesc(CardEdition edition)
     {
         switch (edition)
         {
             case CardEdition.Base:
-                return "";  
+                return "";
+            case CardEdition.Foil:
+                return "Foil: +50 Chips";
+            case CardEdition.Holographic:
+                return "Holographic: +10 Mult";
+            case CardEdition.Polychrome:
+                return "Polychrome: X1.5 Mult";
+            case CardEdition.Negative:
+                return "Negative: -1 Mentor Slot";
         }
 
         return "";
     }
 
     // Return description for given card seal
-    public static string SealDesc(CardSeal seal)
+    public string SealDesc(CardSeal seal)
     {
         switch (seal)
         {
             case CardSeal.Base:
-                return "";  
+                return "";
+            case CardSeal.Funding:
+                return "Funding Seal: Gain $3 when scored";
+            case CardSeal.Retake:
+                return "Retake Seal: Retrigger this card";
+            case CardSeal.Study:
+                return "Study Seal: Generates Textbook for last hand played if held in hand at end of round";
         }
 
         return "";
     }
 
     // Use enhancement effect with given use location
+    public void UseEnhancement(PCard card, UseLocation location)
+    {
+        //  Ignore, part of check in currentHandManager or no enhancement
+        if(card.enhancement == CardEnhancement.Base || card.enhancement == CardEnhancement.WildCard)
+        {
+            return;
+        }
+
+        if(location == UseLocation.PreCard)
+        {
+
+        }
+
+        //  XMult before the +Mult
+        if(location == UseLocation.PostCard)
+        {
+
+        }
+
+        //  "Held in hand" enhancement effects
+        if (location == UseLocation.PostFromDraw)
+        {
+
+        }
+    }
 
     // Use edition effect with given use location
+    public void UseEdition(PCard card, UseLocation location)
+    {
+        //  Do nothing as they don't affect scoring
+        if(card.edition == CardEdition.Base || card.edition == CardEdition.Negative)
+        {
+            return;
+        }
+
+        if(location == UseLocation.PreCard)
+        {
+
+        }
+
+        //  XMult before the +Mult
+        if (location == UseLocation.PostCard)
+        {
+
+        }
+
+        //  This is for Editions that are are on Jokers
+        if (location == UseLocation.Post)
+        {
+
+        }
+    }
 
     // Use seal effect with given use location
+    public void UseSeal(PCard card, UseLocation location)
+    {
+        //  Do nothing
+        if(card.seal == CardSeal.Base)
+        {
+            return;
+        }
+
+        if(location == UseLocation.PreCard)
+        {
+
+        }
+
+        if(location == UseLocation.PostFromDraw)
+        {
+
+        }
+    }
 }

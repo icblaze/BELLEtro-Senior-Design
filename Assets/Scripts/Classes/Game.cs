@@ -117,9 +117,9 @@ public class Game
     {
         //Set the temporary dictionaries with the ones in the CardModifier class.
         //This allows us to enhance the dictionaries below based on packtype, this allows rarer cards to show up in higher ranked packs.
-        var adjustedEditions = CardModifier.editionRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-        var adjustedEnhancements = CardModifier.enhancementRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-        var adjustedSeals = CardModifier.sealRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        var adjustedEditions = CardModifier.access().editionRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        var adjustedEnhancements = CardModifier.access().enhancementRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        var adjustedSeals = CardModifier.access().sealRates.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
 
         if (packEdition == PackEdition.Jumbo_Pack)
         {
@@ -161,9 +161,9 @@ public class Game
             );
         }
 
-        newCard.seal = CardModifier.GetWeightedModifier(adjustedSeals);
-        newCard.enhancement = CardModifier.GetWeightedModifier(adjustedEnhancements);
-        newCard.edition = CardModifier.GetWeightedModifier(adjustedEditions);
+        newCard.seal = CardModifier.access().GetWeightedModifier(adjustedSeals);
+        newCard.enhancement = CardModifier.access().GetWeightedModifier(adjustedEnhancements);
+        newCard.edition = CardModifier.access().GetWeightedModifier(adjustedEditions);
 
 
         return newCard;

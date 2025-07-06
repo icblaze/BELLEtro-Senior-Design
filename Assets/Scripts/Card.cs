@@ -77,7 +77,6 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     [Header("Consumable Object")]
     public ConsumableType consumableType;
     [SerializeField] public string consumableName = "";
-    [SerializeField] private string consumableEditionName = "Base";
     [SerializeField] private int consumableSellValue = 0;
     [SerializeField] private bool consumableDisabled = false;
 

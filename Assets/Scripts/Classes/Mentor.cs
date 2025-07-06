@@ -102,7 +102,7 @@ public class Mentor
         isDisabled = false;
 
         //  Calculate price based on edition, and have sell value be half that amount
-        price = basePrice + CardModifier.EditionPrice(edition);
+        price = basePrice + CardModifier.access().EditionPrice(edition);
         sellValue = (int)Mathf.Floor(price / 2.0f);
     }
 
