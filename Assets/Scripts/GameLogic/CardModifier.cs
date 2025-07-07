@@ -253,15 +253,18 @@ public class CardModifier
         {
             yield return null; //  Don't affect scoring
         }
-        else if(mentor.edition == CardEdition.Foil)
+        else if (!checkPoly)
         {
-            scoringManager.IncrementCurrentChips(50); // +50 chips
+            if (mentor.edition == CardEdition.Foil)
+            {
+                scoringManager.IncrementCurrentChips(50); // +50 chips
+            }
+            else if (mentor.edition == CardEdition.Holographic)
+            {
+                scoringManager.IncrementCurrentMult(10); // +10 Mult
+            }
         }
-        else if(mentor.edition == CardEdition.Holographic)
-        {
-            scoringManager.IncrementCurrentMult(10); // +10 Mult
-        }
-        else if(checkPoly && mentor.edition == CardEdition.Polychrome)
+        else if (checkPoly && mentor.edition == CardEdition.Polychrome)
         {
             int xmult = (int)(scoringManager.GetCurrentMult() * 1.5f);  // X1.5 Mult
             scoringManager.SetCurrentMult(xmult);
@@ -292,10 +295,16 @@ public class CardModifier
         {
             if (card.seal == CardSeal.Study)
             {
-                if(consumableCardHolder == null)
+                if (Player.access().consumables.Count >= Player.access().maxConsumables)
+                {
+                    yield return null;  //  Don't generate textbook if no space
+                }
+
+                if (consumableCardHolder == null)
                 {
                     consumableCardHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
                 }
+
                 TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
                 consumableCardHolder.AddConsumable(new Textbook(handTextbook));
             }

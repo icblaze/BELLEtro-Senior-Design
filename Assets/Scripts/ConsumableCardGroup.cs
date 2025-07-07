@@ -35,6 +35,9 @@ public class ConsumableCardHolder : MonoBehaviour
     private GameObject currentUseButton; // The active use button in the scene
     [SerializeField] private Card cardToUse; // The card we want to use
 
+    [Header("Test Mode")]
+    public bool testMode = true; // Spawn random cards for testing
+
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
@@ -46,11 +49,11 @@ public class ConsumableCardHolder : MonoBehaviour
 
     void Start()
     {
-        //  Add 2 consumable at each rerun of scene for testing purposes!
-        //  Order should persist if correct, selling should remove from consumables  
-        //  Comment out eventually
-        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.ChiliPepper));
-        player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Cheese));
+        if (testMode)
+        {
+            player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Cherry));
+            player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Tea));
+        }
 
         //  Debug consumables in the list, order from left to right
         Debug.Log("Consumables in list:");
@@ -218,35 +221,54 @@ public class ConsumableCardHolder : MonoBehaviour
 
     void OnCardClicked(Card clickedCard)
     {
+        // Check if we are clicking the same card again to deselect it.
+        // We can use cardToSell as the reference for the currently selected card.
+        if (cardToSell == clickedCard)
+        {
+            // If yes, destroy both buttons and clear the references.
+            if (currentSellButton != null)
+            {
+                Destroy(currentSellButton);
+            }
+            if (currentUseButton != null)
+            {
+                Destroy(currentUseButton);
+            }
+            cardToSell = null;
+            cardToUse = null;
+            return; // Exit the function, we are done.
+        }
+
+        // If we are here, it means we clicked a NEW card.
+
+        // First, clean up any old buttons from a previously selected card.
         if (currentSellButton != null)
         {
             Destroy(currentSellButton);
         }
-
-        cardToSell = clickedCard;
-        currentSellButton = Instantiate(sellButtonPrefab, clickedCard.transform);
-
-        currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
-        // This resets the button's position to the center of the card.
-
-        currentSellButton.GetComponentInChildren<TMP_Text>().text = "Sell $" + cardToSell.GetComponent<Card>().consumable.sellValue.ToString();
-        Button sellBtn = currentSellButton.GetComponent<Button>();
-        sellBtn.onClick.AddListener(SellCard);
-
-        //  For use consumables
         if (currentUseButton != null)
         {
             Destroy(currentUseButton);
         }
 
+        // Now, create the new buttons on the newly clicked card.
+
+        // --- Create Sell Button ---
+        cardToSell = clickedCard;
+        currentSellButton = Instantiate(sellButtonPrefab, clickedCard.transform);
+        currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
+        currentSellButton.GetComponentInChildren<TMP_Text>().text = "Sell $" + cardToSell.consumable.sellValue.ToString();
+        Button sellBtn = currentSellButton.GetComponent<Button>();
+        sellBtn.onClick.AddListener(SellCard);
+
+        // --- Create Use Button ---
         cardToUse = clickedCard;
         currentUseButton = Instantiate(useButtonPrefab, clickedCard.transform);
-
         currentUseButton.transform.localPosition = new Vector3(0, -150, 0);
         Button useBtn = currentUseButton.GetComponent<Button>();
         useBtn.onClick.AddListener(UseCard);
 
-        //  Check interactability status if Card Buff
+        // Check interactability status if it's a Card Buff
         if (clickedCard.consumable.type == ConsumableType.CardBuff)
         {
             CardBuff cardBuff = (CardBuff)clickedCard.consumable;

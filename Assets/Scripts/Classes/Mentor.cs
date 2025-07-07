@@ -33,13 +33,13 @@ public class Mentor
             case MentorName.BonusPoints:
                 return new BonusPoints(cardEdition);
             case MentorName.Curve:
-                return new Curve(cardEdition); //  TODO Delete Mentor in UI
+                return new Curve(cardEdition); 
             case MentorName.HelpingHand:
                 return new HelpingHand(cardEdition);
             case MentorName.Brainstorm:
                 return new Brainstorm(cardEdition);
             case MentorName.LabGlasses:
-                return new LabGlasses(cardEdition); //  TODO Assign the mult to the variable in round
+                return new LabGlasses(cardEdition); 
             case MentorName.Extension:
                 return new Extension(cardEdition); 
             case MentorName.LibraryCard:
@@ -47,35 +47,35 @@ public class Mentor
             case MentorName.TwelveCredits:
                 return new TwelveCredits(cardEdition); // TODO Be able to track selected hand
             case MentorName.Valentine:
-                return new Valentine(cardEdition); //  TODO add +3 to Mult variable of round
+                return new Valentine(cardEdition); 
             case MentorName.NoVoice:
-                return new NoVoice(cardEdition); //  TODO add +3 to Mult variable of round
+                return new NoVoice(cardEdition); 
             case MentorName.Eyes:
-                return new Eyes(cardEdition);   //  TODO add +8 to Mult variable of round
+                return new Eyes(cardEdition);   
             case MentorName.Astronaut:
                 return new Astronaut(cardEdition);
             case MentorName.FishBait:
-                return new FishBait(cardEdition);   //  TODO add +100 to Chip variable of round
+                return new FishBait(cardEdition);   
             case MentorName.Triplets:
-                return new Triplets(cardEdition);   //  TODO add +12 Mult variable of round
+                return new Triplets(cardEdition);  
             case MentorName.Graduate:
-                return new Graduate(cardEdition);   //  TODO +20 Chips and +4 Mult when Dipthongs are scored
+                return new Graduate(cardEdition);   
             case MentorName.Vagabond:
                 return new Vagabond(cardEdition);
             case MentorName.Turtle:
-                return new Turtle(cardEdition);
+                return new Turtle(cardEdition);    
             case MentorName.Consonant:
                 return new Consonant(cardEdition);  
             case MentorName.Diphcotomy:
-                return new Diphcotomy(cardEdition); //  TODO Add +mult to the round variable
+                return new Diphcotomy(cardEdition); 
             case MentorName.ELLEvation:
-                return new Ellevation(cardEdition); //  TODO Add +chips to round variable
+                return new Ellevation(cardEdition); 
             case MentorName.MakeupExam:
                 return new MakeupExam(cardEdition);
             case MentorName.EvenAirflow:
-                return new EvenAirflow(cardEdition); //  TODO Multiply the Round mult variable by 2
+                return new EvenAirflow(cardEdition); 
             case MentorName.TheUsualSpot:
-                return new TheUsualSpot(cardEdition); //  TODO Gives +80 Chips if played hand matches by place of articulation
+                return new TheUsualSpot(cardEdition); 
 
             default:
                 return new Mentor();

@@ -22,6 +22,10 @@ public class EndOfRoundManager : MonoBehaviour
     static int totalCashOut = 0;
     int interest = 0;
 
+    public GameObject mentorRewardNumber;
+    public GameObject mentorRewardText;
+    private int mentorReward = 0; //  For Mentors that reward extra money
+
     private static EndOfRoundManager instance;  //EndOfRoundManager instance varaiable
 
     //Singleton for the EndOfRoundManager
@@ -48,6 +52,7 @@ public class EndOfRoundManager : MonoBehaviour
         CalculateRoundReward();
         CalculateHands();
         CalculateInterest();
+        CalculateMentors();
         SetCashOut();
     }
     private void SetScoreAmount()
@@ -105,6 +110,32 @@ public class EndOfRoundManager : MonoBehaviour
         remainingHandsNumber.GetComponent<TMP_Text>().text = hands.ToString();
         totalCashOut += hands;
     }
+
+    //  Run the buffers for economy Mentors that run in PreShop (after transition to end of round)
+    private void CalculateMentors()
+    {
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.PreShop);
+
+        if (mentorReward > 0)
+        {
+            mentorRewardText.SetActive(true);
+            mentorRewardNumber.SetActive(true);
+            mentorRewardNumber.GetComponent<TMP_Text>().text = mentorReward.ToString();
+            totalCashOut += mentorReward;
+        }
+        else
+        {
+            mentorRewardText.SetActive(false);
+            mentorRewardNumber.SetActive(false);
+        }
+    }
+
+    //  Used for mentors to increase the mentor reward
+    public void IncrementMentorReward(int reward)
+    {
+        mentorReward += reward;
+    }
+
     private void SetCashOut()
     {
         cashOutButton.GetComponentInChildren<TMP_Text>().text = "Cash Out: $" + totalCashOut.ToString();

@@ -30,6 +30,9 @@ public class JokerCardHolder : MonoBehaviour
     private GameObject currentSellButton; // The active sell button in the scene
     [SerializeField] private Card cardToSell; // The card we want to sell
 
+    [Header("Test Mode")]
+    public bool testMode = true; // Spawn random cards for testing
+
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
@@ -38,11 +41,11 @@ public class JokerCardHolder : MonoBehaviour
 
     void Start()
     {
-        //  Add 1 random mentor at each rerun of scene for testing purposes!
-        //  Order should persist if correct, selling should remove from mentorDeck  
-        //  Comment out eventually
-        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Curve, CardEdition.Base));
-        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
+        if (testMode)
+        {
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Vagabond, CardEdition.Polychrome));
+        }
 
         //  Debug mentors in the list, order from left to right
         int count = 1;
@@ -190,18 +193,32 @@ public class JokerCardHolder : MonoBehaviour
 
     void OnCardClicked(Card clickedCard)
     {
+        // If we clicked the same card that already has the sell button...
+        if (cardToSell == clickedCard)
+        {
+            // ...it means we're deselecting it, so hide the button.
+            if (currentSellButton != null)
+            {
+                Destroy(currentSellButton);
+            }
+            cardToSell = null; // Forget which card was selected
+            return; // Stop here
+        }
+
+        // --- If we get here, it means we clicked a NEW card ---
+
+        // Destroy any old button that might exist on a different card.
         if (currentSellButton != null)
         {
             Destroy(currentSellButton);
         }
 
+        // Remember the new card and create a new sell button on it.
         cardToSell = clickedCard;
         currentSellButton = Instantiate(sellButtonPrefab, clickedCard.transform);
+        // Set its position above the card
+        currentSellButton.transform.localPosition = new Vector3(0, 150, 0); 
 
-        currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
-        // This resets the button's position to the center of the card.
-
-        currentSellButton.GetComponentInChildren<TMP_Text>().text = "Sell $" + cardToSell.GetComponent<Card>().mentor.sellValue.ToString();
         Button sellBtn = currentSellButton.GetComponent<Button>();
         sellBtn.onClick.AddListener(SellCard);
     }
