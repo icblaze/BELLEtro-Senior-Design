@@ -6,6 +6,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class Brainstorm : Mentor
@@ -34,15 +35,18 @@ public class Brainstorm : Mentor
 
     public override string GetDescription()
     {
+        ChangeEffect();
         description = "Copies the ability of the leftmost Mentor";
 
         if(leftmostMentor == null)
         {
             description += " (none)";
+            return description;
         }
         else if(incompatibleMentors.Contains(leftmostMentor.name))
         {
             description += " (incompatible)";
+            return description;
         }
 
         description += " (compatible)";
@@ -61,8 +65,20 @@ public class Brainstorm : Mentor
         //  If there exists another valid mentor that is leftmost and not Brainstorm itself
         if (currIndex != 0 && player.mentorDeck.Count > 1)
         {
-            Mentor leftmostMentor = player.mentorDeck[0];
-            locations = leftmostMentor.locations;
+            leftmostMentor = player.mentorDeck[0];
+            if (incompatibleMentors.Contains(leftmostMentor.name))
+            {
+                locations = new UseLocation[] { };
+            }
+            else
+            {
+                locations = leftmostMentor.locations.ToArray();
+            }
+        }
+        else
+        {
+            leftmostMentor = null;
+            locations = new UseLocation[] { };
         }
     }
 

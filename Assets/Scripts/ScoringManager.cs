@@ -33,11 +33,31 @@ public class ScoringManager : MonoBehaviour
     private BigInteger neededScore;                         //Score needed to win the round
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement= 0.5f;
+    private readonly float waitIncrement= 0.3f;
 
     //  Call to MentorBufferManager
     private MentorBufferManager mentorBuffer = MentorBufferManager.access();
     private CardModifier cardModifier = CardModifier.access();
+
+    private static ScoringManager instance;  //EndOfRoundManager instance varaiable
+
+    //Singleton for the ScoringManager
+    public static ScoringManager access()
+    {
+        return instance;
+    }
+
+    // Enforce singleton instance
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject); // Optional: prevent duplicates
+            return;
+        }
+
+        instance = this;
+    }
 
     public void Start()
     {

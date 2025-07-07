@@ -41,8 +41,8 @@ public class JokerCardHolder : MonoBehaviour
         //  Add 1 random mentor at each rerun of scene for testing purposes!
         //  Order should persist if correct, selling should remove from mentorDeck  
         //  Comment out eventually
-        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.BonusPoints, CardEdition.Holographic));
-        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Astronaut, CardEdition.Polychrome));
+        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Curve, CardEdition.Base));
+        player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
 
         //  Debug mentors in the list, order from left to right
         int count = 1;
@@ -255,6 +255,32 @@ public class JokerCardHolder : MonoBehaviour
             //  Wait for GameObject deletion before refreshing
             StartCoroutine(RefreshFrame());
         }
+    }
+
+    //  Remove specified mentor from deck without setting
+    public void RemoveMentor(Mentor trashMentor)
+    {
+        Card trashMentorCard = cards.FirstOrDefault(card => card.mentor == trashMentor);
+
+        if (trashMentorCard == null)
+        {
+            Debug.LogWarning("Mentor not found in cards.");
+            return;
+        }
+
+        //  Remove mentor from player's mentor deck first
+        player.mentorDeck.Remove(trashMentor);
+
+        cards.Remove(trashMentorCard);
+
+        Transform parentSlot = trashMentorCard.transform.parent;
+
+        Destroy(trashMentorCard.gameObject);      // Destroy the card
+        if (parentSlot != null)
+            Destroy(parentSlot.gameObject);  // Destroy the parent slot
+
+        //  Wait for GameObject deletion before refreshing
+        StartCoroutine(RefreshFrame());
     }
 
     //  Visually update mentor deck when added

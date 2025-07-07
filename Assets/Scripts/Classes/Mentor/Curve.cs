@@ -12,6 +12,7 @@ public class Curve : Mentor
 {
     private Round round = Round.access();
     private Player player = Player.access();
+    private JokerCardHolder mentorCardHolder;
 
     //  Mentor name and basePrice are preset
     public Curve(CardEdition edition) : base(MentorName.Curve, edition, 5)
@@ -24,21 +25,21 @@ public class Curve : Mentor
     //  Prevents loss if chips scored at least required 25%. Disappears after use.
     public override void UseMentor()
     {
-
         //  If final hand 
         if (player.handCount == 0)
         {
             //  Find percentage of scored chips this round relative to target score 
-            float goal = (float) Game.access().currentChipAmount / (float) round.targetScore;
+            double goal = (double) player.chipCount / (double) ScoringManager.access().GetNeededScore();
 
             //  If at least 25% and not passed
             if (goal >= 0.25 && goal < 1)
             {
                 //  Let the player win by setting to goal
-                Game.access().currentChipAmount = (BigInteger) round.targetScore;
+                player.chipCount = ScoringManager.access().GetNeededScore();
 
                 //  Remove from player's mentorDeck after effect used
-                player.mentorDeck.Remove(this);
+                mentorCardHolder = GameObject.FindFirstObjectByType<JokerCardHolder>();
+                mentorCardHolder.RemoveMentor(this);
             }
         }
     }

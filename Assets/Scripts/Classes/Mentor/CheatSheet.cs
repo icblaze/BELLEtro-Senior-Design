@@ -6,6 +6,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class CheatSheet : Mentor
@@ -34,15 +35,17 @@ public class CheatSheet : Mentor
 
     public override string GetDescription()
     {
-        description = "Copies the ability of the Mentor to the Mentor";
+        description = "Copies the ability of the Mentor to the right";
 
         if (rightMentor == null)
         {
             description += " (none)";
+            return description;
         }
         else if (incompatibleMentors.Contains(rightMentor.name))
         {
             description += " (incompatible)";
+            return description;
         }
 
         description += " (compatible)";
@@ -52,7 +55,6 @@ public class CheatSheet : Mentor
     //  Dynamically change the effect of Cheat Sheet based on rightMentor, call in JokerCard group
     public void ChangeEffect ()
     {
-        //Debug.Log("mic check cheat sheet");
         Player player = Player.access();
 
         //  Get index of Cheat Sheet mentor
@@ -61,8 +63,20 @@ public class CheatSheet : Mentor
         //  If valid mentor to the right, assign it and change its locations
         if (currIndex < player.mentorDeck.Count - 1)
         {
-            Mentor rightMentor = player.mentorDeck[currIndex + 1];
-            locations = rightMentor.locations;
+            rightMentor = player.mentorDeck[currIndex + 1];
+            if(incompatibleMentors.Contains(rightMentor.name))
+            {
+                locations = new UseLocation[] { };
+            }
+            else
+            {
+                locations = rightMentor.locations.ToArray();
+            }
+        }
+        else
+        {
+            rightMentor = null;
+            locations = new UseLocation[]{ };
         }
     }
 

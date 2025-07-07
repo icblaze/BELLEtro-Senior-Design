@@ -65,7 +65,7 @@ public class Mentor
             case MentorName.Turtle:
                 return new Turtle(cardEdition);
             case MentorName.Consonant:
-                return new Consonant(cardEdition);  //  TODO +30 Chips to round variable
+                return new Consonant(cardEdition);  
             case MentorName.Diphcotomy:
                 return new Diphcotomy(cardEdition); //  TODO Add +mult to the round variable
             case MentorName.ELLEvation:

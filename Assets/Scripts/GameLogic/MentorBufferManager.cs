@@ -16,7 +16,7 @@ public class MentorBufferManager
     private Game game = Game.access();
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.2f;
+    private readonly float waitIncrement = 0.25f;
 
     //  Make this a singleton
     private static MentorBufferManager instance;
@@ -102,10 +102,10 @@ public class MentorBufferManager
     //  Go through Post Buffer in left to right order, considering the edition of the mentors
     public IEnumerator RunPostBuffer()
     {
-        //  Go thorugh player's mentor deck from left to right
+        //  Go through player's mentor deck from left to right
         foreach (Mentor mentor in player.mentorDeck)
         {
-            CardModifier.access().UseMentorEdition(mentor, false);
+            yield return CardModifier.access().UseMentorEdition(mentor, false);
 
             //  Use mentor's effect if in Post UseLocation
             if(mentorBuffers[UseLocation.Post].Contains(mentor))
@@ -114,7 +114,7 @@ public class MentorBufferManager
                 yield return new WaitForSecondsRealtime(waitIncrement);
             }
 
-            CardModifier.access().UseMentorEdition(mentor, false);
+            yield return CardModifier.access().UseMentorEdition(mentor, true);
         }
     }
 }

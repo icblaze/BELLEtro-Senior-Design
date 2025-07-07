@@ -27,8 +27,8 @@ public class Consonant : Mentor
             //  Check if pcard is consonant
             if ((LinguisticTerms) i == pcard.term)
             {
-                //  TODO +30 Chips to round variable
-
+                Debug.Log("+30 cuz consonant");
+                ScoringManager.access().IncrementCurrentChips(30);
             }
         }
     }
