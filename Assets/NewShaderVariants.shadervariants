@@ -108,6 +108,8 @@ ShaderVariantCollection:
   - first: {fileID: -6465566751694194690, guid: 0110ae31753964e0184c6593492227c8, type: 3}
     second:
       variants:
+      - keywords: DEBUG_DISPLAY _CULLMODE_OFF _EDITION_HOLOGRAPHIC
+        passType: 13
       - keywords: USE_SHAPE_LIGHT_TYPE_0 _EDITION_NEGATIVE
         passType: 13
       - keywords: USE_SHAPE_LIGHT_TYPE_0 _EDITION_POLYCHROME

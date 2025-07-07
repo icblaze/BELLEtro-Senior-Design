@@ -137,7 +137,7 @@ public class CardModifier
             case CardEdition.Polychrome:
                 return "Polychrome: X1.5 Mult";
             case CardEdition.Negative:
-                return "Negative: -1 Mentor Slot";
+                return "Negative: +1 Mentor Slot";
         }
 
         return "";

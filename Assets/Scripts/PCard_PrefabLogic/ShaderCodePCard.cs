@@ -21,7 +21,7 @@ public class ShaderCodePCard : MonoBehaviour
     Material enhancement_m;
 
     PCardVisual visual;
-    string[] editions = { "REGULAR", "POLYCHROME", "FOIL", "NEGATIVE"};
+    string[] editions = { "REGULAR", "POLYCHROME", "FOIL", "NEGATIVE", "HOLOGRAPHIC"};
 
     void Awake()
     {
@@ -94,6 +94,9 @@ public class ShaderCodePCard : MonoBehaviour
                 break;
             case CardEdition.Negative:
                 chosenEdition = editions[3];
+                break;
+            case CardEdition.Holographic:
+                chosenEdition = editions[4];
                 break;
         }
 
