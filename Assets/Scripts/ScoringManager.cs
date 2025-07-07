@@ -33,7 +33,7 @@ public class ScoringManager : MonoBehaviour
     private BigInteger neededScore;                         //Score needed to win the round
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement= 0.3f;
+    private readonly float waitIncrement= 0.5f;
 
     //  Call to MentorBufferManager
     private MentorBufferManager mentorBuffer = MentorBufferManager.access();

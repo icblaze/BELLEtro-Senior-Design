@@ -17,7 +17,7 @@ public class CardModifier
     private ConsumableCardHolder consumableCardHolder;
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.2f;
+    private readonly float waitIncrement = 0.25f;
 
     //  Make this a singleton
     private static CardModifier instance;
@@ -171,7 +171,7 @@ public class CardModifier
 
         if (card.enhancement == CardEnhancement.Base || card.enhancement == CardEnhancement.WildCard)   
         {
-            yield return null; //  Don't affect scoring
+            yield break; //  Don't affect scoring
         }
         else if (location == UseLocation.PreCard)
         {
@@ -222,7 +222,7 @@ public class CardModifier
     {
         if (card.edition == CardEdition.Base || card.edition == CardEdition.Negative)    
         {
-            yield return null; //  Don't affect scoring
+            yield break; //  Don't affect scoring
         }
         else if (location == UseLocation.PreCard)
         {
@@ -251,7 +251,7 @@ public class CardModifier
     {
         if(mentor.edition == CardEdition.Base || mentor.edition == CardEdition.Negative)
         {
-            yield return null; //  Don't affect scoring
+            yield break; //  Don't affect scoring
         }
         else if (!checkPoly)
         {
@@ -277,7 +277,7 @@ public class CardModifier
     {
         if(card.seal == CardSeal.Base)
         {
-            yield return null; //  Don't affect scoring
+            yield break; //  Don't affect scoring
         }
         else if(location == UseLocation.Retrigger)
         {
@@ -299,14 +299,15 @@ public class CardModifier
                 {
                     yield return null;  //  Don't generate textbook if no space
                 }
-
-                if (consumableCardHolder == null)
+                else
                 {
-                    consumableCardHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
+                    if(consumableCardHolder == null)
+                    {
+                        consumableCardHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
+                    }
+                    TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
+                    consumableCardHolder.AddConsumable(new Textbook(handTextbook));
                 }
-
-                TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
-                consumableCardHolder.AddConsumable(new Textbook(handTextbook));
             }
         }
         yield return new WaitForSecondsRealtime(waitIncrement);
