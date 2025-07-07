@@ -20,7 +20,12 @@ public class Triplets : Mentor
     // +12 Mult if played hand contains three of a kind
     public override void UseMentor()
     {
-        //TODO Add +12 Mult to multiplier
+        string playedHand = ScoringManager.access().GetCurrentHandType();
 
+        //  Add +12 Mult to multiplier
+        if (playedHand.Equals("ThreeKind") || playedHand.Equals("FullHouse") || playedHand.Equals("FourKind") || playedHand.Equals("FiveKind") || playedHand.Equals("FlushFive") | playedHand.Equals("FlushHouse"))
+        {
+            ScoringManager.access().IncrementCurrentMult(12);
+        }
     }
 }

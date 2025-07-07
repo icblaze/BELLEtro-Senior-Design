@@ -20,7 +20,11 @@ public class FishBait : Mentor
     // +100 chips if played hand contains a straight.
     public override void UseMentor()
     {
-        //TODO Increase Round Chip variable by 100
-        
+        string playedHand = ScoringManager.access().GetCurrentHandType();
+
+        if (playedHand.Equals("Straight") || playedHand.Equals("StraightFlush"))
+        {
+            ScoringManager.access().IncrementCurrentChips(100);
+        }
     }
 }

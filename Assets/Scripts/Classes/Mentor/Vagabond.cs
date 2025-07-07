@@ -11,6 +11,7 @@ public class Vagabond : Mentor
 {
     Player player = Player.access();
     Game game = Game.access();
+    ConsumableCardHolder consumableCardHolder;
 
     //  Mentor name and basePrice are preset
     public Vagabond(CardEdition edition) : base(MentorName.Vagabond, edition, 8)
@@ -29,11 +30,13 @@ public class Vagabond : Mentor
             if(player.consumables.Count < player.maxConsumables)
             {
                 //  Generate random Card Buff
-                CardBuff[] randCard = game.randomCardBuffShop(1);
+                CardBuff randCard = game.randomCardBuffShop(1)[0];
 
-                player.consumables.Add(randCard[0]);
-
-                //  TODO visual for adding card to consumable slot
+                if(consumableCardHolder == null)
+                {
+                    consumableCardHolder = GameObject.FindAnyObjectByType<ConsumableCardHolder>();
+                }
+                consumableCardHolder.AddConsumable(randCard);
             }
         }
         

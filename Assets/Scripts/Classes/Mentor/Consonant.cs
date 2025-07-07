@@ -27,7 +27,6 @@ public class Consonant : Mentor
             //  Check if pcard is consonant
             if ((LinguisticTerms) i == pcard.term)
             {
-                Debug.Log("+30 cuz consonant");
                 ScoringManager.access().IncrementCurrentChips(30);
             }
         }

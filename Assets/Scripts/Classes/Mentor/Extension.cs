@@ -27,8 +27,7 @@ public class Extension : Mentor
         // Set the next available Mentor to be $3 off once shop screen is reached
         if(!hasDiscounted)
         {
-            shop = Object.FindFirstObjectByType<ShopManager>();
-            shop.mentorShopEffect(this);
+            ShopManager.access().mentorShopEffect(this);
             hasDiscounted = true; //    Only activate once per shop
         }
     }

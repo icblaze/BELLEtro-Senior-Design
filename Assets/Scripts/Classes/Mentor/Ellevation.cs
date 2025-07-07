@@ -35,9 +35,9 @@ public class Ellevation : Mentor
         }
     }
 
-    //  TODO Add mentor's chips to round chip variable (Post)
+    //  Add mentor's chips to round chip variable (Post)
     public override void UseMentor()
     {
-        //  TODO Add chips to round chip variable
+        ScoringManager.access().IncrementCurrentChips(chips);
     }
 }

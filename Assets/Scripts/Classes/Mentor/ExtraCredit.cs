@@ -12,7 +12,6 @@ public class ExtraCredit : Mentor
     //  Mentor name and basePrice are preset
     public ExtraCredit(CardEdition edition) : base(MentorName.ExtraCredit, edition, 5)
     {
-        //  Might have to change this buffer location?
         locations = new UseLocation[] { UseLocation.PreShop };
         description = "Earn $1 at end of round";
     }
@@ -20,6 +19,6 @@ public class ExtraCredit : Mentor
     //  Adds $1 at end of round
     public override void UseMentor()
     {
-        Player.access().moneyCount++;
+        EndOfRoundManager.access().IncrementMentorReward(1);
     }
 }

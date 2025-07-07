@@ -23,15 +23,14 @@ public class HelpingHand : Mentor
     {
         //  We can check after every hand played
 
-        //  Find percentage of scored chips this round that 
-        float goal = (float)Game.access().currentChipAmount / (float)Round.access().targetScore;
+        //  Find percentage of total chips this round compared to needed score
+        double goal = (double)Player.access().chipCount / (double)ScoringManager.access().GetNeededScore();
 
         //  If at least 95% and not passed
         if (goal >= 0.95 && goal < 1)
-        { 
-            Game.access().currentChipAmount = (BigInteger) Round.access().targetScore;
+        {
+            //  Let the player win by setting to goal
+            ScoringManager.access().SetRoundScore(ScoringManager.access().GetNeededScore());
         }
-
-        //  Sequence before round win check
     }
 }

@@ -24,7 +24,7 @@ public class EvenAirflow : Mentor
         bool hasVoiced = false;
         bool hasVoiceless = false;
 
-        List<PCard> pcardList = GameObject.FindFirstObjectByType<DeleteCard>().GetSelectedPCards();
+        List<PCard> pcardList = ScoringManager.access().GetScoredPCards();
 
         foreach(PCard pcard in pcardList)
         {
@@ -38,10 +38,10 @@ public class EvenAirflow : Mentor
             }
         }
 
-        //  TODO Multiply the Round mult variable by 2
         if(hasVoiced && hasVoiceless)
         {
-
+            int mult = ScoringManager.access().GetCurrentMult();
+            ScoringManager.access().SetCurrentMult(mult * 2);
         }
         
     }

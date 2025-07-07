@@ -7,15 +7,17 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class MakeupExam : Mentor
 {
     Player player = Player.access();
     int retriggerUses = 10;
+    JokerCardHolder mentorCardHolder;
 
     //  Mentor name and basePrice are preset
     public MakeupExam(CardEdition edition) : base(MentorName.MakeupExam, edition, 6)
     {
-        locations = new UseLocation[] { UseLocation.Retrigger, UseLocation.PostHand};
+        locations = new UseLocation[] { UseLocation.PreCard, UseLocation.PostHand};
         description = "Retrigger all cards for the next 10 hands";
     }
 
@@ -27,7 +29,7 @@ public class MakeupExam : Mentor
     }
 
     //  Add retrigger count to each scored pcard (Retrigger)
-    public void UseRetriggerMentor(List<PCard> scoredPCards)
+    public override void UseRetriggerMentor(List<PCard> scoredPCards)
     {
         foreach(PCard pcard in scoredPCards)
         {
@@ -41,11 +43,9 @@ public class MakeupExam : Mentor
         retriggerUses--;
 
         //  Disappears after all uses 
-        if(retriggerUses == 0)
+        if(retriggerUses <= 0)
         {
-            player.mentorDeck.Remove(this);
-
-            //TODO Remove visually
+            mentorCardHolder.RemoveMentor(this);
         }
     }
 

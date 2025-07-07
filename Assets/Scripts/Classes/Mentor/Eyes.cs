@@ -21,6 +21,12 @@ public class Eyes : Mentor
     //  +8 Mult if played hand contains a Pair
     public override void UseMentor()
     {
-        // Add +8 Mult to multiplier
+        string playedHand = ScoringManager.access().GetCurrentHandType();
+
+        if(playedHand.Equals("Pair") || playedHand.Equals("TwoPair") || playedHand.Equals("ThreeKind") || playedHand.Equals("FourKind") || playedHand.Equals("FullHouse") || playedHand.Equals("FiveKind") || playedHand.Equals("FlushFive") || playedHand.Equals("FlushHouse"))
+        {
+            ScoringManager.access().IncrementCurrentMult(8);
+        }
+     
     }
 }

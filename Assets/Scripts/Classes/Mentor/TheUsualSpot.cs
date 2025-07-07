@@ -22,7 +22,7 @@ public class TheUsualSpot : Mentor
     public override void UseMentor()
     {
         //  May have to change way of accessing played hand
-        List<PCard> pcardList = GameObject.FindFirstObjectByType<DeleteCard>().GetSelectedPCards();
+        List<PCard> pcardList = ScoringManager.access().GetScoredPCards();
         int cardCount = pcardList.Count;
 
         //  No match if only 1 card
@@ -42,9 +42,8 @@ public class TheUsualSpot : Mentor
             }
         }
 
-        //  TODO Gives +80 Chips if played hand matches by place of articulation
-
-
+        //  Gives +80 Chips if played hand matches by place of articulation
+        ScoringManager.access().IncrementCurrentChips(80);
     }
 
 }

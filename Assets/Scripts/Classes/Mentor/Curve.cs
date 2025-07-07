@@ -35,7 +35,7 @@ public class Curve : Mentor
             if (goal >= 0.25 && goal < 1)
             {
                 //  Let the player win by setting to goal
-                player.chipCount = ScoringManager.access().GetNeededScore();
+                ScoringManager.access().SetRoundScore(ScoringManager.access().GetNeededScore());
 
                 //  Remove from player's mentorDeck after effect used
                 mentorCardHolder = GameObject.FindFirstObjectByType<JokerCardHolder>();

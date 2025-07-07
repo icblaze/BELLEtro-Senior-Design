@@ -13,6 +13,7 @@ public class Turtle : Mentor
     bool startRound = true;
     Player player = Player.access();
     Game game = Game.access();
+    JokerCardHolder mentorCardHolder;
 
     //  Mentor name and basePrice are preset
     public Turtle(CardEdition edition) : base(MentorName.Turtle, edition, 6)
@@ -21,19 +22,22 @@ public class Turtle : Mentor
         description = "Hand Size increase by " + handSizeBonus + ", reduce by 1 end of round.";
     }
 
+    //  TODO modify this probably to account for CheatSheet/Brainstorm that copy effect
     //  Hand Size increase by 5 and reduce size by 1 each round.
     public override void UseMentor()
     {
         if(startRound)
         {
+            Debug.Log("Turtle Hand Size");
             //  Before intial draw to deck call
-            player.handSize += player.handSize + handSizeBonus;
+            player.handSize += handSizeBonus;
 
             //  Set flag for when called PostBlind
             startRound = false;
         }
         else
         {
+            Debug.Log("Turtle Decrease");
             //  Reset hand size
             player.handSize -= handSizeBonus;
 
@@ -41,11 +45,9 @@ public class Turtle : Mentor
             handSizeBonus--;
 
             //  Remove the mentor if bonus is depleted
-            if(handSizeBonus == 0)
+            if(handSizeBonus <= 0)
             {
-                player.mentorDeck.Remove(this);
-
-                //  TODO remove Mentor visually
+                mentorCardHolder.RemoveMentor(this);
             }
 
             //  Set flag for when called Blind

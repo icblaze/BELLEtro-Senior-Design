@@ -26,20 +26,21 @@ public class Diphcotomy : Mentor
         return description;
     }
 
-    //  Will reset mult to 0 if pcard isDiphthong (PreCard)
+    //  Will reset mult to -1 if pcard isDiphthong (PreCard)
     public override void UseMentor(PCard pcard)
     {
         if(pcard.isDiphthong)
         {
-            mult = 0;
+            mult = -1;  //  so it'll be +0 when Post is run
         }
     }
 
-    //  TODO Add +1 Mult to mult variable, and add mult to round variable (Post)
+    //  Add +1 Mult to mult variable, and add mult to round variable (Post)
     public override void UseMentor()
     {
+        //  Increment before adding to mult
         mult++;
 
-        //  TODO Add mult to round variable
+        ScoringManager.access().IncrementCurrentMult(mult);
     }
 }

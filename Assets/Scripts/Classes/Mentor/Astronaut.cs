@@ -9,6 +9,8 @@ using System.Collections;
 
 public class Astronaut : Mentor
 {
+    private ShopManager shop;
+
     //  Mentor name and basePrice are preset
     public Astronaut(CardEdition edition) : base(MentorName.Astronaut, edition, 6)
     {
@@ -20,6 +22,7 @@ public class Astronaut : Mentor
     public override void UseMentor()
     {
         // In shop screen, set price of packs or textbooks to $0
-        ShopManager.access().mentorShopEffect(this);
+        shop = Object.FindFirstObjectByType<ShopManager>();
+        shop.mentorShopEffect(this);
     }
 }

@@ -32,7 +32,6 @@ public class LabGlasses : Mentor
         multipleCount = Player.access().moneyCount / 5;
         int mult = multipleCount * 2;
 
-        //  TODO Assign the mult to the variable in round
-        
+        ScoringManager.access().IncrementCurrentMult(mult);
     }
 }
