@@ -95,13 +95,15 @@ public class CurrentHandManager : MonoBehaviour
                 if (result.CompareTo("HighCard") == 0)
                 {
                     currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                    updateBaseAndMult(result);
+                    return result;
                 }
                 else
                 {
                     currentHandText.GetComponent<TMP_Text>().text = result;
+                    updateBaseAndMult(result);
+                    return result;
                 }
-                updateBaseAndMult(result);
-                return result;
             case 3://Check if pair, three of a kind, or highcard.
                 if (ThreeKindCheck(selectedCards) == true)
                 {
@@ -114,13 +116,15 @@ public class CurrentHandManager : MonoBehaviour
                 if (result.CompareTo("HighCard") == 0)
                 {
                     currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                    updateBaseAndMult(result);
+                    return result;
                 }
                 else
                 {
                     currentHandText.GetComponent<TMP_Text>().text = result;
+                    updateBaseAndMult(result);
+                    return result;
                 }
-                updateBaseAndMult(result);
-                return result;
             case 4://Check pair, three of a kind, four of a kind, two pair, highcard.
                 if (FourKindCheck(selectedCards) == true)
                 {
@@ -148,14 +152,16 @@ public class CurrentHandManager : MonoBehaviour
                 {
                     result = "Pair";
                     currentHandText.GetComponent<TMP_Text>().text = "Pair";
+                    updateBaseAndMult(result);
+                    return result;
                 }
                 else
                 {
-                    result = "High Card";
-                    currentHandText.GetComponent<TMP_Text>().text = result;
+                    result = "HighCard";
+                    currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                    updateBaseAndMult(result);
+                    return result;
                 }
-                updateBaseAndMult(result);
-                return result;
             case 5:
                 //Do all Five Card functions to test if they are flushes
                 //five of a kinds, etc.
@@ -239,13 +245,15 @@ public class CurrentHandManager : MonoBehaviour
                 if (result.CompareTo("HighCard") == 0)
                 {
                     currentHandText.GetComponent<TMP_Text>().text = "High Card";
+                    updateBaseAndMult(result);
+                    return result;
                 }
                 else
                 {
                     currentHandText.GetComponent<TMP_Text>().text = result;
+                    updateBaseAndMult(result);
+                    return result;
                 }
-                updateBaseAndMult(result);
-                return result;
             default:
                 Debug.LogWarning("Something went wrong. Card Size: " + selectedCards.Count);
                 result = "";
@@ -835,7 +843,6 @@ public class CurrentHandManager : MonoBehaviour
         //Returns the list of cards based on the hand type
         switch (handType)
         {
-
             case "Pair":
                 return pairCards;
             case "TwoPair":
