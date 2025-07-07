@@ -8,6 +8,7 @@ public class SFXManager : MonoBehaviour
 {
     private static AudioManager audioManager;
     private static AudioClip cardScoring;
+    private static AudioClip multScoring;
     private static AudioClip buttonPress;
     private static AudioClip moneyUsed;
     private static AudioClip no;//Simply for instances where something can't be done such as selected an unselectable card
@@ -23,11 +24,12 @@ public class SFXManager : MonoBehaviour
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         buttonPress = Resources.Load<AudioClip>($"SFX/Button");
         cardScoring = Resources.Load<AudioClip>($"SFX/Hollow");
+        multScoring = Resources.Load<AudioClip>($"SFX/Whoosh");
         moneyUsed = Resources.Load<AudioClip>($"SFX/Metal Dropping");
         roundWon = Resources.Load<AudioClip>($"SFX/Level Completion");
         no = Resources.Load<AudioClip>($"SFX/Stingz");
         gameWon = Resources.Load<AudioClip>($"SFX/GameWon");
-        gameLost = Resources.Load<AudioClip>($"SFX/Whoosh");
+        gameLost = Resources.Load<AudioClip>($"SFX/GameLost");
         cardSelected = Resources.Load<AudioClip>($"SFX/CardSelected");
     }
     public void ButtonSFX()
@@ -41,6 +43,10 @@ public class SFXManager : MonoBehaviour
     public void CardScoreSFX()
     {
         audioManager.PlaySFX(cardScoring);
+    }
+    public void MultScoreSFX()
+    {
+        audioManager.PlaySFX(multScoring);
     }
     public void NoSFX()
     {

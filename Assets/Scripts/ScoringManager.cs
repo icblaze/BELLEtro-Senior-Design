@@ -12,13 +12,14 @@ using UnityEngine.PlayerLoop;
 
 public class ScoringManager : MonoBehaviour
 {
-    private DeleteCard deleteCardScript;                            
+    private DeleteCard deleteCardScript;
     private List<PCard> playedPCards;                                //List of PCards played in the hand   
     private PCard highCard;                                     //High card for the hand  
     private List<GameObject> selectedCards = new List<GameObject>(); //list of selected cards
     private List<PCard> heldHand;
     private CurrentHandManager currentHandManager;                   //Current hand manager to get the current hand
     private ShakeScreen shakeScreen;       //ShakeScreen instance variable
+    private SFXManager sfxManager; //SFXManager instance variable
     private Player player = Player.access();                //Player instance variable
     private int currentChips;                               //Current chips for the hand
     private int currentMult;                                //Current multiplier for the hand 
@@ -33,7 +34,7 @@ public class ScoringManager : MonoBehaviour
     private BigInteger neededScore;                         //Score needed to win the round
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement= 0.5f;
+    private readonly float waitIncrement = 0.5f;
 
     //  Call to MentorBufferManager
     private MentorBufferManager mentorBuffer = MentorBufferManager.access();
@@ -61,7 +62,8 @@ public class ScoringManager : MonoBehaviour
 
     public void Start()
     {
-        shakeScreen = GameObject.FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();  
+        sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
+        shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
 
         //Get delete card script and do null check
         deleteCardScript = FindFirstObjectByType<DeleteCard>();
@@ -125,11 +127,11 @@ public class ScoringManager : MonoBehaviour
             playedPCards.Add(highCard); // Add the high card to the playedPCards list
         }
         else
-        { 
+        {
             playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
 
             //Get the list of cards from the current hand manager based on the hand type
-            playedPCards = currentHandManager.GetListOfCards(handType); 
+            playedPCards = currentHandManager.GetListOfCards(handType);
         }
 
         //Start the card scoring process
@@ -142,7 +144,7 @@ public class ScoringManager : MonoBehaviour
         Game.access().currentChipAmount = 0;
         roundScoreText.text = "0";
         redScoreText.text = "0";
-        blueScoreText.text = "0"; 
+        blueScoreText.text = "0";
         currentChips = 0;
         currentMult = 0;
         totalScore = 0;
@@ -187,6 +189,7 @@ public class ScoringManager : MonoBehaviour
                 currentMult += playedCard.multiplier;
                 Debug.Log("Current Chips: " + currentChips.ToString());
                 Debug.Log("Current Mult: " + currentMult.ToString());
+                sfxManager.CardScoreSFX();
 
                 //Update the text UI.
                 //Should have a UI element that is shown in realtime
@@ -266,7 +269,7 @@ public class ScoringManager : MonoBehaviour
             }
         }
     }
-    
+
     //Calculate the totalChips earned from hand, add it to player chipCount
     //and display change in the UI.
     private void SetTotal()
@@ -372,6 +375,7 @@ public class ScoringManager : MonoBehaviour
     public void IncrementCurrentMult(int mult)
     {
         shakeScreen.StartShake();
+        sfxManager.MultScoreSFX();
         currentMult += mult;
         redScoreText.text = currentMult.ToString();
         Debug.Log("Current Mult: " + currentMult.ToString());
