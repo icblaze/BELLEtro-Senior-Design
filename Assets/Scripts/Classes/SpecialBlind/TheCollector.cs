@@ -18,14 +18,14 @@ public class TheCollector : SpecialBlind
 
     public override void applySpecialBlinds()
     {
-        OriginalDiscards = Player.access().discards;
+        OriginalDiscards = Player.access().maxDiscards;
 
-        Player.access().discards = 0;
+        Player.access().maxDiscards = 0;
     }
 
     public override void cleanUpEffect()
     {
-        Player.access().discards = OriginalDiscards;
+        Player.access().maxDiscards = OriginalDiscards;
     }
 }
 

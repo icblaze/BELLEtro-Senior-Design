@@ -18,13 +18,13 @@ public class ThePurist : SpecialBlind
 
     public override void applySpecialBlinds()
     {
-        OriginalHandCount = Player.access().handCount;
+        OriginalHandCount = Player.access().maxHandCount;
 
-        Player.access().handCount = 0;
+        Player.access().maxHandCount = 1;
     }
 
     public override void cleanUpEffect()
     {
-        Player.access().handCount = OriginalHandCount;
+        Player.access().maxHandCount = OriginalHandCount;
     }
 }
