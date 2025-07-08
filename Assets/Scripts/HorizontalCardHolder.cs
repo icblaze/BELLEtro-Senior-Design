@@ -37,6 +37,18 @@ public class HorizontalCardHolder : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(OnBlindStart());
+    }
+
+    public IEnumerator OnBlindStart()
+    {
+        //  Destroy Existing slots (if any), then wait
+        DestroyExistingSlots();
+        yield return null;
+        yield return null;
+
+        //  Run the Blind Buffer here
+
         //  Initial draw from deck to hand
         DrawHand(handSize);
 
@@ -220,5 +232,26 @@ public class HorizontalCardHolder : MonoBehaviour
                     cards[i].cardVisual.UpdateIndex(transform.childCount);
             }
         }
+    }
+
+    //  Destroy slots if existing at new start of round (call before DrawHand)
+    public void DestroyExistingSlots()
+    {
+        cards = GetComponentsInChildren<Card>().ToList();
+        if (cards == null)
+        {
+            return;
+        }
+
+        foreach (Card cardObject in cards)
+        {
+            Transform parentSlot = cardObject.transform.parent;
+
+            Destroy(cardObject.gameObject);      // Destroy the card
+            if (parentSlot != null)
+                Destroy(parentSlot.gameObject);  // Destroy the parent slot
+        }
+
+        cards.Clear();
     }
 }

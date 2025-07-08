@@ -367,7 +367,9 @@ public class ScoringManager : MonoBehaviour
     //  Set the current mult (red score) and update text
     public void SetCurrentMult(int mult)
     {
+        shakeScreen.StartShake();
         currentMult = mult;
+        sfxManager.MultScoreSFX();
         redScoreText.text = currentMult.ToString();
         Debug.Log("Current Mult: " + currentMult.ToString());
     }
