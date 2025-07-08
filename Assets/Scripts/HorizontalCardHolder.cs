@@ -67,7 +67,8 @@ public class HorizontalCardHolder : MonoBehaviour
         cards = GetComponentsInChildren<Card>().ToList();
 
         //  Draw PCards from the deck for each Card intially
-        deck.resetDeck();
+        //  Make sure drawn cards are moved back to deckCards by calling combinePiles
+        deck.combinePiles();
         PCard[] pcardArray = deck.drawCards(handSize);
 
         int cardCount = 0;

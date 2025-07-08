@@ -144,6 +144,17 @@ public class Deck
     }
   }
 
+    //  Reset the Deck to intial values
+    public void Reset()
+  {
+    counter = 0;
+    deckCards = new List<PCard>(); //This will hold all of the cards that have the card info attach to them.
+    cardsDrawn = new List<PCard>(); //This should store all the cards that were drawn
+    playerHand = new List<PCard>(); //This variable will hold the hand of the player.
+    heldHand = new List<PCard>(); //This variable will cards in player held hand that weren't played
+    glassToBreak = new Stack<int>();  // This stack holds PCard ID's that we need to remove if the associated glass card "breaks"
+  }
+
   //This function is responsible for drawing a certain amount of cards into the players hand.
   //PlayerHandCount represents how many missing cards are missing from the players hand.
   public PCard[] drawCards(int cardAmount)
@@ -222,7 +233,7 @@ public class Deck
   }
 
     //  After every blind, add the drawn cards back to main deck 
-    public void resetDeck()
+    public void combinePiles()
     {
         deckCards.AddRange(cardsDrawn);
         cardsDrawn.Clear();
