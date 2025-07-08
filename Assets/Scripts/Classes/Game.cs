@@ -420,7 +420,7 @@ public class Game
         while (count < 1)
         {
             index = randomizer(0, System.Enum.GetValues(typeof(SpecialBlindNames)).Length);
-            blind = new SpecialBlind((SpecialBlindNames)index);
+            blind = SpecialBlind.BlindFactory(SpecialBlindNames.TheCollector);
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
 
             if (!alreadyExists)
@@ -438,12 +438,28 @@ public class Game
         return blind;
     }
 
-    public BigInteger GetChipTotal()
+    public Tag[] randomTag (int tagCount)
+    {
+        Tag[] tagList = new Tag[tagCount];
+        bool alreadyExists;
+
+        Tag tag = null;
+        for (int i=0; i < tagCount; ++i)
+        {
+            index = randomizer(0, System.Enum.GetValues(typeof(TagNames)).Length);
+            tag = Tag.TagFactory(TagNames.FiveDollar);
+            tagList[i] = tag;
+        }
+
+        return tagList;
+    }
+
+    public int GetChipTotal()
     {
         return ChipTotal;
     }
 
-    public BigInteger SetChipTotal(int chipTotal)
+    public int SetChipTotal(int chipTotal)
     {
         ChipTotal = chipTotal;
         return ChipTotal;
