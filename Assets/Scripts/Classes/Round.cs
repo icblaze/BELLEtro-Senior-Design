@@ -32,8 +32,8 @@ public class Round
     public bool endGame;        //This bool indicates if the game has ended
     public string currentHand = ""; //  This is the current hand that gets updated by currentHandManager
     private Player player;
+    public int roundReward; //This is the reward for the current round
 
-    
     //Implement logic here for the selected blind that the player selected.
 
 
@@ -41,7 +41,7 @@ public class Round
 
     //This function takes in the currentAnte and current round the player is on
     //and returns the target number of chips for that round
-    public double GetTargetScore(int currentAnte, int currentRound)
+    public int GetTargetScore(int currentAnte, int currentRound)
     {
         //This is used for debugging purposes to ensure the the values selected are within bounds
         if (currentRound > 3 || currentAnte > 8)
@@ -56,15 +56,39 @@ public class Round
         {
             case 1:
                 targetScore = baseAnteChips[currentAnte] * 1;
-                return targetScore;
+                return (int)targetScore;
             case 2:
-                targetScore = baseAnteChips[currentAnte] * 1.5;
-                return targetScore;
+                targetScore = baseAnteChips[currentAnte] + (baseAnteChips[currentAnte] * 1.5);
+                return (int)targetScore;
             case 3:
-                targetScore = baseAnteChips[currentAnte] * Game.access().currentSpecialBlind.chipMultiplier;
-                return targetScore;
+                targetScore = baseAnteChips[currentAnte] + (baseAnteChips[currentAnte] * Game.access().currentSpecialBlind.chipMultiplier);
+                return (int)targetScore;
             default:
                 return 0;
+        }
+
+    }
+
+    //This function determines the reward for the current round based on the round value.
+    public int CalculateRoundReward()
+    {
+        int round = Game.access().roundValueTest;
+        int ante = Game.access().anteValue;
+
+        switch (round)
+        {
+            case 1:
+                return 3;
+            case 2:
+                return 4;
+            case 3:
+                if (ante == 8)
+                {
+                    return 8;
+                }
+                return 5;
+            default:
+                return 3;
         }
 
     }

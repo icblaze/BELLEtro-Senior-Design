@@ -50,6 +50,8 @@ public class TransitionManager : MonoBehaviour
         }
 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        if (audioManager == null)
+            Debug.LogError("No GameObject found with tag 'Audio'");
         StartCoroutine(fadeScript.FadeOut(roundSelectScreen));
         StartCoroutine(fadeScript.FadeIn(roundScreen));
         TitleManager titleManager = GameObject.FindFirstObjectByType<TitleManager>().GetComponent<TitleManager>();

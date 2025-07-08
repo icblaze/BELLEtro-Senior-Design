@@ -18,7 +18,6 @@ public class ConsumableCardHolder : MonoBehaviour
 {
     [SerializeField] private Card selectedCard;
     [SerializeReference] private Card hoveredCard;
-
     [SerializeField] private GameObject slotPrefab;
     private RectTransform rect;
 
@@ -72,6 +71,7 @@ public class ConsumableCardHolder : MonoBehaviour
             }
         }
 
+        //  Create slots for each consumable in the player's list
         for (int i = 0; i < player.consumables.Count; i++)
         {
             GameObject newSlot = Instantiate(slotPrefab, transform);
@@ -124,6 +124,7 @@ public class ConsumableCardHolder : MonoBehaviour
         RefreshConsumables();
     }
 
+    //This function is called when a card is hovered over, and it will update the hoveredCard variable.
     void CardPointerEnter(Card card)
     {
         hoveredCard = card;
@@ -141,6 +142,7 @@ public class ConsumableCardHolder : MonoBehaviour
         }
     }
 
+    //This function is called when a card is not longer hovered over, and it will reset the hoveredCard variable.
     void CardPointerExit(Card card)
     {
         hoveredCard = null;
@@ -152,6 +154,7 @@ public class ConsumableCardHolder : MonoBehaviour
         {
             if (hoveredCard != null)
             {
+                //This destroy will remove the game object of the hovered card and its parent slot.
                 Destroy(hoveredCard.transform.parent.gameObject);
                 cards.Remove(hoveredCard);
             }
@@ -219,6 +222,8 @@ public class ConsumableCardHolder : MonoBehaviour
         }
     }
 
+
+    //This function is called when a card is clicked, and it will create a sell button and a use button for the card.
     void OnCardClicked(Card clickedCard)
     {
         // Check if we are clicking the same card again to deselect it.
@@ -276,7 +281,7 @@ public class ConsumableCardHolder : MonoBehaviour
         }
     }
 
-    void UseCard()
+    public void UseCard()
     {
         if (cardToUse != null)
         {

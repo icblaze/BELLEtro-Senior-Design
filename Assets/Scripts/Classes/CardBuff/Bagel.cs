@@ -29,10 +29,11 @@ public class Bagel : CardBuff
     }
 
     //  Must have 1 card selected to be enabled
+    //  This override sets isDisabled to true if the user has selected 1 card
     public override bool CheckDisabled()
     {
         deleteScript = GameObject.FindFirstObjectByType<DeleteCard>();
-        if(deleteScript == null)
+        if (deleteScript == null)
         {
             isDisabled = true;
             return isDisabled;

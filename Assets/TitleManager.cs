@@ -52,6 +52,9 @@ public class TitleManager : MonoBehaviour
 
     public void setRoundTitle()//Sets the titles when loading into a round
     {
+        string scoreText = Round.access().GetTargetScore(Game.access().anteValue, Game.access().roundValueTest).ToString();
+        string roundReward = Round.access().CalculateRoundReward().ToString();
+        
         //Set the round title and its components
         int ante = Game.access().GetAnte();
         int round = Game.access().GetRound();

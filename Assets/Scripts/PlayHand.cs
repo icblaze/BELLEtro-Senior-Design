@@ -154,6 +154,12 @@ public class PlayHand : MonoBehaviour
         //selectedCards is a list of cards that were selected by the player and these
         //cards have been moved to the PlayArea.
         ScoringManager scoringManager = FindFirstObjectByType<ScoringManager>();
+        if (scoringManager == null)
+        {
+            Debug.LogError("PlayHand: ScoringManager script not found in scene!");
+            yield break; // Exit if ScoringManager is not found
+        }
+
         yield return scoringManager.GetScoring();
 
         // ✅ Remove cards and draw new ones

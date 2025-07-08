@@ -11,69 +11,87 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Threading.Tasks;
-
 using TMPro;
+
 
 public class ShopManager : MonoBehaviour
 {
     //All UI Components Below
-    private Button nextRoundButton;
-    public Button rerollButton;
-    public GameObject moneyText;
+    [Header("All UI Components")]  
+    private Button nextRoundButton;     //Button to go to next round
+    private Button rerollButton;        //Button to reroll the shop
+    public GameObject moneyText;       //Text for Money
+
     //First Purchasable Card
-    private Mentor mentor1;
-    private Textbook textbook1;
-    private CardBuff cardBuff1;
-    public Button cardButton1;
-    //Second Purchasable Card
-    private Mentor mentor2;
-    private Textbook textbook2;
-    private CardBuff cardBuff2;
-    public Button cardButton2;
-    private Pack pack1;
-    private Pack pack2;
-    public GameObject packText;
-    //Cards in Pack
-    private PCard PackCard1;
-    private PCard PackCard2;
-    private PCard PackCard3;
-    private PCard PackCard4;
-    private PCard PackCard5;
-    public Button PackCardButton1;
-    public Button PackCardButton2;
-    public Button PackCardButton3;
-    public Button PackCardButton4;
-    public Button PackCardButton5;
-    //Vouchers
-    private Voucher voucher;
-    public Button voucherButton;
-    public CanvasGroup shopUI;//Canvas Group for ShopUI
-    public Button pack1Button;
-    public Button pack2Button;
-    private int reroll = 5;//Reroll price
-    private int shopMentorsAmount = 2;//Amount of top cards/purchasable cards
-    public CanvasGroup Mentor1Details;//Details for purchasable cards (says mentor but is for anytype)
-    public CanvasGroup Mentor2Details;
-    public CanvasGroup VoucherDetails;
-    public CanvasGroup Pack1Details;
-    public CanvasGroup Pack2Details;
-    public CanvasGroup RegularUI;//Canvas Group for All UI excluding the Packs
-    public CanvasGroup PackGroup;//Canvas Group for Cards 1-3
-    public CanvasGroup PackGroupPlus;//Canvas group for Cards 4 and 5
-    int cardsSelected = 0;//Cards currently selected in pack
-    int packSelected = 0;//Used to tell which pack was selected
-    SFXManager sfxManager;
+    [Header("First Purchasable Card")]
+    private Mentor mentor1;            //Mentor Card
+    private Textbook textbook1;        //Textbook Card
+    private CardBuff cardBuff1;        //CardBuff Card     
+
+    //Second Purchasable Card  
+    [Header("Second Purchasable Card")]
+    private Mentor mentor2;            //Mentor Card
+    private Textbook textbook2;        //Textbook Card
+    private CardBuff cardBuff2;        //CardBuff Card
+    private Voucher voucher;           //Voucher
+
+    [Header("Packs and Pack Cards")]
+    private Pack pack1;                //Pack 1
+    private Pack pack2;                //Pack 2
+    public GameObject packText;        //Text for Pack
+    private PCard PackCard1;           //Card 1 in Pack
+    private PCard PackCard2;           //Card 2 in Pack
+    private PCard PackCard3;           //Card 3 in Pack
+    private PCard PackCard4;           //Card 4 in Pack
+    private PCard PackCard5;           //Card 5 in Pack
+    public GameObject voucherCard;         //GameObject for Voucher Card
+    public GameObject card1;             //Gameobject for Card 1
+    public GameObject card2;             //Gameobject for Card 2
+    public GameObject pack1Card;         //GameObject for Pack 1
+    public GameObject pack2Card;         //GameObject for Pack 2
+
+    [SerializeReference] public Card hoveredCard;
+    [SerializeReference] public Pack pack;
+
+    [Header("Card Buttons")]
+    public Button PackCard1Button;     //Button for Pack Card 1
+    public Button PackCard2Button;     //Button for Pack Card 2
+    public Button PackCard3Button;     //Button for Pack Card 3
+    public Button PackCard4Button;     //Button for Pack Card 4
+    public Button PackCard5Button;     //Button for Pack Card 5
+    [SerializeField] public GameObject buyButtonPrefab;        //Gameobject that will hold the Buy Button Prefab
+    [SerializeField] public GameObject currentBuyButton;       //Gameobject for the current card being bought
+    [SerializeField] public Button buyButton;                  //Button for Buy Card
+
+    // To visually update the Mentors and Consumables Card Group when items added
+    [Header("Card Holders")]
+    [SerializeField] private JokerCardHolder mentorCardHolder;
+    [SerializeField] private ConsumableCardHolder consumableCardHolder;
+
+    [Header("UI Canvas Groups")]
+    public CanvasGroup shopUI;          //Canvas Group for ShopUI
+    public CanvasGroup Mentor1Details;  //Details for purchasable cards (says mentor but is for anytype)
+    public CanvasGroup Mentor2Details;  //Details for purchasable cards (says mentor but is for anytype)
+    public CanvasGroup VoucherDetails;  //Details for Voucher
+    public CanvasGroup Pack1Details;    //Details for Pack 1
+    public CanvasGroup Pack2Details;    //Details for Pack 2
+    public CanvasGroup RegularUI;       //Canvas Group for All UI excluding the Packs
+    public CanvasGroup PackGroup;       //Canvas Group for Cards 1-3
+    public CanvasGroup PackGroupPlus;   //Canvas group for Cards 4 and 5
+
+    private int reroll = 5;             //Reroll price
+    private int shopMentorsAmount = 2;  //Amount of top cards/purchasable card
+    int cardsSelected = 0;              //Cards currently selected in pack
+    int packSelected = 0;               //Used to tell which pack was selected
 
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
     Player playerInst = Player.access();
     Deck deck = Deck.access();
 
-    // To visually update the Mentors and Consumables Card Group when items added
-    [SerializeField] private JokerCardHolder mentorCardHolder;
-    [SerializeField] private ConsumableCardHolder consumableCardHolder;
-
     public static ShopManager instance { get; private set; }  //ShopManager instance varaiable
+
+    SFXManager sfxManager;
 
     //Singleton for the ShopManager
     public static ShopManager access()
@@ -91,6 +109,8 @@ public class ShopManager : MonoBehaviour
         }
 
         instance = this;
+
+        moneyText = GameObject.Find("Money Text");
     }
 
 
@@ -102,8 +122,7 @@ public class ShopManager : MonoBehaviour
     }
 
     //Function called when  shopUI is opened. This intiallizes the 
-    //shop with any mentors, packs, vouchers, etc. This should be called once
-    //an ante.
+    //shop with any mentors, packs, vouchers, etc. This should be called once per ante
     public void NewShop()
     {
         //Generate Mentors/Textbooks/CardBuffs
@@ -116,7 +135,8 @@ public class ShopManager : MonoBehaviour
             vouchers = inst.randomVoucher(1);
             voucher = vouchers[0];
             voucher.initialPrice = Mathf.CeilToInt(voucher.initialPrice * playerInst.discount);
-            voucherButton.image.sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
+            voucherCard = GameObject.Find("Voucher");
+            voucherCard.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
             Debug.Log("Voucher Name: " + voucher.name.ToString());
         }
 
@@ -131,15 +151,24 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Pack 1 Type: " + pack1.packType);
         Debug.Log("Pack 2 Type: " + pack2.packType);
 
-        pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
-        pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
+        pack1Card = GameObject.Find("Pack1");
+        pack2Card = GameObject.Find("Pack2");
+        pack1Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
+        pack2Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
+
     }
 
+    //This function determines which cards will be placed in the shop.
+    //This function also adds the image of the chosen cards to the shop.
     private void NewCards()
     {
-        //Reset all cards
-        cardButton1.gameObject.SetActive(true);
-        cardButton2.gameObject.SetActive(true);
+
+        card1 = GameObject.Find("Mentor1");
+        card1.gameObject.SetActive(true);
+
+        card2 = GameObject.Find("Mentor2");
+        card2.gameObject.SetActive(true);
+
         mentor1 = null;
         mentor2 = null;
         textbook1 = null;
@@ -149,11 +178,11 @@ public class ShopManager : MonoBehaviour
 
 
 
-        for (int i = 1; i <= shopMentorsAmount; i++)
+        for (int i = 0; i <= shopMentorsAmount; i++)
         {
             //Use probabililties to generate the card shops
             int cardSlot = Random.Range(1, 100);
-            //If number is under 10, create a textbook
+            //If number is 15 or under, create a textbook
             if (cardSlot <= 15)
             {
                 Textbook[] Textbooks = new Textbook[2];
@@ -164,7 +193,7 @@ public class ShopManager : MonoBehaviour
                     textbook1 = Textbooks[0];
                     textbook1.price = Mathf.CeilToInt(textbook1.price * playerInst.discount);
                     //cardButton1.image.sprite = Resources.Load<Sprite>(textbook1.name.ToString());
-                    cardButton1.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook1.name.ToString());
+                    card1.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook1.name.ToString());
                     Debug.Log("Textbook 1 Name: " + textbook1.name.ToString());
                 }
                 else
@@ -172,11 +201,11 @@ public class ShopManager : MonoBehaviour
                     textbook2 = Textbooks[0];
                     textbook2.price = Mathf.CeilToInt(textbook2.price * playerInst.discount);
                     Debug.Log("Textbook 2 Name: " + textbook2.name.ToString());
-                    cardButton2.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook2.name.ToString());
+                    card2.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook2.name.ToString());
                 }
 
             }
-            else if (cardSlot < 30) //Create a CardBuff
+            else if (cardSlot < 30 && cardSlot > 15) //Create a CardBuff
             {
                 CardBuff[] cardBuffs = new CardBuff[2];
                 cardBuffs = inst.randomCardBuffShop(1);
@@ -185,15 +214,15 @@ public class ShopManager : MonoBehaviour
                 {
                     cardBuff1 = cardBuffs[0];
                     cardBuff1.price = Mathf.CeilToInt(cardBuff1.price * playerInst.discount);
-                    cardButton1.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff1.name.ToString());
+                    card1.GetComponent<Image>().sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff1.name.ToString());
                     Debug.Log("CardBuff 1 Name: " + cardBuff1.name.ToString());
                 }
                 else
                 {
                     cardBuff2 = cardBuffs[0];
                     cardBuff2.price = Mathf.CeilToInt(cardBuff2.price * playerInst.discount);
+                    card2.GetComponent<Image>().sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff2.name.ToString());
                     Debug.Log("CardBuff 2 Name: " + cardBuff2.name.ToString());
-                    cardButton2.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff2.name.ToString());
                 }
             }
             else//Create a Joker card.
@@ -226,31 +255,49 @@ public class ShopManager : MonoBehaviour
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
                     mentor1 = mentors[0];
-                    mentor1.price = Mathf.CeilToInt(mentor1.price * playerInst.discount);
 
                     // --- START DEBUGGING ---
-                    if (cardButton1 == null)
+                    if (card1 == null)
                     {
-                        Debug.LogError("FATAL ERROR: cardButton1 is NULL!");
+                        Debug.LogError("FATAL ERROR: card1 is NULL!");
                         return;
                     }
-                    if (cardButton1.image == null)
+                    if (card1.GetComponent<Image>() == null)
                     {
-                        Debug.LogError("FATAL ERROR: cardButton1 does not have an Image component!");
+                        Debug.LogError("FATAL ERROR: card1 does not have an Image component!");
                         return;
                     }
                     // --- END DEBUGGING ---
 
-                    cardButton1.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor1.name.ToString());
+                    card1.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Mentor/" + mentor1.name.ToString());
                     Debug.Log("Mentor 1 Name: " + mentor1.name.ToString());
                 }
                 else
                 {
-                    // (You would add similar checks for mentor2 and cardButton2 here)
-                    mentor2 = mentors[0];
-                    mentor2.price = Mathf.CeilToInt(mentor2.price * playerInst.discount);
-                    Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
-                    cardButton2.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
+                    if (mentor2 == null && cardBuff2 == null && textbook2 == null)
+                    {
+                        mentor2 = mentors[0];
+                        mentor2.price = Mathf.CeilToInt(mentor2.price * playerInst.discount);
+                        
+                        // (You would add similar checks for mentor2 and cardButton2 here)
+                        if (card2 == null)
+                        {
+                            Debug.LogError("FATAL ERROR: card2 is NULL!");
+                            return;
+                        }
+                        if (card2.GetComponent<Image>() == null)
+                        {
+                            Debug.LogError("FATAL ERROR: card2 does not have an Image component!");
+                            return;
+                        }
+
+                        card2.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
+                        Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
+                    }
+                    else
+                    {
+                        Debug.Log("Mentor 2 already exists!.");
+                    }
                 }
             }
 
@@ -258,8 +305,10 @@ public class ShopManager : MonoBehaviour
     }
 
     //Function call takes in a Mentor Card and adds the Mentor Card into the players collection.
-    private void BuyMentor(Mentor mentor, Button mentorButton)
+    private void BuyMentor(Mentor mentor, Button mentorButton, string mentorName)
     {
+        buyButton.interactable = false; //Disable the button to prevent multiple purchases
+
         //If Joker threshold is hit, do not purchase.
         if ((mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors) ||
         playerInst.moneyCount < mentor.price)
@@ -268,6 +317,7 @@ public class ShopManager : MonoBehaviour
             sfxManager.NoSFX();
             return;
         }
+
         //Add Mentor to user's collection
         playerInst.mentorDeck.Add(mentor);
         if (mentorCardHolder != null)
@@ -276,6 +326,7 @@ public class ShopManager : MonoBehaviour
         }
 
         //Remove Mentor from Screen
+        GameObject.Find(mentorName).SetActive(false);
         mentorButton.gameObject.SetActive(false);
 
         int cardsPurchased = VictoryManager.access().GetCardsPurchased();
@@ -285,8 +336,9 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount = playerInst.moneyCount - mentor.price;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
-    private void BuyTextbook(Textbook textbook, Button textbookButton)
+    private void BuyTextbook(Textbook textbook, Button textbookButton, string textbookName)
     {
+        buyButton.interactable = false; //Disable the button to prevent multiple purchases
         //If consumables is maxed or not enough money
         if (playerInst.consumables.Count < playerInst.maxConsumables
         && playerInst.moneyCount >= textbook.price)
@@ -300,6 +352,7 @@ public class ShopManager : MonoBehaviour
 
             //Move pack disappear
             // textbookButton.interactable |= false;
+            GameObject.Find(textbookName).SetActive(false);
             textbookButton.gameObject.SetActive(false);
 
             int cardsPurchased = VictoryManager.access().GetCardsPurchased();
@@ -317,8 +370,9 @@ public class ShopManager : MonoBehaviour
             return;
         }
     }
-    private void BuyCardBuff(CardBuff cardBuff, Button cardBuffButton)
+    private void BuyCardBuff(CardBuff cardBuff, Button cardBuffButton, string cardBuffName)
     {
+        buyButton.interactable = false; //Disable the button to prevent multiple purchases
         if (playerInst.consumables.Count >= playerInst.maxConsumables
         || playerInst.moneyCount < cardBuff.price)
         {
@@ -335,7 +389,8 @@ public class ShopManager : MonoBehaviour
             consumableCardHolder.AddConsumable(cardBuff); //  Visually add to holder
         }
 
-        //Make Pack Disappear
+        //Make cardBuff Disappear
+        GameObject.Find(cardBuffName).SetActive(false);
         cardBuffButton.gameObject.SetActive(false);
 
         int cardsPurchased = VictoryManager.access().GetCardsPurchased();
@@ -346,47 +401,11 @@ public class ShopManager : MonoBehaviour
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
     }
-
-    //Function is used to call the BuyMentors function for Card 1
-    public void CardButton1()
-    {
-        //Should use if statements to determine what the card is
-        //and call the respective function
-        if (mentor1 != null)
-        {
-            BuyMentor(mentor1, cardButton1);
-        }
-        else if (cardBuff1 != null)
-        {
-            BuyCardBuff(cardBuff1, cardButton1);
-        }
-        else
-        {
-            BuyTextbook(textbook1, cardButton1);
-        }
-
-    }
-    //Function is used to call the BuyMentors function for Card 2
-    public void CardButton2()
-    {
-        //Should use if statements to determine what the card is
-        //and call the respective function
-        if (mentor2 != null)
-        {
-            BuyMentor(mentor2, cardButton2);
-        }
-        else if (cardBuff2 != null)
-        {
-            BuyCardBuff(cardBuff2, cardButton2);
-        }
-        else
-        {
-            BuyTextbook(textbook2, cardButton2);
-        }
-    }
+  
     //Function call takes in a voucher card and adds the effects into the player's run.
     public void BuyVoucher()
     {
+        buyButton.interactable = false; //Disable the button to prevent multiple purchases
         if (playerInst.moneyCount < voucher.initialPrice)
         {
             sfxManager.NoSFX();
@@ -402,8 +421,8 @@ public class ShopManager : MonoBehaviour
         voucher.applyEffect();
 
         //Remove voucher from screen
-        voucherButton.interactable = false;
-        voucherButton.gameObject.SetActive(false);
+        //voucherCard.GetComponent<Button>().interactable = false;
+        voucherCard.SetActive(false);
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - voucher.initialPrice;
@@ -411,17 +430,19 @@ public class ShopManager : MonoBehaviour
     }
     public void Pack1()
     {
-        BuyPack(pack1, pack1Button);
+        buyButton.interactable = false;
+        BuyPack(pack1, buyButton, "Pack1");
         packSelected = 1;
     }
     public void Pack2()
     {
-        BuyPack(pack2, pack2Button);
+        buyButton.interactable = false;
+        BuyPack(pack2, buyButton, "Pack2");
         packSelected = 2;
     }
 
     //Function call takes in a pack card and opens it, calling the necessary functions.
-    private void BuyPack(Pack pack, Button packButton)
+    private void BuyPack(Pack pack, Button packButton, string packName)
     {
         if (playerInst.moneyCount < pack.price)
         {
@@ -435,10 +456,12 @@ public class ShopManager : MonoBehaviour
 
         //Make pack disappear
         packButton.interactable |= false;
+        GameObject.Find(packName).SetActive(false);
         packButton.gameObject.SetActive(false);
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
+
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
 
@@ -448,11 +471,11 @@ public class ShopManager : MonoBehaviour
     }
     public void BuyPack1()
     {
-        BuyPack(pack1, pack1Button);
+        BuyPack(pack1, buyButton, "Pack1");
     }
     public void BuyPack2()
     {
-        BuyPack(pack2, pack2Button);
+        BuyPack(pack2, buyButton, "Pack2");
     }
 
     //Function causes the shop UI to disappear and transitions back into the regular scene.
@@ -483,8 +506,7 @@ public class ShopManager : MonoBehaviour
     {
         if (playerInst.moneyCount < reroll)
         {
-            //Possibly make screen shake
-            sfxManager.NoSFX();
+            //Possibly make screen shake, or output a message saying not enough money
             Debug.Log("Money Insufficient");
             return;
         }
@@ -497,7 +519,7 @@ public class ShopManager : MonoBehaviour
 
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;
-        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount;
+        moneyText.GetComponent<TMP_Text>().text = "$" + playerInst.moneyCount;
         reroll++;
         rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 
@@ -565,9 +587,94 @@ public class ShopManager : MonoBehaviour
             RemoveTextbook2Details();
         }
     }
+
+    public void ActivateBuyButton(string cardName)
+    {
+        if (currentBuyButton != null)
+        {
+            Destroy(currentBuyButton);
+        }
+
+        RectTransform rectTransform = GameObject.Find(cardName).GetComponent<RectTransform>();
+        currentBuyButton = Instantiate(buyButtonPrefab, rectTransform);
+        currentBuyButton.transform.localPosition = new Vector3(0, -75, 0);
+
+        buyButton = currentBuyButton.GetComponent<Button>();
+
+        //Adds a listener to the buy button
+        buyButton.onClick.AddListener(() =>
+        {
+            if (cardName == "Mentor1")
+            {
+                if (mentor1 != null)
+                {
+                    buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                    BuyMentor(mentor1, buyButton, cardName);
+                }
+                else if (cardBuff1 != null)
+                {
+                    buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                    BuyCardBuff(cardBuff1, buyButton, cardName);
+                }
+                else
+                {
+                    buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                    BuyTextbook(textbook1, buyButton, cardName);
+                }
+            }
+            else if (cardName == "Mentor2")
+            {
+                if (mentor2 != null)
+                {
+                    buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                    BuyMentor(mentor2, buyButton, cardName);
+                }
+                else if (cardBuff2 != null)
+                {
+                    buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                    BuyCardBuff(cardBuff2, buyButton, cardName);
+                }
+                else
+                {
+                    buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                    BuyTextbook(textbook2, buyButton, cardName);
+                }
+            }
+            else if (cardName == "Voucher")
+            {
+                buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                RemoveVoucherDetails();
+                BuyVoucher();
+            }
+            else if (cardName == "Pack1")
+            {
+                buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                BuyPack1();
+            }
+            else if (cardName == "Pack2")
+            {
+                buyButton.GetComponent<CanvasGroup>().alpha = 0;
+                BuyPack2();
+            }
+        });
+    }
+    //This deactivates the Buy button if it exists.
+    public void DeactivateBuyButton()
+    {
+        // Deactivate the buy button if it exists
+        if (currentBuyButton != null)
+        {
+
+            Destroy(currentBuyButton);
+        }
+
+        currentBuyButton = null;
+    }
+
     //Function is used to show the details of what the Joker does
     private void ShowMentor1Details()
     {
+        ActivateBuyButton("Mentor1");
         Mentor1Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor1.name.ToString()) + "\n" + mentor1.description.ToString() + "\n$" + mentor1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
@@ -575,19 +682,22 @@ public class ShopManager : MonoBehaviour
     }
     private void RemoveMentor1Details()
     {
+        DeactivateBuyButton();
         Mentor1Details.blocksRaycasts = false;
         Mentor1Details.interactable = false;
         StartCoroutine(FadeOut(Mentor1Details));
     }
     private void ShowMentor2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor2.name.ToString()) + "\n" + mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
+        ActivateBuyButton("Mentor2");
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor2.name.ToString()) + "\n" +  mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
     }
     private void RemoveMentor2Details()
     {
+        DeactivateBuyButton();
         Mentor2Details.blocksRaycasts = false;
         Mentor2Details.interactable = false;
         StartCoroutine(FadeOut(Mentor2Details));
@@ -595,6 +705,7 @@ public class ShopManager : MonoBehaviour
 
     private void ShowTextbook1Details()
     {
+        ActivateBuyButton("Mentor1");   
         Mentor1Details.GetComponentInChildren<TMP_Text>().text = textbook1.GetDescription() + "\n$" + textbook1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
@@ -602,12 +713,14 @@ public class ShopManager : MonoBehaviour
     }
     private void RemoveTextbook1Details()
     {
+        DeactivateBuyButton();
         Mentor1Details.blocksRaycasts = false;
         Mentor1Details.interactable = false;
         StartCoroutine(FadeOut(Mentor1Details));
     }
     private void ShowTextbook2Details()
     {
+        ActivateBuyButton("Mentor2");
         Mentor2Details.GetComponentInChildren<TMP_Text>().text = textbook2.GetDescription() + "\n$" + textbook2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
@@ -615,6 +728,7 @@ public class ShopManager : MonoBehaviour
     }
     private void RemoveTextbook2Details()
     {
+        DeactivateBuyButton();
         Mentor2Details.blocksRaycasts = false;
         Mentor2Details.interactable = false;
         StartCoroutine(FadeOut(Mentor2Details));
@@ -622,6 +736,7 @@ public class ShopManager : MonoBehaviour
 
     private void ShowCardBuff1Details()
     {
+        ActivateBuyButton("Mentor1");
         Mentor1Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(cardBuff1.name.ToString()) + "\n" + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
         Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
@@ -629,12 +744,14 @@ public class ShopManager : MonoBehaviour
     }
     private void RemoveCardBuff1Details()
     {
+        DeactivateBuyButton();
         Mentor1Details.blocksRaycasts = false;
         Mentor1Details.interactable = false;
         StartCoroutine(FadeOut(Mentor1Details));
     }
     private void ShowCardBuff2Details()
     {
+        ActivateBuyButton("Mentor2");
         Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(cardBuff2.name.ToString()) + "\n" + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
@@ -648,19 +765,23 @@ public class ShopManager : MonoBehaviour
     }
     public void ShowVoucherDetails()
     {
-        VoucherDetails.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(voucher.name.ToString()) + "\n" + voucher.GetDescription() + "\n$" + voucher.initialPrice.ToString();
+        ActivateBuyButton("Voucher");
+        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n$" + voucher.initialPrice.ToString();
         VoucherDetails.blocksRaycasts = true;
         VoucherDetails.interactable = true;
         StartCoroutine(FadeIn(VoucherDetails));
     }
     public void RemoveVoucherDetails()
     {
+        DeactivateBuyButton();
         VoucherDetails.blocksRaycasts = false;
         VoucherDetails.interactable = false;
         StartCoroutine(FadeOut(VoucherDetails));
     }
     public void ShowPack1Details()
     {
+        ActivateBuyButton("Pack1");
+
         Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.packType.ToString() + "\nChoose " + pack1.selectableCards.ToString() + " of " + pack1.packSize.ToString() + " cards" + "\n" + "$" + pack1.price.ToSafeString();
 
         Pack1Details.blocksRaycasts = true;
@@ -669,12 +790,14 @@ public class ShopManager : MonoBehaviour
     }
     public void RemovePack1Details()
     {
+        DeactivateBuyButton();
         Pack1Details.blocksRaycasts = false;
         Pack1Details.interactable = false;
         StartCoroutine(FadeOut(Pack1Details));
     }
     public void ShowPack2Details()
     {
+        ActivateBuyButton("Pack2");
         Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.packType.ToString() + "\nChoose " + pack2.selectableCards.ToString() + " of " + pack2.packSize.ToString() + " cards" + "\n" + "$" + pack2.price.ToSafeString();
         Pack2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack2Details));
@@ -682,6 +805,7 @@ public class ShopManager : MonoBehaviour
     }
     public void RemovePack2Details()
     {
+        DeactivateBuyButton();
         Pack2Details.blocksRaycasts = false;
         Pack2Details.interactable = false;
         StartCoroutine(FadeOut(Pack2Details));
@@ -722,6 +846,7 @@ public class ShopManager : MonoBehaviour
         PackCard1 = pack.cardsInPack[0];
         PackCard2 = pack.cardsInPack[1];
         PackCard3 = pack.cardsInPack[2];
+
         packText.GetComponentInChildren<TMP_Text>().text = "" + pack.packType.ToString() + "\n\nChoose Up To " + pack.selectableCards.ToString();
 
 
@@ -729,10 +854,14 @@ public class ShopManager : MonoBehaviour
         Debug.Log("PackCard1 cardBuff:" + PackCard1.cardBuff);
         Debug.Log("PackCard1 textbook:" + PackCard1.textbook);
 
+        PackCard1Button = GameObject.Find("Pack Card 1").GetComponent<Button>();
+        PackCard2Button = GameObject.Find("Pack Card 2").GetComponent<Button>();  
+        PackCard3Button = GameObject.Find("Pack Card 3").GetComponent<Button>();
+
         //Set Images For Cards
-        SetPackImage(PackCard1, PackCardButton1);
-        SetPackImage(PackCard2, PackCardButton2);
-        SetPackImage(PackCard3, PackCardButton3);
+        SetPackImage(PackCard1, PackCard1Button);
+        SetPackImage(PackCard2, PackCard2Button);
+        SetPackImage(PackCard3, PackCard3Button);
 
 
         StartCoroutine(FadeIn(PackGroup));
@@ -742,8 +871,10 @@ public class ShopManager : MonoBehaviour
         {
             PackCard4 = pack.cardsInPack[3];
             PackCard5 = pack.cardsInPack[4];
-            SetPackImage(PackCard4, PackCardButton4);
-            SetPackImage(PackCard5, PackCardButton5);
+            PackCard4Button = GameObject.Find("Pack Card 4").GetComponent<Button>();
+            PackCard5Button = GameObject.Find("Pack Card 5").GetComponent<Button>();
+            SetPackImage(PackCard4, PackCard4Button);
+            SetPackImage(PackCard5, PackCard5Button);
             StartCoroutine(FadeIn(PackGroupPlus));
             PackGroupPlus.interactable = true;
             PackGroupPlus.blocksRaycasts = true;
@@ -854,7 +985,7 @@ public class ShopManager : MonoBehaviour
         //  If regular playing card, add to player's deck
         deck.AddCard(PackCard1);
 
-        PackCardButton1.interactable = false;
+        PackCard1Button.interactable = false;
         checkPackAmountSelected();
 
     }
@@ -910,7 +1041,7 @@ public class ShopManager : MonoBehaviour
         //  If regular playing card, add to player's deck
         deck.AddCard(PackCard2);
 
-        PackCardButton2.interactable = false;
+        PackCard2Button.interactable = false;
         checkPackAmountSelected();
     }
     public void PackCard3Selected()
@@ -965,7 +1096,7 @@ public class ShopManager : MonoBehaviour
         //  If regular playing card, add to player's deck
         deck.AddCard(PackCard3);
 
-        PackCardButton3.interactable = false;
+        PackCard3Button.interactable = false;
         checkPackAmountSelected();
     }
     public void PackCard4Selected()
@@ -1020,7 +1151,7 @@ public class ShopManager : MonoBehaviour
         //  If regular playing card, add to player's deck
         deck.AddCard(PackCard4);
 
-        PackCardButton4.interactable = false;
+        PackCard4Button.interactable = false;
         checkPackAmountSelected();
     }
     public void PackCard5Selected()
@@ -1075,7 +1206,7 @@ public class ShopManager : MonoBehaviour
         //  If regular playing card, add to player's deck
         deck.AddCard(PackCard5);
 
-        PackCardButton5.interactable = false;
+        PackCard5Button.interactable = false;
         checkPackAmountSelected();
     }
 
@@ -1099,11 +1230,11 @@ public class ShopManager : MonoBehaviour
 
         //Reset Cards
         //Set cards to null and removing blocking for PackGroup
-        PackCardButton1.interactable = true;
-        PackCardButton2.interactable = true;
-        PackCardButton3.interactable = true;
-        PackCardButton4.interactable = true;
-        PackCardButton5.interactable = true;
+        PackCard1Button.interactable = true;
+        PackCard2Button.interactable = true;
+        PackCard3Button.interactable = true;
+        PackCard4Button.interactable = true;
+        PackCard5Button.interactable = true;
 
         //Fade Out UI
         StartCoroutine(FadeOut(PackGroup));
@@ -1116,6 +1247,7 @@ public class ShopManager : MonoBehaviour
 
     }
 
+    //This returns the card from the pack based on the index provided.
     public PCard GetCardFromPack(int i)
     {
         switch (i)
@@ -1194,6 +1326,11 @@ public class ShopManager : MonoBehaviour
     //  Method to update shop's moneyCount text (for example after selling)
     public void UpdateMoneyDisplay()
     {
+        if (moneyText == null)
+        { 
+            Debug.LogError("ShopManager could not update UI! moneyText is null!");
+        }
+
         if (moneyText != null && playerInst != null)
         {
             Debug.Log("ShopManager received update call. New money to display: " + playerInst.moneyCount);

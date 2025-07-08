@@ -40,50 +40,54 @@ public class BlindSceneManager : MonoBehaviour
     private Tag tag2;
     private SpecialBlind special;
 
-    private Game ginst = Game.access();
-    private Player pinst = Player.access();
-    private FadeScript ainst = FadeScript.access();
-    private Round rinst = Round.access();
+    private Game gameInst = Game.access();
+    private Player playerInst = Player.access();
+    private FadeScript fadeInst = FadeScript.access();
+    private Round roundInst = Round.access();
+    
+
 
     // This function is called whenever the blind scene is brought up and initializes the variables for the scene
     public void NewBlind()
     {
-        Tag[] newTags = ginst.randomTag(2);
+        Tag[] newTags = gameInst.randomTag(2);
         tag1 = newTags[0];
         tag2 = newTags[1];
 
         //ginst.SetChipTotal(600);
 
-        if (ginst.currentSpecialBlind == null)
+        if (gameInst.currentSpecialBlind == null)
         {
-            ginst.currentSpecialBlind = ginst.randomSpecialBlind();
+            gameInst.currentSpecialBlind = gameInst.randomSpecialBlind();
         }
 
-        special = ginst.currentSpecialBlind;
+        special = gameInst.currentSpecialBlind;
         
         SetBlindScreenInfo();
         /*
+        special = gameInst.currentSpecialBlind;
+
         SpecialBlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + special.blindType.ToString());
 
         SpecialBlindName.GetComponentInChildren<TMP_Text>().text = special.nameText;
 
         SpecialBlindDesc.GetComponentInChildren<TMP_Text>().text = special.description;
 
-        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()];
+        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.anteValue];
 
-        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * 1.5;
+        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.anteValue] * 1.5;
 
-        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * special.chipMultiplier;
-        
-        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxHandCount;
+        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.anteValue] * special.chipMultiplier;
 
-        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxDiscards;
+        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.handCount;
 
-        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
+        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.discards;
 
-        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetAnte();
+        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
 
-        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetRound();
+        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + gameInst.anteValue;
+
+        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + gameInst.roundValueTest;
 
         setBlindCover();
         */
@@ -98,21 +102,21 @@ public class BlindSceneManager : MonoBehaviour
 
         SpecialBlindDesc.GetComponentInChildren<TMP_Text>().text = special.description;
 
-        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()];
+        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.GetAnte()];
 
-        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * 1.5;
+        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.GetAnte()] * 1.5;
 
-        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * special.chipMultiplier;
-        
-        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxHandCount;
+        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.GetAnte()] * special.chipMultiplier;
 
-        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxDiscards;
+        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.maxHandCount;
 
-        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
+        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.maxDiscards;
 
-        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetAnte();
+        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
 
-        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetRound();
+        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + gameInst.GetAnte();
+
+        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + gameInst.GetRound();
 
         setBlindCover();
     }
@@ -125,37 +129,38 @@ public class BlindSceneManager : MonoBehaviour
         BigBlindCover.interactable = true;
         SpecialBlindCover.blocksRaycasts = true;
         SpecialBlindCover.interactable = true;
-        Debug.Log("Round is currently: " + ginst.GetRound());
+        Debug.Log("Round is currently: " + gameInst.GetRound());
 
         //  Reset blind cover appearance
-        StartCoroutine(ainst.FadeIn(SmallBlindCover));
-        StartCoroutine(ainst.FadeIn(BigBlindCover));
-        StartCoroutine(ainst.FadeIn(SpecialBlindCover));
+        StartCoroutine(fadeInst.FadeIn(SmallBlindCover));
+        StartCoroutine(fadeInst.FadeIn(BigBlindCover));
+        StartCoroutine(fadeInst.FadeIn(SpecialBlindCover));
 
-        if (ginst.GetRound() == 1)
+        if (gameInst.roundValueTest == 1)
         {
             SmallBlindCover.blocksRaycasts = false;
             SmallBlindCover.interactable = false;
-            StartCoroutine(ainst.FadeOut(SmallBlindCover));
+            StartCoroutine(fadeInst.FadeOut(SmallBlindCover));
+  
         }
-        else if (ginst.GetRound() == 2)
+        else if (gameInst.roundValueTest == 2)
         {
             BigBlindCover.blocksRaycasts = false;
             BigBlindCover.interactable = false;
-            StartCoroutine(ainst.FadeOut(BigBlindCover));
+            StartCoroutine(fadeInst.FadeOut(BigBlindCover));
         }
         else
         {
             SpecialBlindCover.blocksRaycasts = false;
             SpecialBlindCover.interactable = false;
-            StartCoroutine(ainst.FadeOut(SpecialBlindCover));
+            StartCoroutine(fadeInst.FadeOut(SpecialBlindCover));
         }
     }
 
 
     public void useSmallBlindButton()
     {
-        ginst.SetRound(1);
+        gameInst.SetRound(1);
         setBlindCover();
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
@@ -164,7 +169,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void useBigBlindButton()
     {
-        ginst.SetRound(2);
+        gameInst.SetRound(2);
         setBlindCover();
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
@@ -172,7 +177,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void useSpecialBlindButton()
     {
-        ginst.SetRound(3);
+        gameInst.SetRound(3);
         setBlindCover();
         special.applySpecialBlinds();
         //Either this script or round script will then apply special blind
@@ -182,40 +187,40 @@ public class BlindSceneManager : MonoBehaviour
 
     public void UseSkipButton1()
     {
-        ginst.SetRound(2);
+        gameInst.SetRound(2);
 
         applyTag(tag1);
-        ++ginst.skipCount;
+        ++gameInst.skipCount;
 
         setBlindCover();
 
-        StartCoroutine(ainst.FadeIn(SmallBlindCover));
+        StartCoroutine(fadeInst.FadeIn(SmallBlindCover));
     }
 
     public void UseSkipButton2()
     {
-        ginst.SetRound(3);
+        gameInst.SetRound(3);
 
         applyTag(tag2);
-        ++ginst.skipCount;
+        ++gameInst.skipCount;
 
         setBlindCover();
 
-        StartCoroutine(ainst.FadeIn(BigBlindCover));
+        StartCoroutine(fadeInst.FadeIn(BigBlindCover));
     }
 
     private void applyTag(Tag tag)
     {
         tag.applyTag();
 
-        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$" + pinst.moneyCount;
+        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
     }
 
     public void showSkip1Details()
     {
         Tag1Details.GetComponentInChildren<TMP_Text>().text = tag1.tagName + "\n" + tag1.description;
         Tag1Details.blocksRaycasts = true;
-        StartCoroutine(ainst.FadeIn(Tag1Details));
+        StartCoroutine(fadeInst.FadeIn(Tag1Details));
         Tag1Details.interactable = true;
     }
 
@@ -223,7 +228,7 @@ public class BlindSceneManager : MonoBehaviour
     {
         Tag2Details.GetComponentInChildren<TMP_Text>().text = tag2.tagName + "\n" + tag2.description;
         Tag2Details.blocksRaycasts = true;
-        StartCoroutine(ainst.FadeIn(Tag2Details));
+        StartCoroutine(fadeInst.FadeIn(Tag2Details));
         Tag2Details.interactable = true;
 
     }
@@ -232,7 +237,7 @@ public class BlindSceneManager : MonoBehaviour
     {
         Tag1Details.blocksRaycasts = false;
         Tag1Details.interactable = false;
-        StartCoroutine(ainst.FadeOut(Tag1Details));
+        StartCoroutine(fadeInst.FadeOut(Tag1Details));
 
     }
 
@@ -240,7 +245,7 @@ public class BlindSceneManager : MonoBehaviour
     {
         Tag2Details.blocksRaycasts = false;
         Tag2Details.interactable = false;
-        StartCoroutine(ainst.FadeOut(Tag2Details));
+        StartCoroutine(fadeInst.FadeOut(Tag2Details));
 
     }
 
