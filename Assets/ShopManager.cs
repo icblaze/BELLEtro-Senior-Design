@@ -62,6 +62,7 @@ public class ShopManager : MonoBehaviour
     public CanvasGroup PackGroupPlus;//Canvas group for Cards 4 and 5
     int cardsSelected = 0;//Cards currently selected in pack
     int packSelected = 0;//Used to tell which pack was selected
+    SFXManager sfxManager;
 
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
@@ -95,6 +96,7 @@ public class ShopManager : MonoBehaviour
 
     public void Start()
     {
+        sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
         NewShop();
         UpdateMoneyDisplay();
         StartCoroutine(ActivateShopMentors());
@@ -253,10 +255,11 @@ public class ShopManager : MonoBehaviour
     private void BuyMentor(Mentor mentor, Button mentorButton)
     {
         //If Joker threshold is hit, do not purchase.
-        if (mentor.edition != CardEdition.Negative && (playerInst.mentorDeck.Count >= playerInst.maxMentors ||
-        playerInst.moneyCount < mentor.price))
+        if ((mentor.edition != CardEdition.Negative && playerInst.mentorDeck.Count >= playerInst.maxMentors) ||
+        playerInst.moneyCount < mentor.price)
         {
             Debug.Log("Not Enough Space In Mentors or Money Insufficient");
+            sfxManager.NoSFX();
             return;
         }
         //Add Mentor to user's collection
@@ -297,6 +300,7 @@ public class ShopManager : MonoBehaviour
         else
         {
             //Should make the UI shake
+            sfxManager.NoSFX();
             Debug.Log("Not Enough Space In Consumables or Money Insufficient");
             return;
         }
@@ -307,6 +311,7 @@ public class ShopManager : MonoBehaviour
         || playerInst.moneyCount < cardBuff.price)
         {
             //Should make the UI shake
+            sfxManager.NoSFX();
             Debug.Log("Not Enough Space In Consumables or Money Insufficient");
             return;
         }
@@ -369,6 +374,7 @@ public class ShopManager : MonoBehaviour
     {
         if (playerInst.moneyCount < voucher.initialPrice)
         {
+            sfxManager.NoSFX();
             Debug.Log("Insufficient Funds");
             return;
         }
@@ -398,11 +404,12 @@ public class ShopManager : MonoBehaviour
     //Function call takes in a pack card and opens it, calling the necessary functions.
     private void BuyPack(Pack pack, Button packButton)
     {
-        // if (playerInst.moneyCount < pack.price)
-        // {
-        //     Debug.Log("Insufficient Funds");
-        //     return;
-        // }
+        if (playerInst.moneyCount < pack.price)
+        {
+            sfxManager.NoSFX();
+            Debug.Log("Insufficient Funds");
+            return;
+        }
 
         //Make pack disappear
         packButton.interactable |= false;
@@ -454,6 +461,7 @@ public class ShopManager : MonoBehaviour
         if (playerInst.moneyCount < reroll)
         {
             //Possibly make screen shake
+            sfxManager.NoSFX();
             Debug.Log("Money Insufficient");
             return;
         }

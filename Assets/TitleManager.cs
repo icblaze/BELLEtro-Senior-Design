@@ -54,6 +54,19 @@ public class TitleManager : MonoBehaviour
         //Set the round title and its components
         scoreRequirement.GetComponent<TMP_Text>().text = "" /* + round.scoreRequirment*/;
         rewardAmount.GetComponent<TMP_Text>().text = "$" /*+ round.reward*/;
-        roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Round/" /*+ round.name*/);
+        int round = Game.access().roundValueTest;
+        if (round == 1)
+        {
+            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindToken/SmallBlind");
+        }
+        else if (round == 2)
+        {
+            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindToken/BigBlind");
+        }
+        else
+        {
+            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindToken/" + Game.access().currentSpecialBlind);
+        }
+            
     }
 }
