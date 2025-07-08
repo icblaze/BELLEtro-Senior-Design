@@ -16,13 +16,13 @@ public class Graduate : Mentor
         description = "+20 Chips and +4 Mult when Dipthongs are scored";
     }
 
-    //  TODO +20 Chips and +4 Mult when Dipthongs are scored
     public override void UseMentor(PCard pcard)
     {
         //  Check if PCard is Dipthong
         if(pcard.isDiphthong)
         {
-            //  Add +20 to Chips, add +4 to Mult
+            ScoringManager.access().IncrementCurrentChips(20);
+            ScoringManager.access().IncrementCurrentMult(4);
         }
     }
 }

@@ -283,7 +283,7 @@ public class ScoringManager : MonoBehaviour
         roundScoreText.text = player.chipCount.ToString();
     }
 
-    //Takes in hand name and gets chips and mult of hand
+    //Takes in hand name and gets chips and mult of hand (also increment playCount
     private void SetHandScore(string name)
     {
         switch (name)
@@ -291,50 +291,62 @@ public class ScoringManager : MonoBehaviour
             case "HighCard":
                 currentChips = player.handTable[TextbookName.HighCard].GetCurrChips();
                 currentMult = player.handTable[TextbookName.HighCard].GetCurrMult();
+                player.handTable[TextbookName.HighCard].timesPlayed++;
                 break;
             case "Pair":
                 currentChips = player.handTable[TextbookName.Pair].GetCurrChips();
                 currentMult = player.handTable[TextbookName.Pair].GetCurrMult();
+                player.handTable[TextbookName.Pair].timesPlayed++;
                 break;
             case "TwoPair":
                 currentChips = player.handTable[TextbookName.TwoPair].GetCurrChips();
                 currentMult = player.handTable[TextbookName.TwoPair].GetCurrMult();
+                player.handTable[TextbookName.TwoPair].timesPlayed++;
                 break;
             case "ThreeKind":
                 currentChips = player.handTable[TextbookName.ThreeKind].GetCurrChips();
                 currentMult = player.handTable[TextbookName.ThreeKind].GetCurrMult();
+                player.handTable[TextbookName.ThreeKind].timesPlayed++;
                 break;
             case "Straight":
                 currentChips = player.handTable[TextbookName.Straight].GetCurrChips();
                 currentMult = player.handTable[TextbookName.Straight].GetCurrMult();
+                player.handTable[TextbookName.Straight].timesPlayed++;
                 break;
             case "Flush":
                 currentChips = player.handTable[TextbookName.Flush].GetCurrChips();
                 currentMult = player.handTable[TextbookName.Flush].GetCurrMult();
+                player.handTable[TextbookName.Flush].timesPlayed++;
                 break;
             case "FullHouse":
                 currentChips = player.handTable[TextbookName.FullHouse].GetCurrChips();
                 currentMult = player.handTable[TextbookName.FullHouse].GetCurrMult();
+                player.handTable[TextbookName.FullHouse].timesPlayed++;
                 break;
             case "FourKind":
                 currentChips = player.handTable[TextbookName.FourKind].GetCurrChips();
                 currentMult = player.handTable[TextbookName.FourKind].GetCurrMult();
+                player.handTable[TextbookName.FourKind].timesPlayed++;
                 break;
             case "StraightFlush":
                 currentChips = player.handTable[TextbookName.StraightFlush].GetCurrChips();
                 currentMult = player.handTable[TextbookName.StraightFlush].GetCurrMult();
+                player.handTable[TextbookName.StraightFlush].timesPlayed++;
                 break;
             case "FiveKind":
                 currentChips = player.handTable[TextbookName.FiveKind].GetCurrChips();
                 currentMult = player.handTable[TextbookName.FiveKind].GetCurrMult();
+                player.handTable[TextbookName.FiveKind].timesPlayed++;
                 break;
             case "FlushHouse":
                 currentChips = player.handTable[TextbookName.FlushHouse].GetCurrChips();
                 currentMult = player.handTable[TextbookName.FlushHouse].GetCurrMult();
+                player.handTable[TextbookName.FlushHouse].timesPlayed++;
                 break;
             case "FlushFive":
                 currentChips = player.handTable[TextbookName.FlushFive].GetCurrChips();
                 currentMult = player.handTable[TextbookName.FlushFive].GetCurrMult();
+                player.handTable[TextbookName.FlushFive].timesPlayed++;
                 break;
             default:
                 return;
