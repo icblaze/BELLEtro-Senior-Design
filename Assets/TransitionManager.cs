@@ -59,6 +59,10 @@ public class TransitionManager : MonoBehaviour
         //  Run Blind Mentor Buffer
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Blind);
 
+        //  Reset MaxHandCount/MaxDiscards
+        GameObject.FindFirstObjectByType<PlayHand>().ResetHandCount();
+        GameObject.FindFirstObjectByType<DeleteCard>().ResetDiscards();
+
         //  Hand Draw After Blind Selected
         StartCoroutine(horizontalCardHolder.OnBlindStart());
     }

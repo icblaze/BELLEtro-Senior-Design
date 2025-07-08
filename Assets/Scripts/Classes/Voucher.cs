@@ -29,6 +29,8 @@ public class Voucher
         {
             case VoucherNames.ExtraCredit:
                 // Gain +1 Discard Per Round
+                Player.access().maxDiscards++;
+                GameObject.FindFirstObjectByType<DeleteCard>().discardsLeft.text = Player.access().maxDiscards.ToString();
                 break;
 
             case VoucherNames.StudyGroup:
@@ -48,6 +50,8 @@ public class Voucher
 
             case VoucherNames.FluentStart:
                 // Gain +1 Hand Per Round
+                Player.access().maxHandCount++;
+                GameObject.FindFirstObjectByType<PlayHand>().handsLeft.text = Player.access().maxHandCount.ToString();
                 break;
 
             case VoucherNames.LectureBoost:

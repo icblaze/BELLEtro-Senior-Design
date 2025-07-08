@@ -9,13 +9,14 @@ public class DeleteCard : MonoBehaviour
 {
     [SerializeField] private Button deleteButton;           //Delete button
     [SerializeField] private Transform playingCardGroup;    //Transform 
-    [HideInInspector] private TextMeshProUGUI discardsLeft;
+    [HideInInspector] public TextMeshProUGUI discardsLeft;
     [HideInInspector] private static int discardCount;
     private DeckManager deckManager;                        //Instance of the Deck Manager
     [SerializeField] private List<GameObject> selectedCards = new List<GameObject>();        //List of the current Gameobjects that the user has selected
     private List<PCard> selectedPCards = new List<PCard>();                 //List of the selected cards that the user has selected
     [SerializeField] private int pcardCount;
     private CardType cardType;
+
     void Start()
     {    
         deckManager = FindFirstObjectByType<DeckManager>();
@@ -33,7 +34,7 @@ public class DeleteCard : MonoBehaviour
 
         if (deleteButton != null)
         {
-            discardCount = Player.access().discards;
+            discardCount = Player.access().maxDiscards;
             discardsLeft = GameObject.Find("Discards Number Text").GetComponent<TextMeshProUGUI>();
             deleteButton.onClick.AddListener(RemoveSelectedCards);
         }
@@ -41,6 +42,14 @@ public class DeleteCard : MonoBehaviour
         {
             Debug.LogError("DeleteCard: deleteButton not assigned in Inspector!");
         }
+    }
+
+    //  Sets discards to be the maxDiscards after blind select or end of round
+    public void ResetDiscards()
+    {
+        Player.access().discards = Player.access().maxDiscards;
+        discardCount = Player.access().discards;
+        discardsLeft.text = discardCount.ToString();
     }
 
     //Adds the card to the selectedCards list

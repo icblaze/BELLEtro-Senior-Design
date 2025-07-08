@@ -34,6 +34,8 @@ public class Player
     public List<Consumable> consumables;                         //List of consumables that the player currently has. Consumables are also called Textbooks.
     public int discards;                                         //The amount of discards the player currently has.
     public int handCount;                                        //The amoung of hands the player can play.
+    public int maxDiscards;                                      //The max amount of discards of the player has, typically changed before round starts
+    public int maxHandCount;                                     //The max hands the player can play, typically changed before round starts
     public int moneyCount;                                       //Money count for player.
     public BigInteger chipCount;                                 //Current chip count for the player.
     public int maxConsumables;
@@ -76,6 +78,8 @@ public class Player
         vouchers = new List<Voucher>();
         discards = 4;
         handCount = 4;
+        maxDiscards = 4;
+        maxHandCount = 4;
         moneyCount = 4;
         chipCount = 0;
         discount = 1.0f;    //  100% price initially
@@ -94,6 +98,8 @@ public class Player
         vouchers = new List<Voucher>();
         discards = 4;
         handCount = 4;
+        maxDiscards = 4;
+        maxHandCount = 4;
         moneyCount = 4;
         chipCount = 0;
         discount = 1.0f;    // 100% price initially

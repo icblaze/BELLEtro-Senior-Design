@@ -148,8 +148,11 @@ public class EndOfRoundManager : MonoBehaviour
         Debug.Log("Total CashOut: $" + totalCashOut);
         //Add cash out to player's cash and change text
         player.moneyCount += totalCashOut;
-        player.handCount = 4;
-        player.discards = 4;
+
+        //  Reset MaxHandCount/MaxDiscards
+        GameObject.FindFirstObjectByType<PlayHand>().ResetHandCount();
+        GameObject.FindFirstObjectByType<DeleteCard>().ResetDiscards();
+
         player.chipCount = 0;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + player.moneyCount.ToString();
 

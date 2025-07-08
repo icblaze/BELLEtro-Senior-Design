@@ -55,6 +55,14 @@ public class PlayHand : MonoBehaviour
             Debug.LogError("PlayHand: DeckManager script not found in scene!");
     }
 
+    //  Sets discards to be the maxDiscards after blind select or end of round
+    public void ResetHandCount()
+    {
+        Player.access().handCount = Player.access().maxHandCount;
+        currHandCount = Player.access().handCount;      //Decrease Hand count of the player
+        handsLeft.text = currHandCount.ToString("0");
+    }
+
     //This function initiates moving the selected cards to the play area 
     //after the player clicks on the play hand button
     public void PlaySelectedCards()
