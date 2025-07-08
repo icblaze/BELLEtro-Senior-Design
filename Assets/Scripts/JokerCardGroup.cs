@@ -43,7 +43,7 @@ public class JokerCardHolder : MonoBehaviour
     {
         if (testMode)
         {
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Holographic));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Turtle, CardEdition.Holographic));
             player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Vagabond, CardEdition.Polychrome));
         }
 

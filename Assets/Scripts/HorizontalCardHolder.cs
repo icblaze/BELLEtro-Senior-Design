@@ -48,7 +48,7 @@ public class HorizontalCardHolder : MonoBehaviour
         yield return null;
 
         //  Initial draw from deck to hand
-        DrawHand(handSize);
+        DrawHand(Player.access().handSize);
 
         //  Draws the cards to the slots visually and assign hand
         RefreshVisual();

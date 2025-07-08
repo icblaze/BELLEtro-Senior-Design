@@ -22,7 +22,13 @@ public class Turtle : Mentor
         description = "Hand Size increase by " + handSizeBonus + ", reduce by 1 end of round.";
     }
 
-    //  TODO modify this probably to account for CheatSheet/Brainstorm that copy effect
+    //  Update handSize bonus in description
+    public override string GetDescription()
+    {
+        description = "Hand Size increase by " + handSizeBonus + ", reduce by 1 end of round.";
+        return description;
+    }
+
     //  Hand Size increase by 5 and reduce size by 1 each round.
     public override void UseMentor()
     {
