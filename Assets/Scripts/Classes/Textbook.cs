@@ -6,6 +6,7 @@
 
 using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 // Textbooks will enhance the base chips and mult for a kind of hand
 public class Textbook : Consumable
@@ -42,7 +43,12 @@ public class Textbook : Consumable
     //  Increases appropiate hand based on textbook name
     public void applyTextbook()
     {
+        bool hasAnnotated = player.vouchers.Any(voucher => voucher.name == VoucherNames.AnnotatedEdition);
         player.handTable[name].IncreaseLevel();
+        if(hasAnnotated)
+        {
+            player.handTable[name].IncreaseLevel(); //  Level up again
+        }
 
         //  Set previous consumable to used Textbook
         Game.access().previousConsumable = new Textbook(name);
@@ -51,11 +57,20 @@ public class Textbook : Consumable
     //  Return description of textbook including it's current level
     public string GetDescription()
     {
+        bool hasAnnotated = player.vouchers.Any(voucher => voucher.name == VoucherNames.AnnotatedEdition);
+
         string handName = name.ToString();
         int level = player.handTable[name].level;
         int incrementMult = player.handTable[name].incrementMult;
         int incrementChips = player.handTable[name].incrementChips;
-        return "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + " Mult and" + "+" + incrementChips + " Chips";
-        //return handName;
+
+        if(!hasAnnotated)
+        {
+            return "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + " Mult and" + "+" + incrementChips + " Chips";
+        }
+        else
+        {
+            return "(lvl. " + level + ") Level up " + handName + " +" + (incrementMult * 2) + " Mult and" + "+" + (incrementChips * 2) + " Chips (Annotated)";
+        }
     }
 }

@@ -7,6 +7,7 @@
 // Van: Designed functionality
 
 using System.Collections;
+using System;
 using System.Reflection.Emit;
 using UnityEngine;
 
@@ -15,11 +16,42 @@ public class Voucher
 {
     public VoucherNames name;
     public int initialPrice = 10; // Vouchers have a base price of 10
+    public string description;
 
     // Constructor for Voucher
     public Voucher(VoucherNames voucherName)
     {
         this.name = voucherName;
+        description = SetVoucherDescription();
+    }
+
+    private string SetVoucherDescription()
+    {
+        switch (name)
+        {
+            case VoucherNames.ExtraCredit:
+                return "Gain +1 Discard Per Round";
+            case VoucherNames.StudyGroup:
+                return "+1 Hand Size";
+            case VoucherNames.AnnotatedEdition:
+                return "Textbooks will level hand by two levels";
+            case VoucherNames.OfficeHours:
+                return "New Shop Items are 25% off";
+            case VoucherNames.FluentStart:
+                return "Gain +1 Hand";
+            case VoucherNames.LectureBoost:
+                return "Level up every hand once";
+            case VoucherNames.TenureTrack:
+                return "Raises interest cap to $10";
+            case VoucherNames.BrainstormBonus:
+                return "+1 Consumable Slot";
+        }
+        return "Nothing?";
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 
     // Apply the effect of the voucher to the player
@@ -55,7 +87,11 @@ public class Voucher
                 break;
 
             case VoucherNames.LectureBoost:
-                // Level up every hand 
+                // Level up every hand
+                foreach (TextbookName name in Enum.GetValues(typeof(TextbookName)))
+                {
+                    Player.access().handTable[name].IncreaseLevel();
+                }
                 break;
 
             case VoucherNames.TenureTrack:
