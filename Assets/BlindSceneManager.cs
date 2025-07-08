@@ -60,7 +60,9 @@ public class BlindSceneManager : MonoBehaviour
         }
 
         special = ginst.currentSpecialBlind;
-
+        
+        SetBlindScreenInfo();
+        /*
         SpecialBlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + special.blindType.ToString());
 
         SpecialBlindName.GetComponentInChildren<TMP_Text>().text = special.nameText;
@@ -84,8 +86,35 @@ public class BlindSceneManager : MonoBehaviour
         RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetRound();
 
         setBlindCover();
-
+        */
         // Insert code for changing the tag sprites to ones that match the generated tags & code for special blind
+    }
+
+    public void SetBlindScreenInfo()
+    {
+        SpecialBlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + special.blindType.ToString());
+
+        SpecialBlindName.GetComponentInChildren<TMP_Text>().text = special.nameText;
+
+        SpecialBlindDesc.GetComponentInChildren<TMP_Text>().text = special.description;
+
+        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()];
+
+        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * 1.5;
+
+        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * special.chipMultiplier;
+        
+        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxHandCount;
+
+        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxDiscards;
+
+        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
+
+        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetAnte();
+
+        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetRound();
+
+        setBlindCover();
     }
 
     public void setBlindCover()
