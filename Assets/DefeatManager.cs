@@ -37,7 +37,7 @@ public class DefeatManager : MonoBehaviour
         }
         else
         {
-            defeated = "Defeated By: " + inst.currentSpecialBlind.ToString() + "<sprite name=\"" + inst.currentSpecialBlind.ToString() + "\">\n";
+            defeated = "Defeated By: " + inst.currentSpecialBlind.ToString() + " <sprite name=\"" + inst.currentSpecialBlind.ToString() + "\">\n";
         }
         defeatText = GameObject.Find("Defeat Text");
         defeatText.GetComponent<TMP_Text>().text = score + rounds + defeated;

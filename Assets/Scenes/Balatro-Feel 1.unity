@@ -3138,7 +3138,7 @@ MonoBehaviour:
   roundRewardText: {fileID: 1854398908}
   moneyText: {fileID: 1973148756}
   scoreAtLeastAmount: {fileID: 1890562229}
-  BlindToken: {fileID: 0}
+  BlindToken: {fileID: 1375747869}
   mentorRewardNumber: {fileID: 1125370631}
   mentorRewardText: {fileID: 1561564879}
 --- !u!21 &97083179
@@ -24145,7 +24145,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31097,7 +31097,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -40731,7 +40731,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1937679304}
   - {fileID: 310782540}
   - {fileID: 1627054884}
   - {fileID: 69100126}
@@ -54000,60 +53999,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936813810}
   m_CullTransparentMesh: 1
---- !u!1 &1937679302
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1937679304}
-  - component: {fileID: 1937679303}
-  m_Layer: 0
-  m_Name: EndOfRoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1937679303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937679302}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c74bf0ea942545c8a44b95ea385b2ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  remainingHandsNumber: {fileID: 957132644}
-  cashOutButton: {fileID: 1649026613}
-  interestNumber: {fileID: 861401821}
-  interestText: {fileID: 860758577}
-  roundRewardText: {fileID: 1854398908}
-  moneyText: {fileID: 1973148756}
-  scoreAtLeastAmount: {fileID: 0}
-  BlindToken: {fileID: 0}
-  mentorRewardNumber: {fileID: 1125370631}
-  mentorRewardText: {fileID: 1561564879}
---- !u!4 &1937679304
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937679302}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1483873743}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1940470055
 GameObject:
   m_ObjectHideFlags: 0
@@ -57577,7 +57522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

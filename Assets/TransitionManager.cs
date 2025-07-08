@@ -1,7 +1,7 @@
 //Script is used a central place to transition between the different 
 //screens. This allows other members from being able to transition
 //to different scenes without worrying about its functionality.
-//Current Devs: 
+//Current Devs: //
 //Fredrick Bouloute (bouloutef04)
 
 using UnityEngine;
