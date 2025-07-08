@@ -47,8 +47,6 @@ public class HorizontalCardHolder : MonoBehaviour
         yield return null;
         yield return null;
 
-        //  Run the Blind Buffer here
-
         //  Initial draw from deck to hand
         DrawHand(handSize);
 

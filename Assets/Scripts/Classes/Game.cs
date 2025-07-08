@@ -295,7 +295,7 @@ public class Game
 
         while (count < pack.packSize)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length/2);    // Select a random Mentor name (1-25)
             int mentorEditionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);
 
             PCard newMentorCard = new PCard();
@@ -328,7 +328,7 @@ public class Game
 
         while (count < numMentors)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);                   // Select a random Mentor name 
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length/2);                   // Select a random Mentor name (1-25)
             int editionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);                     // Select a random edition
 
             Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)editionIndex);     // Create a Mentor with the MentorFactory

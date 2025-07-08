@@ -124,7 +124,7 @@ public class ShopManager : MonoBehaviour
         Voucher[] vouchers = new Voucher[1];
         vouchers = inst.randomVoucher(1);
         voucher = vouchers[0];
-        voucherButton.image.sprite = Resources.Load<Sprite>($"Voucher/" + voucher.name.ToString());
+        voucherButton.image.sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
         Debug.Log("Voucher Name: " + voucher.name.ToString());
 
         //Generate randomn Packs

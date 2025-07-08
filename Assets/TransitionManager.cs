@@ -8,19 +8,6 @@ using UnityEngine;
 
 public class TransitionManager : MonoBehaviour
 {
-    private static TransitionManager instance;  //TransitionManager instance varaiable
-
-    //Singleton for the TransitionManager
-    public static TransitionManager access()
-    {
-        if (instance == null)
-        {
-            instance = new TransitionManager();
-        }
-
-        return instance;
-    }
-
     public CanvasGroup roundSelectScreen;
     public CanvasGroup roundScreen;
     public CanvasGroup endOfRoundScreen;
@@ -31,6 +18,7 @@ public class TransitionManager : MonoBehaviour
     private FadeScript fadeScript = FadeScript.access();
     private AudioManager audioManager;
     private ShopManager shopManager;
+    private HorizontalCardHolder horizontalCardHolder;
     private Game inst = Game.access();
 
     public void TransitionToRoundSelect()
@@ -51,6 +39,11 @@ public class TransitionManager : MonoBehaviour
     }
     public void TransitionToRoundScreen()
     {
+        if (horizontalCardHolder == null)
+        {
+            horizontalCardHolder = FindFirstObjectByType<HorizontalCardHolder>();
+        }
+
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         StartCoroutine(fadeScript.FadeOut(roundSelectScreen));
         StartCoroutine(fadeScript.FadeIn(roundScreen));
@@ -58,6 +51,12 @@ public class TransitionManager : MonoBehaviour
         {
             audioManager.ChangeToBossMusic();
         }
+
+        //  Run Blind Mentor Buffer
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.Blind);
+
+        //  Hand Draw After Blind Selected
+        StartCoroutine(horizontalCardHolder.OnBlindStart());
     }
     public void TransitionToEndOfRoundScreen()
     {
