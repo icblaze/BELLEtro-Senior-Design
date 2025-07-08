@@ -167,6 +167,7 @@ public class EndOfRoundManager : MonoBehaviour
         totalCashOut = 0;
         roundReward = 0;
         interest = 0;
+        mentorReward = 0;
 
         if (Game.access().GetRound() == 3)
         {
