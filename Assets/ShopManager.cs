@@ -380,7 +380,7 @@ public class ShopManager : MonoBehaviour
         }
         Debug.Log("Voucher Purchased");
         // //Add voucher effect to user's run
-        voucher.applyEffect(playerInst);
+        voucher.applyEffect();
 
         //Remove voucher from screen
         voucherButton.interactable = false;

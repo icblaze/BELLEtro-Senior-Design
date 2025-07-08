@@ -366,7 +366,20 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         if (!instantiateVisual)
             return;
 
-        visualHandler = FindFirstObjectByType<VisualCardsHandler>();
+        //  Instantiate at correct corresponding visual handler depending on type
+        if(cardType == CardType.Card)
+        {
+            visualHandler = GameObject.FindWithTag("HandVisual").GetComponent<VisualCardsHandler>();
+        }
+        else if(cardType == CardType.Consumable)
+        {
+            visualHandler = GameObject.FindWithTag("ConsumableVisual").GetComponent<VisualCardsHandler>();
+        }
+        else if(cardType == CardType.Mentor)
+        {
+            visualHandler = GameObject.FindWithTag("MentorVisual").GetComponent<VisualCardsHandler>();
+        }
+
         cardVisual = Instantiate(cardVisualPrefab, visualHandler ? visualHandler.transform : canvas.transform).GetComponent<PCardVisual>();
         cardVisual.Initialize(this);
     }

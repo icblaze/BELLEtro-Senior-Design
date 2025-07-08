@@ -10,6 +10,9 @@ TagManager:
   - PCard
   - ShopManager
   - TransitionManager
+  - MentorVisual
+  - ConsumableVisual
+  - HandVisual
   layers:
   - Default
   - TransparentFX
