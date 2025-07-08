@@ -152,6 +152,12 @@ public class EndOfRoundManager : MonoBehaviour
         totalCashOut = 0;
         roundReward = 0;
         interest = 0;
+        
+        if (Game.access().roundValueTest == 3)
+        {
+            Game.access().anteValue += 1;
+            Game.access().roundValueTest = 1;
+        }
 
         //Transition to shopScreen
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);

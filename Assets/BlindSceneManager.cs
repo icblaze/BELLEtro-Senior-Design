@@ -121,17 +121,27 @@ public class BlindSceneManager : MonoBehaviour
 
     public void useSmallBlindButton()
     {
-        
+        ginst.roundValueTest = 1;
+        setBlindCover();
+        TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+        transitionManager.TransitionToRoundScreen();
     }
 
     public void useBigBlindButton()
     {
-
+        ginst.roundValueTest = 2;
+        setBlindCover();
+        TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+        transitionManager.TransitionToRoundScreen();
     }
 
     public void useSpecialBlindButton()
     {
-
+        ginst.roundValueTest = 3;
+        setBlindCover();
+        //Either this script or round script will then apply special blind
+        TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+        transitionManager.TransitionToRoundScreen();
     }
 
     public void UseSkipButton1()
@@ -197,14 +207,8 @@ public class BlindSceneManager : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        NewBlind();   
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // void Start()
+    // {
+    //     NewBlind();   
+    // }
 }

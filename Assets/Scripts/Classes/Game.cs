@@ -38,8 +38,8 @@ public class Game
     }
 
     public GameObject cardPrefab;
-    public static int ante;                                                        //Ante variable holds the current ante that the player is on
-    public static int roundValue;                                                  //RoundValue is the Round within the current Ante
+    public static int ante = 1;                                                   //Ante variable holds the current ante that the player is on
+    public static int roundValue = 1;                                              //RoundValue is the Round within the current Ante
     public BigInteger currentChipAmount;                                           //currentChipAmount contains the number of chips the player currently has
     private int ChipTotal;                                                         //ChipTotal is the number of chips needed to win a round
     public Voucher[] voucherHolder;                                                //VoucherHolder contains the current Ante's Vouchers
@@ -53,12 +53,12 @@ public class Game
 
     public int anteValue
     {
-        get; set;   
+        get; set;
     }
 
     public int roundValueTest
     {
-        get; set;   
+        get; set;
     }
 
     //This function is used to create a seed, so that we can get a random card from the deck.
@@ -295,7 +295,7 @@ public class Game
 
         while (count < pack.packSize)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length/2);    // Select a random Mentor name (1-25)
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length / 2);    // Select a random Mentor name (1-25)
             int mentorEditionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);
 
             PCard newMentorCard = new PCard();
@@ -328,7 +328,7 @@ public class Game
 
         while (count < numMentors)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length/2);                   // Select a random Mentor name (1-25)
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length / 2);                   // Select a random Mentor name (1-25)
             int editionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);                     // Select a random edition
 
             Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)editionIndex);     // Create a Mentor with the MentorFactory
@@ -448,13 +448,13 @@ public class Game
         return blind;
     }
 
-    public Tag[] randomTag (int tagCount)
+    public Tag[] randomTag(int tagCount)
     {
         Tag[] tagList = new Tag[tagCount];
         bool alreadyExists;
 
         Tag tag = null;
-        for (int i=0; i < tagCount; ++i)
+        for (int i = 0; i < tagCount; ++i)
         {
             index = randomizer(0, System.Enum.GetValues(typeof(TagNames)).Length);
             tag = Tag.TagFactory(TagNames.FiveDollar);
@@ -473,6 +473,14 @@ public class Game
     {
         ChipTotal = chipTotal;
         return ChipTotal;
+    }
+
+    public void Start()
+    {
+        anteValue = 1;
+        roundValueTest = 1;
+        BlindSceneManager blindSceneManager = GameObject.FindFirstObjectByType<BlindSceneManager>().GetComponent<BlindSceneManager>();
+        blindSceneManager.NewBlind();
     }
 
 
