@@ -37,7 +37,7 @@ public class HorizontalCardHolder : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(OnBlindStart());
+        //StartCoroutine(OnBlindStart());
     }
 
     public IEnumerator OnBlindStart()
