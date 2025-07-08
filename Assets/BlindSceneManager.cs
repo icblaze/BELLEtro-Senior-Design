@@ -98,12 +98,16 @@ public class BlindSceneManager : MonoBehaviour
         SpecialBlindCover.interactable = true;
         Debug.Log("Round is currently: " + ginst.GetRound());
 
+        //  Reset blind cover appearance
+        StartCoroutine(ainst.FadeIn(SmallBlindCover));
+        StartCoroutine(ainst.FadeIn(BigBlindCover));
+        StartCoroutine(ainst.FadeIn(SpecialBlindCover));
+
         if (ginst.GetRound() == 1)
         {
             SmallBlindCover.blocksRaycasts = false;
             SmallBlindCover.interactable = false;
             StartCoroutine(ainst.FadeOut(SmallBlindCover));
-
         }
         else if (ginst.GetRound() == 2)
         {
