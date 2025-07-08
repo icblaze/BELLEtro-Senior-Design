@@ -33,6 +33,7 @@ public class Voucher
 
             case VoucherNames.StudyGroup:
                 // +1 Hand Size
+                Player.access().handSize++;
                 break;
 
             case VoucherNames.AnnotatedEdition:
@@ -42,6 +43,7 @@ public class Voucher
 
             case VoucherNames.OfficeHours:
                 // New Shop Items are 25% off
+                Player.access().discount = 0.75f;
                 break;
 
             case VoucherNames.FluentStart:
@@ -54,10 +56,12 @@ public class Voucher
 
             case VoucherNames.TenureTrack:
                 // Raise interest cap to $10
+                Player.access().maxInterest = 10;
                 break;
 
             case VoucherNames.BrainstormBonus:
-                // +1 Consumable Slot 
+                // +1 Consumable Slot
+                Player.access().maxConsumables++;
                 break;
 
             default:

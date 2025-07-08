@@ -18,7 +18,7 @@ public class ShopManager : MonoBehaviour
 {
     //All UI Components Below
     private Button nextRoundButton;
-    private Button rerollButton;
+    public Button rerollButton;
     public GameObject moneyText;
     //First Purchasable Card
     private Mentor mentor1;
@@ -113,6 +113,7 @@ public class ShopManager : MonoBehaviour
         Voucher[] vouchers = new Voucher[1];
         vouchers = inst.randomVoucher(1);
         voucher = vouchers[0];
+        voucher.initialPrice = Mathf.CeilToInt(voucher.initialPrice * playerInst.discount);
         voucherButton.image.sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
         Debug.Log("Voucher Name: " + voucher.name.ToString());
 
@@ -120,8 +121,10 @@ public class ShopManager : MonoBehaviour
         Pack[] packs = new Pack[2];
         packs = inst.randomPacks(1);
         pack1 = packs[0];
+        pack1.price = Mathf.CeilToInt(pack1.price * playerInst.discount);
         packs = inst.randomPacks(1);
         pack2 = packs[0];
+        pack2.price = Mathf.CeilToInt(pack2.price * playerInst.discount);
         Debug.Log("Pack 1 Type: " + pack1.packType);
         Debug.Log("Pack 2 Type: " + pack2.packType);
         
@@ -156,6 +159,7 @@ public class ShopManager : MonoBehaviour
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
                     textbook1 = Textbooks[0];
+                    textbook1.price = Mathf.CeilToInt(textbook1.price * playerInst.discount);
                     //cardButton1.image.sprite = Resources.Load<Sprite>(textbook1.name.ToString());
                     cardButton1.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook1.name.ToString());
                     Debug.Log("Textbook 1 Name: " + textbook1.name.ToString());
@@ -163,6 +167,7 @@ public class ShopManager : MonoBehaviour
                 else
                 {
                     textbook2 = Textbooks[0];
+                    textbook2.price = Mathf.CeilToInt(textbook2.price * playerInst.discount);
                     Debug.Log("Textbook 2 Name: " + textbook2.name.ToString());
                     cardButton2.image.sprite = Resources.Load<Sprite>($"Textbook/textbook_" + textbook2.name.ToString());
                 }
@@ -176,12 +181,14 @@ public class ShopManager : MonoBehaviour
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
                     cardBuff1 = cardBuffs[0];
+                    cardBuff1.price = Mathf.CeilToInt(cardBuff1.price * playerInst.discount);
                     cardButton1.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff1.name.ToString());
                     Debug.Log("CardBuff 1 Name: " + cardBuff1.name.ToString());
                 }
                 else
                 {
                     cardBuff2 = cardBuffs[0];
+                    cardBuff2.price = Mathf.CeilToInt(cardBuff2.price * playerInst.discount);
                     Debug.Log("CardBuff 2 Name: " + cardBuff2.name.ToString());
                     cardButton2.image.sprite = Resources.Load<Sprite>($"CardBuff/food_" + cardBuff2.name.ToString());
                 }
@@ -213,7 +220,8 @@ public class ShopManager : MonoBehaviour
                 if (mentor1 == null && cardBuff1 == null && textbook1 == null)
                 {
                     mentor1 = mentors[0];
-                    
+                    mentor1.price = Mathf.CeilToInt(mentor1.price * playerInst.discount);
+
                     // --- START DEBUGGING ---
                     if (cardButton1 == null) {
                         Debug.LogError("FATAL ERROR: cardButton1 is NULL!");
@@ -232,6 +240,7 @@ public class ShopManager : MonoBehaviour
                 {
                     // (You would add similar checks for mentor2 and cardButton2 here)
                     mentor2 = mentors[0];
+                    mentor2.price = Mathf.CeilToInt(mentor2.price * playerInst.discount);
                     Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
                     cardButton2.image.sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
                 }
@@ -368,7 +377,11 @@ public class ShopManager : MonoBehaviour
             return;
         }
         Debug.Log("Voucher Purchased");
-        // //Add voucher effect to user's run
+
+        //  Add voucher to Player's voucher list
+        playerInst.vouchers.Add(voucher);
+
+        //  Add voucher effect to user's run
         voucher.applyEffect();
 
         //Remove voucher from screen
@@ -428,6 +441,7 @@ public class ShopManager : MonoBehaviour
     {
         //Reset Reroll price to 5
         reroll = 5;
+        rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 
         GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>().ChangeToRoundMusic();
 
@@ -462,6 +476,7 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount = playerInst.moneyCount - reroll;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount;
         reroll++;
+        rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 
     }
 
