@@ -112,6 +112,9 @@ public class ScoringManager : MonoBehaviour
         int round = Game.access().roundValueTest;
         neededScore = (int)Round.access().GetTargetScore(ante, round);
 
+        //  Check all played cards (even not part of valid hand)
+        mentorBuffer.RunBufferImmediate(UseLocation.AllCards);
+
         //Call a function that passes the hand type, and the selected cards, and return only the cards that are part of a valid hand
         //This will be used to calculate the score of the hand
         if (handType == "")
@@ -156,6 +159,11 @@ public class ScoringManager : MonoBehaviour
     {
         //Go through cards and add their scores. Wait for a small time
         //before going to the next card
+
+        if(MentorBufferManager.mentorBuffers[UseLocation.AllCards].Count >= 1)
+        {
+            yield return new WaitForSecondsRealtime(waitIncrement);
+        }
 
         //  Run the initial Mentor buffer
         yield return mentorBuffer.RunBuffer(UseLocation.Initial);

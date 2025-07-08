@@ -12,13 +12,17 @@ public class TwelveCredits : Mentor
     //  Mentor name and basePrice are preset
     public TwelveCredits(CardEdition edition) : base(MentorName.TwelveCredits, edition, 7)
     {
-        locations = new UseLocation[] { UseLocation.Initial };
-        description = "Be able to form Straights and Flushes with 4 cards";
+        locations = new UseLocation[] { UseLocation.AllCards };
+        description = "If exactly 4 cards are played, +12 Chips";
     }
 
     //  Be able to form Straights and Flushes with 4 cards
     public override void UseMentor()
     {
-        //  TODO Set a flag in the hand check that will disable needing a 5th card for both the Straight and Flush hands  
+        //  Temporary effect for the demo
+        if(ScoringManager.access().GetScoredPCards().Count == 4)
+        {
+            ScoringManager.access().IncrementCurrentChips(12);
+        }
     }
 }
