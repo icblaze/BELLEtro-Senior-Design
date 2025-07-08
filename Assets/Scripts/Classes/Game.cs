@@ -50,6 +50,22 @@ public class Game
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
 
     public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.     
+    public int GetAnte()
+    {
+        return ante;
+    }
+    public void SetAnte(int i)
+    {
+        ante = i;
+    }
+    public int GetRound()
+    {
+        return roundValue;
+    }
+    public void SetRound(int i)
+    {
+        roundValue = i;
+    }
 
     public int anteValue
     {
@@ -477,8 +493,6 @@ public class Game
 
     public void Start()
     {
-        anteValue = 1;
-        roundValueTest = 1;
         BlindSceneManager blindSceneManager = GameObject.FindFirstObjectByType<BlindSceneManager>().GetComponent<BlindSceneManager>();
         blindSceneManager.NewBlind();
     }

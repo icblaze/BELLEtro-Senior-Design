@@ -67,11 +67,11 @@ public class BlindSceneManager : MonoBehaviour
 
         SpecialBlindDesc.GetComponentInChildren<TMP_Text>().text = special.description;
 
-        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.anteValue];
+        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()];
 
-        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.anteValue] * 1.5;
+        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * 1.5;
 
-        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.anteValue] * special.chipMultiplier;
+        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * special.chipMultiplier;
         
         HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.handCount;
 
@@ -79,16 +79,16 @@ public class BlindSceneManager : MonoBehaviour
 
         MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
 
-        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.anteValue;
+        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetAnte();
 
-        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.roundValueTest;
+        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetRound();
 
         setBlindCover();
 
         // Insert code for changing the tag sprites to ones that match the generated tags & code for special blind
     }
 
-    private void setBlindCover()
+    public void setBlindCover()
     {
         SmallBlindCover.blocksRaycasts = true;
         SmallBlindCover.interactable = true;
@@ -96,15 +96,16 @@ public class BlindSceneManager : MonoBehaviour
         BigBlindCover.interactable = true;
         SpecialBlindCover.blocksRaycasts = true;
         SpecialBlindCover.interactable = true;
+        Debug.Log("Round is currently: " + ginst.GetRound());
 
-        if (ginst.roundValueTest == 1)
+        if (ginst.GetRound() == 1)
         {
             SmallBlindCover.blocksRaycasts = false;
             SmallBlindCover.interactable = false;
             StartCoroutine(ainst.FadeOut(SmallBlindCover));
-  
+
         }
-        else if (ginst.roundValueTest == 2)
+        else if (ginst.GetRound() == 2)
         {
             BigBlindCover.blocksRaycasts = false;
             BigBlindCover.interactable = false;
@@ -121,7 +122,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void useSmallBlindButton()
     {
-        ginst.roundValueTest = 1;
+        ginst.SetRound(1);
         setBlindCover();
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
@@ -129,7 +130,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void useBigBlindButton()
     {
-        ginst.roundValueTest = 2;
+        ginst.SetRound(2);
         setBlindCover();
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
@@ -137,7 +138,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void useSpecialBlindButton()
     {
-        ginst.roundValueTest = 3;
+        ginst.SetRound(3);
         setBlindCover();
         //Either this script or round script will then apply special blind
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
@@ -146,7 +147,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void UseSkipButton1()
     {
-        ginst.roundValueTest = 2;
+        ginst.SetRound(2);
 
         applyTag(tag1);
 
@@ -157,7 +158,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void UseSkipButton2()
     {
-        ginst.roundValueTest = 3;
+        ginst.SetRound(3);
 
         applyTag(tag2);
 
@@ -207,8 +208,8 @@ public class BlindSceneManager : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-    // {
-    //     NewBlind();   
-    // }
+    void Start()
+    {
+        NewBlind();   
+    }
 }

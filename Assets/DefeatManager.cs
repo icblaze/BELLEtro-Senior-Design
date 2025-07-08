@@ -25,13 +25,13 @@ public class DefeatManager : MonoBehaviour
         Game inst = Game.access();
         Player player = Player.access();
         String score = "Score of Last Round:" + player.chipCount + "\n\n";
-        String rounds = "Reached Ante: " + inst.anteValue + " Round: " + inst.roundValueTest + "\n\n";
+        String rounds = "Reached Ante: " + inst.GetAnte() + " Round: " + inst.GetRound() + "\n\n";
         String defeated;
-        if (inst.roundValueTest == 1)
+        if (inst.GetRound() == 1)
         {
             defeated = "Defeated By: Small Blind <sprite name=\"SmallBlind\">\n";
         }
-        else if (inst.roundValueTest == 2)
+        else if (inst.GetRound() == 2)
         {
             defeated = "Defeated By: Big Blind <sprite name=\"BigBlind\">\n";
         }

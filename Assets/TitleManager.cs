@@ -52,20 +52,27 @@ public class TitleManager : MonoBehaviour
     public void setRoundTitle()//Sets the titles when loading into a round
     {
         //Set the round title and its components
-        scoreRequirement.GetComponent<TMP_Text>().text = "" /* + round.scoreRequirment*/;
-        rewardAmount.GetComponent<TMP_Text>().text = "$" /*+ round.reward*/;
-        int round = Game.access().roundValueTest;
+        int ante = Game.access().GetAnte();
+        int round = Game.access().GetRound();
+        scoreRequirement.GetComponent<TMP_Text>().text = Round.access().GetTargetScore(ante, round).ToString();
+        
         if (round == 1)
         {
-            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindToken/SmallBlind");
+            blindName.GetComponent<TMP_Text>().text = "Small Blind";
+            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/SmallBlind");
+            rewardAmount.GetComponent<TMP_Text>().text = "$3";
         }
         else if (round == 2)
         {
-            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindToken/BigBlind");
+            blindName.GetComponent<TMP_Text>().text = "Big Blind";
+            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/BigBlind");
+            rewardAmount.GetComponent<TMP_Text>().text = "$4";
         }
         else
         {
-            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindToken/" + Game.access().currentSpecialBlind);
+            blindName.GetComponent<TMP_Text>().text = Game.access().currentSpecialBlind.ToString();
+            roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + Game.access().currentSpecialBlind);
+            rewardAmount.GetComponent<TMP_Text>().text = "$5";
         }
             
     }

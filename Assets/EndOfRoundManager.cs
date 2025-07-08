@@ -57,7 +57,7 @@ public class EndOfRoundManager : MonoBehaviour
     }
     private void SetScoreAmount()
     {
-        int ante = Game.access().anteValue;
+        int ante = Game.access().GetAnte();
         int round = Game.access().roundValueTest;
         int scoreNeeded = (int)Round.access().GetTargetScore(ante, round);
         scoreAtLeastAmount.GetComponent<TMP_Text>().text = scoreNeeded.ToString();
@@ -65,7 +65,7 @@ public class EndOfRoundManager : MonoBehaviour
     private void CalculateRoundReward()
     {
         int round = inst.roundValueTest;
-        int ante = inst.anteValue;
+        int ante = inst.GetAnte();
 
         switch (round)
         {
@@ -94,7 +94,7 @@ public class EndOfRoundManager : MonoBehaviour
 
     private void CalculateInterest()
     {
-        interest = player.moneyCount/5;
+        interest = player.moneyCount / 5;
         if (interest > 5)
         {
             interest = 5;
@@ -146,18 +146,30 @@ public class EndOfRoundManager : MonoBehaviour
         Debug.Log("Total CashOut: $" + totalCashOut);
         //Add cash out to player's cash and change text
         player.moneyCount += totalCashOut;
+        player.handCount = 4;
+        player.discards = 4;
+        player.chipCount = 0;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + player.moneyCount.ToString();
 
         //Set everything to default/0
         totalCashOut = 0;
         roundReward = 0;
         interest = 0;
-        
-        if (Game.access().roundValueTest == 3)
+
+        if (Game.access().GetRound() == 3)
         {
-            Game.access().anteValue += 1;
-            Game.access().roundValueTest = 1;
+            int ante = Game.access().GetAnte();
+            Game.access().SetAnte(ante + 1);
+            Game.access().SetRound(1);
         }
+        else
+        {
+            int round = Game.access().GetRound();
+            Game.access().SetRound(round + 1);
+        }
+        Debug.Log("Round after CashOut: " + Game.access().GetRound());
+
+
 
         //Transition to shopScreen
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);

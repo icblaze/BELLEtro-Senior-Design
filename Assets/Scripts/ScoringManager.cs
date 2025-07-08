@@ -103,13 +103,9 @@ public class ScoringManager : MonoBehaviour
         //Get current hand and scores for it
         handType = currentHandManager.findCurrentHand(playedPCards);
         SetHandScore(handType);
-
-        //Setting ante and round values for testing purposes
-        Game.access().anteValue = 1;
-        Game.access().roundValueTest = 1;
-
-        int ante = Game.access().anteValue;
-        int round = Game.access().roundValueTest;
+    
+        int ante = Game.access().GetAnte();
+        int round = Game.access().GetRound();
         neededScore = (int)Round.access().GetTargetScore(ante, round);
 
         //  Check all played cards (even not part of valid hand)
