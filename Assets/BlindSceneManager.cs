@@ -59,7 +59,7 @@ public class BlindSceneManager : MonoBehaviour
             ginst.currentSpecialBlind = ginst.randomSpecialBlind();
         }
 
-        ginst.roundValue = 1;
+        ginst.roundValueTest = 1;
 
         special = ginst.currentSpecialBlind;
 
@@ -81,9 +81,9 @@ public class BlindSceneManager : MonoBehaviour
 
         MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
 
-        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.ante;
+        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.anteValue;
 
-        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.roundValue;
+        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + ginst.roundValueTest;
 
         setBlindCover();
 
@@ -99,14 +99,14 @@ public class BlindSceneManager : MonoBehaviour
         SpecialBlindCover.blocksRaycasts = true;
         SpecialBlindCover.interactable = true;
 
-        if (ginst.roundValue == 1)
+        if (ginst.roundValueTest == 1)
         {
             SmallBlindCover.blocksRaycasts = false;
             SmallBlindCover.interactable = false;
             StartCoroutine(ainst.FadeOut(SmallBlindCover));
   
         }
-        else if (ginst.roundValue == 2)
+        else if (ginst.roundValueTest == 2)
         {
             BigBlindCover.blocksRaycasts = false;
             BigBlindCover.interactable = false;
@@ -138,7 +138,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void UseSkipButton1()
     {
-        ginst.roundValue = 2;
+        ginst.roundValueTest = 2;
 
         applyTag(tag1);
 
@@ -149,7 +149,7 @@ public class BlindSceneManager : MonoBehaviour
 
     public void UseSkipButton2()
     {
-        ginst.roundValue = 3;
+        ginst.roundValueTest = 3;
 
         applyTag(tag2);
 
