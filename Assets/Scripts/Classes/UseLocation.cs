@@ -9,7 +9,7 @@ using UnityEngine;
 // Mentors are very diverse so they can be used in many locations, here are the locations
 public enum UseLocation
 {
-  Initial,            // Mentors that have this location will be used at the start of the game
+  Initial,            // Mentors that have this location will before start of the scoring
   Retrigger,          // Mentors that have this location will be used to set retrigger on scored cards
   PreCard,            // Mentors that have this location will be used before the card is played
   PlayCard,           // Mentors that have this location will be used during the card play phase (might not be used)
@@ -21,5 +21,6 @@ public enum UseLocation
   Shop,               // Mentors that have this location will be used in the shop
   Blind,              // Mentors that have this location will be used during the blind phase
   PostBlind,          // Mentors that have this location will be used after the blind phase
-  PostHand            // Mentors that have this location will be used after the hand is played
+  PostHand,            // Mentors that have this location will be used after the hand is played
+  AllCards            // Mentors that have this location call before selected scored PCards of hand
 }
