@@ -13,6 +13,7 @@ public class EndOfRoundManager : MonoBehaviour
     public GameObject remainingHandsNumber;
     public Button cashOutButton;
     public GameObject interestNumber;
+    public GameObject interestText;
     public GameObject roundRewardText;
     public GameObject moneyText;
     public GameObject scoreAtLeastAmount;
@@ -95,10 +96,11 @@ public class EndOfRoundManager : MonoBehaviour
     private void CalculateInterest()
     {
         interest = player.moneyCount / 5;
-        if (interest > 5)
+        if (interest > Player.access().maxInterest)
         {
-            interest = 5;
+            interest = Player.access().maxInterest;
         }
+        interestText.GetComponent<TMP_Text>().text = $"1 Interest per $5 ({Player.access().maxInterest} max)";
         interestNumber.GetComponent<TMP_Text>().text = interest.ToString();
         totalCashOut += interest;
     }

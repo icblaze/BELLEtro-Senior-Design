@@ -43,6 +43,7 @@ public class Player
     public float discount;                                       //Discount that can be used in store.
     public int sellValue;                                        //Sell value of a card enhancer
     public int handSize;
+    public int maxInterest;
 
 
     //Save player state in the game
@@ -79,6 +80,7 @@ public class Player
         chipCount = 0;
         discount = 1.0f;    //  100% price initially
         handSize = 8;
+        maxInterest = 5;
         InitializeHandTable();
     }
 
@@ -97,6 +99,7 @@ public class Player
         discount = 1.0f;    // 100% price initially
         sellValue = 0;
         handSize = 8;
+        maxInterest = 5;
         handTable.Clear();
         InitializeHandTable();
     }

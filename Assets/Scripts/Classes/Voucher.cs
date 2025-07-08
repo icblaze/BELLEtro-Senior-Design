@@ -28,35 +28,36 @@ public class Voucher
         switch (name)
         {
             case VoucherNames.ExtraCredit:
-                // Grants bonus points on correct play or combo
+                // Gain +1 Discard Per Round
                 break;
 
             case VoucherNames.StudyGroup:
-                // Draw +1 card each round
+                // +1 Hand Size
                 break;
 
             case VoucherNames.AnnotatedEdition:
-                // Makes Textbooks more effective (e.g., increase power or reduce cost)
+                // Textbooks will level hand by two levels
+                //  Textbook.cs will handle this logic
                 break;
 
             case VoucherNames.OfficeHours:
-                // Reduces shop prices
+                // New Shop Items are 25% off
                 break;
 
             case VoucherNames.FluentStart:
-                // Start the run with an extra buff or card
+                // Gain +1 Hand Per Round
                 break;
 
             case VoucherNames.LectureBoost:
-                // Increase multiplier on specific hand types like Full House or Straight
+                // Level up every hand 
                 break;
 
             case VoucherNames.TenureTrack:
-                // Gain a growing passive bonus each round (e.g., +1% score/round)
+                // Raise interest cap to $10
                 break;
 
             case VoucherNames.BrainstormBonus:
-                // Buffs from cards or mentors stack better or last longer
+                // +1 Consumable Slot 
                 break;
 
             default:

@@ -99,17 +99,6 @@ public class ShopManager : MonoBehaviour
         sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
         NewShop();
         UpdateMoneyDisplay();
-        StartCoroutine(ActivateShopMentors());
-
-        IEnumerator ActivateShopMentors()
-        {
-            while(MentorBufferManager.access() != null)
-            {
-                yield return null;
-            }
-
-            MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);
-        }
     }
 
     //Function called when  shopUI is opened. This intiallizes the 
