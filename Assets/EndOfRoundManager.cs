@@ -107,6 +107,10 @@ public class EndOfRoundManager : MonoBehaviour
         {
             interest = Player.access().maxInterest;
         }
+        if (interest < 0)
+        {
+            interest = 0;
+        }
         interestText.GetComponent<TMP_Text>().text = $"1 Interest per $5 ({Player.access().maxInterest} max)";
         interestNumber.GetComponent<TMP_Text>().text = interest.ToString();
         totalCashOut += interest;
