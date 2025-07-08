@@ -24,7 +24,7 @@ public class PlayHand : MonoBehaviour
     private static int currHandCount;
     private Transform playingCardGroup;
 
-    private bool cashPenalty = false;
+    public bool cashPenalty = false;
 
     // Look into incorporating a save system
     void Awake()
