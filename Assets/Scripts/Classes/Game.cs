@@ -445,9 +445,13 @@ public class Game
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0, System.Enum.GetValues(typeof(SpecialBlindNames)).Length);
-            blind = SpecialBlind.BlindFactory(SpecialBlindNames.TheCollector);
+            index = randomizer(0, 2);
+            blind = SpecialBlind.BlindFromNumber(index);
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
+            
+            int change = 2;
+
+            return blind;
 
             if (!alreadyExists)
             {

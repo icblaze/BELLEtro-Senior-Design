@@ -41,6 +41,21 @@ public class SpecialBlind
         {
             case SpecialBlindNames.TheCollector:
                 return new TheCollector();
+            case SpecialBlindNames.ThePurist:
+                return new ThePurist();
+            default:
+                return null;
+        }
+    }
+
+    public static SpecialBlind BlindFromNumber(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                return BlindFactory(SpecialBlindNames.TheCollector);
+            case 1:
+                return BlindFactory(SpecialBlindNames.ThePurist);
             default:
                 return null;
         }
