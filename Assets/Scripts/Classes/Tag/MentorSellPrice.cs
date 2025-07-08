@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class MentorSellPrice : Tag
 {
     public MentorSellPrice() : base(TagNames.MentorSellPrice)
@@ -18,4 +18,4 @@ public class MentorSellPrice : Tag
     {
 
     }
-}
+}*/

@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class NegativeMentor : Tag
 {
     public NegativeMentor() : base(TagNames.NegativeMentor)
@@ -18,4 +18,4 @@ public class NegativeMentor : Tag
     {
 
     }
-}
+}*/

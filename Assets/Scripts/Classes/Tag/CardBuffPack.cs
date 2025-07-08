@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class CardBuffPack : Tag
 {
     public CardBuffPack() : base(TagNames.CardBuffPack)
@@ -18,4 +18,4 @@ public class CardBuffPack : Tag
     {
 
     }
-}
+}*/

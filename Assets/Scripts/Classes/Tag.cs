@@ -24,9 +24,24 @@ public class Tag
        {
           case TagNames.FiveDollar:
               return new FiveDollar();
+          case TagNames.SkipMoney:
+              return new SkipMoney();
           default:
               return null;
        }
+    }
+
+    public static Tag TagFromIndex(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                return TagFactory(TagNames.FiveDollar);
+            case 1:
+                return TagFactory(TagNames.SkipMoney);
+            default:
+                return null;
+        }
     }
     
     // Activates the effect of the tag (more information is provided in each specific Tag.

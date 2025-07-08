@@ -46,6 +46,7 @@ public class Game
     public SpecialBlind currentSpecialBlind;                                       //CurrentSpecialBlind contains this Ante's Special Blind
     public Player thePlayer;                                                       //The Player is a refrence to the Player class 
     private int index;                                                             //This variable will hold a value that we could use to index into our deck
+    public int skipCount;                                                          //This int will be used to count the number of skips the player does
     public Consumable previousConsumable = null;                                   //Stores the name of last used consumable
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
 
@@ -472,8 +473,8 @@ public class Game
         Tag tag = null;
         for (int i = 0; i < tagCount; ++i)
         {
-            index = randomizer(0, System.Enum.GetValues(typeof(TagNames)).Length);
-            tag = Tag.TagFactory(TagNames.FiveDollar);
+            index = randomizer(0, 2);
+            tag = Tag.TagFromIndex(index);
             tagList[i] = tag;
         }
 

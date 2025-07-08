@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class MentorPack : Tag
 {
     public MentorPack() : base(TagNames.MentorPack)
@@ -18,4 +18,4 @@ public class MentorPack : Tag
     {
 
     }
-}
+}*/

@@ -156,6 +156,7 @@ public class BlindSceneManager : MonoBehaviour
         ginst.SetRound(2);
 
         applyTag(tag1);
+        ++ginst.skipCount;
 
         setBlindCover();
 
@@ -167,6 +168,7 @@ public class BlindSceneManager : MonoBehaviour
         ginst.SetRound(3);
 
         applyTag(tag2);
+        ++ginst.skipCount;
 
         setBlindCover();
 
@@ -177,7 +179,7 @@ public class BlindSceneManager : MonoBehaviour
     {
         tag.applyTag();
 
-        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
+        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$" + pinst.moneyCount;
     }
 
     public void showSkip1Details()

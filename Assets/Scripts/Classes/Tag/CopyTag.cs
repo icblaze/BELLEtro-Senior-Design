@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class CopyTag : Tag
 {
     public CopyTag() : base(TagNames.CopyTag)
@@ -18,4 +18,4 @@ public class CopyTag : Tag
     {
 
     }
-}
+}*/

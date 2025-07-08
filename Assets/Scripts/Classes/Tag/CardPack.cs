@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class CardPack : Tag
 {
     public CardPack() : base(TagNames.CardPack)
@@ -18,4 +18,4 @@ public class CardPack : Tag
     {
 
     }
-}
+}*/

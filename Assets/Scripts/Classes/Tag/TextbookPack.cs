@@ -5,7 +5,7 @@
 
 using System.Collections;
 using UnityEngine;
-
+/*
 public class TextbookPack : Tag
 {
     public TextbookPack() : base(TagNames.TextbookPack)
@@ -18,4 +18,4 @@ public class TextbookPack : Tag
     {
 
     }
-}
+}*/

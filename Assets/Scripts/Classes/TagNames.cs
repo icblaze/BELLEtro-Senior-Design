@@ -8,12 +8,13 @@ using UnityEngine;
 
 public enum TagNames
 {
-    CardPack,
-    CardBuffPack,
-    TextbookPack,
-    MentorPack,
+    //CardPack,
+    //CardBuffPack,
+    //TextbookPack,
+    //MentorPack,
     FiveDollar,
-    MentorSellPrice,
-    NegativeMentor,
-    CopyTag
+    SkipMoney,
+    //MentorSellPrice,
+    //NegativeMentor,
+    //CopyTag
 }
