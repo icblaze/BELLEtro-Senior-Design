@@ -17,6 +17,8 @@ public class DeleteCard : MonoBehaviour
     [SerializeField] private int pcardCount;
     private CardType cardType;
 
+    public bool cashPenalty = false;
+
     void Start()
     {    
         deckManager = FindFirstObjectByType<DeckManager>();
@@ -155,7 +157,12 @@ public class DeleteCard : MonoBehaviour
         
         discardCount = Round.access().DecreaseDiscardCount();      //Decrease Hand count of the player
         discardsLeft.text = discardCount.ToString("0");
-        
+
+        if(cashPenalty)
+        {
+            Player.access().moneyCount--;
+            ShopManager.access().UpdateMoneyDisplay();
+        }
 
         StartCoroutine(RefillNextFrame(newCards));
     }

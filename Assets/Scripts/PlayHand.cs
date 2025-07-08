@@ -24,6 +24,8 @@ public class PlayHand : MonoBehaviour
     private static int currHandCount;
     private Transform playingCardGroup;
 
+    private bool cashPenalty = false;
+
     // Look into incorporating a save system
     void Awake()
     {
@@ -102,7 +104,13 @@ public class PlayHand : MonoBehaviour
 
         currHandCount = Round.access().DecreaseHandCount();      //Decrease Hand count of the player
         handsLeft.text = currHandCount.ToString("0");
-        
+
+        if (cashPenalty)
+        {
+            Player.access().moneyCount--;
+            ShopManager.access().UpdateMoneyDisplay();
+        }
+
         //Call a function here that clears all the Lists from currentHandManager
 
         // Move selected cards to the play area
