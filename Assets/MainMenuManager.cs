@@ -102,7 +102,7 @@ public class MainMenuManager : MonoBehaviour
     //Function that is called once the animation is done to load the playable scene.
     public void DelayedLoad()
     {
-        SceneManager.LoadScene("Balatro-Feel");
+        SceneManager.LoadScene("Balatro-Feel 1");
         audioManager.ChangeToRoundMusic();
     }
 
