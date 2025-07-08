@@ -451,8 +451,6 @@ public class Game
             
             int change = 2;
 
-            return blind;
-
             if (!alreadyExists)
             {
                 pastSpecialBlinds.Add(blind);          //This line adds the blind to the list that contains the past special blinds in the game.

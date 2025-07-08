@@ -73,9 +73,9 @@ public class BlindSceneManager : MonoBehaviour
 
         SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.GetAnte()] * special.chipMultiplier;
         
-        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.handCount;
+        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxHandCount;
 
-        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.discards;
+        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.maxDiscards;
 
         MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + pinst.moneyCount;
 
@@ -130,6 +130,7 @@ public class BlindSceneManager : MonoBehaviour
         setBlindCover();
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
+
     }
 
     public void useBigBlindButton()
