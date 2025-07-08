@@ -15,5 +15,6 @@ public enum SpecialBlindNames
     //TheSilence,
     TheCollector,
     ThePurist,
+    TheYoink,
     //TheMirage
 }

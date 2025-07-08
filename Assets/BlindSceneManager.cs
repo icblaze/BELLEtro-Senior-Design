@@ -145,6 +145,7 @@ public class BlindSceneManager : MonoBehaviour
     {
         ginst.SetRound(3);
         setBlindCover();
+        special.applySpecialBlinds();
         //Either this script or round script will then apply special blind
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();

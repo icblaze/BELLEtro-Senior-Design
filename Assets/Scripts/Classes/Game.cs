@@ -440,16 +440,14 @@ public class Game
     public SpecialBlind randomSpecialBlind()
     {
         int count = 0;
-        bool alreadyExists;
+        bool alreadyExists = false;
 
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0, 2);
+            index = randomizer(0,3);
             blind = SpecialBlind.BlindFromNumber(index);
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
-            
-            int change = 2;
 
             if (!alreadyExists)
             {

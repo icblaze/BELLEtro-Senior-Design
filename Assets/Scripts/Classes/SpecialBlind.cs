@@ -43,6 +43,8 @@ public class SpecialBlind
                 return new TheCollector();
             case SpecialBlindNames.ThePurist:
                 return new ThePurist();
+            case SpecialBlindNames.TheYoink:
+                return new TheYoink();
             default:
                 return null;
         }
@@ -56,6 +58,8 @@ public class SpecialBlind
                 return BlindFactory(SpecialBlindNames.TheCollector);
             case 1:
                 return BlindFactory(SpecialBlindNames.ThePurist);
+            case 2:
+                return BlindFactory(SpecialBlindNames.TheYoink);
             default:
                 return null;
         }
