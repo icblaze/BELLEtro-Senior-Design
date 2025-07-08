@@ -17,6 +17,7 @@ public class EndOfRoundManager : MonoBehaviour
     public GameObject roundRewardText;
     public GameObject moneyText;
     public GameObject scoreAtLeastAmount;
+    public GameObject BlindToken;
     Game inst = Game.access();
     Player player = Player.access();
     int roundReward = 0;
@@ -59,9 +60,15 @@ public class EndOfRoundManager : MonoBehaviour
     private void SetScoreAmount()
     {
         int ante = Game.access().GetAnte();
-        int round = Game.access().roundValueTest;
+        int round = Game.access().GetRound();
         int scoreNeeded = (int)Round.access().GetTargetScore(ante, round);
         scoreAtLeastAmount.GetComponent<TMP_Text>().text = scoreNeeded.ToString();
+        if (Game.access().GetRound() == 1)
+            BlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/SmallBlind");
+        else if (Game.access().GetRound() == 2)
+            BlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/BigBlind");
+        else
+            BlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + Game.access().currentSpecialBlind);
     }
     private void CalculateRoundReward()
     {
@@ -174,7 +181,9 @@ public class EndOfRoundManager : MonoBehaviour
         }
         Debug.Log("Round after CashOut: " + Game.access().GetRound());
 
-
+        //Have shop reset
+        ShopManager shopManager = GameObject.FindGameObjectWithTag("ShopManager").GetComponent<ShopManager>();
+        shopManager.NewShop();
 
         //Transition to shopScreen
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);

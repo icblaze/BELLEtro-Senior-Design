@@ -35,6 +35,8 @@ public class TransitionManager : MonoBehaviour
             StartCoroutine(fadeScript.FadeOut(shopScreen));
             StartCoroutine(fadeScript.FadeIn(roundSelectScreen));
             audioManager.ChangeToRoundMusic();
+            TitleManager titleManager = GameObject.FindFirstObjectByType<TitleManager>().GetComponent<TitleManager>();
+            titleManager.changeToRoundSelectScreen();
             BlindSceneManager blindSceneManager = GameObject.Find("BlindSceneManager").GetComponent<BlindSceneManager>();
             blindSceneManager.setBlindCover();
         }
@@ -50,6 +52,7 @@ public class TransitionManager : MonoBehaviour
         StartCoroutine(fadeScript.FadeOut(roundSelectScreen));
         StartCoroutine(fadeScript.FadeIn(roundScreen));
         TitleManager titleManager = GameObject.FindFirstObjectByType<TitleManager>().GetComponent<TitleManager>();
+        titleManager.changeToRoundScreen();
         titleManager.setRoundTitle();
         if (inst.GetRound() == 3)//If boss/special blind, set boss music
         {
@@ -78,6 +81,8 @@ public class TransitionManager : MonoBehaviour
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         StartCoroutine(fadeScript.FadeOut(endOfRoundScreen));
         StartCoroutine(fadeScript.FadeIn(shopScreen));
+        TitleManager titleManager = GameObject.FindFirstObjectByType<TitleManager>().GetComponent<TitleManager>();
+        titleManager.changeToShopScreen();
         audioManager.ChangeToShopMusic();
         Debug.Log("Transitioning");
     }

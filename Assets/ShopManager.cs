@@ -110,12 +110,15 @@ public class ShopManager : MonoBehaviour
         NewCards();
 
         //Generate randomVoucher
-        Voucher[] vouchers = new Voucher[1];
-        vouchers = inst.randomVoucher(1);
-        voucher = vouchers[0];
-        voucher.initialPrice = Mathf.CeilToInt(voucher.initialPrice * playerInst.discount);
-        voucherButton.image.sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
-        Debug.Log("Voucher Name: " + voucher.name.ToString());
+        if (Game.access().GetRound() == 1)
+        {
+            Voucher[] vouchers = new Voucher[1];
+            vouchers = inst.randomVoucher(1);
+            voucher = vouchers[0];
+            voucher.initialPrice = Mathf.CeilToInt(voucher.initialPrice * playerInst.discount);
+            voucherButton.image.sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
+            Debug.Log("Voucher Name: " + voucher.name.ToString());
+        }
 
         //Generate randomn Packs
         Pack[] packs = new Pack[2];
@@ -127,7 +130,7 @@ public class ShopManager : MonoBehaviour
         pack2.price = Mathf.CeilToInt(pack2.price * playerInst.discount);
         Debug.Log("Pack 1 Type: " + pack1.packType);
         Debug.Log("Pack 2 Type: " + pack2.packType);
-        
+
         pack1Button.image.sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
         pack2Button.image.sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
     }
@@ -196,7 +199,8 @@ public class ShopManager : MonoBehaviour
             else//Create a Joker card.
             {
                 // --- START DEBUGGING ---
-                if (inst == null) {
+                if (inst == null)
+                {
                     Debug.LogError("FATAL ERROR: The 'inst' variable is NULL!");
                     return; // Stop the function here
                 }
@@ -206,11 +210,13 @@ public class ShopManager : MonoBehaviour
                 mentors = inst.randomMentorShop(1);
 
                 // --- START DEBUGGING ---
-                if (mentors == null || mentors.Length == 0) {
+                if (mentors == null || mentors.Length == 0)
+                {
                     Debug.LogError("ERROR: randomMentorShop() returned an empty or null array!");
                     continue; // Skip to the next loop iteration
                 }
-                if (mentors[0] == null) {
+                if (mentors[0] == null)
+                {
                     Debug.LogError("ERROR: The first mentor returned from the shop was NULL!");
                     continue; // Skip to the next loop iteration
                 }
@@ -223,11 +229,13 @@ public class ShopManager : MonoBehaviour
                     mentor1.price = Mathf.CeilToInt(mentor1.price * playerInst.discount);
 
                     // --- START DEBUGGING ---
-                    if (cardButton1 == null) {
+                    if (cardButton1 == null)
+                    {
                         Debug.LogError("FATAL ERROR: cardButton1 is NULL!");
                         return;
                     }
-                    if (cardButton1.image == null) {
+                    if (cardButton1.image == null)
+                    {
                         Debug.LogError("FATAL ERROR: cardButton1 does not have an Image component!");
                         return;
                     }
@@ -262,7 +270,7 @@ public class ShopManager : MonoBehaviour
         }
         //Add Mentor to user's collection
         playerInst.mentorDeck.Add(mentor);
-        if(mentorCardHolder != null)
+        if (mentorCardHolder != null)
         {
             mentorCardHolder.AddMentor(mentor); //  Visually add to holder
         }
@@ -558,7 +566,7 @@ public class ShopManager : MonoBehaviour
     }
     private void ShowMentor2Details()
     {
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor2.name.ToString()) + "\n" +  mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor2.name.ToString()) + "\n" + mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
         Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
@@ -1115,32 +1123,32 @@ public class ShopManager : MonoBehaviour
     //  Used for mentors that modify the price of reroll or items
     public void mentorShopEffect(Mentor mentor)
     {
-        if(mentor.name == MentorName.Extension)
+        if (mentor.name == MentorName.Extension)
         {
-           if(mentor1 != null)
-           {
+            if (mentor1 != null)
+            {
                 mentor1.price = (mentor1.price < 3 ? 0 : mentor1.price - 3);
-           }
-           else if(mentor2 != null)
-           {
+            }
+            else if (mentor2 != null)
+            {
                 mentor2.price = (mentor2.price < 3 ? 0 : mentor2.price - 3);
-           }
+            }
         }
-        else if(mentor.name == MentorName.Astronaut)
+        else if (mentor.name == MentorName.Astronaut)
         {
-            if(textbook1 != null)
+            if (textbook1 != null)
             {
                 textbook1.price = 0;
             }
-            if(textbook2 != null)
+            if (textbook2 != null)
             {
                 textbook2.price = 0;
             }
-            if(pack1 != null && pack1.packType == PackType.Textbook_Pack)
+            if (pack1 != null && pack1.packType == PackType.Textbook_Pack)
             {
                 pack1.price = 0;
             }
-            if(pack2 != null && pack2.packType == PackType.Textbook_Pack)
+            if (pack2 != null && pack2.packType == PackType.Textbook_Pack)
             {
                 pack2.price = 0;
             }
@@ -1157,12 +1165,12 @@ public class ShopManager : MonoBehaviour
     private void resetShopMentor()
     {
         //  Check for certain mentors that need to reset after shop
-        foreach(Mentor mentor in playerInst.mentorDeck)
+        foreach (Mentor mentor in playerInst.mentorDeck)
         {
             //  Reset first mentor discount for next shop
-            if(mentor.name == MentorName.Extension)
+            if (mentor.name == MentorName.Extension)
             {
-                Extension extension = (Extension) mentor;
+                Extension extension = (Extension)mentor;
                 extension.hasDiscounted = false;
             }
         }

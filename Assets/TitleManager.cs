@@ -17,6 +17,7 @@ public class TitleManager : MonoBehaviour
     public GameObject scoreRequirement;
     public GameObject rewardAmount;
     //Symbol/Badge for the round
+    public GameObject blindTitleColor;
     public GameObject roundSymbol;
     //Accessing Fade Script Functions
     FadeScript fade = FadeScript.access();
@@ -58,18 +59,21 @@ public class TitleManager : MonoBehaviour
         
         if (round == 1)
         {
+            blindTitleColor.GetComponent<Image>().color = new Color32(2, 115, 254, 255);
             blindName.GetComponent<TMP_Text>().text = "Small Blind";
             roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/SmallBlind");
             rewardAmount.GetComponent<TMP_Text>().text = "$3";
         }
         else if (round == 2)
         {
+            blindTitleColor.GetComponent<Image>().color = new Color32(255, 144, 0, 255);
             blindName.GetComponent<TMP_Text>().text = "Big Blind";
             roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/BigBlind");
             rewardAmount.GetComponent<TMP_Text>().text = "$4";
         }
         else
         {
+            blindTitleColor.GetComponent<Image>().color = Color.gray;
             blindName.GetComponent<TMP_Text>().text = Game.access().currentSpecialBlind.ToString();
             roundSymbol.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + Game.access().currentSpecialBlind);
             rewardAmount.GetComponent<TMP_Text>().text = "$5";
