@@ -174,6 +174,10 @@ public class EndOfRoundManager : MonoBehaviour
             int ante = Game.access().GetAnte();
             Game.access().SetAnte(ante + 1);
             Game.access().SetRound(1);
+            Game.access().currentSpecialBlind = null;
+            BlindSceneManager blindSceneManager = GameObject.Find("BlindSceneManager").GetComponent<BlindSceneManager>();
+            blindSceneManager.NewBlind();
+            
         }
         else
         {

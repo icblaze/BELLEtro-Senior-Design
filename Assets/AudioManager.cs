@@ -89,10 +89,12 @@ public class AudioManager : MonoBehaviour
         {
             changeMusic(shopSource, mainMenuSource);
         }
-        else if (bossSource.volume >= .9f){
+        else if (bossSource.volume >= .9f)
+        {
             changeMusic(bossSource, mainMenuSource);
         }
-        else {
+        else
+        {
             changeMusic(defeatSource, mainMenuSource);
         }
     }
@@ -111,12 +113,18 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeToBossMusic()
     {
-        //Round music will always play before going into boss
-        changeMusic(roundSource, bossSource);
+        if (mainMenuSource.volume >= .9f)
+        {
+            changeMusic(mainMenuSource, bossSource);
+        }
+        else
+            //Round music will always play before going into boss
+            changeMusic(roundSource, bossSource);
     }
     public void ChangeToShopMusic()
     {
-        if (mainMenuSource.volume >= .9f){
+        if (mainMenuSource.volume >= .9f)
+        {
             changeMusic(mainMenuSource, shopSource);
         }
         //If player finished round, go to shop
@@ -136,7 +144,8 @@ public class AudioManager : MonoBehaviour
         {
             changeMusic(roundSource, defeatSource);
         }
-        else if (mainMenuSource.volume >= .9f){
+        else if (mainMenuSource.volume >= .9f)
+        {
             changeMusic(mainMenuSource, defeatSource);
         }
         else//If player lost in boss round
