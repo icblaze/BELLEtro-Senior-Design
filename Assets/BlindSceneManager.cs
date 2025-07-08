@@ -40,10 +40,10 @@ public class BlindSceneManager : MonoBehaviour
     private Tag tag2;
     private SpecialBlind special;
 
-
     private Game ginst = Game.access();
     private Player pinst = Player.access();
     private FadeScript ainst = FadeScript.access();
+    private Round rinst = Round.access();
 
     // This function is called whenever the blind scene is brought up and initializes the variables for the scene
     public void NewBlind()
@@ -59,8 +59,6 @@ public class BlindSceneManager : MonoBehaviour
             ginst.currentSpecialBlind = ginst.randomSpecialBlind();
         }
 
-        ginst.roundValueTest = 1;
-
         special = ginst.currentSpecialBlind;
 
         SpecialBlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + special.blindType.ToString());
@@ -69,11 +67,11 @@ public class BlindSceneManager : MonoBehaviour
 
         SpecialBlindDesc.GetComponentInChildren<TMP_Text>().text = special.description;
 
-        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetChipTotal();
+        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.anteValue];
 
-        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetChipTotal() * 1.5;
+        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.anteValue] * 1.5;
 
-        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + ginst.GetChipTotal() * special.chipMultiplier;
+        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + rinst.baseAnteChips[ginst.anteValue] * special.chipMultiplier;
         
         HandNumber.GetComponentInChildren<TMP_Text>().text = "" + pinst.handCount;
 
