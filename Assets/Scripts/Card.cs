@@ -164,6 +164,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
             else if(cardType == CardType.Mentor)
             {
                 cardDescription = mentor.GetDescription();
+                cardDescription += CardModifier.access().EditionDesc(mentor.edition);
             }
             else
             {

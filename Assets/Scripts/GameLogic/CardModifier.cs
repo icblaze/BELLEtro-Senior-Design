@@ -107,17 +107,17 @@ public class CardModifier
             case CardEnhancement.Base:
                 return "";
             case CardEnhancement.BonusCard:
-                return "Bonus Card: +30 extra Chips";
+                return "\nBonus Card: +30 extra Chips";
             case CardEnhancement.MultCard:
-                return "Mult Card: +4 Mult";
+                return "\nMult Card: +4 Mult";
             case CardEnhancement.WildCard:
-                return "Wild Card: Can be used as any suit";
+                return "\nWild Card: Can be used as any suit";
             case CardEnhancement.GoldCard:
-                return "Gold Card: Gain $3 if held in hand at end of round";
+                return "\nGold Card: Gain $3 if held in hand at end of round";
             case CardEnhancement.SteelCard:
-                return "Steel Card: X1.5 Mult when held in hand";
+                return "\nSteel Card: X1.5 Mult when held in hand";
             case CardEnhancement.GlassCard:
-                return "Glass Card: X2 Mult when scored. 25% chance of being destroyed after scoring";
+                return "\nGlass Card: X2 Mult when scored. 25% chance of being destroyed after scoring";
         }
 
         return "";
@@ -131,13 +131,13 @@ public class CardModifier
             case CardEdition.Base:
                 return "";
             case CardEdition.Foil:
-                return "Foil: +50 Chips";
+                return "\nFoil: +50 Chips";
             case CardEdition.Holographic:
-                return "Holographic: +10 Mult";
+                return "\nHolographic: +10 Mult";
             case CardEdition.Polychrome:
-                return "Polychrome: X1.5 Mult";
+                return "\nPolychrome: X1.5 Mult";
             case CardEdition.Negative:
-                return "Negative: +1 Mentor Slot";
+                return "\nNegative: +1 Mentor Slot";
         }
 
         return "";
@@ -151,11 +151,11 @@ public class CardModifier
             case CardSeal.Base:
                 return "";
             case CardSeal.Funding:
-                return "Funding Seal: Gain $3 when scored";
+                return "\nFunding Seal: Gain $3 when scored";
             case CardSeal.Retake:
-                return "Retake Seal: Retrigger this card";
+                return "\nRetake Seal: Retrigger this card";
             case CardSeal.Study:
-                return "Study Seal: Generates Textbook for last hand played if held in hand at end of round";
+                return "\nStudy Seal: Generates Textbook for last hand played if held in hand at end of round";
         }
 
         return "";

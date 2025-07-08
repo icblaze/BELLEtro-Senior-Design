@@ -79,9 +79,12 @@ public class PCard : BaseCard
     public override string ToString()
     {
         //  For testing/debugging
-        string description = "Linguistic Term: " + term.ToString() + "\nSuit:" + suit.ToString();
+        string description = term.ToString();
 
-        //description += $"Chips: {chips}\nMult: {multiplier}\n";
+        description += $"\n+{chips} Chips +{multiplier} Mult";
+        description += CardModifier.access().EnhancementDesc(enhancement);
+        description += CardModifier.access().SealDesc(seal);
+        description += CardModifier.access().EditionDesc(edition);
 
         return description;
     }
