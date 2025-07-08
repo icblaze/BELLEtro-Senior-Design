@@ -38,7 +38,7 @@ public class TransitionManager : MonoBehaviour
             TitleManager titleManager = GameObject.FindFirstObjectByType<TitleManager>().GetComponent<TitleManager>();
             titleManager.changeToRoundSelectScreen();
             BlindSceneManager blindSceneManager = GameObject.Find("BlindSceneManager").GetComponent<BlindSceneManager>();
-            blindSceneManager.setBlindCover();
+            blindSceneManager.SetBlindScreenInfo();
         }
     }
     public void TransitionToRoundScreen()

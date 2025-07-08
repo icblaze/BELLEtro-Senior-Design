@@ -178,6 +178,8 @@ public class EndOfRoundManager : MonoBehaviour
             int ante = Game.access().GetAnte();
             Game.access().SetAnte(ante + 1);
             Game.access().SetRound(1);
+            //  Clean up the special blind effect before setting to null
+            Game.access().currentSpecialBlind.cleanUpEffect();
             Game.access().currentSpecialBlind = null;
             BlindSceneManager blindSceneManager = GameObject.Find("BlindSceneManager").GetComponent<BlindSceneManager>();
             blindSceneManager.NewBlind();
