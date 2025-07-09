@@ -83,6 +83,8 @@ public class TransitionManager : MonoBehaviour
         StartCoroutine(fadeScript.FadeOut(endOfRoundScreen));
         StartCoroutine(fadeScript.FadeIn(shopScreen));
         TitleManager titleManager = GameObject.FindFirstObjectByType<TitleManager>().GetComponent<TitleManager>();
+        ShopManager shopManager = GameObject.FindFirstObjectByType<ShopManager>().GetComponent<ShopManager>();
+        shopManager.NewShop();
         titleManager.changeToShopScreen();
         audioManager.ChangeToShopMusic();
         Debug.Log("Transitioning");

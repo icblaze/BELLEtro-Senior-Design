@@ -108,6 +108,9 @@ public class ShopManager : MonoBehaviour
     {
         //Generate Mentors/Textbooks/CardBuffs
         NewCards();
+        cardsSelected = 0;//Cards currently selected in pack
+        packSelected = 0;//Used to tell which pack was selected
+        reroll = 5;
 
         //Generate randomVoucher
         if (Game.access().GetRound() == 1)
