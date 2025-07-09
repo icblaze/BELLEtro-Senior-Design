@@ -15,6 +15,7 @@ public class TransitionManager : MonoBehaviour
     public CanvasGroup packScreen;
     public CanvasGroup defeatScreen;
     public CanvasGroup regularUI;
+    public CanvasGroup victoryScreen;
     private FadeScript fadeScript = FadeScript.access();
     private AudioManager audioManager;
     private ShopManager shopManager;
@@ -96,5 +97,14 @@ public class TransitionManager : MonoBehaviour
         audioManager.ChangeToDeathMusic();
         DefeatManager defeatManager = DefeatManager.access();
         defeatManager.SetText();
+    }
+
+    public void TransitionToVictoryScreen()
+    {
+        SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
+        sfxManager.GameWonSFX();
+        StartCoroutine(fadeScript.FadeIn(victoryScreen));
+        VictoryManager victoryManager = GameObject.Find("VictoryManager").GetComponent<VictoryManager>();
+        victoryManager.GameWon();
     }
 }

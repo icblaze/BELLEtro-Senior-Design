@@ -278,6 +278,9 @@ public class ShopManager : MonoBehaviour
         //Remove Mentor from Screen
         mentorButton.gameObject.SetActive(false);
 
+        int cardsPurchased = VictoryManager.access().GetCardsPurchased();
+        VictoryManager.access().SetCardsPurchased(cardsPurchased + 1);
+
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - mentor.price;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
@@ -298,6 +301,9 @@ public class ShopManager : MonoBehaviour
             //Move pack disappear
             // textbookButton.interactable |= false;
             textbookButton.gameObject.SetActive(false);
+
+            int cardsPurchased = VictoryManager.access().GetCardsPurchased();
+            VictoryManager.access().SetCardsPurchased(cardsPurchased + 1);
 
             // //Reduce money based on price and change text to display new money
             playerInst.moneyCount = playerInst.moneyCount - textbook.price;
@@ -331,6 +337,9 @@ public class ShopManager : MonoBehaviour
 
         //Make Pack Disappear
         cardBuffButton.gameObject.SetActive(false);
+
+        int cardsPurchased = VictoryManager.access().GetCardsPurchased();
+        VictoryManager.access().SetCardsPurchased(cardsPurchased + 1);
 
         //Reduce Money and Update
         playerInst.moneyCount = playerInst.moneyCount - cardBuff.price;
@@ -421,6 +430,9 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
+        int packsPurchased = VictoryManager.access().GetPacksPurchased();
+        VictoryManager.access().SetPacksPurchased(packsPurchased + 1);
+
         //Make pack disappear
         packButton.interactable |= false;
         packButton.gameObject.SetActive(false);
@@ -479,6 +491,9 @@ public class ShopManager : MonoBehaviour
         //Refresh the Card slots with new random Cards
         NewCards();
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
+
+        int numRerolls = VictoryManager.access().GetNumRerolls();
+        VictoryManager.access().SetCardsPurchased(numRerolls + 1);
 
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;

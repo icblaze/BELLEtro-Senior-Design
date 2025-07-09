@@ -132,6 +132,9 @@ public class ScoringManager : MonoBehaviour
             //Get the list of cards from the current hand manager based on the hand type
             playedPCards = currentHandManager.GetListOfCards(handType);
         }
+        //Increment handsPlayed
+        int handsPlayed = VictoryManager.access().GetHandsPlayed();
+        VictoryManager.access().SetHandsPlayed(handsPlayed + 1);
 
         //Start the card scoring process
         yield return StartCoroutine(CardScoring());
@@ -247,9 +250,19 @@ public class ScoringManager : MonoBehaviour
             }
             yield return mentorBuffer.RunBuffer(UseLocation.PostBlind);
 
-            EndOfRound();
-            TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
-            transitionManager.TransitionToEndOfRoundScreen();
+            if (Game.access().GetAnte() == 8 && Game.access().GetRound() == 3)//If game is won, transition to victory screen
+            {
+                TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+                transitionManager.TransitionToVictoryScreen();
+            }
+            else//If regular round is won, progress through rounds
+            {
+                EndOfRound();
+                TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+                transitionManager.TransitionToEndOfRoundScreen();
+            }
+
+            
         }
 
         //If player runs out of hands, game over
@@ -279,6 +292,10 @@ public class ScoringManager : MonoBehaviour
     private void SetTotal()
     {
         totalScore = currentChips * currentMult;
+        if (totalScore > VictoryManager.access().GetBestHand())
+        {
+            VictoryManager.access().SetBestHand(totalScore);
+        }
         player.chipCount += totalScore;
         roundScoreText.text = player.chipCount.ToString();
     }
