@@ -524,7 +524,7 @@ public class ShopManager : MonoBehaviour
 
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;
-        moneyText.GetComponent<TMP_Text>().text = "$" + playerInst.moneyCount;
+        moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount;
         reroll++;
         rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 

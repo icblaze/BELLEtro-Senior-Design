@@ -70,6 +70,10 @@ public class HorizontalCardHolder : MonoBehaviour
         //  Make sure drawn cards are moved back to deckCards by calling combinePiles
         deck.combinePiles();
         PCard[] pcardArray = deck.drawCards(handSize);
+        Debug.Log("This is Deck: " + deck);
+        Debug.Log("This is hand size: " + handSize);
+        Debug.Log("This is Deck Draw card: " + deck.drawCards(handSize));
+        Debug.Log("This is PCard: " + pcardArray);
 
         int cardCount = 0;
         foreach (Card card in cards)

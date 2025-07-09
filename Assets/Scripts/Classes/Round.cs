@@ -58,10 +58,10 @@ public class Round
                 targetScore = baseAnteChips[currentAnte] * 1;
                 return (int)targetScore;
             case 2:
-                targetScore = baseAnteChips[currentAnte] + (baseAnteChips[currentAnte] * 1.5);
+                targetScore = (baseAnteChips[currentAnte] * 1.5);
                 return (int)targetScore;
             case 3:
-                targetScore = baseAnteChips[currentAnte] + (baseAnteChips[currentAnte] * Game.access().currentSpecialBlind.chipMultiplier);
+                targetScore = (baseAnteChips[currentAnte] * Game.access().currentSpecialBlind.chipMultiplier);
                 return (int)targetScore;
             default:
                 return 0;

@@ -64,33 +64,7 @@ public class BlindSceneManager : MonoBehaviour
         special = gameInst.currentSpecialBlind;
         
         SetBlindScreenInfo();
-        /*
-        special = gameInst.currentSpecialBlind;
-
-        SpecialBlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + special.blindType.ToString());
-
-        SpecialBlindName.GetComponentInChildren<TMP_Text>().text = special.nameText;
-
-        SpecialBlindDesc.GetComponentInChildren<TMP_Text>().text = special.description;
-
-        SmallBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.anteValue];
-
-        BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.anteValue] * 1.5;
-
-        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.anteValue] * special.chipMultiplier;
-
-        HandNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.handCount;
-
-        DiscardNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.discards;
-
-        MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
-
-        AnteNumber.GetComponentInChildren<TMP_Text>().text = "" + gameInst.anteValue;
-
-        RoundNumber.GetComponentInChildren<TMP_Text>().text = "" + gameInst.roundValueTest;
-
-        setBlindCover();
-        */
+       
         // Insert code for changing the tag sprites to ones that match the generated tags & code for special blind
     }
 

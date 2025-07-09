@@ -109,7 +109,8 @@ public class Game
         while (count < pack.packSize)
         {
             int index = randomizer(0, deck.deckCards.Count);
-
+            Debug.Log("Index: " + index);
+            Debug.Log("DeckCards" + deck.deckCards);
             PCard clonedCard = PCard.CloneCard(deck.deckCards[index]);
 
             //Call a function here to determine what the enhancements will be on the current card
@@ -448,7 +449,7 @@ public class Game
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0,3);
+            index = randomizer(0, 3);
             blind = SpecialBlind.BlindFromNumber(index);
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
 
@@ -502,10 +503,10 @@ public class Game
         ChipTotal = 0;
         voucherHolder = null;
         currentSpecialBlind = null;
-        index = 0;
+        //index = 0;
         skipCount = 0;
         previousConsumable = null;
-        pastSpecialBlinds = null;
+        pastSpecialBlinds = new List<SpecialBlind>();
         isEasyMode = true;
     }
 
