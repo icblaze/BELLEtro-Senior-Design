@@ -70,7 +70,7 @@ public class EndOfRoundManager : MonoBehaviour
         else
             BlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + Game.access().currentSpecialBlind);
     }
-    private void CalculateRoundReward()
+    public void CalculateRoundReward()
     {
         int round = inst.roundValueTest;
         int ante = inst.GetAnte();

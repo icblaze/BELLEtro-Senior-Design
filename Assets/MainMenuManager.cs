@@ -73,8 +73,6 @@ public class MainMenuManager : MonoBehaviour
         //If menu is not present, display. 
         if (optionsMenu.alpha == 0)
         {
-
-
             optionsMenu.alpha = 1;
             optionsMenu.blocksRaycasts = true;
         }//else, close menu. This is a non-issue as player isn't able to hit button when menu
@@ -96,7 +94,6 @@ public class MainMenuManager : MonoBehaviour
     {
         howToPlayMenu.alpha = 1;
         howToPlayMenu.blocksRaycasts = true;
-
     }
 
     //Function that is called once the animation is done to load the playable scene.

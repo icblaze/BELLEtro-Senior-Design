@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ab94e8972d1724fe689a273f51bc0433
+guid: a0a7f8f139ed8a84e92829a4cbe61021
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4683124880302716848
-    second: brainstorm bonus_0
+      213: 1356281618106240076
+    second: BrainstormBonus_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,11 +109,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brainstorm bonus_0
+      name: BrainstormBonus_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05843cecbb2320fb0800000000000000
-      internalID: -4683124880302716848
+      spriteID: c4c4d9e12fa72d210800000000000000
+      internalID: 1356281618106240076
       vertices: []
       indices: 
       edges: []
@@ -147,8 +160,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      brainstorm bonus_0: -4683124880302716848
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -62,8 +62,11 @@ public class Deck
   }
   public bool IsValidCombination(SuitName suit, PlaceArticulation placeArt, MannerArticulation mannerArt, LinguisticTerms term)
   {
-    if (suit.ToString() == "None")
+    if (suit == SuitName.None || placeArt == PlaceArticulation.None || mannerArt == MannerArticulation.None || term == LinguisticTerms.None)
     {
+      // If any of the parameters are None, return false
+      // This is to ensure that we don't create cards with invalid combinations
+      // This will also prevent cards from being created with the None suit, placeArt, mannerArt, or term
       return false;
     }
 

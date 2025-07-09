@@ -11,7 +11,7 @@ using UnityEngine;
 
 // Mentors can fundamentally alter the way a player will be able to play BELLEtro.
 // Their effects can range from giving money, to multiplying the mult in a round.
-public class Mentor
+public class Mentor 
 {
     public int sellValue;
     public int price;
@@ -24,7 +24,7 @@ public class Mentor
     //  This will construct the appropiate Mentor subclass with passed card edition
     public static Mentor MentorFactory(MentorName name, CardEdition cardEdition)
     {
-        switch(name)
+        switch (name)
         {
             case MentorName.CheatSheet:
                 return new CheatSheet(cardEdition);
@@ -41,7 +41,7 @@ public class Mentor
             case MentorName.LabGlasses:
                 return new LabGlasses(cardEdition); 
             case MentorName.Extension:
-                return new Extension(cardEdition); 
+                return new Extension(cardEdition);
             case MentorName.LibraryCard:
                 return new LibraryCard(cardEdition);
             case MentorName.TwelveCredits:

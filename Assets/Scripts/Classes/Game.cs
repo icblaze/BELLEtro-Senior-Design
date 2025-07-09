@@ -68,11 +68,13 @@ public class Game
         roundValue = i;
     }
 
+    //This will hold the current Ante value that the player is on.
     public int anteValue
     {
         get; set;
     }
 
+    //This will hold the current Round value that the player is on.
     public int roundValueTest
     {
         get; set;
