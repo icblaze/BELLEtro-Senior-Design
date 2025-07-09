@@ -492,6 +492,21 @@ public class Game
         return ChipTotal;
     }
 
+    public void ResetGame()//Resets the variables held in Game.cs
+    {
+        ante = 1;
+        roundValue = 1;
+        currentChipAmount = 0;
+        ChipTotal = 0;
+        voucherHolder = null;
+        currentSpecialBlind = null;
+        index = 0;
+        skipCount = 0;
+        previousConsumable = null;
+        pastSpecialBlinds = null;
+        isEasyMode = true;
+    }
+
     public void Start()
     {
         BlindSceneManager blindSceneManager = GameObject.FindFirstObjectByType<BlindSceneManager>().GetComponent<BlindSceneManager>();

@@ -48,10 +48,11 @@ public class PauseMenuManager : MonoBehaviour
     //the scene should change soon after.
     public void QuitClick()
     {
-        Round round = Round.access();
+        Game.access().ResetGame();
+        Round.access().RestartGame();
         Player.access().Reset();
         Deck.access().Reset();
-        round.RestartGame();
+
         AudioManager audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         audioManager.ChangeToMainMenuMusic();
         StartCoroutine(FadeToBlack());

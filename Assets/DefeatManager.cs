@@ -41,9 +41,9 @@ public class DefeatManager : MonoBehaviour
         }
         defeatText = GameObject.Find("Defeat Text");
         defeatText.GetComponent<TMP_Text>().text = score + rounds + defeated;
-        Round round = Round.access();
+        Game.access().ResetGame();
+        Round.access().RestartGame();
         Player.access().Reset();
         Deck.access().Reset();
-        round.RestartGame();
     }
 }
