@@ -18,8 +18,8 @@ public class ShopManager : MonoBehaviour
 {
     //All UI Components Below
     [Header("All UI Components")]  
-    private Button nextRoundButton;     //Button to go to next round
-    private Button rerollButton;        //Button to reroll the shop
+    public Button nextRoundButton;     //Button to go to next round
+    public Button rerollButton;        //Button to reroll the shop
     public GameObject moneyText;       //Text for Money
 
     //First Purchasable Card
@@ -47,8 +47,8 @@ public class ShopManager : MonoBehaviour
     public GameObject voucherCard;         //GameObject for Voucher Card
     public GameObject card1;             //Gameobject for Card 1
     public GameObject card2;             //Gameobject for Card 2
-    public GameObject pack1Card;         //GameObject for Pack 1
-    public GameObject pack2Card;         //GameObject for Pack 2
+    [SerializeField] public GameObject pack1Card;         //GameObject for Pack 1
+    [SerializeField] public GameObject pack2Card;         //GameObject for Pack 2
 
     [SerializeReference] public Card hoveredCard;
     [SerializeReference] public Pack pack;
@@ -152,7 +152,9 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Pack 2 Type: " + pack2.packType);
 
         pack1Card = GameObject.Find("Pack1");
+        pack1Card.SetActive(true);
         pack2Card = GameObject.Find("Pack2");
+        pack2Card.SetActive(true);
         pack1Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
         pack2Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
 
@@ -164,10 +166,10 @@ public class ShopManager : MonoBehaviour
     {
 
         card1 = GameObject.Find("Mentor1");
-        card1.gameObject.SetActive(true);
+        card1.SetActive(true);
 
         card2 = GameObject.Find("Mentor2");
-        card2.gameObject.SetActive(true);
+        card2.SetActive(true);
 
         mentor1 = null;
         mentor2 = null;

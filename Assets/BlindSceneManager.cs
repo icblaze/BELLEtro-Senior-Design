@@ -136,14 +136,14 @@ public class BlindSceneManager : MonoBehaviour
         StartCoroutine(fadeInst.FadeIn(BigBlindCover));
         StartCoroutine(fadeInst.FadeIn(SpecialBlindCover));
 
-        if (gameInst.roundValueTest == 1)
+        if (gameInst.GetRound() == 1)
         {
             SmallBlindCover.blocksRaycasts = false;
             SmallBlindCover.interactable = false;
             StartCoroutine(fadeInst.FadeOut(SmallBlindCover));
   
         }
-        else if (gameInst.roundValueTest == 2)
+        else if (gameInst.GetRound() == 2)
         {
             BigBlindCover.blocksRaycasts = false;
             BigBlindCover.interactable = false;
