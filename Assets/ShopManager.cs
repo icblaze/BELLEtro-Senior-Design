@@ -320,6 +320,8 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount < mentor.price)
         {
             Debug.Log("Not Enough Space In Mentors or Money Insufficient");
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             sfxManager.NoSFX();
             return;
         }
@@ -340,6 +342,7 @@ public class ShopManager : MonoBehaviour
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - mentor.price;
+        sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
     private void BuyTextbook(Textbook textbook, Button textbookButton, string textbookName)
@@ -366,6 +369,7 @@ public class ShopManager : MonoBehaviour
 
             // //Reduce money based on price and change text to display new money
             playerInst.moneyCount = playerInst.moneyCount - textbook.price;
+            sfxManager.MoneyUsed();
             moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
         }
         else
@@ -408,6 +412,7 @@ public class ShopManager : MonoBehaviour
 
         //Reduce Money and Update
         playerInst.moneyCount = playerInst.moneyCount - cardBuff.price;
+        sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
     }
@@ -441,6 +446,7 @@ public class ShopManager : MonoBehaviour
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - voucher.initialPrice;
+        sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
     public void Pack1()
@@ -462,6 +468,8 @@ public class ShopManager : MonoBehaviour
         if (playerInst.moneyCount < pack.price)
         {
             sfxManager.NoSFX();
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             Debug.Log("Insufficient Funds");
             return;
         }
@@ -476,6 +484,7 @@ public class ShopManager : MonoBehaviour
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
+        sfxManager.MoneyUsed();
 
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
@@ -534,6 +543,7 @@ public class ShopManager : MonoBehaviour
 
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;
+        sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount;
         reroll++;
         rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";

@@ -119,18 +119,29 @@ public class DeleteCard : MonoBehaviour
         if (selectedCards.Count > 5)
         {
             Debug.LogWarning("You cannot discard more than 5 cards at a time!");
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             // Stop the function here so no cards are deleted.
             return;
         }
         if (selectedCards.Count == 0)
         {
             Debug.LogWarning("No cards selected for deletion!");
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
+            SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
+            sfxManager.NoSFX();
             return;
         }
 
         if (discardCount == 0)
         {
             Debug.LogWarning("You don't have anymore discards left!");
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
+            SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
+            sfxManager.NoSFX();
+            
             return;
         }
 
@@ -158,10 +169,12 @@ public class DeleteCard : MonoBehaviour
         discardCount = Round.access().DecreaseDiscardCount();      //Decrease Hand count of the player
         discardsLeft.text = discardCount.ToString("0");
 
-        if(cashPenalty)
+        if (cashPenalty)
         {
             Player.access().moneyCount--;
             ShopManager.access().UpdateMoneyDisplay();
+            SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
+            sfxManager.MoneyUsed();
         }
 
         StartCoroutine(RefillNextFrame(newCards));

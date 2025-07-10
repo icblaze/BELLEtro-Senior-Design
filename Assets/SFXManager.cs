@@ -52,6 +52,10 @@ public class SFXManager : MonoBehaviour
     {
         audioManager.PlaySFX(no);
     }
+    public void MoneyUsed()
+    {
+        audioManager.PlaySFX(moneyUsed);
+    }
     public void RoundWonSFX()
     {
         audioManager.PlaySFX(roundWon);
