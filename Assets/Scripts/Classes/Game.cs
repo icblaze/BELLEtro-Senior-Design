@@ -50,7 +50,9 @@ public class Game
     public Consumable previousConsumable = null;                                   //Stores the name of last used consumable
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
 
-    public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.     
+    public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.  
+
+    //Getter and Setter for the ante variable   
     public int GetAnte()
     {
         return ante;
@@ -59,6 +61,8 @@ public class Game
     {
         ante = i;
     }
+
+    //Getter and Setter for the roundValue variable
     public int GetRound()
     {
         return roundValue;
@@ -66,18 +70,6 @@ public class Game
     public void SetRound(int i)
     {
         roundValue = i;
-    }
-
-    //This will hold the current Ante value that the player is on.
-    public int anteValue
-    {
-        get; set;
-    }
-
-    //This will hold the current Round value that the player is on.
-    public int roundValueTest
-    {
-        get; set;
     }
 
     //This function is used to create a seed, so that we can get a random card from the deck.
