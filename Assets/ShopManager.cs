@@ -419,6 +419,8 @@ public class ShopManager : MonoBehaviour
         if (playerInst.moneyCount < voucher.initialPrice)
         {
             sfxManager.NoSFX();
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             Debug.Log("Insufficient Funds");
             return;
         }
