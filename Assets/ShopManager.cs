@@ -154,9 +154,9 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Pack 1 Type: " + pack1.packType);
         Debug.Log("Pack 2 Type: " + pack2.packType);
 
-        pack1Card = GameObject.Find("Pack1");
+        // pack1Card = GameObject.Find("Pack1");
         pack1Card.SetActive(true);
-        pack2Card = GameObject.Find("Pack2");
+        // pack2Card = GameObject.Find("Pack2");
         pack2Card.SetActive(true);
         pack1Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
         pack2Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
@@ -846,6 +846,7 @@ public class ShopManager : MonoBehaviour
     {
         //Fade Out UI
         StartCoroutine(FadeOut(RegularUI));
+        StartCoroutine(FadeOut(shopUI));
 
         //Attach the corresponding objects(cards) onto the sections needed.
         PackCard1 = pack.cardsInPack[0];
@@ -1247,6 +1248,7 @@ public class ShopManager : MonoBehaviour
 
         //Bring back Regular UI
         StartCoroutine(FadeIn(RegularUI));
+        StartCoroutine(FadeIn(shopUI));
         RegularUI.interactable = true;
         RegularUI.blocksRaycasts = true;
 
