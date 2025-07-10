@@ -518,6 +518,8 @@ public class ShopManager : MonoBehaviour
         if (playerInst.moneyCount < reroll)
         {
             //Possibly make screen shake, or output a message saying not enough money
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             Debug.Log("Money Insufficient");
             return;
         }
