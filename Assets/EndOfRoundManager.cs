@@ -72,7 +72,7 @@ public class EndOfRoundManager : MonoBehaviour
     }
     public void CalculateRoundReward()
     {
-        int round = inst.roundValueTest;
+        int round = inst.GetRound();
         int ante = inst.GetAnte();
 
         switch (round)

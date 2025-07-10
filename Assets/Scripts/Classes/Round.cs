@@ -49,31 +49,36 @@ public class Round
             Debug.Log("Current round or current ante is not within bounds.");
             return 0;
         }
+        if (currentAnte == 0)
+        { 
+            Debug.Log("Current ante is 0, returning 0 as target score.");
+            return 0;
+        }
 
         //This switch statement determines the target score based on the blind value(Round value)
-        //and current Ante that the player is currently playing.
-        switch (currentRound)
-        {
-            case 1:
-                targetScore = baseAnteChips[currentAnte] * 1;
-                return (int)targetScore;
-            case 2:
-                targetScore = (baseAnteChips[currentAnte] * 1.5);
-                return (int)targetScore;
-            case 3:
-                targetScore = (baseAnteChips[currentAnte] * Game.access().currentSpecialBlind.chipMultiplier);
-                return (int)targetScore;
-            default:
-                return 0;
-        }
+            //and current Ante that the player is currently playing.
+            switch (currentRound)
+            {
+                case 1:
+                    targetScore = baseAnteChips[currentAnte] * 1;
+                    return (int)targetScore;
+                case 2:
+                    targetScore = (baseAnteChips[currentAnte] * 1.5);
+                    return (int)targetScore;
+                case 3:
+                    targetScore = baseAnteChips[currentAnte] * Game.access().currentSpecialBlind.chipMultiplier;
+                    return (int)targetScore;
+                default:
+                    return 0;
+            }
 
     }
 
     //This function determines the reward for the current round based on the round value.
     public int CalculateRoundReward()
     {
-        int round = Game.access().roundValueTest;
-        int ante = Game.access().anteValue;
+        int round = Game.access().GetRound();
+        int ante = Game.access().GetAnte();
 
         switch (round)
         {

@@ -29,7 +29,6 @@ public class BlindSceneManager : MonoBehaviour
     public Button SmallBlindButton;
     public Button BigBlindButton;
     public Button SpecialBlindButton;
-
     public GameObject HandNumber;
     public GameObject DiscardNumber;
     public GameObject MoneyNumber;
@@ -80,6 +79,8 @@ public class BlindSceneManager : MonoBehaviour
 
         BigBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.GetAnte()] * 1.5;
 
+        SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.GetTargetScore(gameInst.GetAnte(), 3);
+
         SpecialBlindChips.GetComponentInChildren<TMP_Text>().text = "" + roundInst.baseAnteChips[gameInst.GetAnte()] * special.chipMultiplier;
 
         HandNumber.GetComponentInChildren<TMP_Text>().text = "" + playerInst.maxHandCount;
@@ -104,18 +105,17 @@ public class BlindSceneManager : MonoBehaviour
         SpecialBlindCover.blocksRaycasts = true;
         SpecialBlindCover.interactable = true;
         Debug.Log("Round is currently: " + gameInst.GetRound());
-
-        //  Reset blind cover appearance
-        StartCoroutine(fadeInst.FadeIn(SmallBlindCover));
-        StartCoroutine(fadeInst.FadeIn(BigBlindCover));
-        StartCoroutine(fadeInst.FadeIn(SpecialBlindCover));
+        
+        SmallBlindCover.alpha = 1;
+        BigBlindCover.alpha = 1;
+        SpecialBlindCover.alpha = 1;
 
         if (gameInst.GetRound() == 1)
         {
             SmallBlindCover.blocksRaycasts = false;
             SmallBlindCover.interactable = false;
             StartCoroutine(fadeInst.FadeOut(SmallBlindCover));
-  
+
         }
         else if (gameInst.GetRound() == 2)
         {
