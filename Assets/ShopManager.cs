@@ -33,7 +33,7 @@ public class ShopManager : MonoBehaviour
     private Mentor mentor2;            //Mentor Card
     private Textbook textbook2;        //Textbook Card
     private CardBuff cardBuff2;        //CardBuff Card
-    private Voucher voucher;           //Voucher
+    private Voucher voucher;           //Voucher Card
 
     [Header("Packs and Pack Cards")]
     private Pack pack1;                //Pack 1
@@ -44,13 +44,11 @@ public class ShopManager : MonoBehaviour
     private PCard PackCard3;           //Card 3 in Pack
     private PCard PackCard4;           //Card 4 in Pack
     private PCard PackCard5;           //Card 5 in Pack
-    public GameObject voucherCard;         //GameObject for Voucher Card
+    public GameObject voucherCard;       //GameObject for Voucher Card
     public GameObject card1;             //Gameobject for Card 1
     public GameObject card2;             //Gameobject for Card 2
     [SerializeField] public GameObject pack1Card;         //GameObject for Pack 1
     [SerializeField] public GameObject pack2Card;         //GameObject for Pack 2
-
-    [SerializeReference] public Card hoveredCard;
     [SerializeReference] public Pack pack;
 
     [Header("Card Buttons")]
@@ -63,7 +61,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] public GameObject currentBuyButton;       //Gameobject for the current card being bought
     [SerializeField] public Button buyButton;                  //Button for Buy Card
 
-    // To visually update the Mentors and Consumables Card Group when items added
+    // To visually update the Mentors and Consumables Card Group when items are added
     [Header("Card Holders")]
     [SerializeField] private JokerCardHolder mentorCardHolder;
     [SerializeField] private ConsumableCardHolder consumableCardHolder;
@@ -80,7 +78,7 @@ public class ShopManager : MonoBehaviour
     public CanvasGroup PackGroupPlus;   //Canvas group for Cards 4 and 5
 
     private int reroll = 5;             //Reroll price
-    private int shopMentorsAmount = 2;  //Amount of top cards/purchasable card
+    private int shopMentorsAmount = 2;  //We will include 2 of the following: Mentors, Textbooks, or CardBuffs
     int cardsSelected = 0;              //Cards currently selected in pack
     int packSelected = 0;               //Used to tell which pack was selected
 
@@ -138,7 +136,7 @@ public class ShopManager : MonoBehaviour
             vouchers = inst.randomVoucher(1);
             voucher = vouchers[0];
             voucher.initialPrice = Mathf.CeilToInt(voucher.initialPrice * playerInst.discount);
-            voucherCard = GameObject.Find("Voucher");
+            voucherCard.SetActive(true);
             voucherCard.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Vouchers/" + voucher.name.ToString());
             Debug.Log("Voucher Name: " + voucher.name.ToString());
         }
@@ -154,20 +152,23 @@ public class ShopManager : MonoBehaviour
         Debug.Log("Pack 1 Type: " + pack1.packType);
         Debug.Log("Pack 2 Type: " + pack2.packType);
 
-        // pack1Card = GameObject.Find("Pack1");
         pack1Card.SetActive(true);
-        // pack2Card = GameObject.Find("Pack2");
         pack2Card.SetActive(true);
         pack1Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack1.packType.ToString() + "_" + pack1.edition.ToString());
         pack2Card.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Pack/" + pack2.packType.ToString() + "_" + pack2.edition.ToString());
 
+        //Reset all Info text boxes for the different packs/cards in the shop
+        VoucherDetails.alpha = 0;
+        Pack1Details.alpha = 0;
+        Pack2Details.alpha = 0;
+        Mentor1Details.alpha = 0;
+        Mentor2Details.alpha = 0;
     }
 
     //This function determines which cards will be placed in the shop.
     //This function also adds the image of the chosen cards to the shop.
     private void NewCards()
     {
-
         card1 = GameObject.Find("Mentor1");
         card1.SetActive(true);
 
@@ -343,7 +344,7 @@ public class ShopManager : MonoBehaviour
     }
     private void BuyTextbook(Textbook textbook, Button textbookButton, string textbookName)
     {
-        buyButton.interactable = false; //Disable the button to prevent multiple purchases
+        textbookButton.interactable = false; //Disable the button to prevent multiple purchases
         //If consumables is maxed or not enough money
         if (playerInst.consumables.Count < playerInst.maxConsumables
         && playerInst.moneyCount >= textbook.price)
@@ -356,10 +357,10 @@ public class ShopManager : MonoBehaviour
             }
 
             //Move pack disappear
-            // textbookButton.interactable |= false;
             GameObject.Find(textbookName).SetActive(false);
             textbookButton.gameObject.SetActive(false);
 
+            //Increment cards purchased
             int cardsPurchased = VictoryManager.access().GetCardsPurchased();
             VictoryManager.access().SetCardsPurchased(cardsPurchased + 1);
 
@@ -377,7 +378,7 @@ public class ShopManager : MonoBehaviour
     }
     private void BuyCardBuff(CardBuff cardBuff, Button cardBuffButton, string cardBuffName)
     {
-        buyButton.interactable = false; //Disable the button to prevent multiple purchases
+        cardBuffButton.interactable = false; //Disable the button to prevent multiple purchases
         if (playerInst.consumables.Count >= playerInst.maxConsumables
         || playerInst.moneyCount < cardBuff.price)
         {
@@ -408,9 +409,9 @@ public class ShopManager : MonoBehaviour
     }
   
     //Function call takes in a voucher card and adds the effects into the player's run.
-    public void BuyVoucher()
+    public void BuyVoucher(Voucher voucher, Button voucherButton)
     {
-        buyButton.interactable = false; //Disable the button to prevent multiple purchases
+        voucherButton.interactable = false; //Disable the button to prevent multiple purchases
         if (playerInst.moneyCount < voucher.initialPrice)
         {
             sfxManager.NoSFX();
@@ -426,8 +427,11 @@ public class ShopManager : MonoBehaviour
         voucher.applyEffect();
 
         //Remove voucher from screen
-        //voucherCard.GetComponent<Button>().interactable = false;
         voucherCard.SetActive(false);
+        voucherButton.gameObject.SetActive(false);
+
+        int cardsPurchased = VictoryManager.access().GetCardsPurchased();
+        VictoryManager.access().SetCardsPurchased(cardsPurchased + 1);
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - voucher.initialPrice;
@@ -460,7 +464,7 @@ public class ShopManager : MonoBehaviour
         VictoryManager.access().SetPacksPurchased(packsPurchased + 1);
 
         //Make pack disappear
-        packButton.interactable |= false;
+        packButton.interactable = false;
         GameObject.Find(packName).SetActive(false);
         packButton.gameObject.SetActive(false);
 
@@ -468,8 +472,6 @@ public class ShopManager : MonoBehaviour
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
 
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
-
-
 
         //Open pack and allow user to choose from cards
         OpenPacks(pack);
@@ -648,8 +650,7 @@ public class ShopManager : MonoBehaviour
             else if (cardName == "Voucher")
             {
                 buyButton.GetComponent<CanvasGroup>().alpha = 0;
-                RemoveVoucherDetails();
-                BuyVoucher();
+                BuyVoucher(voucher, buyButton);
             }
             else if (cardName == "Pack1")
             {
@@ -773,8 +774,8 @@ public class ShopManager : MonoBehaviour
         ActivateBuyButton("Voucher");
         VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n" + voucher.description + "\n$"  + voucher.initialPrice.ToString();
         VoucherDetails.blocksRaycasts = true;
-        VoucherDetails.interactable = true;
         StartCoroutine(FadeIn(VoucherDetails));
+        VoucherDetails.interactable = true;
     }
     public void RemoveVoucherDetails()
     {

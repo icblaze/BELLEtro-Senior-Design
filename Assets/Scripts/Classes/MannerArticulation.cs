@@ -11,7 +11,7 @@ using UnityEngine;
 // the vocal tract to produce a sound.
 public enum MannerArticulation
 {
-    None,
+    //None,
     Stop,
     Fricative,
     Affricate,
