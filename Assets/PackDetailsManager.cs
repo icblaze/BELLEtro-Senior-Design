@@ -47,19 +47,19 @@ public class PackDetailsManager : MonoBehaviour
 
         if (pCard.mentor != null)
         {
-            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.mentor.description;
+            cardDetails.GetComponentInChildren<TMP_Text>().text = "Edition:" + pCard.edition + "\n" + SplitString.SplitCase.Split(pCard.mentor.name.ToString()) + "\n" + pCard.mentor.description.ToString();
         }
         else if (pCard.textbook != null)
         {
-            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.textbook.GetDescription();
+            cardDetails.GetComponentInChildren<TMP_Text>().text = "Edition:" +  pCard.edition + "\n" +  pCard.textbook.GetDescription();
         }
         else if (pCard.cardBuff != null)
         {
-            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.cardBuff.name.ToString();
+            cardDetails.GetComponentInChildren<TMP_Text>().text = "Edition:" +  pCard.edition + "\n" +  SplitString.SplitCase.Split(pCard.cardBuff.name.ToString()) + "\n" + pCard.cardBuff.GetDescription();
         }
         else
         {
-            cardDetails.GetComponentInChildren<TMP_Text>().text = pCard.term.ToString();
+            cardDetails.GetComponentInChildren<TMP_Text>().text = "Edition:" +  pCard.edition + "\n" +  pCard.term.ToString() + "\n Chips: " + pCard.chips + "Mult: " + pCard.multiplier;
         }
         // cardDetails.blocksRaycasts = true;
         StartCoroutine(FadeIn(cardDetails));

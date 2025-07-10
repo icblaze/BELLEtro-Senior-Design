@@ -771,7 +771,7 @@ public class ShopManager : MonoBehaviour
     public void ShowVoucherDetails()
     {
         ActivateBuyButton("Voucher");
-        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n$" + voucher.initialPrice.ToString();
+        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n" + voucher.description + "\n$"  + voucher.initialPrice.ToString();
         VoucherDetails.blocksRaycasts = true;
         VoucherDetails.interactable = true;
         StartCoroutine(FadeIn(VoucherDetails));

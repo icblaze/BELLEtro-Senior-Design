@@ -29,15 +29,15 @@ public class DefeatManager : MonoBehaviour
         String defeated;
         if (inst.GetRound() == 1)
         {
-            defeated = "Defeated By: Small Blind <sprite name=\"SmallBlind\">\n";
+            defeated = "Defeated By: Small Blind\n <sprite name=\"SmallBlind\">\n";
         }
         else if (inst.GetRound() == 2)
         {
-            defeated = "Defeated By: Big Blind <sprite name=\"BigBlind\">\n";
+            defeated = "Defeated By: Big Blind\n <sprite name=\"BigBlind\">\n";
         }
         else
         {
-            defeated = "Defeated By: " + inst.currentSpecialBlind.ToString() + " <sprite name=\"" + inst.currentSpecialBlind.ToString() + "\">\n";
+            defeated = "Defeated By: " + inst.currentSpecialBlind.ToString() + "\n <sprite name=\"" + inst.currentSpecialBlind.ToString() + "\">\n";
         }
         defeatText = GameObject.Find("Defeat Text");
         defeatText.GetComponent<TMP_Text>().text = score + rounds + defeated;
