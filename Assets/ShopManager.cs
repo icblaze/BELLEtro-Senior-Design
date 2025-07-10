@@ -371,6 +371,8 @@ public class ShopManager : MonoBehaviour
         else
         {
             //Should make the UI shake
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             sfxManager.NoSFX();
             Debug.Log("Not Enough Space In Consumables or Money Insufficient");
             return;
@@ -383,6 +385,8 @@ public class ShopManager : MonoBehaviour
         || playerInst.moneyCount < cardBuff.price)
         {
             //Should make the UI shake
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
             sfxManager.NoSFX();
             Debug.Log("Not Enough Space In Consumables or Money Insufficient");
             return;

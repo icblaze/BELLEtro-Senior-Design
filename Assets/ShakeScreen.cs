@@ -24,6 +24,14 @@ public class ShakeScreen : MonoBehaviour
 
         return instance;
     }
+    public void Update()
+    {
+        if (shake == true)
+        {
+            shake = false;
+            OnShake(1f, .05f);
+        }
+    }
     public void StartShake()
     {
         OnShake(1f, .025f);
