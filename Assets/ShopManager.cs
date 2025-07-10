@@ -17,7 +17,7 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     //All UI Components Below
-    [Header("All UI Components")]  
+    [Header("All UI Components")]
     public Button nextRoundButton;     //Button to go to next round
     public Button rerollButton;        //Button to reroll the shop
     public GameObject moneyText;       //Text for Money
@@ -169,10 +169,10 @@ public class ShopManager : MonoBehaviour
     //This function also adds the image of the chosen cards to the shop.
     private void NewCards()
     {
-        card1 = GameObject.Find("Mentor1");
+        // card1 = GameObject.Find("Mentor1");
         card1.SetActive(true);
 
-        card2 = GameObject.Find("Mentor2");
+        // card2 = GameObject.Find("Mentor2");
         card2.SetActive(true);
 
         mentor1 = null;
@@ -284,7 +284,7 @@ public class ShopManager : MonoBehaviour
                     {
                         mentor2 = mentors[0];
                         mentor2.price = Mathf.CeilToInt(mentor2.price * playerInst.discount);
-                        
+
                         // (You would add similar checks for mentor2 and cardButton2 here)
                         if (card2 == null)
                         {
@@ -342,6 +342,8 @@ public class ShopManager : MonoBehaviour
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - mentor.price;
+        RemoveMentor1Details();
+        RemoveMentor2Details();
         sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
@@ -369,6 +371,8 @@ public class ShopManager : MonoBehaviour
 
             // //Reduce money based on price and change text to display new money
             playerInst.moneyCount = playerInst.moneyCount - textbook.price;
+            RemoveTextbook1Details();
+            RemoveTextbook2Details();
             sfxManager.MoneyUsed();
             moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
         }
@@ -412,11 +416,13 @@ public class ShopManager : MonoBehaviour
 
         //Reduce Money and Update
         playerInst.moneyCount = playerInst.moneyCount - cardBuff.price;
+        RemoveCardBuff1Details();
+        RemoveCardBuff2Details();
         sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
     }
-  
+
     //Function call takes in a voucher card and adds the effects into the player's run.
     public void BuyVoucher(Voucher voucher, Button voucherButton)
     {
@@ -446,6 +452,7 @@ public class ShopManager : MonoBehaviour
 
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - voucher.initialPrice;
+        RemoveVoucherDetails();
         sfxManager.MoneyUsed();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
     }
@@ -485,7 +492,8 @@ public class ShopManager : MonoBehaviour
         // //Reduce money based on price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - pack.price;
         sfxManager.MoneyUsed();
-
+        RemovePack1Details();
+        RemovePack2Details();
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount.ToString();
 
         //Open pack and allow user to choose from cards
@@ -700,7 +708,6 @@ public class ShopManager : MonoBehaviour
     {
         ActivateBuyButton("Mentor1");
         Mentor1Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor1.name.ToString()) + "\n" + mentor1.description.ToString() + "\n$" + mentor1.price.ToString();
-        Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
     }
@@ -714,8 +721,7 @@ public class ShopManager : MonoBehaviour
     private void ShowMentor2Details()
     {
         ActivateBuyButton("Mentor2");
-        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor2.name.ToString()) + "\n" +  mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
-        Mentor2Details.blocksRaycasts = true;
+        Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(mentor2.name.ToString()) + "\n" + mentor2.description.ToString() + "\n$" + mentor2.price.ToString();
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
     }
@@ -729,9 +735,8 @@ public class ShopManager : MonoBehaviour
 
     private void ShowTextbook1Details()
     {
-        ActivateBuyButton("Mentor1");   
+        ActivateBuyButton("Mentor1");
         Mentor1Details.GetComponentInChildren<TMP_Text>().text = textbook1.GetDescription() + "\n$" + textbook1.price.ToString();
-        Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
     }
@@ -746,7 +751,6 @@ public class ShopManager : MonoBehaviour
     {
         ActivateBuyButton("Mentor2");
         Mentor2Details.GetComponentInChildren<TMP_Text>().text = textbook2.GetDescription() + "\n$" + textbook2.price.ToString();
-        Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
     }
@@ -762,7 +766,6 @@ public class ShopManager : MonoBehaviour
     {
         ActivateBuyButton("Mentor1");
         Mentor1Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(cardBuff1.name.ToString()) + "\n" + cardBuff1.GetDescription() + "\n$" + cardBuff1.price.ToString();
-        Mentor1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor1Details));
         Mentor1Details.interactable = true;
     }
@@ -777,7 +780,6 @@ public class ShopManager : MonoBehaviour
     {
         ActivateBuyButton("Mentor2");
         Mentor2Details.GetComponentInChildren<TMP_Text>().text = SplitString.SplitCase.Split(cardBuff2.name.ToString()) + "\n" + cardBuff2.GetDescription() + "\n$" + cardBuff2.price.ToString();
-        Mentor2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Mentor2Details));
         Mentor2Details.interactable = true;
     }
@@ -790,8 +792,7 @@ public class ShopManager : MonoBehaviour
     public void ShowVoucherDetails()
     {
         ActivateBuyButton("Voucher");
-        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n" + voucher.description + "\n$"  + voucher.initialPrice.ToString();
-        VoucherDetails.blocksRaycasts = true;
+        VoucherDetails.GetComponentInChildren<TMP_Text>().text = voucher.name.ToString() + "\n" + voucher.description + "\n$" + voucher.initialPrice.ToString();
         StartCoroutine(FadeIn(VoucherDetails));
         VoucherDetails.interactable = true;
     }
@@ -807,8 +808,6 @@ public class ShopManager : MonoBehaviour
         ActivateBuyButton("Pack1");
 
         Pack1Details.GetComponentInChildren<TMP_Text>().text = pack1.packType.ToString() + "\nChoose " + pack1.selectableCards.ToString() + " of " + pack1.packSize.ToString() + " cards" + "\n" + "$" + pack1.price.ToSafeString();
-
-        Pack1Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack1Details));
         Pack1Details.interactable = true;
     }
@@ -823,7 +822,6 @@ public class ShopManager : MonoBehaviour
     {
         ActivateBuyButton("Pack2");
         Pack2Details.GetComponentInChildren<TMP_Text>().text = pack2.packType.ToString() + "\nChoose " + pack2.selectableCards.ToString() + " of " + pack2.packSize.ToString() + " cards" + "\n" + "$" + pack2.price.ToSafeString();
-        Pack2Details.blocksRaycasts = true;
         StartCoroutine(FadeIn(Pack2Details));
         Pack2Details.interactable = true;
     }
@@ -880,7 +878,7 @@ public class ShopManager : MonoBehaviour
         Debug.Log("PackCard1 textbook:" + PackCard1.textbook);
 
         PackCard1Button = GameObject.Find("Pack Card 1").GetComponent<Button>();
-        PackCard2Button = GameObject.Find("Pack Card 2").GetComponent<Button>();  
+        PackCard2Button = GameObject.Find("Pack Card 2").GetComponent<Button>();
         PackCard3Button = GameObject.Find("Pack Card 3").GetComponent<Button>();
 
         //Set Images For Cards
@@ -1353,7 +1351,7 @@ public class ShopManager : MonoBehaviour
     public void UpdateMoneyDisplay()
     {
         if (moneyText == null)
-        { 
+        {
             Debug.LogError("ShopManager could not update UI! moneyText is null!");
         }
 
