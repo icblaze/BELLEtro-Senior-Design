@@ -12,7 +12,6 @@ public class LinguisticTermSymbol
     public static Dictionary<LinguisticTerms, string> unicodeMap = new()
     {
         //Default Value
-        //{ LinguisticTerms.None, "None"},
 
         //Stop Consonants         
         { LinguisticTerms.Voiceless_Stop_Labial, "p" },

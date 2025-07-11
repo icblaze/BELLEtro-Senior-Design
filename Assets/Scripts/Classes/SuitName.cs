@@ -8,7 +8,6 @@ using UnityEngine;
 
 public enum SuitName
 {
-    //None,
     Voiced,
     Voiceless,
     Tense,
