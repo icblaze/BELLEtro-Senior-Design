@@ -10,7 +10,7 @@ using UnityEngine;
 public enum LinguisticTerms
 {
     //Default Value
-    None,
+    //None,
 
     //Consonants
 
