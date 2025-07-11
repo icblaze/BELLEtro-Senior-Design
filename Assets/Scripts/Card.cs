@@ -73,6 +73,9 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     [SerializeField] private string editionName = "";
     [SerializeField] private bool disabled = false;
 
+    [Header("Special Blind Flags")]
+    private bool hideSuit = false;
+
     public Consumable consumable;
     [Header("Consumable Object")]
     public ConsumableType consumableType;
@@ -385,6 +388,12 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         cardVisual.Initialize(this);
     }
 
+    //  Set the flag for whether to hide the suit whenever PCard is assigned at start of blind
+    public void SetSuitVisibility(bool hideSuit)
+    {
+        this.hideSuit = hideSuit;
+    }
+
     //  Assigns the PCard object to Card and assigns attributes from PCard
     public void AssignPCard(PCard pcard)
     {
@@ -427,7 +436,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         if (suitName != newSuit)
         {
             suitName = newSuit;
-            appearance.UpdateSuit(newSuit);
+            appearance.UpdateSuit(newSuit, hideSuit);
         }
 
         //  Update Suit if different

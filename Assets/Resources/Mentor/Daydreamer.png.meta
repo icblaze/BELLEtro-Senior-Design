@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b4606aecef561ff498a64ac5fb268731
+guid: a9bf0d70b5e8e446a9c72d8a1ebd3640
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5646292197338574624
-    second: OfficeHours_0
+      213: 249651008950545849
+    second: Daydreamer_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OfficeHours_0
+      name: Daydreamer_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 271
-        height: 407
+        width: 378
+        height: 529
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 02fec6096d8ab5e40800000000000000
-      internalID: 5646292197338574624
+      spriteID: 9bda05a1540f67300800000000000000
+      internalID: 249651008950545849
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      OfficeHours_0: 5646292197338574624
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

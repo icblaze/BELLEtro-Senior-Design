@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BrainstormBonus_0: 1356281618106240076
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

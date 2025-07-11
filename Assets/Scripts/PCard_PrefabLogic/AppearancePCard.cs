@@ -46,11 +46,12 @@ public class AppearancePCard : MonoBehaviour
     }
 
     //  When Suit of PCard is updated, change layer
-    public void UpdateSuit(string suit)
+    public void UpdateSuit(string suit, bool hideSuit)
     {
         Sprite sprite = Resources.Load<Sprite>($"PCard/Suits/" + suit);
 
-        if (sprite == null)
+        //  If special blind activated to hide suit, then make it transparent
+        if (sprite == null || hideSuit)
         {
             suitLayer.color = new Color(1f, 1f, 1f, 0f); // fully transparent
         }

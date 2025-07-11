@@ -52,8 +52,8 @@ public class LinguisticTermSymbol
         { LinguisticTerms.Voiceless_Glide_Velar, "ʍ" },
 
         //High Vowels
-        { LinguisticTerms.Tense_High_Front, "ij" },
-        { LinguisticTerms.Tense_High_Back, "uw" },
+        { LinguisticTerms.Tense_High_Front, "i" },
+        { LinguisticTerms.Tense_High_Back, "u" },
         { LinguisticTerms.Lax_High_Front, "ɪ" },
         { LinguisticTerms.Lax_High_Back, "ʊ" },
 

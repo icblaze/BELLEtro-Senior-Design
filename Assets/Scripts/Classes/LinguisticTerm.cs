@@ -57,8 +57,8 @@ public enum LinguisticTerms
     //Lax vowels don't require much muscular effort from the vocal tract.
 
     //High Vowels
-    Tense_High_Front,                             //(ij)
-    Tense_High_Back,                              //(uw)
+    Tense_High_Front,                             //(i)
+    Tense_High_Back,                              //(u)
     Lax_High_Front,                               //(I)
     Lax_High_Back,                                //(ʊ)
     
