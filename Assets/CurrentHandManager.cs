@@ -481,10 +481,21 @@ public class CurrentHandManager : MonoBehaviour
         bool cardsPlaceOfManner = cardTerms.GroupBy(cardTerm => cardTerm[1]).Any(g => g.Count() == 4);
         bool cardsPlaceOfArt = cardTerms.GroupBy(cardTerm => cardTerm[2]).Any(g => g.Count() == 4);
 
+        int cardsVowelCount = 0;    // Count the number of vowel cards in the hand
+        int cardsConsonantCount = 0; // Count the number of consonant cards in the hand
 
-        if (cardsPlaceOfArt && cardsPlaceOfManner)
+        for (int i = 0; i < pCards.Count; i++)
         {
-            for (int i = 0; i < cardTerms.Length; i++)
+            if (pCards[i].suit == SuitName.Lax || pCards[i].suit == SuitName.Tense)
+            {
+                cardsVowelCount++;
+            }
+        }
+        
+        //If there are 4 vowels, then we can check for four of a kind with vowels
+        if (cardsPlaceOfArt && cardsPlaceOfManner && cardsVowelCount >= 4)
+        {
+            for (int i = 0; i < cardTerms.Length - 1; i++)
             {
                 fourOfAKindCards.Clear(); // Clear the four of a kind cards list before checking for four of a kind
                 fourOfAKindCards.Add(pCards[i]); // Add the first card to the four of a kind cards list
@@ -498,16 +509,26 @@ public class CurrentHandManager : MonoBehaviour
 
                 if (fourOfAKindCards.Count == 4)
                 {
-                    Debug.LogWarning("Four of a Kind with vowels!");
+                    Debug.LogWarning("Four of a Kind found with vowels!");
                     return true; // Found a four of a kind
                 }
             }
         }
 
-        //This checks if the consonants have the same manner of articulation
-        if (cardsPlaceOfManner && !cardsPlaceOfArt)
+        //I need to make sure that the cards are not vowels before checking for consonants
+        //I need to check the first element in my cardterms array to see if it is a consonant
+        for(int i = 0; i < pCards.Count; i++)
         {
-            for (int i = 0; i < cardTerms.Length; i++)
+            if (pCards[i].suit == SuitName.Voiced || pCards[i].suit == SuitName.Voiceless)
+            {
+                cardsConsonantCount++;
+            }
+        }
+
+        //This checks if the consonants have the same manner of articulation
+        if (cardsPlaceOfManner && !cardsPlaceOfArt && cardsConsonantCount >= 4)
+        {
+            for (int i = 0; i < cardTerms.Length - 1; i++)
             {
                 fourOfAKindCards.Clear(); // Clear the four of a kind cards list before checking for four of a kind
                 fourOfAKindCards.Add(pCards[i]); // Add the first card to the four of a kind cards list
@@ -528,7 +549,7 @@ public class CurrentHandManager : MonoBehaviour
         }
 
         //This checks if the consonants have the same place of articulation
-        if (cardsPlaceOfArt)
+        if (cardsPlaceOfArt && cardsConsonantCount >= 4)
         {
             for (int i = 0; i < cardTerms.Length; i++)
             {

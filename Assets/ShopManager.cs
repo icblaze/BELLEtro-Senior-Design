@@ -169,10 +169,8 @@ public class ShopManager : MonoBehaviour
     //This function also adds the image of the chosen cards to the shop.
     private void NewCards()
     {
-        // card1 = GameObject.Find("Mentor1");
         card1.SetActive(true);
 
-        // card2 = GameObject.Find("Mentor2");
         card2.SetActive(true);
 
         mentor1 = null;
