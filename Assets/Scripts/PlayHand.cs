@@ -20,6 +20,7 @@ public class PlayHand : MonoBehaviour
     private DeckManager deckManager;                                 // Reference to DeckManager
     public TextMeshProUGUI handsLeft;
     private ScoringManager ScoringManager;
+    private GameObject[] roundCovers; //  Covers for the hand and mentors
 
     private static int currHandCount;
     private Transform playingCardGroup;
@@ -55,6 +56,18 @@ public class PlayHand : MonoBehaviour
 
         if (deckManager == null)
             Debug.LogError("PlayHand: DeckManager script not found in scene!");
+
+        //  Find cover objects that will block elements of the round while scoring
+        roundCovers = GameObject.FindGameObjectsWithTag("BlockWhileScoring");
+
+        if (roundCovers != null)
+        {
+            //  There should be 2, but just in case
+            foreach (GameObject cover in roundCovers)
+            {
+                cover.SetActive(false);
+            }
+        }
     }
 
     //  Sets discards to be the maxDiscards after blind select or end of round
@@ -119,6 +132,16 @@ public class PlayHand : MonoBehaviour
 
     private IEnumerator MoveCardsToPlayArea()
     {
+        if(roundCovers != null)
+        {
+            //  There should be 2, but just in case
+            foreach(GameObject cover in roundCovers)
+            {
+                cover.SetActive(true);
+            }
+        }
+
+
         Debug.Log("MoveCardsToPlayArea started");
 
         float offsetX = -((selectedCards.Count - 1) * 50f); // Adjusts card positioning
@@ -220,6 +243,15 @@ public class PlayHand : MonoBehaviour
             foreach (PCard extra in extraCards)
             {
                 deckManager.DrawNewSlot(extra);
+            }
+        }
+
+        if (roundCovers != null)
+        {
+            //  There should be 2, but just in case
+            foreach (GameObject cover in roundCovers)
+            {
+                cover.SetActive(true);
             }
         }
     }

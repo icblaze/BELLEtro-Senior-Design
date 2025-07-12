@@ -13,6 +13,7 @@ TagManager:
   - MentorVisual
   - ConsumableVisual
   - HandVisual
+  - BlockWhileScoring
   layers:
   - Default
   - TransparentFX
