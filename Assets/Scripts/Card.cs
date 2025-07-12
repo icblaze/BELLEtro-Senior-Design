@@ -95,6 +95,23 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     void Start()
     {
         deleteCardScript = FindFirstObjectByType<DeleteCard>();
+
+        //  Should only be called once
+        if (infoPanel == null)
+        {
+            infoPanel = GameObject.Find("CardInfoPanel");
+            Image panelImage = infoPanel.GetComponent<Image>();
+            panelImage.color = new Color(255, 255, 255, 0.4f);
+            if (infoPanel != null)
+            {
+                infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
+                infoPanel.SetActive(false); // Ensure it's hidden at the start
+            }
+            else
+            {
+                Debug.LogError("Could not find 'CardInfoPanel' in the scene. Make sure it is named correctly and exists in your Hierarchy.");
+            }
+        }
     }
 
     void Update()
@@ -356,19 +373,6 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     //  Instantiate card visual and sets up card info panel
     private void InstantiateCardVisual()
     {
-        if (infoPanel == null)
-        {
-            infoPanel = GameObject.Find("CardInfoPanel");
-            if (infoPanel != null)
-            {
-                infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
-                infoPanel.SetActive(false); // Ensure it's hidden at the start
-            }
-            else
-            {
-                Debug.LogError("Could not find 'CardInfoPanel' in the scene. Make sure it is named correctly and exists in your Hierarchy.");
-            }
-        }
         canvas = GetComponentInParent<Canvas>();
         imageComponent = GetComponent<Image>();
 

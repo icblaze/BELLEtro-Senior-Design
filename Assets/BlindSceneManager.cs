@@ -226,6 +226,10 @@ public class BlindSceneManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        NewBlind();   
+        NewBlind();
+
+        //  Hide the card info initially
+        Image panelImage = GameObject.Find("CardInfoPanel").GetComponent<Image>();
+        panelImage.color = new Color(255, 255, 255, 0);
     }
 }
