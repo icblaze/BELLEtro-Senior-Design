@@ -180,7 +180,7 @@ public class Deck
     }
 
     //  If deck has less than card amount, give remaining 
-    if (deckCards.Count - cardAmount < 0)
+    if (deckCards.Count < cardAmount)
     {
         cardAmount = deckCards.Count;
     }

@@ -185,6 +185,20 @@ public class DeleteCard : MonoBehaviour
         // wait one frame so the Slots are truly empty
         yield return null;
 
+        //  Clean up extra slots if effects that given it have been sold/used up
+        int extraSlots = deckManager.GetSlotCount() - Player.access().handSize;
+
+        while (extraSlots > 0)
+        {
+            Transform emptySlot = deckManager.GetFirstEmptySlot();
+            if (emptySlot != null)
+            {
+                Destroy(emptySlot.gameObject);
+            }
+            extraSlots--;
+            yield return null;
+        }
+
         // here’s the only change: use DrawCard() so it honors your Slot layout
         for (int i = 0; i < newCards.Length; i++)
         {
@@ -193,11 +207,11 @@ public class DeleteCard : MonoBehaviour
         }
 
         //  Draw additional to make up for missing slots
-        int extraSlots = Player.access().handSize - deckManager.GetSlotCount();
+        int missingSlots = Player.access().handSize - deckManager.GetSlotCount();
 
-        if(extraSlots > 0)
+        if (missingSlots > 0)
         {
-            PCard[] extraCards = Deck.access().drawCards(extraSlots);
+            PCard[] extraCards = Deck.access().drawCards(missingSlots);
 
             foreach (PCard extra in extraCards)
             {

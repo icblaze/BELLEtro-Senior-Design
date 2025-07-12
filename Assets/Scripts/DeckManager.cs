@@ -139,6 +139,18 @@ public class DeckManager : MonoBehaviour
         return slotTransforms;
     }
 
+    public Transform GetFirstEmptySlot()
+    {
+        List<Transform> slotTransforms = playingCardGroup
+            .GetComponentsInChildren<Transform>(true)
+            .Where(t => t.CompareTag("Slot"))
+            .ToList();
+
+        Transform emptySlot = slotTransforms.FirstOrDefault(s => s.childCount == 0);
+
+        return emptySlot;
+    }
+
 
     /// <summary>
     /// Draws one card directly into the playingCardGroup—ignores slots and hand-size limits.

@@ -249,6 +249,10 @@ public class JokerCardHolder : MonoBehaviour
                 shopManager.UpdateMoneyDisplay();
             }
 
+            //  Cleanup if certain mentors are sold
+            FixHandSize(cardToSell.mentor);
+
+
             // Remove the card from our list, associated slot, and destroy its game object
 
             //  Remove mentor from player's mentor deck first
@@ -271,6 +275,22 @@ public class JokerCardHolder : MonoBehaviour
 
             //  Wait for GameObject deletion before refreshing
             StartCoroutine(RefreshFrame());
+        }
+    }
+
+    //  When selling turtle, the hand size is set back to normal after discard/play
+    private void FixHandSize(Mentor fixMentor)
+    {
+        //  Adjust hand size back to before bonus
+        if (fixMentor.name == MentorName.Turtle)
+        {
+            Turtle turtleMentor = (Turtle)fixMentor;
+
+            //  If bonus has been applied to hand size, then fix it
+            if (turtleMentor.bonusApplied)
+            {
+                player.handSize -= turtleMentor.handSizeBonus;
+            }
         }
     }
 

@@ -9,7 +9,8 @@ using System.Collections;
 
 public class Turtle : Mentor
 {
-    int handSizeBonus = 5;
+    public int handSizeBonus = 5;
+    public bool bonusApplied = false;   //  One-time flag
     bool startRound = true;
     Player player = Player.access();
     Game game = Game.access();
@@ -40,6 +41,9 @@ public class Turtle : Mentor
 
             //  Set flag for when called PostBlind
             startRound = false;
+
+            //  Indicate that handSizeBonus has been applied
+            bonusApplied = true;
         }
         else
         {
