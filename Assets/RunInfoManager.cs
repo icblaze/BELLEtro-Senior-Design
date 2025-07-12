@@ -154,60 +154,60 @@ public class RunInfoManager : MonoBehaviour
         highCardRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.HighCard].GetCurrMult().ToString();
         highCardTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.HighCard].GetTimesPlayed().ToString();
 
-        pairLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Pair].level.ToString();
+        pairLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.Pair].level.ToString();
         pairBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Pair].GetCurrChips().ToString();
         pairRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Pair].GetCurrMult().ToString();
         pairTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.Pair].GetTimesPlayed().ToString();
 
-        twoPairLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.TwoPair].level.ToString();
+        twoPairLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.TwoPair].level.ToString();
         twoPairBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.TwoPair].GetCurrChips().ToString();
         twoPairRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.TwoPair].GetCurrMult().ToString();
         twoPairTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.TwoPair].GetTimesPlayed().ToString();
 
-        threeKindLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.ThreeKind].level.ToString();
+        threeKindLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.ThreeKind].level.ToString();
         threeKindBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.ThreeKind].GetCurrChips().ToString();
         threeKindRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.ThreeKind].GetCurrMult().ToString();
-        threeKindTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.ThreeKind].GetTimesPlayed().ToString();
+        threeKindTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.ThreeKind].GetTimesPlayed().ToString();
 
-        straightLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Straight].level.ToString();
+        straightLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.Straight].level.ToString();
         straightBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Straight].GetCurrChips().ToString();
         straightRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Straight].GetCurrMult().ToString();
-        straightTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.Straight].GetTimesPlayed().ToString();
+        straightTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.Straight].GetTimesPlayed().ToString();
 
-        flushLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Flush].level.ToString();
+        flushLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.Flush].level.ToString();
         flushBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Flush].GetCurrChips().ToString();
         flushRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.Flush].GetCurrMult().ToString();
-        flushTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.Flush].GetTimesPlayed().ToString();
+        flushTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.Flush].GetTimesPlayed().ToString();
 
-        fullHouseLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FullHouse].level.ToString();
+        fullHouseLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.FullHouse].level.ToString();
         fullHouseBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FullHouse].GetCurrChips().ToString();
         fullHouseRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FullHouse].GetCurrMult().ToString();
-        fullHouseTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.FullHouse].GetTimesPlayed().ToString();
+        fullHouseTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.FullHouse].GetTimesPlayed().ToString();
 
-        fourKindLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FourKind].level.ToString();
+        fourKindLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.FourKind].level.ToString();
         fourKindBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FourKind].GetCurrChips().ToString();
         fourKindRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FourKind].GetCurrMult().ToString();
-        fourKindTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.FourKind].GetTimesPlayed().ToString();
+        fourKindTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.FourKind].GetTimesPlayed().ToString();
 
-        straightFlushLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.StraightFlush].level.ToString();
+        straightFlushLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.StraightFlush].level.ToString();
         straightFlushBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.StraightFlush].GetCurrChips().ToString();
         straightFlushRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.StraightFlush].GetCurrMult().ToString();
-        straightFlushTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.StraightFlush].GetTimesPlayed().ToString();
+        straightFlushTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.StraightFlush].GetTimesPlayed().ToString();
 
-        fiveKindLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FiveKind].level.ToString();
+        fiveKindLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.FiveKind].level.ToString();
         fiveKindBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FiveKind].GetCurrChips().ToString();
         fiveKindRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FiveKind].GetCurrMult().ToString();
-        fiveKindTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.FiveKind].GetTimesPlayed().ToString();
+        fiveKindTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.FiveKind].GetTimesPlayed().ToString();
 
-        flushHouseLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FlushHouse].level.ToString();
+        flushHouseLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.FlushHouse].level.ToString();
         flushHouseBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FlushHouse].GetCurrChips().ToString();
         flushHouseRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FlushHouse].GetCurrMult().ToString();
-        flushHouseTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.FlushHouse].GetTimesPlayed().ToString();
+        flushHouseTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.FlushHouse].GetTimesPlayed().ToString();
 
-        flushFiveLevelText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FlushFive].level.ToString();
+        flushFiveLevelText.GetComponent<TMP_Text>().text = "lvl. " + Player.access().handTable[TextbookName.FlushFive].level.ToString();
         flushFiveBlueScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FlushFive].GetCurrChips().ToString();
         flushFiveRedScoreText.GetComponent<TMP_Text>().text = Player.access().handTable[TextbookName.FlushFive].GetCurrMult().ToString();
-        flushFiveTimesPlayedText.GetComponent<TMP_Text>().text = "#" +  Player.access().handTable[TextbookName.FlushFive].GetTimesPlayed().ToString();
+        flushFiveTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.FlushFive].GetTimesPlayed().ToString();
     }
 
 }
