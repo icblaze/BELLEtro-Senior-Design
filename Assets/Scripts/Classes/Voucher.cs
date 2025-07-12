@@ -52,7 +52,7 @@ public class Voucher
             case VoucherNames.BrainstormBonus:
                 return "+1 Consumable Slot";
             case VoucherNames.SyntaxSurge:
-                return "+5 Chips for every card in deck";
+                return "+5 Chips added to every card in deck";
         }
         return "Nothing?";
     }

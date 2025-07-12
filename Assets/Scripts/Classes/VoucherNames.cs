@@ -20,5 +20,5 @@ public enum VoucherNames
     SpeedReading,       // Skipping blinds grant $3
     BrainstormBonus,    // +1 Consumable Slot
     RerollPass,         // Shop Reroll costs $2 less
-    SyntaxSurge         // +5 Chips for every card in deck
+    SyntaxSurge         // +5 Chips added to every card in deck
 }

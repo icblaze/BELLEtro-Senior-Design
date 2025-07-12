@@ -251,7 +251,7 @@ public class PlayHand : MonoBehaviour
             //  There should be 2, but just in case
             foreach (GameObject cover in roundCovers)
             {
-                cover.SetActive(true);
+                cover.SetActive(false);
             }
         }
     }
