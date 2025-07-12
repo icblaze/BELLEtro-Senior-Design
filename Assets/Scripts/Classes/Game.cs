@@ -94,6 +94,8 @@ public class Game
         //Get access to the Deck 
         Deck deck = Deck.access();
 
+        deck.combinePiles();    //  Ensures that when getting clonedCard, include both piles
+
         //This list of card objects will contain the random cards that were selected from the deck
         List<PCard> cardList = new List<PCard>();
 
@@ -307,7 +309,7 @@ public class Game
 
         while (count < pack.packSize)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length / 2);    // Select a random Mentor name (1-25)
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);    
             int mentorEditionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);
 
             PCard newMentorCard = new PCard();
@@ -340,7 +342,7 @@ public class Game
 
         while (count < numMentors)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length / 2);                   // Select a random Mentor name (1-25)
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);                  
             int editionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);                     // Select a random edition
 
             Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)editionIndex);     // Create a Mentor with the MentorFactory

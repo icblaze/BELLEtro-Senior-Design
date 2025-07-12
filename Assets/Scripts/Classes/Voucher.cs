@@ -33,6 +33,8 @@ public class Voucher
                 return "Gain +1 Discard Per Round";
             case VoucherNames.StudyGroup:
                 return "+1 Hand Size";
+            case VoucherNames.PopQuiz:
+                return "Give a random Card Buff after Special Blind is selected";
             case VoucherNames.AnnotatedEdition:
                 return "Textbooks will level hand by two levels";
             case VoucherNames.OfficeHours:
@@ -43,8 +45,14 @@ public class Voucher
                 return "Level up every hand once";
             case VoucherNames.TenureTrack:
                 return "Raises interest cap to $10";
+            case VoucherNames.SpeedReading:
+                return "Skipping blinds grant $3";
+            case VoucherNames.RerollPass:
+                return "Shop Reroll costs $2 less";
             case VoucherNames.BrainstormBonus:
                 return "+1 Consumable Slot";
+            case VoucherNames.SyntaxSurge:
+                return "+5 Chips for every card in deck";
         }
         return "Nothing?";
     }

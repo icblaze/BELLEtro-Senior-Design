@@ -9,16 +9,16 @@ using UnityEngine;
 public enum VoucherNames
 {
     None,
-    ExtraCredit,        // Grants bonus points on correct play or combo
-    StudyGroup,         // Draw +1 card each round
-    //PopQuiz,            // Grants a random bonus effect at the start of each round
-    AnnotatedEdition,   // Makes Textbooks more effective (e.g., increase power or reduce cost)
-    OfficeHours,        // Reduces shop prices
-    FluentStart,        // Start the run with an extra buff or card
-    LectureBoost,       // Increase multiplier on specific hand types like Full House or Straight
-    TenureTrack,        // Gain a growing passive bonus each round (e.g., +1% score/round)
-    //SpeedReading,       // Speeds up draw/animation or allows playing more cards
-    BrainstormBonus,    // Buffs from cards or mentors stack better or last longer
-    //RerollPass,         // Grants 1 free reroll per shop phase or card draw phase
-    //SyntaxSurge         // Big score bonus when forming advanced hands (Full House, Straight Flush, etc.)
+    ExtraCredit,        // Gain +1 Discard Per Round
+    StudyGroup,         // +1 Hand Size
+    PopQuiz,            // Give a random Card Buff after Special Blind is selected
+    AnnotatedEdition,   // Textbooks will level hand by two levels
+    OfficeHours,        // New Shop Items are 25% off
+    FluentStart,        // Gain +1 Hand
+    LectureBoost,       // Level up every hand once
+    TenureTrack,        // Raises interest cap to $10
+    SpeedReading,       // Skipping blinds grant $3
+    BrainstormBonus,    // +1 Consumable Slot
+    RerollPass,         // Shop Reroll costs $2 less
+    SyntaxSurge         // +5 Chips for every card in deck
 }
