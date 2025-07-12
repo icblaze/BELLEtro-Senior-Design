@@ -70,6 +70,10 @@ public class SFXManager : MonoBehaviour
     }
     public void CardSelected()
     {
-        audioManager.PlaySFX(cardSelected); 
+        audioManager.PlaySFX(cardSelected);
+    }
+    public void VoiceSFX(AudioClip voice)
+    {
+        audioManager.PlaySFX(voice);
     }
 }

@@ -153,6 +153,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     }
 
     //This shows the card details in the info panel when the card is being hovered or clicked by the mouse
+    //This also plays the voice sfx for the card
     public void OnPointerEnter(PointerEventData eventData)
     {
         PointerEnterEvent.Invoke(this);
@@ -160,25 +161,27 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         if (infoPanel != null && infoText != null)
         {
             //  Update specific description for card type
-            if(cardType == CardType.Card)
+            if (cardType == CardType.Card)
             {
                 cardDescription = pcard.ToString();
+                SFXManager sfxManager = GameObject.FindFirstObjectByType<SFXManager>().GetComponent<SFXManager>();
+                sfxManager.VoiceSFX(Resources.Load<AudioClip>("Voice/" + pcard.term.ToString()));
             }
-            else if(cardType == CardType.Mentor)
+            else if (cardType == CardType.Mentor)
             {
                 cardDescription = mentor.GetDescription();
                 cardDescription += CardModifier.access().EditionDesc(mentor.edition);
             }
             else
             {
-                if(consumableType == ConsumableType.CardBuff)
+                if (consumableType == ConsumableType.CardBuff)
                 {
-                    CardBuff cardBuff = (CardBuff) consumable;
+                    CardBuff cardBuff = (CardBuff)consumable;
                     cardDescription = cardBuff.GetDescription();
                 }
                 else
                 {
-                    Textbook tbook = (Textbook) consumable;
+                    Textbook tbook = (Textbook)consumable;
                     cardDescription = tbook.GetDescription();
                 }
             }
@@ -188,6 +191,8 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
 
             // Show the panel
             infoPanel.SetActive(true);
+
+
 
         }
     }
@@ -344,8 +349,8 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
 
     private void OnDestroy()
     {
-        if(cardVisual != null)
-        Destroy(cardVisual.gameObject);
+        if (cardVisual != null)
+            Destroy(cardVisual.gameObject);
     }
 
     //  Instantiate card visual and sets up card info panel
@@ -371,15 +376,15 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
             return;
 
         //  Instantiate at correct corresponding visual handler depending on type
-        if(cardType == CardType.Card)
+        if (cardType == CardType.Card)
         {
             visualHandler = GameObject.FindWithTag("HandVisual").GetComponent<VisualCardsHandler>();
         }
-        else if(cardType == CardType.Consumable)
+        else if (cardType == CardType.Consumable)
         {
             visualHandler = GameObject.FindWithTag("ConsumableVisual").GetComponent<VisualCardsHandler>();
         }
-        else if(cardType == CardType.Mentor)
+        else if (cardType == CardType.Mentor)
         {
             visualHandler = GameObject.FindWithTag("MentorVisual").GetComponent<VisualCardsHandler>();
         }
