@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DiphthongDelight_0: -3604634626127151765
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

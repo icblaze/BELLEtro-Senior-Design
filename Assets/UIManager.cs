@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
 
     public void RunInfoButton()
     {
+        RunInfoManager runInfoManager = FindFirstObjectByType<RunInfoManager>();
+        runInfoManager.OpenRunInfo();
         runInfo.alpha = 1;
         runInfo.blocksRaycasts = true;
         runInfo.interactable = true;

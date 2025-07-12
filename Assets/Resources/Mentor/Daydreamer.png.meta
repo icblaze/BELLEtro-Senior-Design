@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Daydreamer_0: 249651008950545849
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
