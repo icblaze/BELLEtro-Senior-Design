@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource bossSource;
     [SerializeField] AudioSource defeatSource;
     [SerializeField] AudioSource sfxSource;
+    [SerializeField] AudioSource voiceSource;
     [Header("-------Audio Clips----------")]
     public AudioClip MainMenuMusic;
     public AudioClip RoundMusic;
@@ -71,6 +72,10 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         sfxSource.PlayOneShot(clip);
+    }
+    public void PlayVoice(AudioClip clip)
+    {
+        voiceSource.PlayOneShot(clip);
     }
 
     //Function call to change between music tracks

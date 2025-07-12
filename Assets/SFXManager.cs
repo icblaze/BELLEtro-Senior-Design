@@ -74,6 +74,6 @@ public class SFXManager : MonoBehaviour
     }
     public void VoiceSFX(AudioClip voice)
     {
-        audioManager.PlaySFX(voice);
+        audioManager.PlayVoice(voice);
     }
 }
