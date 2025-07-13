@@ -227,6 +227,9 @@ public class JokerCardHolder : MonoBehaviour
     {
         if (cardToSell != null)
         {
+            //  Hide the description
+            cardToSell.HideDescription();
+
             // Get the Player and ShopManager instances
             ShopManager shopManager = ShopManager.access();
 
@@ -298,6 +301,9 @@ public class JokerCardHolder : MonoBehaviour
     public void RemoveMentor(Mentor trashMentor)
     {
         Card trashMentorCard = cards.FirstOrDefault(card => card.mentor == trashMentor);
+
+        //  Hide the description
+        trashMentorCard.HideDescription();
 
         if (trashMentorCard == null)
         {

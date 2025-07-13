@@ -403,6 +403,12 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         this.hideSuit = hideSuit;
     }
 
+    //  Hide the description box
+    public void HideDescription()
+    {
+        infoPanel.SetActive(false);
+    }
+
     //  Assigns the PCard object to Card and assigns attributes from PCard
     public void AssignPCard(PCard pcard)
     {

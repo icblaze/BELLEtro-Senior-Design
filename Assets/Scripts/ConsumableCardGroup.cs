@@ -285,23 +285,23 @@ public class ConsumableCardHolder : MonoBehaviour
     {
         if (cardToUse != null)
         {
-            // Get the Card component to access its sellValue
-            Card cardComponent = cardToUse.GetComponent<Card>();
+            //  Hide the description
+            cardToUse.HideDescription();
 
-            if(deleteScript == null)
+            if (deleteScript == null)
             {
                 deleteScript = FindFirstObjectByType<DeleteCard>();
             }
 
             //  Use effect
-            if (cardComponent.consumable.type == ConsumableType.Textbook)
+            if (cardToUse.consumable.type == ConsumableType.Textbook)
             {
-                Textbook tbook = (Textbook)cardComponent.consumable;
+                Textbook tbook = (Textbook)cardToUse.consumable;
                 tbook.applyTextbook();
             }
             else
             {
-                CardBuff cardBuff = (CardBuff)cardComponent.consumable;
+                CardBuff cardBuff = (CardBuff)cardToUse.consumable;
                 cardBuff.applyCardBuff();
 
                 //  Refresh cards if possible hand changed
@@ -312,7 +312,7 @@ public class ConsumableCardHolder : MonoBehaviour
             }
 
             //  Remove consumable from player's consuamble list first
-            player.consumables.Remove(cardComponent.consumable);
+            player.consumables.Remove(cardToUse.consumable);
 
             cards.Remove(cardToUse);
 
@@ -341,18 +341,18 @@ public class ConsumableCardHolder : MonoBehaviour
             // Get the Player and ShopManager instances
             ShopManager shopManager = ShopManager.access();
 
-            // Get the Card component to access its sellValue
-            Card cardComponent = cardToSell.GetComponent<Card>();
+            //  Hide the description
+            cardToSell.HideDescription();
 
             // Make sure everything exists before proceeding
-            if (player != null && cardComponent != null && shopManager != null)
+            if (player != null && cardToSell != null && shopManager != null)
             {
                 Debug.Log("--- Selling Card ---");
                 Debug.Log("Money BEFORE sale: " + player.moneyCount);
-                Debug.Log("Card sell value: " + cardComponent.consumable.sellValue);
+                Debug.Log("Card sell value: " + cardToSell.consumable.sellValue);
 
                 // Add the card's value to the player's money
-                player.moneyCount += cardComponent.consumable.sellValue;
+                player.moneyCount += cardToSell.consumable.sellValue;
 
                 Debug.Log("Money AFTER sale: " + player.moneyCount);
 
@@ -363,7 +363,7 @@ public class ConsumableCardHolder : MonoBehaviour
             // Remove the card from our list, associated slot, and destroy its game object
 
             //  Remove consumable from player's consuamble list first
-            player.consumables.Remove(cardComponent.consumable);
+            player.consumables.Remove(cardToSell.consumable);
 
             cards.Remove(cardToSell);
 
