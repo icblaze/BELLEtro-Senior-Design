@@ -1,13 +1,17 @@
-//Script is used to close out the RunInfo Manager.
+//Script is used to close out the RunInfo Manager. This is used to set all of the runInfo text
+//in addition to the example hands.
 //Current Devs:
 //Fredrick Bouloute (bouloutef04)
 
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class RunInfoManager : MonoBehaviour
 {
     public CanvasGroup runInfo;
+    private GameObject runInfoHandExample;
+    //Text objects for each hand Type
     private GameObject highCardBlueScoreText;
     private GameObject highCardRedScoreText;
     private GameObject highCardLevelText;
@@ -83,6 +87,8 @@ public class RunInfoManager : MonoBehaviour
 
     public void Start()
     {
+        runInfoHandExample = GameObject.Find("Run Info Hand Example");
+
         highCardLevelText = GameObject.Find("High Card Level Text");
         highCardBlueScoreText = GameObject.Find("High Card Base Score Text");
         highCardRedScoreText = GameObject.Find("High Card Mult Score Text");
@@ -210,4 +216,70 @@ public class RunInfoManager : MonoBehaviour
         flushFiveTimesPlayedText.GetComponent<TMP_Text>().text = "#" + Player.access().handTable[TextbookName.FlushFive].GetTimesPlayed().ToString();
     }
 
+    public void HighCardHover()
+    {
+        Debug.Log("High Card Hover");
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/High_Card");
+        runInfoHandExample.SetActive(true);
+    }
+    public void PairHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Pair");
+        runInfoHandExample.SetActive(true);
+    }
+    public void TwoPairHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Two_Pair");
+        runInfoHandExample.SetActive(true);
+    }
+    public void ThreeOfAKindHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Three_Of_A_Kind");
+        runInfoHandExample.SetActive(true);
+    }
+    public void StraightHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Straight");
+        runInfoHandExample.SetActive(true);
+    }
+    public void FlushHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Flush");
+        runInfoHandExample.SetActive(true);
+    }
+    public void FullHouseHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Full_House");
+        runInfoHandExample.SetActive(true);
+    }
+    public void FourOfAKindHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Four_Of_A_Kind");
+        runInfoHandExample.SetActive(true);
+    }
+    public void StraightFlushHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Straight_Flush");
+        runInfoHandExample.SetActive(true);
+    }
+    public void FiveOfAKindHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Five_Of_A_Kind");
+        runInfoHandExample.SetActive(true);
+    }
+    public void FlushHouserHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Flush_House");
+        runInfoHandExample.SetActive(true);
+    }
+    public void FlushFiveHover()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = Resources.Load<Sprite>("Run_Info_Hands/Flush_Five");
+        runInfoHandExample.SetActive(true);
+    }
+    public void Exit()
+    {
+        runInfoHandExample.GetComponent<Image>().sprite = null;
+        runInfoHandExample.SetActive(false);
+    }
 }
