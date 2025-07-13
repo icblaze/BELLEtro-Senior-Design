@@ -67,7 +67,7 @@ public enum LinguisticTerms
     Tense_Mid_Back_Rounded_Diphthong_ow,                //(ow)
     Tense_Mid_Back_Rounded_Diphthong_oj,                //(oj)
     Lax_Mid_Front,                                      //(ɛ)
-    Tense_Mid_Central_Vowel_Schwa,                      //(ə)
+    Lax_Mid_Central_Vowel_Schwa,                      //(ə)
     Lax_Mid_Central_Vowel,                              //(ʌ)
     Lax_Mid_Back_Rounded_Vowel,                         //(ɔ)
           

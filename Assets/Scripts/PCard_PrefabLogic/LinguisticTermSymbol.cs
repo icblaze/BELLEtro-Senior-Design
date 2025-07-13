@@ -62,7 +62,7 @@ public class LinguisticTermSymbol
         { LinguisticTerms.Tense_Mid_Back_Rounded_Diphthong_ow, "ow" },
         { LinguisticTerms.Tense_Mid_Back_Rounded_Diphthong_oj, "oj" },
         { LinguisticTerms.Lax_Mid_Front, "ɛ" },
-        { LinguisticTerms.Tense_Mid_Central_Vowel_Schwa, "ə" },
+        { LinguisticTerms.Lax_Mid_Central_Vowel_Schwa, "ə" },
         { LinguisticTerms.Lax_Mid_Central_Vowel, "ʌ" },
         { LinguisticTerms.Lax_Mid_Back_Rounded_Vowel, "ɔ" },
 
