@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f1083cd4b06514c6e8e7b4f114f1952b
+guid: 593ab6bfd07af471681dde172663b047
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1282647987391954125
-    second: Flush_Five_0
+      213: -532237754951708849
+    second: PageFlip_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flush_Five_0
+      name: PageFlip_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 804
-        height: 456
+        width: 378
+        height: 529
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 33302a3837e133ee0800000000000000
-      internalID: -1282647987391954125
+      spriteID: f4f4d00f49c1d98f0800000000000000
+      internalID: -532237754951708849
       vertices: []
       indices: 
       edges: []

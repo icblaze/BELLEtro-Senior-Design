@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f1083cd4b06514c6e8e7b4f114f1952b
+guid: 8cd872714e0d244f2b9fb53916069c61
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1282647987391954125
-    second: Flush_Five_0
+      213: 1600577400413447990
+    second: Pair_Info_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,12 +113,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Flush_Five_0
+      name: Pair_Info_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 804
+        width: 803
         height: 456
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 33302a3837e133ee0800000000000000
-      internalID: -1282647987391954125
+      spriteID: 637692b5aa4663610800000000000000
+      internalID: 1600577400413447990
       vertices: []
       indices: 
       edges: []
