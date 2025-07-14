@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 using System.Threading.Tasks;
 
 using TMPro;
+using System.Linq;
 
 
 public class BlindSceneManager : MonoBehaviour
@@ -157,6 +158,16 @@ public class BlindSceneManager : MonoBehaviour
         //Either this script or round script will then apply special blind
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
+
+        //  If player has Pop Quiz voucher, generate random Card Buff when Special Blind selected
+        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.PopQuiz))
+        {
+            ConsumableCardHolder consumableHolder = FindFirstObjectByType<ConsumableCardHolder>();
+            if (consumableHolder != null && (playerInst.consumables.Count < playerInst.maxConsumables))
+            {
+                consumableHolder.AddConsumable(gameInst.randomCardBuffShop(1)[0]);
+            }
+        }
     }
 
     public void UseSkipButton1()
@@ -169,6 +180,13 @@ public class BlindSceneManager : MonoBehaviour
         setBlindCover();
 
         StartCoroutine(fadeInst.FadeIn(SmallBlindCover));
+
+        //  Give additional $3 if player has Speed Reading voucher
+        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.SpeedReading))
+        {
+            playerInst.moneyCount += 3;
+            MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
+        }
     }
 
     public void UseSkipButton2()
@@ -181,6 +199,13 @@ public class BlindSceneManager : MonoBehaviour
         setBlindCover();
 
         StartCoroutine(fadeInst.FadeIn(BigBlindCover));
+
+        //  Give additional $3 if player has Speed Reading voucher
+        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.SpeedReading))
+        {
+            playerInst.moneyCount += 3;
+            MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
+        }
     }
 
     private void applyTag(Tag tag)

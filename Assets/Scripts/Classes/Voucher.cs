@@ -78,6 +78,11 @@ public class Voucher
                 Player.access().handSize++;
                 break;
 
+            case VoucherNames.PopQuiz:
+                //  Give a random Card Buff after Special Blind is selected
+                //  Logic handled in BlindSelectManager.cs
+                break;
+
             case VoucherNames.AnnotatedEdition:
                 // Textbooks will level hand by two levels
                 //  Textbook.cs will handle this logic
@@ -107,9 +112,28 @@ public class Voucher
                 Player.access().maxInterest = 10;
                 break;
 
+            case VoucherNames.SpeedReading:
+                // Skipping blinds grant $3
+                //  Logic handled in BlindSelectManager.cs
+                break;
+
             case VoucherNames.BrainstormBonus:
                 // +1 Consumable Slot
                 Player.access().maxConsumables++;
+                break;
+
+            case VoucherNames.RerollPass:
+                // Shop Reroll costs $2 less
+                // Handled in ShopManager.cs
+                break;
+
+            case VoucherNames.SyntaxSurge:
+                // +5 Chips added to every card in deck
+                Deck.access().combinePiles();
+                for (int i = 0; i < Deck.access().deckCards.Count; i++)
+                {
+                    Deck.access().deckCards[i].chips += 5;
+                }
                 break;
 
             default:

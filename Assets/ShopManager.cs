@@ -12,6 +12,7 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Threading.Tasks;
 using TMPro;
+using System.Linq;
 
 
 public class ShopManager : MonoBehaviour
@@ -127,7 +128,16 @@ public class ShopManager : MonoBehaviour
         NewCards();
         cardsSelected = 0;//Cards currently selected in pack
         packSelected = 0;//Used to tell which pack was selected
-        reroll = 5;
+
+        //Reset Reroll price to 5 (or $3 with voucher)
+        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
+        {
+            reroll = 3;
+        }
+        else
+        {
+            reroll = 5;
+        }
 
         //Generate randomVoucher
         if (Game.access().GetRound() == 1)
@@ -441,6 +451,13 @@ public class ShopManager : MonoBehaviour
         //  Add voucher effect to user's run
         voucher.applyEffect();
 
+        //  If "Reroll Pass" was bought
+        if (voucher.name == VoucherNames.RerollPass)
+        {
+            reroll -= 2;
+            rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
+        }
+
         //Remove voucher from screen
         voucherCard.SetActive(false);
         voucherButton.gameObject.SetActive(false);
@@ -510,8 +527,15 @@ public class ShopManager : MonoBehaviour
     //Music should also change back to the regular gameplay music.
     public void NextRound()
     {
-        //Reset Reroll price to 5
-        reroll = 5;
+        //Reset Reroll price to 5 (or $3 with voucher)
+        if(playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
+        {
+            reroll = 3;
+        }
+        else
+        {
+            reroll = 5;
+        }
         rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 
         GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>().ChangeToRoundMusic();
