@@ -103,7 +103,7 @@ public class MainMenuManager : MonoBehaviour
         audioManager.ChangeToRoundMusic();
     }
 
-    private IEnumerator FadeToBlack()//Fade the scene when the quit button is clikced
+    private IEnumerator FadeToBlack()//Fade the scene when the quit button is clicked
     {
         while (fadeToBlack.alpha < 1)
         {
