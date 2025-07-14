@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Three_Of_A_Kind_0: -5489866218816242145
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Flush_Five_0: -1282647987391954125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

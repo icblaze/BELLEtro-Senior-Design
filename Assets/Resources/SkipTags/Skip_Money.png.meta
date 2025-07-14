@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8cd872714e0d244f2b9fb53916069c61
+guid: 30dd72c7785944d6ca129835b1c6ce14
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1600577400413447990
-    second: Pair_Info_0
+      213: 3576033435176699208
+    second: Skip_Money_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pair_Info_0
+      name: Skip_Money_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 803
-        height: 456
+        width: 200
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 637692b5aa4663610800000000000000
-      internalID: 1600577400413447990
+      spriteID: 84580a0767f90a130800000000000000
+      internalID: 3576033435176699208
       vertices: []
       indices: 
       edges: []

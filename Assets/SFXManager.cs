@@ -25,7 +25,7 @@ public class SFXManager : MonoBehaviour
         buttonPress = Resources.Load<AudioClip>($"SFX/Button");
         cardScoring = Resources.Load<AudioClip>($"SFX/Hollow");
         multScoring = Resources.Load<AudioClip>($"SFX/Whoosh");
-        moneyUsed = Resources.Load<AudioClip>($"SFX/Metal Dropping");
+        moneyUsed = Resources.Load<AudioClip>($"SFX/Sync");
         roundWon = Resources.Load<AudioClip>($"SFX/Level Completion");
         no = Resources.Load<AudioClip>($"SFX/Stingz");
         gameWon = Resources.Load<AudioClip>($"SFX/GameWon");
