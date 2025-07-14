@@ -13,16 +13,16 @@ public class TwelveCredits : Mentor
     public TwelveCredits(CardEdition edition) : base(MentorName.TwelveCredits, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.AllCards };
-        description = "If exactly 4 cards are played, +12 Chips";
+        description = "If exactly 4 cards are played, +12 Mult";
     }
 
     //  Be able to form Straights and Flushes with 4 cards
     public override void UseMentor()
     {
-        //  Temporary effect for the demo
+        //  Temporary effect for the demo (when this is run, it does consider every card)
         if(ScoringManager.access().GetScoredPCards().Count == 4)
         {
-            ScoringManager.access().IncrementCurrentChips(12);
+            ScoringManager.access().IncrementCurrentMult(12);
         }
     }
 }

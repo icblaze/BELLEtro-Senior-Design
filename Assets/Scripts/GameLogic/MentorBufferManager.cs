@@ -117,4 +117,18 @@ public class MentorBufferManager
             yield return CardModifier.access().UseMentorEdition(mentor, true);
         }
     }
+
+    //  Reset certain mentors whose effect only work once per blind or reset at end
+    public void ResetMentorStatus()
+    {
+        foreach (Mentor mentor in player.mentorDeck)
+        {
+            //  Change suit after each round
+            if(mentor.name == MentorName.GradingWeights)
+            {
+                GradingWeights gradingWeights = (GradingWeights) mentor;
+                gradingWeights.RandomizeSuit();
+            }
+        }
+    }
 }

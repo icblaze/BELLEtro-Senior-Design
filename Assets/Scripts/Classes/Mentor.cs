@@ -45,7 +45,7 @@ public class Mentor
             case MentorName.LibraryCard:
                 return new LibraryCard(cardEdition);
             case MentorName.TwelveCredits:
-                return new TwelveCredits(cardEdition); // TODO Be able to track selected hand
+                return new TwelveCredits(cardEdition); 
             case MentorName.Valentine:
                 return new Valentine(cardEdition); 
             case MentorName.NoVoice:
@@ -75,7 +75,17 @@ public class Mentor
             case MentorName.EvenAirflow:
                 return new EvenAirflow(cardEdition); 
             case MentorName.TheUsualSpot:
-                return new TheUsualSpot(cardEdition); 
+                return new TheUsualSpot(cardEdition);
+            case MentorName.CrossItOut:
+                return new CrossItOut(cardEdition);
+            case MentorName.PageFlip:
+                return new PageFlip(cardEdition);
+            case MentorName.GradingWeights:
+                return new GradingWeights(cardEdition);
+            case MentorName.AreaOfExpertise:
+                return new AreaOfExpertise(cardEdition);
+            case MentorName.Glider:
+                return new Glider(cardEdition);
 
             default:
                 return new Mentor();

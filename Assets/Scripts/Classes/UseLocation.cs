@@ -22,5 +22,6 @@ public enum UseLocation
   Blind,              // Mentors that have this location will be used during the blind phase
   PostBlind,          // Mentors that have this location will be used after the blind phase
   PostHand,            // Mentors that have this location will be used after the hand is played
-  AllCards            // Mentors that have this location call before selected scored PCards of hand
+  AllCards,            // Mentors that have this location call before selected scored PCards of hand
+  Discard              // Mentors that have this location will be used on player's discard
 }

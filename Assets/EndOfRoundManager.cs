@@ -164,6 +164,9 @@ public class EndOfRoundManager : MonoBehaviour
         GameObject.FindFirstObjectByType<PlayHand>().ResetHandCount();
         GameObject.FindFirstObjectByType<DeleteCard>().ResetDiscards();
 
+        //  Reset Mentors that need to
+        MentorBufferManager.access().ResetMentorStatus();
+
         player.chipCount = 0;
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + player.moneyCount.ToString();
 

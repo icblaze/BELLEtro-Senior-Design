@@ -78,6 +78,14 @@ public class PlayHand : MonoBehaviour
         handsLeft.text = currHandCount.ToString("0");
     }
 
+    //  Sets hand after reset is called (by Mentors)
+    public void SetHandCount(int hands)
+    {
+        Player.access().handCount = hands;
+        currHandCount = Player.access().handCount;      //Decrease Hand count of the player
+        handsLeft.text = currHandCount.ToString("0");
+    }
+
     //This function initiates moving the selected cards to the play area 
     //after the player clicks on the play hand button
     public void PlaySelectedCards()

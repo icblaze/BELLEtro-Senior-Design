@@ -313,7 +313,7 @@ public class CardModifier
         yield return new WaitForSecondsRealtime(waitIncrement);
     }
 
-    private TextbookName GetTextbookFromString(string handName)
+    public TextbookName GetTextbookFromString(string handName)
     {
         switch(handName)
         {

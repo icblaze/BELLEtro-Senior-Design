@@ -17,13 +17,13 @@ public class Brainstorm : Mentor
     //  Incompatible mentors for copying
     private static readonly HashSet<MentorName> incompatibleMentors = new()
     {
-        MentorName.TwelveCredits,
         MentorName.Turtle,
         MentorName.Astronaut,
         MentorName.Curve,
         MentorName.Extension,
         MentorName.HelpingHand,
-        MentorName.LibraryCard
+        MentorName.LibraryCard,
+        MentorName.PageFlip
     };
 
     //  Mentor name and basePrice are preset

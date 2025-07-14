@@ -54,6 +54,14 @@ public class DeleteCard : MonoBehaviour
         discardsLeft.text = discardCount.ToString();
     }
 
+    //  Sets discards after reset (by Mentors
+    public void SetDiscards(int discards)
+    {
+        Player.access().discards = discards;
+        discardCount = Player.access().discards;
+        discardsLeft.text = discardCount.ToString();
+    }
+
     //Adds the card to the selectedCards list
     public void AddSelectedCard(GameObject card)
     {
@@ -152,6 +160,9 @@ public class DeleteCard : MonoBehaviour
             
             return;
         }
+
+        //  Activate on discard
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.Discard);
 
         //  Draw from deck equal to amount played
         PCard[] newCards = Deck.access().drawCards(selectedCards.Count);
