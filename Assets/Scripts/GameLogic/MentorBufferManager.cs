@@ -154,6 +154,12 @@ public class MentorBufferManager
                     HistoryClass historyClass = (HistoryClass)mentor;
                     historyClass.ResetStatus();
                     break;
+
+                //  Reset hash set each round
+                case MentorName.Bookstore:
+                    Bookstore bookstore = (Bookstore)mentor;
+                    bookstore.ResetHashSet();
+                    break;
             }
         }
     }

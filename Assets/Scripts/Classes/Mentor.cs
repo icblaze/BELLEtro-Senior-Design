@@ -116,6 +116,16 @@ public class Mentor
                 return new HistoryClass(cardEdition);
             case MentorName.Recess:
                 return new Recess(cardEdition);
+            case MentorName.Library:
+                return new Library(cardEdition);
+            case MentorName.Bookstore:
+                return new Bookstore(cardEdition);
+            case MentorName.MadHatter:
+                return new MadHatter(cardEdition);
+            case MentorName.HighlyEducated:
+                return new HighlyEducated(cardEdition);
+            case MentorName.LightSnack:
+                return new LightSnack(cardEdition);
 
             default:
                 return new Mentor();

@@ -50,6 +50,16 @@ public class Textbook : Consumable
             player.handTable[name].IncreaseLevel(); //  Level up again
         }
 
+        //  If player has Library, raise its xmult
+        foreach(Mentor mentor in player.mentorDeck)
+        {
+            if(mentor.name == MentorName.Library)
+            {
+                Library library = (Library)mentor;
+                library.IncreaseMult();
+            }
+        }
+
         //  Set previous consumable to used Textbook
         Game.access().previousConsumable = new Textbook(name);
     }

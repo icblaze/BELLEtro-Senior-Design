@@ -140,6 +140,7 @@ public class BlindSceneManager : MonoBehaviour
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
 
+        MadHatterCheck();
     }
 
     public void useBigBlindButton()
@@ -148,6 +149,8 @@ public class BlindSceneManager : MonoBehaviour
         setBlindCover();
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToRoundScreen();
+
+        MadHatterCheck();
     }
 
     public void useSpecialBlindButton()
@@ -181,12 +184,7 @@ public class BlindSceneManager : MonoBehaviour
 
         StartCoroutine(fadeInst.FadeIn(SmallBlindCover));
 
-        //  Give additional $3 if player has Speed Reading voucher
-        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.SpeedReading))
-        {
-            playerInst.moneyCount += 3;
-            MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
-        }
+        SpeedReadingCheck();
     }
 
     public void UseSkipButton2()
@@ -200,12 +198,7 @@ public class BlindSceneManager : MonoBehaviour
 
         StartCoroutine(fadeInst.FadeIn(BigBlindCover));
 
-        //  Give additional $3 if player has Speed Reading voucher
-        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.SpeedReading))
-        {
-            playerInst.moneyCount += 3;
-            MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
-        }
+        SpeedReadingCheck();
     }
 
     private void applyTag(Tag tag)
@@ -256,5 +249,29 @@ public class BlindSceneManager : MonoBehaviour
         //  Hide the card info initially
         Image panelImage = GameObject.Find("CardInfoPanel").GetComponent<Image>();
         panelImage.color = new Color(255, 255, 255, 0);
+    }
+
+    //  For "Mad Hatter" mentor specifically activate the IncreaseMult effect on Small and Big Blind
+    private void MadHatterCheck()
+    {
+        for (int i = 0; i < playerInst.mentorDeck.Count; i++)
+        {
+            Mentor mentor = playerInst.mentorDeck[i];
+            if (mentor.name == MentorName.MadHatter)
+            {
+                MadHatter madHatter = (MadHatter)mentor;
+                madHatter.IncreaseMult();
+            }
+        }
+    }
+
+    //  For "Speed Reading" Voucher, effect of adding $3 when skip
+    private void SpeedReadingCheck()
+    {
+        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.SpeedReading))
+        {
+            playerInst.moneyCount += 3;
+            MoneyNumber.GetComponentInChildren<TMP_Text>().text = "$ " + playerInst.moneyCount;
+        }
     }
 }

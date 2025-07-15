@@ -26,7 +26,9 @@ public class CheatSheet : Mentor
         MentorName.PageFlip,
         MentorName.Overachiever,
         MentorName.Revisionist,
-        MentorName.Recess
+        MentorName.Recess,
+        MentorName.Bookstore,
+        MentorName.LightSnack
     };
 
     //  Mentor name and basePrice are preset

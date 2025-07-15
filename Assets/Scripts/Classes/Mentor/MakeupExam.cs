@@ -45,6 +45,7 @@ public class MakeupExam : Mentor
         //  Disappears after all uses 
         if(retriggerUses <= 0)
         {
+            mentorCardHolder = GameObject.FindFirstObjectByType<JokerCardHolder>();
             mentorCardHolder.RemoveMentor(this);
         }
     }
