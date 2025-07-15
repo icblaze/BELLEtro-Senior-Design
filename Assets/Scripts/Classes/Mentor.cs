@@ -86,6 +86,16 @@ public class Mentor
                 return new AreaOfExpertise(cardEdition);
             case MentorName.Glider:
                 return new Glider(cardEdition);
+            case MentorName.MindMeld:
+                return new MindMeld(cardEdition);
+            case MentorName.EchoChamber:
+                return new EchoChamber(cardEdition);
+            case MentorName.FastLearner:
+                return new FastLearner(cardEdition);
+            case MentorName.Overachiever:
+                return new Overachiever(cardEdition);
+            case MentorName.Daydreamer:
+                return new Daydreamer(cardEdition);
 
             default:
                 return new Mentor();

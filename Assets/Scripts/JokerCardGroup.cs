@@ -44,7 +44,7 @@ public class JokerCardHolder : MonoBehaviour
         if (testMode)
         {
             player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Glider, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Daydreamer, CardEdition.Base));
         }
 
         //  Debug mentors in the list, order from left to right
@@ -217,7 +217,9 @@ public class JokerCardHolder : MonoBehaviour
         cardToSell = clickedCard;
         currentSellButton = Instantiate(sellButtonPrefab, clickedCard.transform);
         // Set its position above the card
-        currentSellButton.transform.localPosition = new Vector3(0, 150, 0); 
+        currentSellButton.transform.localPosition = new Vector3(0, 150, 0);
+        // Set sell price
+        currentSellButton.GetComponentInChildren<TMP_Text>().text = "Sell $" + cardToSell.mentor.sellValue.ToString();
 
         Button sellBtn = currentSellButton.GetComponent<Button>();
         sellBtn.onClick.AddListener(SellCard);

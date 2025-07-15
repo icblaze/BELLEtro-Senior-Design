@@ -200,6 +200,7 @@ public class EndOfRoundManager : MonoBehaviour
         shopManager.NewShop();
 
         //Transition to shopScreen
+        shopManager.resetShopMentor();
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToShopScreen();

@@ -123,11 +123,31 @@ public class MentorBufferManager
     {
         foreach (Mentor mentor in player.mentorDeck)
         {
-            //  Change suit after each round
-            if(mentor.name == MentorName.GradingWeights)
+            switch (mentor.name)
             {
-                GradingWeights gradingWeights = (GradingWeights) mentor;
-                gradingWeights.RandomizeSuit();
+                //  Change suit after each round
+                case MentorName.GradingWeights:
+                    GradingWeights gradingWeights = (GradingWeights)mentor;
+                    gradingWeights.RandomizeSuit();
+                    break;
+
+                //  Reset hash set each round
+                case MentorName.MindMeld:
+                    MindMeld mindMeld = (MindMeld)mentor;
+                    mindMeld.EmptyHandSet();
+                    break;
+
+                //  Set prevHand to "None"
+                case MentorName.EchoChamber:
+                    EchoChamber echoChamber = (EchoChamber)mentor;
+                    echoChamber.ResetPrevHand();
+                    break;
+
+                //  Reset first hand status
+                case MentorName.Overachiever:
+                    Overachiever overachiever = (Overachiever)mentor;
+                    overachiever.ResetStatus();
+                    break;
             }
         }
     }

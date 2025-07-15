@@ -32,6 +32,7 @@ public class ScoringManager : MonoBehaviour
     private TMP_Text roundScoreText;                        //Text for the round score
     private BigInteger totalScore;                          //Total score for the hand   
     private BigInteger neededScore;                         //Score needed to win the round
+    private bool isScoring = false;
 
     //  Adjust time of scoring manager between each score increment
     private readonly float waitIncrement = 0.5f;
@@ -132,6 +133,7 @@ public class ScoringManager : MonoBehaviour
             //Get the list of cards from the current hand manager based on the hand type
             playedPCards = currentHandManager.GetListOfCards(handType);
         }
+
         //Increment handsPlayed
         int handsPlayed = VictoryManager.access().GetHandsPlayed();
         VictoryManager.access().SetHandsPlayed(handsPlayed + 1);
@@ -158,8 +160,9 @@ public class ScoringManager : MonoBehaviour
     {
         //Go through cards and add their scores. Wait for a small time
         //before going to the next card
+        isScoring = true;
 
-        if(MentorBufferManager.mentorBuffers[UseLocation.AllCards].Count >= 1)
+        if (MentorBufferManager.mentorBuffers[UseLocation.AllCards].Count >= 1)
         {
             yield return new WaitForSecondsRealtime(waitIncrement);
         }
@@ -221,6 +224,10 @@ public class ScoringManager : MonoBehaviour
         //  Playing From Draw Cards
         foreach (PCard heldCard in heldHand)
         {
+            if(heldCard.isDisabled)
+            {
+                continue;
+            }
             //  PreFromDraw (Mentors)
             yield return mentorBuffer.RunBuffer(UseLocation.PreFromDraw, heldCard);
 
@@ -234,6 +241,7 @@ public class ScoringManager : MonoBehaviour
 
         SetTotal();
 
+        isScoring = false;
         yield return new WaitForSecondsRealtime(1f);
 
         //   Run the PostHand Mentor buffer
@@ -439,5 +447,11 @@ public class ScoringManager : MonoBehaviour
     {
         player.chipCount = bigInteger;
         roundScoreText.text = bigInteger.ToString();
+    }
+
+    //  Check flag to see if in middle of scoring (useful for differentiating Mentor effects)
+    public bool GetScoringStatus()
+    {
+        return isScoring;
     }
 }

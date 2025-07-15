@@ -23,7 +23,8 @@ public class CheatSheet : Mentor
         MentorName.Extension,
         MentorName.HelpingHand,
         MentorName.LibraryCard,
-        MentorName.PageFlip
+        MentorName.PageFlip,
+        MentorName.Overachiever
     };
 
     //  Mentor name and basePrice are preset

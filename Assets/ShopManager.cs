@@ -1355,7 +1355,7 @@ public class ShopManager : MonoBehaviour
     }
 
     //  Reset certain mentors at end of shop
-    private void resetShopMentor()
+    public void resetShopMentor()
     {
         //  Check for certain mentors that need to reset after shop
         foreach (Mentor mentor in playerInst.mentorDeck)
