@@ -13,7 +13,7 @@ public class SpecialBlind
 {
     public float chipMultiplier;
     public SpecialBlindNames blindType;
-    public int minimumAnte;
+    public int minimumAnte = 1;
     public string description;
     public string nameText;
 
@@ -51,6 +51,8 @@ public class SpecialBlind
                 return new JumboBlind();
             case SpecialBlindNames.MegaBlind:
                 return new MegaBlind();
+            case SpecialBlindNames.TheHandful:
+                return new TheHandful();
             case SpecialBlindNames.TheBasket:
                 return new TheBasket();
             default:

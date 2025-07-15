@@ -962,14 +962,14 @@ public class ShopManager : MonoBehaviour
     {
         if (packSelected == 1)
         {
-            if (pack1.selectableCards <= cardsSelected)//If player has selected all cards, exit
+            if (pack1.getSelectableCount(pack1.edition) <= cardsSelected)//If player has selected all cards, exit
             {
                 PackCardSelected();
             }
         }
         else if (packSelected == 2)
         {
-            if (pack2.selectableCards <= cardsSelected)//If player has selected all cards, exit
+            if (pack2.getSelectableCount(pack2.edition) <= cardsSelected)//If player has selected all cards, exit
             {
                 PackCardSelected();
             }
@@ -1278,6 +1278,7 @@ public class ShopManager : MonoBehaviour
         PackCard3 = null;
         PackCard4 = null;
         PackCard5 = null;
+        cardsSelected = 0;
         PackGroup.interactable = false;
         PackGroup.blocksRaycasts = false;
 

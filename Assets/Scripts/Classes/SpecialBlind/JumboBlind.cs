@@ -13,7 +13,8 @@ public class JumboBlind : SpecialBlind
     }
     public override void applySpecialBlinds()
     {
-        //Nothing special here
+        minimumAnte = 2;
+        chipMultiplier = 4;
     }
     public override void cleanUpEffect()
     {

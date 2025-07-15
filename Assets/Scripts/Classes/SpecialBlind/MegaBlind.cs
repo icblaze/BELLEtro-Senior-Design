@@ -13,7 +13,8 @@ public class MegaBlind : SpecialBlind
     }
     public override void applySpecialBlinds()
     {
-        //Nothing special here
+        minimumAnte = 8;
+        chipMultiplier = 6;
     }
     public override void cleanUpEffect()
     {
