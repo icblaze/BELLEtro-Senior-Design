@@ -16,6 +16,7 @@ public class SFXManager : MonoBehaviour
     private static AudioClip gameWon;
     private static AudioClip gameLost;
     private static AudioClip cardSelected;
+    private static AudioClip useButton;
     private static SFXManager sfxManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,6 +32,7 @@ public class SFXManager : MonoBehaviour
         gameWon = Resources.Load<AudioClip>($"SFX/GameWon");
         gameLost = Resources.Load<AudioClip>($"SFX/GameLost");
         cardSelected = Resources.Load<AudioClip>($"SFX/CardSelected");
+        useButton = Resources.Load<AudioClip>($"SFX/More Metal");
     }
     public void ButtonSFX()
     {
@@ -75,5 +77,9 @@ public class SFXManager : MonoBehaviour
     public void VoiceSFX(AudioClip voice)
     {
         audioManager.PlayVoice(voice);
+    }
+    public void UseButton()
+    {
+        audioManager.PlaySFX(useButton);
     }
 }

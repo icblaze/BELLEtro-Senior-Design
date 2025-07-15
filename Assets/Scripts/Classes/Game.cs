@@ -443,7 +443,7 @@ public class Game
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0, 3);
+            index = randomizer(0, 4);
             blind = SpecialBlind.BlindFromNumber(index);
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
 

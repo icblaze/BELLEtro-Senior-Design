@@ -260,6 +260,8 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         {
             deleteCardScript.AddSelectedCard(gameObject);
             transform.localPosition += (cardVisual.transform.up * selectionOffset);
+            SFXManager sfxManager = GameObject.FindFirstObjectByType<SFXManager>().GetComponent<SFXManager>();
+            sfxManager.CardSelected();
         }
         else
         {

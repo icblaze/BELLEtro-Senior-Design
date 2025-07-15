@@ -41,7 +41,7 @@ public class ConsumableCardHolder : MonoBehaviour
     [SerializeField] private bool tweenCardReturn = true;
 
     //  DeleteCard to update current hand if cards changed
-    [SerializeField] private DeleteCard deleteScript; 
+    [SerializeField] private DeleteCard deleteScript;
 
     Player player = Player.access();
     Game game = Game.access();
@@ -59,14 +59,14 @@ public class ConsumableCardHolder : MonoBehaviour
         foreach (Consumable consumable in player.consumables)
         {
             //  Realize that it might be better to just have the name be in Consumable
-            if(consumable.type == ConsumableType.Textbook)
+            if (consumable.type == ConsumableType.Textbook)
             {
-                Textbook tbook = (Textbook) consumable;
+                Textbook tbook = (Textbook)consumable;
                 Debug.Log($"Textbook: {tbook.name}");
             }
             else
             {
-                CardBuff cardBuff = (CardBuff) consumable;
+                CardBuff cardBuff = (CardBuff)consumable;
                 Debug.Log($"Card Buff: {cardBuff.name}");
             }
         }
@@ -132,7 +132,7 @@ public class ConsumableCardHolder : MonoBehaviour
         //  Update interactable status of use button
         if (cardToUse != null)
         {
-            if(card.consumable.type == ConsumableType.CardBuff && cardToUse.Equals(card))
+            if (card.consumable.type == ConsumableType.CardBuff && cardToUse.Equals(card))
             {
                 CardBuff cardBuff = (CardBuff)card.consumable;
                 Button useBtn = currentUseButton.GetComponent<Button>();
@@ -205,7 +205,7 @@ public class ConsumableCardHolder : MonoBehaviour
 
         cards[index].transform.SetParent(focusedParent);
         cards[index].transform.localPosition = cards[index].selected ? new Vector3(0, cards[index].selectionOffset, 0) : Vector3.zero;
-        selectedCard.transform.SetParent(crossedParent);    
+        selectedCard.transform.SetParent(crossedParent);
 
         isCrossing = false;
 
@@ -305,11 +305,14 @@ public class ConsumableCardHolder : MonoBehaviour
                 cardBuff.applyCardBuff();
 
                 //  Refresh cards if possible hand changed
-                if(!cardBuff.isInstant)
+                if (!cardBuff.isInstant)
                 {
                     CurrentHandManager.Instance.findCurrentHand(deleteScript.GetSelectedPCards());
                 }
             }
+
+            SFXManager sfxManager = GameObject.FindFirstObjectByType<SFXManager>().GetComponent<SFXManager>();
+            sfxManager.UseButton();
 
             //  Remove consumable from player's consuamble list first
             player.consumables.Remove(cardToUse.consumable);
@@ -355,6 +358,9 @@ public class ConsumableCardHolder : MonoBehaviour
                 player.moneyCount += cardToSell.consumable.sellValue;
 
                 Debug.Log("Money AFTER sale: " + player.moneyCount);
+
+                SFXManager sfxManager = GameObject.FindFirstObjectByType<SFXManager>().GetComponent<SFXManager>();
+                sfxManager.UseButton();
 
                 // Tell the ShopManager to update the UI display
                 shopManager.UpdateMoneyDisplay();

@@ -12,7 +12,7 @@ using UnityEngine;
 public enum SpecialBlindNames
 {
     //TheScrambler,
-    //TheSilence,
+    TheSilence,
     TheCollector,
     ThePurist,
     TheYoink,
