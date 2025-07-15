@@ -520,10 +520,12 @@ public class ShopManager : MonoBehaviour
     public void BuyPack1()
     {
         BuyPack(pack1, buyButton, "Pack1");
+        packSelected = 1;
     }
     public void BuyPack2()
     {
         BuyPack(pack2, buyButton, "Pack2");
+        packSelected = 2;
     }
 
     //Function causes the shop UI to disappear and transitions back into the regular scene.
