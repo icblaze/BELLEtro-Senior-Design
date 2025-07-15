@@ -47,6 +47,10 @@ public class SpecialBlind
                 return new TheYoink();
             case SpecialBlindNames.TheSilence:
                 return new TheSilence();
+            case SpecialBlindNames.JumboBlind:
+                return new JumboBlind();
+            case SpecialBlindNames.MegaBlind:
+                return new MegaBlind();
             default:
                 return null;
         }
@@ -64,6 +68,10 @@ public class SpecialBlind
                 return BlindFactory(SpecialBlindNames.TheYoink);
             case 3:
                 return BlindFactory(SpecialBlindNames.TheSilence);
+            case 4:
+                return BlindFactory(SpecialBlindNames.JumboBlind);
+            case 5:
+                return BlindFactory(SpecialBlindNames.MegaBlind);
             default:
                 return null;
         }

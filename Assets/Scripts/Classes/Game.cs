@@ -309,7 +309,7 @@ public class Game
 
         while (count < pack.packSize)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);    
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);
             int mentorEditionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);
 
             PCard newMentorCard = new PCard();
@@ -342,7 +342,7 @@ public class Game
 
         while (count < numMentors)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);                  
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);
             int editionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);                     // Select a random edition
 
             Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)editionIndex);     // Create a Mentor with the MentorFactory
@@ -445,6 +445,10 @@ public class Game
         {
             index = randomizer(0, 4);
             blind = SpecialBlind.BlindFromNumber(index);
+            if (blind.minimumAnte > ante)//If special blind can't spawn yet, find different blind
+            {
+                continue;
+            }
             alreadyExists = pastSpecialBlinds.Any(currentBlind => currentBlind.blindType == blind.blindType);
 
             if (!alreadyExists)

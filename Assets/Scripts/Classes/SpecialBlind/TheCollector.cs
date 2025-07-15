@@ -10,7 +10,7 @@ public class TheCollector : SpecialBlind
 {
     private int OriginalDiscards;
 
-    public TheCollector() : base(SpecialBlindNames.TheCollector, 2, 2)
+    public TheCollector() : base(SpecialBlindNames.TheCollector, 2, 1)
     {
         description = "Start with 0 discards";
         nameText = "The Collector";

@@ -10,7 +10,7 @@ public class ThePurist : SpecialBlind
 {
     private int OriginalHandCount;
 
-    public ThePurist() : base(SpecialBlindNames.ThePurist, 1, 2)
+    public ThePurist() : base(SpecialBlindNames.ThePurist, 1, 1)
     {
         description = "Play a single hand";
         nameText = "The Purist";

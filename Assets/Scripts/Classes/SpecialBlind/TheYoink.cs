@@ -9,7 +9,7 @@ using UnityEngine;
 public class TheYoink : SpecialBlind
 {
 
-    public TheYoink() : base(SpecialBlindNames.TheYoink, 2, 2)
+    public TheYoink() : base(SpecialBlindNames.TheYoink, 2, 1)
     {
         description = "Every Hand or Discard you take will cost $1";
         nameText = "The Yoink";
