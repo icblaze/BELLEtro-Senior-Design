@@ -44,7 +44,7 @@ public class JokerCardHolder : MonoBehaviour
         if (testMode)
         {
             player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.LateBloomer, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Recess, CardEdition.Base));
         }
 
         //  Debug mentors in the list, order from left to right

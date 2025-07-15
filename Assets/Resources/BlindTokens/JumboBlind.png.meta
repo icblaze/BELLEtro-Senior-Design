@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      JumboBlind_0: -2798891183214669230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -51,7 +51,7 @@ public class ConsumableCardHolder : MonoBehaviour
         if (testMode)
         {
             player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Cherry));
-            player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Tea));
+            player.consumables.Add(CardBuff.CardBuffFactory(CardBuffName.Popcorn));
         }
 
         //  Debug consumables in the list, order from left to right

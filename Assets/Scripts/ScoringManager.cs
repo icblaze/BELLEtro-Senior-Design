@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -114,24 +115,29 @@ public class ScoringManager : MonoBehaviour
 
         //Call a function that passes the hand type, and the selected cards, and return only the cards that are part of a valid hand
         //This will be used to calculate the score of the hand
-        if (handType == "")
-        {
-            Debug.LogWarning("No valid hand found. Please select a valid hand.");
-            yield return null;
-        }
-        else if (handType == "HighCard")
-        {
-            // If the hand type is HighCard, we only need one card
-            highCard = currentHandManager.GetHighCard(playedPCards);
-            playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
-            playedPCards.Add(highCard); // Add the high card to the playedPCards list
-        }
-        else
-        {
-            playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
 
-            //Get the list of cards from the current hand manager based on the hand type
-            playedPCards = currentHandManager.GetListOfCards(handType);
+        //  If player is in possesion of the "Recess" then don't bother trimming the selected cards
+        if (!Player.access().mentorDeck.Any(mentor => mentor.name == MentorName.Recess))
+        {
+            if (handType == "")
+            {
+                Debug.LogWarning("No valid hand found. Please select a valid hand.");
+                yield return null;
+            }
+            else if (handType == "HighCard")
+            {
+                // If the hand type is HighCard, we only need one card
+                highCard = currentHandManager.GetHighCard(playedPCards);
+                playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
+                playedPCards.Add(highCard); // Add the high card to the playedPCards list
+            }
+            else
+            {
+                playedPCards.Clear(); // Clear the playedPCards list to avoid duplicates
+
+                //Get the list of cards from the current hand manager based on the hand type
+                playedPCards = currentHandManager.GetListOfCards(handType);
+            }
         }
 
         //Increment handsPlayed

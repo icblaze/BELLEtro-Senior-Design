@@ -148,6 +148,12 @@ public class MentorBufferManager
                     Overachiever overachiever = (Overachiever)mentor;
                     overachiever.ResetStatus();
                     break;
+
+                //  Reset first hand status
+                case MentorName.HistoryClass:
+                    HistoryClass historyClass = (HistoryClass)mentor;
+                    historyClass.ResetStatus();
+                    break;
             }
         }
     }

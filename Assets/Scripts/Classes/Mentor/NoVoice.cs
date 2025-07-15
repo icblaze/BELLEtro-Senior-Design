@@ -19,7 +19,7 @@ public class NoVoice : Mentor
     //  Played card will add +3 Mult if Voiceless/Lax suit
     public override void UseMentor(PCard card)
     {
-        if(card.suit == SuitName.Voiceless || card.suit == SuitName.Lax || card.enhancement == CardEnhancement.WildCard)
+        if(card.suit == SuitName.Voiceless || card.suit == SuitName.Lax || (!card.isDisabled && card.enhancement == CardEnhancement.WildCard))
         {
             ScoringManager.access().IncrementCurrentMult(3);
         }

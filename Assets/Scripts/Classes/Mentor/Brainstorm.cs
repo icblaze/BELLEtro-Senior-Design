@@ -25,7 +25,8 @@ public class Brainstorm : Mentor
         MentorName.LibraryCard,
         MentorName.PageFlip,
         MentorName.Overachiever,
-        MentorName.Revisionist
+        MentorName.Revisionist,
+        MentorName.Recess
     };
 
     //  Mentor name and basePrice are preset
@@ -110,5 +111,19 @@ public class Brainstorm : Mentor
             return;
         }
         leftmostMentor.UseMentor(card);
+    }
+
+    //  Uses leftmostMentor's effect when retrigger effect
+    public override void UseRetriggerMentor(List<PCard> scoredPCards)
+    {
+        if (leftmostMentor == null)
+        {
+            return;
+        }
+        else if (incompatibleMentors.Contains(leftmostMentor.name))
+        {
+            return;
+        }
+        leftmostMentor.UseRetriggerMentor(scoredPCards);
     }
 }

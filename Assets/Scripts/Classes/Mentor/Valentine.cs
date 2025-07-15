@@ -19,7 +19,7 @@ public class Valentine : Mentor
     //  Played card will add +3 Mult if Voiced/Tense suit
     public override void UseMentor(PCard card)
     {
-        if(card.suit == SuitName.Voiced || card.suit == SuitName.Tense || card.enhancement == CardEnhancement.WildCard)
+        if(card.suit == SuitName.Voiced || card.suit == SuitName.Tense || (!card.isDisabled && card.enhancement == CardEnhancement.WildCard))
         {
             ScoringManager.access().IncrementCurrentMult(3);
         }

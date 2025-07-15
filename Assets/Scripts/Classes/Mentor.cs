@@ -106,6 +106,16 @@ public class Mentor
                 return new FrequencyHopper(cardEdition);
             case MentorName.LateBloomer:
                 return new LateBloomer(cardEdition);
+            case MentorName.DiphthongDelight:
+                return new DiphthongDelight(cardEdition);
+            case MentorName.FirstInLine:
+                return new FirstInLine(cardEdition);
+            case MentorName.Blackboard:
+                return new Blackboard(cardEdition);
+            case MentorName.HistoryClass:
+                return new HistoryClass(cardEdition);
+            case MentorName.Recess:
+                return new Recess(cardEdition);
 
             default:
                 return new Mentor();

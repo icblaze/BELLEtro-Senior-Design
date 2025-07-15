@@ -25,7 +25,8 @@ public class CheatSheet : Mentor
         MentorName.LibraryCard,
         MentorName.PageFlip,
         MentorName.Overachiever,
-        MentorName.Revisionist
+        MentorName.Revisionist,
+        MentorName.Recess
     };
 
     //  Mentor name and basePrice are preset
@@ -108,5 +109,19 @@ public class CheatSheet : Mentor
             return;
         }
         rightMentor.UseMentor(card);
+    }
+
+    //  Uses leftmostMentor's effect when retrigger effect
+    public override void UseRetriggerMentor(List<PCard> scoredPCards)
+    {
+        if (rightMentor == null)
+        {
+            return;
+        }
+        else if (incompatibleMentors.Contains(rightMentor.name))
+        {
+            return;
+        }
+        rightMentor.UseRetriggerMentor(scoredPCards);
     }
 }
