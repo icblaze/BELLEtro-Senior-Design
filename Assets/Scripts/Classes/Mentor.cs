@@ -96,6 +96,8 @@ public class Mentor
                 return new Overachiever(cardEdition);
             case MentorName.Daydreamer:
                 return new Daydreamer(cardEdition);
+            case MentorName.Revisionist:
+                return new Revisionist(cardEdition);
 
             default:
                 return new Mentor();

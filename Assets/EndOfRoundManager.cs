@@ -195,13 +195,6 @@ public class EndOfRoundManager : MonoBehaviour
         }
         Debug.Log("Round after CashOut: " + Game.access().GetRound());
 
-        //Have shop reset
-        ShopManager shopManager = GameObject.FindGameObjectWithTag("ShopManager").GetComponent<ShopManager>();
-        shopManager.NewShop();
-
-        //Transition to shopScreen
-        shopManager.resetShopMentor();
-        MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);
         TransitionManager transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         transitionManager.TransitionToShopScreen();
     }

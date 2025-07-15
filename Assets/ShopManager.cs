@@ -564,9 +564,6 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Money Insufficient");
             return;
         }
-        //Refresh the Card slots with new random Cards
-        NewCards();
-        MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
 
         int numRerolls = VictoryManager.access().GetNumRerolls();
         VictoryManager.access().SetCardsPurchased(numRerolls + 1);
@@ -578,6 +575,9 @@ public class ShopManager : MonoBehaviour
         reroll++;
         rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 
+        //Refresh the Card slots with new random Cards
+        NewCards();
+        MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
     }
 
     //Card Details Hovering Functions
@@ -1346,6 +1346,11 @@ public class ShopManager : MonoBehaviour
                 pack2.price = 0;
             }
         }
+        else if (mentor.name == MentorName.Revisionist)
+        {
+            reroll = 0;
+            rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
+        }
     }
 
     //  Is this used for anything now?
@@ -1365,6 +1370,11 @@ public class ShopManager : MonoBehaviour
             {
                 Extension extension = (Extension)mentor;
                 extension.hasDiscounted = false;
+            }
+            else if(mentor.name == MentorName.Revisionist)
+            {
+                Revisionist revisionist = (Revisionist)mentor;
+                revisionist.hasRerolled = false;
             }
         }
     }

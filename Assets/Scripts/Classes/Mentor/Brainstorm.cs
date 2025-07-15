@@ -24,7 +24,8 @@ public class Brainstorm : Mentor
         MentorName.HelpingHand,
         MentorName.LibraryCard,
         MentorName.PageFlip,
-        MentorName.Overachiever
+        MentorName.Overachiever,
+        MentorName.Revisionist
     };
 
     //  Mentor name and basePrice are preset
