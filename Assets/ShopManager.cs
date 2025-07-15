@@ -341,6 +341,9 @@ public class ShopManager : MonoBehaviour
             mentorCardHolder.AddMentor(mentor); //  Visually add to holder
         }
 
+        // Check if newly bought mentor activate on Shop
+        mentorShopEffect(mentor);
+
         //Remove Mentor from Screen
         GameObject.Find(mentorName).SetActive(false);
         mentorButton.gameObject.SetActive(false);
@@ -992,6 +995,7 @@ public class ShopManager : MonoBehaviour
             if (mentorCardHolder != null)
             {
                 mentorCardHolder.AddMentor(PackCard1.mentor); //  Visually add to holder
+                mentorShopEffect(PackCard1.mentor);
             }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
@@ -1048,6 +1052,7 @@ public class ShopManager : MonoBehaviour
             if (mentorCardHolder != null)
             {
                 mentorCardHolder.AddMentor(PackCard2.mentor); //  Visually add to holder
+                mentorShopEffect(PackCard2.mentor);
             }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
@@ -1103,6 +1108,7 @@ public class ShopManager : MonoBehaviour
             if (mentorCardHolder != null)
             {
                 mentorCardHolder.AddMentor(PackCard3.mentor); //  Visually add to holder
+                mentorShopEffect(PackCard3.mentor);
             }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
@@ -1158,6 +1164,7 @@ public class ShopManager : MonoBehaviour
             if (mentorCardHolder != null)
             {
                 mentorCardHolder.AddMentor(PackCard4.mentor); //  Visually add to holder
+                mentorShopEffect(PackCard4.mentor);
             }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;
@@ -1213,6 +1220,7 @@ public class ShopManager : MonoBehaviour
             if (mentorCardHolder != null)
             {
                 mentorCardHolder.AddMentor(PackCard5.mentor); //  Visually add to holder
+                mentorShopEffect(PackCard5.mentor);
             }
             Debug.Log("Mentor Count: " + playerInst.mentorDeck.Count);
             cardsSelected++;

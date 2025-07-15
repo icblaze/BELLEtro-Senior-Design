@@ -309,12 +309,12 @@ public class Game
 
         while (count < pack.packSize)
         {
-            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);
-            int mentorEditionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);
+            int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);    
+            CardEdition mentorEdition = CardModifier.access().GetWeightedModifier(CardModifier.access().editionRates);
 
             PCard newMentorCard = new PCard();
 
-            newMentorCard.mentor = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)mentorEditionIndex);
+            newMentorCard.mentor = Mentor.MentorFactory((MentorName)mentorNameIndex, mentorEdition);
 
             //Checks if the cardBuff already exists in the cardBuffCards list
             alreadyExists = mentorCards.Any(mentorCard => mentorCard.mentor.name == newMentorCard.mentor.name);
@@ -343,9 +343,9 @@ public class Game
         while (count < numMentors)
         {
             int mentorNameIndex = randomizer(1, System.Enum.GetValues(typeof(MentorName)).Length);
-            int editionIndex = randomizer(0, System.Enum.GetValues(typeof(CardEdition)).Length);                     // Select a random edition
+            CardEdition mentorEdition = CardModifier.access().GetWeightedModifier(CardModifier.access().editionRates); // Select a random edition (weighted)
 
-            Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, (CardEdition)editionIndex);     // Create a Mentor with the MentorFactory
+            Mentor mentorCard = Mentor.MentorFactory((MentorName)mentorNameIndex, mentorEdition);     // Create a Mentor with the MentorFactory
 
             bool alreadyExists = System.Array.Exists(mentorCards, mentor => mentor != null && mentor.name == mentorCard.name);    //Check to see if the mentor already exists within the mentorCards array
 

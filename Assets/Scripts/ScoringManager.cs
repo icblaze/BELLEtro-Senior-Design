@@ -160,7 +160,6 @@ public class ScoringManager : MonoBehaviour
     {
         //Go through cards and add their scores. Wait for a small time
         //before going to the next card
-        isScoring = true;
 
         if (MentorBufferManager.mentorBuffers[UseLocation.AllCards].Count >= 1)
         {
@@ -169,6 +168,8 @@ public class ScoringManager : MonoBehaviour
 
         //  Run the initial Mentor buffer
         yield return mentorBuffer.RunBuffer(UseLocation.Initial);
+
+        isScoring = true;
 
         //  Run the Retrigger mentors/seals
         yield return mentorBuffer.RunRetriggerBuffer(playedPCards);

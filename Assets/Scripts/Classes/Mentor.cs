@@ -98,6 +98,14 @@ public class Mentor
                 return new Daydreamer(cardEdition);
             case MentorName.Revisionist:
                 return new Revisionist(cardEdition);
+            case MentorName.WildCard:
+                return new WildCard(cardEdition);
+            case MentorName.LinguistsEdge:
+                return new LinguistsEdge(cardEdition);
+            case MentorName.FrequencyHopper:
+                return new FrequencyHopper(cardEdition);
+            case MentorName.LateBloomer:
+                return new LateBloomer(cardEdition);
 
             default:
                 return new Mentor();
