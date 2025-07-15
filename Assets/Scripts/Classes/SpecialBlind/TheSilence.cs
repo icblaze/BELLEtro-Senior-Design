@@ -1,3 +1,8 @@
+// This document contains the code for TheSilence Special Blind.
+// This blind will mute the phonetic sounds for the round.
+// Current Devs:
+// Fredrick Bouloute (bouloutef04)
+
 using UnityEngine;
 
 public class TheSilence : SpecialBlind
@@ -5,7 +10,7 @@ public class TheSilence : SpecialBlind
     private AudioSource voiceHolderSource;
     public TheSilence() : base(SpecialBlindNames.TheSilence, 2, 2)
     {
-        description = "All phoneme pronunciation sounds are muted this round";
+        description = "All phonetic sounds are muted this round";
         nameText = "The Silence";
     }
 

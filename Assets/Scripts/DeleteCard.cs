@@ -18,9 +18,10 @@ public class DeleteCard : MonoBehaviour
     private CardType cardType;
 
     public bool cashPenalty = false;
+    public bool drawThree = false;
 
     void Start()
-    {    
+    {
         deckManager = FindFirstObjectByType<DeckManager>();
         if (deckManager == null)
             Debug.LogError("DeleteCard: no DeckManager in scene!");
@@ -80,7 +81,7 @@ public class DeleteCard : MonoBehaviour
             {
                 int aOrder = a.GetComponent<Card>().ParentIndex();
                 int bOrder = b.GetComponent<Card>().ParentIndex();
-                return aOrder.CompareTo(bOrder);  
+                return aOrder.CompareTo(bOrder);
             });
 
             //  Debug hand check
@@ -120,7 +121,7 @@ public class DeleteCard : MonoBehaviour
     {
         selectedPCards.Clear(); //  Refresh PCards
 
-        foreach(GameObject cardObject in selectedCards)
+        foreach (GameObject cardObject in selectedCards)
         {
             selectedPCards.Add(cardObject.GetComponent<Card>().pcard);
         }
@@ -157,15 +158,23 @@ public class DeleteCard : MonoBehaviour
             shakeScreen.StartShake();
             SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
             sfxManager.NoSFX();
-            
+
             return;
         }
 
         //  Activate on discard
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Discard);
 
-        //  Draw from deck equal to amount played
-        PCard[] newCards = Deck.access().drawCards(selectedCards.Count);
+        PCard[] newCards;
+        if (drawThree == true)//If special blind is active, draw three
+        {
+            newCards = Deck.access().drawCards(3);
+        }
+        else
+        {
+            //  Draw from deck equal to amount played
+            newCards = Deck.access().drawCards(selectedCards.Count);
+        }
 
         var cardsToRemove = new List<GameObject>();
         foreach (var card in selectedCards)
@@ -176,7 +185,7 @@ public class DeleteCard : MonoBehaviour
                 Debug.LogWarning($"Cannot delete {card?.name}; not a child of playingCardGroup.");
         }
 
-        
+
         int removedCount = cardsToRemove.Count;
         foreach (var card in cardsToRemove)
         {
@@ -184,7 +193,7 @@ public class DeleteCard : MonoBehaviour
             RemoveSelectedCard(card);
             Destroy(card);
         }
-        
+
         discardCount = Round.access().DecreaseDiscardCount();      //Decrease Hand count of the player
         discardsLeft.text = discardCount.ToString("0");
 
@@ -225,9 +234,16 @@ public class DeleteCard : MonoBehaviour
             deckManager.DrawCard(newCards[i]);
         }
 
-        //  Draw additional to make up for missing slots
-        int missingSlots = Player.access().handSize - deckManager.GetSlotCount();
+        int missingSlots;
 
+        if (drawThree == true)//If special blind is active, ignore handSize
+        {
+            missingSlots = 3;
+        }
+        else
+        {
+            missingSlots = Player.access().handSize - deckManager.GetSlotCount();
+        }
         if (missingSlots > 0)
         {
             PCard[] extraCards = Deck.access().drawCards(missingSlots);

@@ -1,3 +1,7 @@
+// This document contains the code for the Jumbo Special Blind.
+// This blind will be 4 times the score of the small blind.
+// Current Devs:
+// Fredrick Bouloute (bouloutef04)
 using UnityEngine;
 
 public class JumboBlind : SpecialBlind

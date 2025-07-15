@@ -26,6 +26,7 @@ public class PlayHand : MonoBehaviour
     private Transform playingCardGroup;
 
     public bool cashPenalty = false;
+    public bool drawThree = false;
 
     // Look into incorporating a save system
     void Awake()
@@ -206,9 +207,18 @@ public class PlayHand : MonoBehaviour
         }
 
         selectedCards.Clear();  //  might be redundant
+        
+        PCard[] newCards;
+        if (drawThree == true)//If special blind is active, draw three
+        {
+            newCards = Deck.access().drawCards(3);
+        }
+        else
+        {
+            //  Draw from deck equal to amount played
+            newCards = Deck.access().drawCards(cardsPlayed);
+        }
 
-        //  Draw from deck equal to amount played
-        PCard[] newCards = Deck.access().drawCards(cardsPlayed);
         //  Break glass cards that were marked after put into drawnCards pile
         Deck.access().DestroyGlassCards();
 
@@ -241,8 +251,16 @@ public class PlayHand : MonoBehaviour
             deckManager.DrawCard(newCards[i]);
         }
 
-        //  Draw additional to make up for missing slots
-        int missingSlots = Player.access().handSize - deckManager.GetSlotCount();
+        int missingSlots;
+
+        if (drawThree == true)//If special blind is active, ignore handSize
+        {
+            missingSlots = 3;
+        }
+        else
+        {
+            missingSlots = Player.access().handSize - deckManager.GetSlotCount();
+        }
 
         if (missingSlots > 0)
         {

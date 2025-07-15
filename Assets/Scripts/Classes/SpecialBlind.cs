@@ -51,6 +51,8 @@ public class SpecialBlind
                 return new JumboBlind();
             case SpecialBlindNames.MegaBlind:
                 return new MegaBlind();
+            case SpecialBlindNames.TheBasket:
+                return new TheBasket();
             default:
                 return null;
         }
@@ -72,6 +74,8 @@ public class SpecialBlind
                 return BlindFactory(SpecialBlindNames.JumboBlind);
             case 5:
                 return BlindFactory(SpecialBlindNames.MegaBlind);
+            case 6:
+                return BlindFactory(SpecialBlindNames.TheBasket);
             default:
                 return null;
         }
