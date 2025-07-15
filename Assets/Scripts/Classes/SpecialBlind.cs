@@ -76,6 +76,8 @@ public class SpecialBlind
                 return BlindFactory(SpecialBlindNames.MegaBlind);
             case 6:
                 return BlindFactory(SpecialBlindNames.TheBasket);
+            case 7:
+                return BlindFactory(SpecialBlindNames.TheHandful);
             default:
                 return null;
         }

@@ -27,6 +27,7 @@ public class PlayHand : MonoBehaviour
 
     public bool cashPenalty = false;
     public bool drawThree = false;
+    public bool handful = false;
 
     // Look into incorporating a save system
     void Awake()
@@ -104,7 +105,15 @@ public class PlayHand : MonoBehaviour
             Debug.LogWarning("Cannot play more than 5 cards!");
             return;
         }
-
+        if (handful == true && selectedCards.Count != 5)//If handful active and not playing 5 cards
+        {
+            Debug.LogWarning("Must Play 5 cards!");
+            ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+            shakeScreen.StartShake();
+            SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
+            sfxManager.NoSFX();
+            return;
+        }
         currHandCount = Player.access().handCount;
         if (currHandCount == 0)
         {

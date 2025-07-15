@@ -17,6 +17,7 @@ public enum SpecialBlindNames
     ThePurist,
     TheYoink,
     TheBasket,
+    TheHandful,
     JumboBlind,
     MegaBlind
     //TheMirage
