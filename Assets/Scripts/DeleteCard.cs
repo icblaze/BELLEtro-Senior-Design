@@ -77,12 +77,7 @@ public class DeleteCard : MonoBehaviour
             selectedCards.Add(card);
 
             //  Sort selected cards to match left to right order of the hand
-            selectedCards.Sort((a, b) =>
-            {
-                int aOrder = a.GetComponent<Card>().ParentIndex();
-                int bOrder = b.GetComponent<Card>().ParentIndex();
-                return aOrder.CompareTo(bOrder);
-            });
+            SortSelectedCards();
 
             //  Debug hand check
             CurrentHandManager.Instance.findCurrentHand(GetSelectedPCards());
@@ -108,6 +103,17 @@ public class DeleteCard : MonoBehaviour
             pcardCount = selectedPCards.Count;
 
         }
+    }
+
+    //This sorts the selected cards that the player currently has selected from left to right
+    public void SortSelectedCards()
+    {
+        selectedCards.Sort((a, b) =>
+        {
+            int aOrder = a.GetComponent<Card>().ParentIndex();
+            int bOrder = b.GetComponent<Card>().ParentIndex();
+            return aOrder.CompareTo(bOrder);
+        });
     }
 
     //This returns the selected cards that the player currently has selected

@@ -28,6 +28,7 @@ public class HorizontalCardHolder : MonoBehaviour
     [SerializeField] private bool tweenCardReturn = true;
 
     private Deck deck = Deck.access();
+    private DeleteCard deleteScript;
 
     void Awake()
     {
@@ -194,6 +195,13 @@ public class HorizontalCardHolder : MonoBehaviour
         {
             card.cardVisual.UpdateIndex(transform.childCount);
         }
+
+        //  Refresh selected cards list after swapping
+        if(deleteScript == null)
+        {
+            deleteScript = FindFirstObjectByType<DeleteCard>();
+        }
+        deleteScript.SortSelectedCards();
     }
 
     //  Refresh visual index and update playerHand
