@@ -443,7 +443,7 @@ public class Game
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0, 4);
+            index = randomizer(0, 6);
             blind = SpecialBlind.BlindFromNumber(index);
             if (blind.minimumAnte > ante)//If special blind can't spawn yet, find different blind
             {
