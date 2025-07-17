@@ -86,9 +86,6 @@ Thumbs.db
 *.zip
 *.tar.gz
 
-# Ignoring Meta files
-*.meta
-
 # Ignoring User Settings
 default-6000.dwlt
 
