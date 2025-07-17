@@ -16,8 +16,7 @@ using System.Text.RegularExpressions;
 using UnityEngine.UI;
 using System.Linq;
 using Newtonsoft.Json;
-
-
+using System.Runtime.InteropServices;
 
 public class BackendHook : MonoBehaviour
 {
@@ -28,6 +27,15 @@ public class BackendHook : MonoBehaviour
     public static string loginTokenString;
     public static string sessionID;
     public static int currentAnte; //  Expose ante value so React/WebGL can get the value when quitting from tab
+
+    // The following are used to update React states on the Card Game React page (credits to VirtuELLE Mentor team)
+    // See https://react-unity-webgl.dev/docs/api/event-system for more info
+    [DllImport("__Internal")]
+    private static extern void setSessionID(string sessionID);
+    [DllImport("__Internal")]
+    private static extern void setCurrentAnte(int score);
+    [DllImport("__Internal")]
+    private static extern void setUserIsPlayingGame(int state);
 
     private static BackendHook instance;
 
@@ -118,8 +126,12 @@ public class BackendHook : MonoBehaviour
         startSessionRequest.disposeUploadHandlerOnDispose = true;
         startSessionRequest.disposeDownloadHandlerOnDispose = true;
         startSessionRequest.Dispose();
+
+        #if UNITY_WEBGL == true && UNITY_EDITOR == false
+            setUserIsPlayingGame(1); // Signal to JS/React that game session has begun
+        #endif
     }
-    
+
     // This function records the final time of the session and the player's points (takes in Ante the player left on)
     public static IEnumerator endSession(int anteScore)
     {
@@ -167,6 +179,20 @@ public class BackendHook : MonoBehaviour
         endSessionRequest.disposeUploadHandlerOnDispose = true;
         endSessionRequest.disposeDownloadHandlerOnDispose = true;
         endSessionRequest.Dispose();
+
+        #if UNITY_WEBGL == true && UNITY_EDITOR == false
+            setUserIsPlayingGame(0); // Signal to JS/React that game session has ended
+        #endif
+    }
+
+    public void WEBGL_ExtractGameInfo()
+    {
+        Debug.Log("Unity is now extracting current game info.");
+
+        #if UNITY_WEBGL == true && UNITY_EDITOR == false
+            setSessionID(sessionID);
+            setCurrentAnte(currentAnte);
+        #endif
     }
 
     public static void StartHook(IEnumerator routine)
