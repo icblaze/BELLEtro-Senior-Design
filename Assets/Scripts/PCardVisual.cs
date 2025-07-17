@@ -107,28 +107,26 @@ public class PCardVisual : MonoBehaviour
     {
         if (!initalize || parentCard == null) return;
 
-        // --- Start of Changes ---
-
-        // Check if the card has been played.
+        // If the card has been played, disable hand effects and flatten it.
         if (parentCard.isPlayed)
         {
-            // When played, we don't need hand positioning logic.
-            // Reset the curve offset so the card animates flatly to the play area.
-            curveYOffset = 0;
+            // ✨ ADD THIS LINE to remove the vertical offset from the hand curve.
+            curveYOffset = 0f;
+
+            // Smoothly reset the rotation of the visual components to zero (flat).
+            tiltParent.localRotation = Quaternion.Lerp(tiltParent.localRotation, Quaternion.identity, tiltSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.identity, rotationSpeed * Time.deltaTime);
         }
+        // If the card is still in the player's hand, apply all the dynamic effects.
         else
         {
-            // If the card is NOT played, run the normal hand logic.
             HandPositioning();
             CardTilt();
+            FollowRotation();
         }
 
-        // These methods should always run to keep the visual smoothly
-        // following the card's RectTransform, even during animation.
+        // This should always run to keep the visual attached to the logical card position.
         SmoothFollow();
-        FollowRotation();
-
-        // --- End of Changes ---
     }
 
     private void HandPositioning()
