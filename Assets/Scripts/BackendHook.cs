@@ -27,6 +27,7 @@ public class BackendHook : MonoBehaviour
     public static int userID;
     public static string loginTokenString;
     public static string sessionID;
+    public static int currentAnte; //  Expose ante value so React/WebGL can get the value when quitting from tab
 
     private static BackendHook instance;
 
@@ -143,6 +144,7 @@ public class BackendHook : MonoBehaviour
         form.AddField("endTime", endTimeString);
         form.AddField("playerScore", anteScore.ToString());
 
+        Debug.Log("Exit on ante: " + currentAnte);  //  Might make the input parameter redundant?
         UnityWebRequest endSessionRequest = UnityWebRequest.Post(url, form);
 
         endSessionRequest.SetRequestHeader("Authorization", "Bearer " + loginToken);

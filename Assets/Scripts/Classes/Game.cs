@@ -60,6 +60,8 @@ public class Game
     public void SetAnte(int i)
     {
         ante = i;
+        //  Change value in BackendHook
+        BackendHook.currentAnte = i;
     }
 
     //Getter and Setter for the roundValue variable
