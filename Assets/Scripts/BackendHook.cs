@@ -27,6 +27,19 @@ public class BackendHook : MonoBehaviour
     public static int userID;
     public static string loginTokenString;
     public static string sessionID;
+
+    private static BackendHook instance;
+
+    private void Awake()
+    {
+        if (FindObjectsOfType<BackendHook>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+        instance = this;
+    }
  
     // This is the script for manual login into ELLE Servers
     public static IEnumerator Login(string username, string password)
@@ -152,6 +165,23 @@ public class BackendHook : MonoBehaviour
         endSessionRequest.disposeUploadHandlerOnDispose = true;
         endSessionRequest.disposeDownloadHandlerOnDispose = true;
         endSessionRequest.Dispose();
+    }
+
+    public static void StartHook(IEnumerator routine)
+    {
+        instance.StartCoroutine(routine);
+    }
+
+    // Example of how to use this is on Login Screen
+    public static void StartHookWithCallback(IEnumerator routine, Action callback)
+    {
+        instance.StartCoroutine(callOnCompletion(routine, callback));
+    }
+
+    private static IEnumerator callOnCompletion(IEnumerator routine, Action callback)
+    {
+        yield return routine;
+        callback.Invoke();
     }
 }
 
