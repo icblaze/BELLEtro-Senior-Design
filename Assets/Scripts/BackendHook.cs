@@ -26,7 +26,7 @@ public class BackendHook : MonoBehaviour
     public static int userID;
     public static string loginTokenString;
     public static string sessionID;
-    public static int currentAnte; //  Expose ante value so React/WebGL can get the value when quitting from tab
+    public static int currentAnte = 1; //  Expose ante value so React/WebGL can get the value when quitting from tab
 
     // The following are used to update React states on the Card Game React page (credits to VirtuELLE Mentor team)
     // See https://react-unity-webgl.dev/docs/api/event-system for more info
