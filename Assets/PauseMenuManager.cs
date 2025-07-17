@@ -58,6 +58,9 @@ public class PauseMenuManager : MonoBehaviour
         StartCoroutine(FadeToBlack());
 
         Debug.Log("QuitButton Was Clicked");
+
+        //  End play session
+        BackendHook.StartHook(BackendHook.endSession());
     }
     //Load the main menu scene.
     public void DelayedLoad()

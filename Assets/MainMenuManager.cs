@@ -63,6 +63,9 @@ public class MainMenuManager : MonoBehaviour
     {
         StartCoroutine(FadeToBlack());
         Debug.Log("StartButton Was Clicked");
+
+        //  Start play session
+        BackendHook.StartHook(BackendHook.startSession());
     }
 
     //Function used to bring up options menu. When options button is clicked, it will determine
