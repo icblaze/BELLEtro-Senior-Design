@@ -25,6 +25,8 @@ public class BlindSceneManager : MonoBehaviour
     public GameObject SpecialBlindName;
     public GameObject SpecialBlindDesc;
     public GameObject SpecialBlindToken;
+    public GameObject SmallBlindSkipTag;
+    public GameObject BigBlindSkipTag;
     public Button Skip1Button;
     public Button Skip2Button;
     public Button SmallBlindButton;
@@ -70,7 +72,10 @@ public class BlindSceneManager : MonoBehaviour
 
     public void SetBlindScreenInfo()
     {
+        Debug.Log("Tag 1: " + tag1.tagName);
         SpecialBlindToken.GetComponent<Image>().sprite = Resources.Load<Sprite>($"BlindTokens/" + special.blindType.ToString());
+        SmallBlindSkipTag.GetComponent<Image>().sprite = Resources.Load<Sprite>($"SkipTags/" + tag1.tagName);
+        BigBlindSkipTag.GetComponent<Image>().sprite = Resources.Load<Sprite>($"SkipTags/" + tag2.tagName);
 
         SpecialBlindName.GetComponentInChildren<TMP_Text>().text = special.nameText;
 
