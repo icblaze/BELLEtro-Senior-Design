@@ -62,7 +62,7 @@ public class Login : MonoBehaviour
         {
             Debug.Log("Login Attempted");
             loginPending = true;
-            // BackendHook.StartHookWithCallback(BackendHook.Login(username.text, passwordInputfield.text), OnLoginComplete);
+            BackendHook.StartHookWithCallback(BackendHook.Login(username.text, passwordInputfield.text), OnLoginComplete);
         }
     }
 
@@ -71,12 +71,12 @@ public class Login : MonoBehaviour
     {
         loginPending = false;
 
-        // if (BackendHook.loginTokenString.Contains("User Not Found") || BackendHook.loginTokenString.Contains("Incorrect"))
-        // {
-        //     Debug.Log("Login Failed");
-        //     Debug.LogWarning(BackendHook.loginTokenString);
-        //     return;
-        // }
+        if (BackendHook.loginTokenString.Contains("User Not Found") || BackendHook.loginTokenString.Contains("Incorrect"))
+        {
+            Debug.Log("Login Failed");
+            Debug.LogWarning(BackendHook.loginTokenString);
+            return;
+        }
         Debug.Log("Successful Login: Moving Scenes");
         loginSuccessful = true;
     }
