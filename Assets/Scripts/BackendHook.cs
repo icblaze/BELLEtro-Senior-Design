@@ -119,8 +119,8 @@ public class BackendHook : MonoBehaviour
         startSessionRequest.Dispose();
     }
     
-    // This function records the final time of the session and the player's points
-    public static IEnumerator endSession()
+    // This function records the final time of the session and the player's points (takes in Ante the player left on)
+    public static IEnumerator endSession(int anteScore)
     {
         string url = API_ENDPOINT + "/endsession";
         WWWForm form = new WWWForm();
@@ -141,7 +141,7 @@ public class BackendHook : MonoBehaviour
 
         form.AddField("sessionID", sessionID);
         form.AddField("endTime", endTimeString);
-        form.AddField("playerScore", Game.ante.ToString());
+        form.AddField("playerScore", anteScore.ToString());
 
         UnityWebRequest endSessionRequest = UnityWebRequest.Post(url, form);
 

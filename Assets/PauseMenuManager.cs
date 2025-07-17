@@ -48,6 +48,9 @@ public class PauseMenuManager : MonoBehaviour
     //the scene should change soon after.
     public void QuitClick()
     {
+        //  End play session
+        BackendHook.StartHook(BackendHook.endSession(Game.access().GetAnte()));
+
         Game.access().ResetGame();
         Round.access().RestartGame();
         Player.access().Reset();
@@ -58,9 +61,6 @@ public class PauseMenuManager : MonoBehaviour
         StartCoroutine(FadeToBlack());
 
         Debug.Log("QuitButton Was Clicked");
-
-        //  End play session
-        BackendHook.StartHook(BackendHook.endSession());
     }
     //Load the main menu scene.
     public void DelayedLoad()

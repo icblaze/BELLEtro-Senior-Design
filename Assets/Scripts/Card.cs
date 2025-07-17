@@ -101,7 +101,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         {
             infoPanel = GameObject.Find("CardInfoPanel");
             Image panelImage = infoPanel.GetComponent<Image>();
-            panelImage.color = new Color(255, 255, 255, 0.4f);
+            panelImage.color = new Color(255, 255, 255, 0.8f);
             if (infoPanel != null)
             {
                 infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
