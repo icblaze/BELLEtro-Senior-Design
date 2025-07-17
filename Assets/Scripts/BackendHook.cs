@@ -73,8 +73,8 @@ public class BackendHook : MonoBehaviour
         yield return loginToken;
     }
 
-    
-    public static IEnumerator startSession(int moduleID)
+    // Starts the recording of the time the game is played for and the info about the game into the server (like what module it is)
+    public static IEnumerator startSession()
     {
         string url = API_ENDPOINT + "/session";
         WWWForm form = new WWWForm();
@@ -82,7 +82,7 @@ public class BackendHook : MonoBehaviour
         string sessionDate = DateTime.Now.ToString(@"MM\/dd\/yy");
         string startTime = DateTime.Now.ToString("HH:mm");
 
-        form.AddField("moduleID", moduleID);
+        form.AddField("moduleID", 66);
         form.AddField("sessionDate", sessionDate);
         form.AddField("startTime", startTime);
         form.AddField("platform", "cp");
@@ -105,8 +105,9 @@ public class BackendHook : MonoBehaviour
         startSessionRequest.disposeDownloadHandlerOnDispose = true;
         startSessionRequest.Dispose();
     }
-
-    public static IEnumerator endSession(int points)
+    
+    // This function records the final time of the session and the player's points
+    public static IEnumerator endSession()
     {
         string url = API_ENDPOINT + "/endsession";
         WWWForm form = new WWWForm();
@@ -127,7 +128,7 @@ public class BackendHook : MonoBehaviour
 
         form.AddField("sessionID", sessionID);
         form.AddField("endTime", endTimeString);
-        form.AddField("playerScore", points.ToString());
+        form.AddField("playerScore", Game.ante.ToString());
 
         UnityWebRequest endSessionRequest = UnityWebRequest.Post(url, form);
 
