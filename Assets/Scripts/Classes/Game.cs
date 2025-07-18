@@ -472,12 +472,11 @@ public class Game
     public Tag[] randomTag(int tagCount)
     {
         Tag[] tagList = new Tag[tagCount];
-        bool alreadyExists;
 
         Tag tag = null;
         for (int i = 0; i < tagCount; ++i)
         {
-            index = randomizer(0, 2);
+            index = randomizer(0, 5);
             tag = Tag.TagFromIndex(index);
             tagList[i] = tag;
         }

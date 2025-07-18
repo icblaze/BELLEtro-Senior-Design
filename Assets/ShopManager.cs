@@ -82,6 +82,7 @@ public class ShopManager : MonoBehaviour
     private int shopMentorsAmount = 2;  //We will include 2 of the following: Mentors, Textbooks, or CardBuffs
     int cardsSelected = 0;              //Cards currently selected in pack
     int packSelected = 0;               //Used to tell which pack was selected
+    public bool freeReroll = false;
 
     //Game and Player Manager Scripts for accessing functions and variables
     Game inst = Game.access();
@@ -130,7 +131,11 @@ public class ShopManager : MonoBehaviour
         packSelected = 0;//Used to tell which pack was selected
 
         //Reset Reroll price to 5 (or $3 with voucher)
-        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
+        if (freeReroll == true)
+        {
+            reroll = 0;
+        }
+        else if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
         {
             reroll = 3;
         }
@@ -138,6 +143,7 @@ public class ShopManager : MonoBehaviour
         {
             reroll = 5;
         }
+        rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
 
         //Generate randomVoucher
         if (Game.access().GetRound() == 1)
@@ -533,7 +539,7 @@ public class ShopManager : MonoBehaviour
     public void NextRound()
     {
         //Reset Reroll price to 5 (or $3 with voucher)
-        if(playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
+        if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
         {
             reroll = 3;
         }
@@ -566,6 +572,7 @@ public class ShopManager : MonoBehaviour
             //Possibly make screen shake, or output a message saying not enough money
             ShakeScreen shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
             shakeScreen.StartShake();
+            sfxManager.NoSFX();
             Debug.Log("Money Insufficient");
             return;
         }
@@ -576,6 +583,18 @@ public class ShopManager : MonoBehaviour
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;
         sfxManager.MoneyUsed();
+        if (freeReroll == true)
+        {
+            freeReroll = false;
+            if (playerInst.vouchers.Any(voucher => voucher.name == VoucherNames.RerollPass))
+            {
+                reroll = 3;
+            }
+            else
+            {
+                reroll = 5;
+            }
+        }
         moneyText.GetComponentInChildren<TMP_Text>().text = "$" + playerInst.moneyCount;
         reroll++;
         rerollButton.GetComponentInChildren<TMP_Text>().text = $"Reroll\n${reroll}";
@@ -1382,7 +1401,7 @@ public class ShopManager : MonoBehaviour
                 Extension extension = (Extension)mentor;
                 extension.hasDiscounted = false;
             }
-            else if(mentor.name == MentorName.Revisionist)
+            else if (mentor.name == MentorName.Revisionist)
             {
                 Revisionist revisionist = (Revisionist)mentor;
                 revisionist.hasRerolled = false;

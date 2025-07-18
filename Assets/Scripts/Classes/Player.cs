@@ -46,10 +46,12 @@ public class Player
     public int sellValue;                                        //Sell value of a card enhancer
     public int handSize;
     public int maxInterest;
+    public int handsPlayed;
+    public int discardsPlayed;
 
 
     //Save player state in the game
-     public void SaveState()
+    public void SaveState()
     {
         PlayerPrefsManager.SetMoney(moneyCount);
         PlayerPrefsManager.SetHandCount(handCount);
@@ -85,6 +87,8 @@ public class Player
         discount = 1.0f;    //  100% price initially
         handSize = 8;
         maxInterest = 5;
+        handsPlayed = 0;
+        discardsPlayed = 0;
         InitializeHandTable();
     }
 
@@ -106,6 +110,8 @@ public class Player
         sellValue = 0;
         handSize = 8;
         maxInterest = 5;
+        handsPlayed = 0;
+        discardsPlayed = 0;
         handTable.Clear();
         InitializeHandTable();
     }

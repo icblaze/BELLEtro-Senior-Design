@@ -210,7 +210,7 @@ public class DeleteCard : MonoBehaviour
             SFXManager sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
             sfxManager.MoneyUsed();
         }
-
+        Player.access().discardsPlayed++;
         StartCoroutine(RefillNextFrame(newCards));
     }
 

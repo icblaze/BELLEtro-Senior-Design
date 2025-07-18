@@ -14,6 +14,9 @@ public enum TagNames
     //MentorPack,
     FiveDollar,
     SkipMoney,
+    Shoplifter,
+    HandsOn,
+    HandsOff,
     //MentorSellPrice,
     //NegativeMentor,
     //CopyTag

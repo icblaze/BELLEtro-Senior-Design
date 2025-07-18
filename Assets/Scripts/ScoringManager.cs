@@ -313,6 +313,7 @@ public class ScoringManager : MonoBehaviour
         }
         player.chipCount += totalScore;
         roundScoreText.text = player.chipCount.ToString();
+        Player.access().handsPlayed++;
     }
 
     //Takes in hand name and gets chips and mult of hand (also increment playCount
