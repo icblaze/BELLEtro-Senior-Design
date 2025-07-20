@@ -395,6 +395,8 @@ public class ScoringManager : MonoBehaviour
     //  Set the current chips (blue score) and update text
     public void SetCurrentChips(int chips)
     {
+        shakeScreen.StartShake();
+        sfxManager.CardScoreSFX();
         currentChips = chips;
         blueScoreText.text = currentChips.ToString();
     }
@@ -402,6 +404,7 @@ public class ScoringManager : MonoBehaviour
     public void IncrementCurrentChips(int chips)
     {
         shakeScreen.StartShake();
+        sfxManager.CardScoreSFX();
         currentChips += chips;
         blueScoreText.text = currentChips.ToString();
         Debug.Log("Current Chips: " + currentChips.ToString());

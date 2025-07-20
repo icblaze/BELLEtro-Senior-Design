@@ -578,7 +578,7 @@ public class ShopManager : MonoBehaviour
         }
 
         int numRerolls = VictoryManager.access().GetNumRerolls();
-        VictoryManager.access().SetCardsPurchased(numRerolls + 1);
+        VictoryManager.access().SetNumRerolls(numRerolls + 1);
 
         //Reduce money based on reroll price and change text to display new money
         playerInst.moneyCount = playerInst.moneyCount - reroll;
