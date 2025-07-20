@@ -26,6 +26,9 @@ public class EndOfRoundManager : MonoBehaviour
 
     public GameObject mentorRewardNumber;
     public GameObject mentorRewardText;
+    public GameObject tagRewardNumber;
+    public GameObject tagRewardText;
+    public bool extraBossReward = false;
     private int mentorReward = 0; //  For Mentors that reward extra money
 
     private static EndOfRoundManager instance;  //EndOfRoundManager instance varaiable
@@ -55,6 +58,7 @@ public class EndOfRoundManager : MonoBehaviour
         CalculateHands();
         CalculateInterest();
         CalculateMentors();
+        CalculateBossReward();
         SetCashOut();
     }
     private void SetScoreAmount()
@@ -140,6 +144,23 @@ public class EndOfRoundManager : MonoBehaviour
         {
             mentorRewardText.SetActive(false);
             mentorRewardNumber.SetActive(false);
+        }
+    }
+
+    private void CalculateBossReward()
+    {
+        if (extraBossReward == true)
+        {
+            tagRewardText.SetActive(true);
+            tagRewardNumber.SetActive(true);
+            tagRewardNumber.GetComponent<TMP_Text>().text = "25";
+            totalCashOut += 25;
+            extraBossReward = false;
+        }
+        else
+        {
+            tagRewardText.SetActive(false);
+            tagRewardNumber.SetActive(false);
         }
     }
 

@@ -476,7 +476,7 @@ public class Game
         Tag tag = null;
         for (int i = 0; i < tagCount; ++i)
         {
-            index = randomizer(0, 5);
+            index = randomizer(0, 8);
             tag = Tag.TagFromIndex(index);
             tagList[i] = tag;
         }

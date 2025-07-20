@@ -32,6 +32,12 @@ public class Tag
                 return new HandsOn();
             case TagNames.HandsOff:
                 return new HandsOff();
+            case TagNames.Studious:
+                return new Studious();
+            case TagNames.FreeKnowledge:
+                return new FreeKnowledge();
+            case TagNames.MidtermMaster:
+                return new MidtermMaster();
             default:
                 return null;
         }
@@ -51,6 +57,12 @@ public class Tag
                 return TagFactory(TagNames.HandsOn);
             case 4:
                 return TagFactory(TagNames.HandsOff);
+            case 5:
+                return TagFactory(TagNames.Studious);
+            case 6:
+                return TagFactory(TagNames.FreeKnowledge);
+            case 7:
+                return TagFactory(TagNames.MidtermMaster);
             default:
                 return null;
         }

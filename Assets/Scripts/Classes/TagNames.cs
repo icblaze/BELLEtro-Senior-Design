@@ -17,6 +17,9 @@ public enum TagNames
     Shoplifter,
     HandsOn,
     HandsOff,
+    Studious,
+    FreeKnowledge,
+    MidtermMaster,
     //MentorSellPrice,
     //NegativeMentor,
     //CopyTag
