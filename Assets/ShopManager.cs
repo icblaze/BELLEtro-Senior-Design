@@ -560,9 +560,9 @@ public class ShopManager : MonoBehaviour
         transitionMan.TransitionToRoundSelect();
 
         //Set a new shop in the background
-        resetShopMentor();
-        NewShop();
-        MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
+        //resetShopMentor();
+        //NewShop();
+        //MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);   //  Run shop Mentors
     }
     //Function causes the Mentors to reset. 
     public void Reroll()

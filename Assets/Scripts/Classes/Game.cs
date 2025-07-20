@@ -197,7 +197,7 @@ public class Game
             Voucher voucherCard = new Voucher((VoucherNames)index);                                                            // This constructs a new Voucher with the name of a random voucher from the VoucherNames enum  
 
             bool alreadyExists = System.Array.Exists(vouchers, voucher => voucher != null && voucher.name == voucherCard.name); //This checks if the Voucher already exists in out vouchers array
-            bool playerHas = Player.access().vouchers.Contains(voucherCard);    //  Check if Player already has the voucher
+            bool playerHas = Player.access().vouchers.Exists(voucher => voucher.name == voucherCard.name);    //  Check if Player already has the voucher
 
             if (!alreadyExists && !playerHas)
             {
