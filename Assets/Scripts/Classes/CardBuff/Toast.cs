@@ -61,9 +61,10 @@ public class Toast : CardBuff
 
         for (int i = 0; i < deleteScript.GetSelectedCards().Count; i++)
         {
-            //  We don't have to use AssignPCard here since visual don't have to update
+            //  We should use AssignPCard here 
             Card chipCard = deleteScript.GetSelectedCards()[i].GetComponent<Card>();
             chipCard.pcard.chips += 10;
+            chipCard.AssignPCard(chipCard.pcard);
 
             //  Apply to it in cardsDrawn so that'll it be in deck
             for (int j = 0; j < deck.cardsDrawn.Count; j++)

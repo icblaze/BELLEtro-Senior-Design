@@ -55,7 +55,7 @@ public class Bagel : CardBuff
     public override void applyCardBuff ()
     {
         //  Add copy to deckCards list
-        deck.AddCard(deleteScript.GetSelectedPCards()[0]);
+        deck.AddCard(PCard.CloneCard(deleteScript.GetSelectedPCards()[0]));
 
         //  Set prev used consumable to current consumable
         game.previousConsumable = CardBuffFactory(name);

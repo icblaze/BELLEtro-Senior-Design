@@ -61,9 +61,10 @@ public class Flatbread : CardBuff
 
         for (int i = 0; i < deleteScript.GetSelectedCards().Count; i++)
         {
-            //  We don't have to use AssignPCard here since visual don't have to update
+            //  We should AssignPCard here
             Card multCard = deleteScript.GetSelectedCards()[i].GetComponent<Card>();
             multCard.pcard.multiplier += 1;
+            multCard.AssignPCard(multCard.pcard);
 
             //  Apply to it in cardsDrawn so that'll it be in deck
             for (int j = 0; j < deck.cardsDrawn.Count; j++)

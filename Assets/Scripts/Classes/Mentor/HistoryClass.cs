@@ -57,7 +57,7 @@ public class HistoryClass : Mentor
             if (isFirstHand && scoredPCards.Count == 1)
             {
                 Debug.Log("Card cloned!");
-                deck.AddCard(scoredPCards[0]);
+                deck.AddCard(PCard.CloneCard(scoredPCards[0]));
             }
         }
     }
