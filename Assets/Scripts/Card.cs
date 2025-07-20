@@ -260,7 +260,8 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
             transform.localPosition += (cardVisual.transform.up * selectionOffset);
             SFXManager sfxManager = GameObject.FindFirstObjectByType<SFXManager>().GetComponent<SFXManager>();
             sfxManager.CardSelected();
-            sfxManager.VoiceSFX(Resources.Load<AudioClip>("Voice/" + pcard.term.ToString()));
+            if(pcard.term.ToString() != null || pcard.term.ToString().CompareTo("") == 0)
+                sfxManager.VoiceSFX(Resources.Load<AudioClip>("Voice/" + pcard.term.ToString()));
         }
         else
         {

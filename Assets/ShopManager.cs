@@ -1022,7 +1022,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If CardBuff Card, check if count is not max then add if not
-        if (PackCard1.textbook != null)
+        else if (PackCard1.textbook != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1037,7 +1037,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
-        if (PackCard1.cardBuff != null)
+        else if (PackCard1.cardBuff != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1051,9 +1051,12 @@ public class ShopManager : MonoBehaviour
             }
             cardsSelected++;
         }
-
         //  If regular playing card, add to player's deck
-        deck.AddCard(PackCard1);
+        else
+        {
+            deck.AddCard(PackCard1);
+            cardsSelected++;
+        }
 
         PackCard1Button.interactable = false;
         checkPackAmountSelected();
@@ -1079,7 +1082,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If CardBuff Card, check if count is not max then add if not
-        if (PackCard2.textbook != null)
+        else if (PackCard2.textbook != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1094,7 +1097,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
-        if (PackCard2.cardBuff != null)
+        else if (PackCard2.cardBuff != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1108,9 +1111,11 @@ public class ShopManager : MonoBehaviour
             }
             cardsSelected++;
         }
-
-        //  If regular playing card, add to player's deck
-        deck.AddCard(PackCard2);
+        else
+        {
+            deck.AddCard(PackCard2);
+            cardsSelected++;
+        }
 
         PackCard2Button.interactable = false;
         checkPackAmountSelected();
@@ -1135,7 +1140,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If CardBuff Card, check if count is not max then add if not
-        if (PackCard3.textbook != null)
+        else if (PackCard3.textbook != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1150,7 +1155,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
-        if (PackCard3.cardBuff != null)
+        else if (PackCard3.cardBuff != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1164,9 +1169,11 @@ public class ShopManager : MonoBehaviour
             }
             cardsSelected++;
         }
-
-        //  If regular playing card, add to player's deck
-        deck.AddCard(PackCard3);
+        else
+        {
+            deck.AddCard(PackCard3);
+            cardsSelected++;
+        }
 
         PackCard3Button.interactable = false;
         checkPackAmountSelected();
@@ -1191,7 +1198,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If CardBuff Card, check if count is not max then add if not
-        if (PackCard4.textbook != null)
+        else if (PackCard4.textbook != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1206,7 +1213,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
-        if (PackCard4.cardBuff != null)
+        else if (PackCard4.cardBuff != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1220,9 +1227,12 @@ public class ShopManager : MonoBehaviour
             }
             cardsSelected++;
         }
-
         //  If regular playing card, add to player's deck
-        deck.AddCard(PackCard4);
+        else
+        {
+            deck.AddCard(PackCard4);
+            cardsSelected++;
+        }
 
         PackCard4Button.interactable = false;
         checkPackAmountSelected();
@@ -1247,7 +1257,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If CardBuff Card, check if count is not max then add if not
-        if (PackCard5.textbook != null)
+        else if (PackCard5.textbook != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1262,7 +1272,7 @@ public class ShopManager : MonoBehaviour
             cardsSelected++;
         }
         //If Texbook Card, check if count is not max then add if not
-        if (PackCard5.cardBuff != null)
+        else if (PackCard5.cardBuff != null)
         {
             if (playerInst.consumables.Count > playerInst.maxConsumables)
             {
@@ -1276,9 +1286,12 @@ public class ShopManager : MonoBehaviour
             }
             cardsSelected++;
         }
-
         //  If regular playing card, add to player's deck
-        deck.AddCard(PackCard5);
+        else
+        {
+            deck.AddCard(PackCard5);
+            cardsSelected++;
+        }
 
         PackCard5Button.interactable = false;
         checkPackAmountSelected();
