@@ -43,8 +43,8 @@ public class JokerCardHolder : MonoBehaviour
     {
         if (testMode)
         {
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.LightSnack, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Turtle, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.MadHatter, CardEdition.Base));
         }
 
         //  Debug mentors in the list, order from left to right
@@ -312,6 +312,9 @@ public class JokerCardHolder : MonoBehaviour
             Debug.LogWarning("Mentor not found in cards.");
             return;
         }
+
+        //  Cleanup if certain mentors are destroyed
+        FixHandSize(trashMentor);
 
         //  Remove mentor from player's mentor deck first
         player.mentorDeck.Remove(trashMentor);
