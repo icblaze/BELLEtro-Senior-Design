@@ -198,7 +198,7 @@ public class ShopManager : MonoBehaviour
 
 
 
-        for (int i = 0; i <= shopMentorsAmount; i++)
+        for (int i = 0; i < shopMentorsAmount; i++)
         {
             //Use probabililties to generate the card shops
             int cardSlot = Random.Range(1, 100);
@@ -208,7 +208,7 @@ public class ShopManager : MonoBehaviour
                 Textbook[] Textbooks = new Textbook[2];
                 Textbooks = inst.randomTextbookShop(1);
                 Debug.Log("Textbook Object: " + Textbooks[0]);
-                if (mentor1 == null && cardBuff1 == null && textbook1 == null)
+                if (i == 0)
                 {
                     textbook1 = Textbooks[0];
                     textbook1.price = Mathf.CeilToInt(textbook1.price * playerInst.discount);
@@ -230,7 +230,7 @@ public class ShopManager : MonoBehaviour
                 CardBuff[] cardBuffs = new CardBuff[2];
                 cardBuffs = inst.randomCardBuffShop(1);
                 Debug.Log("CardBuff Object: " + cardBuffs[0]);
-                if (mentor1 == null && cardBuff1 == null && textbook1 == null)
+                if (i == 0)
                 {
                     cardBuff1 = cardBuffs[0];
                     cardBuff1.price = Mathf.CeilToInt(cardBuff1.price * playerInst.discount);
@@ -272,7 +272,7 @@ public class ShopManager : MonoBehaviour
                 // --- END DEBUGGING ---
 
                 Debug.Log("Mentor Object: " + mentors[0]);
-                if (mentor1 == null && cardBuff1 == null && textbook1 == null)
+                if (i == 0)
                 {
                     mentor1 = mentors[0];
 
@@ -294,8 +294,8 @@ public class ShopManager : MonoBehaviour
                 }
                 else
                 {
-                    if (mentor2 == null && cardBuff2 == null && textbook2 == null)
-                    {
+                    // if (mentor2 == null && cardBuff2 == null && textbook2 == null)
+                    // {
                         mentor2 = mentors[0];
                         mentor2.price = Mathf.CeilToInt(mentor2.price * playerInst.discount);
 
@@ -313,11 +313,11 @@ public class ShopManager : MonoBehaviour
 
                         card2.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Mentor/" + mentor2.name.ToString());
                         Debug.Log("Mentor 2 Name: " + mentor2.name.ToString());
-                    }
-                    else
-                    {
-                        Debug.Log("Mentor 2 already exists!.");
-                    }
+                    // }
+                    // else
+                    // {
+                    //     Debug.Log("Mentor 2 already exists!.");
+                    // }
                 }
             }
 
