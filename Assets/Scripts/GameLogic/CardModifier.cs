@@ -281,7 +281,11 @@ public class CardModifier
         }
         else if(location == UseLocation.Retrigger)
         {
-            card.replayCounter++;
+            // If card has red seal, increment retrigger count for this card
+            if (card.seal == CardSeal.Retake)
+            {
+                card.replayCounter++;
+            }
         }
         else if(location == UseLocation.PreCard)
         {
