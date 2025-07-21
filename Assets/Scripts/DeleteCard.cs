@@ -244,7 +244,7 @@ public class DeleteCard : MonoBehaviour
 
         if (drawThree == true)//If special blind is active, ignore handSize
         {
-            missingSlots = 3;
+            missingSlots = 0;
         }
         else
         {
