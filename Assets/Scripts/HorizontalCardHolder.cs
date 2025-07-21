@@ -21,7 +21,6 @@ public class HorizontalCardHolder : MonoBehaviour
     private RectTransform rect;
 
     [Header("Spawn Settings")]
-    [SerializeField] private int handSize = 8;
     public List<Card> cards;
 
     bool isCrossing = false;

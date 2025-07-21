@@ -41,7 +41,7 @@ public class BackendHook : MonoBehaviour
 
     private void Awake()
     {
-        if (FindObjectsOfType<BackendHook>().Length > 1)
+        if (FindObjectsByType<BackendHook>(FindObjectsSortMode.None).Length > 1)
         {
             Destroy(gameObject);
             return;
