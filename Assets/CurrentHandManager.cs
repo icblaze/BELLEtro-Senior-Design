@@ -655,44 +655,31 @@ public class CurrentHandManager : MonoBehaviour
             return false;
         }
 
-        string[][] cardTerms = new string[pCards.Count][];
+        // Consider Wild cards if they're not disabled
+        List<PCard> wildCards = pCards.Where(card => card.enhancement == CardEnhancement.WildCard && !card.isDisabled).ToList();
+
+        //  Cards with just one suit
+        List<PCard> nonWildCards = pCards.Where(card => card.enhancement != CardEnhancement.WildCard).ToList();
+
+        // Group cards with just one suit by their suit
+        var suitGroups = nonWildCards.GroupBy(card => card.suit).ToList();
+
+
         flushCards.Clear(); //Clear the flush cards list before checking for a flush
 
-        //Convert the Enum lingustic terms into a string
-        for (int i = 0; i < pCards.Count; i++)
+        //  Check through every suit group and consider possible wild cards
+        foreach (var suitGroup in suitGroups)
         {
-            string formatted = SplitCase.Split(pCards[i].term.ToString());
-            cardTerms[i] = formatted.Split(' ');
-        }
-
-        for (int i = 0; i < cardTerms.Length; i++)
-        {
-            if (cardTerms[i] == null)
-                Debug.LogError($"cardTerms[{i}] is null!");
-            else if (cardTerms[i].Length == 0)
-                Debug.LogError($"cardTerms[{i}] is empty!");
-        }
-
-
-
-        bool isFlush = cardTerms.GroupBy(term => term[0]).Any(g => g.Count() >= 5);
-
-
-        if (isFlush)
-        {
-            // Add all cards with the same suit to the flushCards list
-            foreach (var card in pCards)
+            //  If group of card with suit and wild card add up 5, then they all match
+            if (suitGroup.Count() + wildCards.Count == 5)
             {
-                flushCards.Add(card);
+                flushCards.AddRange(pCards);
+                Debug.LogWarning("Flush detected!");
+                return true; // Found a flush
             }
-            Debug.LogWarning("Flush detected!");
-            return true; // Found a flush
-        }
-        else
-        {
-            Debug.LogWarning("Flush not detected!");
         }
 
+        Debug.LogWarning("Flush not detected!");
         return false; // No flush found
     }
 
