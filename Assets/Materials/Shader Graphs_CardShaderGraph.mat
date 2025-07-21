@@ -37,6 +37,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EditionHolographic_f43ee32b57c940b09a0fee8f1bac5571_PatternTexture_1644127867_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 30ff599da7eed44a08d963ea67832471, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EditionPolychrome_d87ee072cd044a8a80f4f17e004ac2bf_CardTexture_3079567608_Texture2D:
         m_Texture: {fileID: 2800000, guid: e63fba139e92744aca651dfeee7fe118, type: 3}
         m_Scale: {x: 1, y: 1}

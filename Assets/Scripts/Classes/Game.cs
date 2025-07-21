@@ -445,8 +445,8 @@ public class Game
         SpecialBlind blind = null;
         while (count < 1)
         {
-            index = randomizer(0, 8);
-            blind = SpecialBlind.BlindFromNumber(index);
+            index = randomizer(0, System.Enum.GetValues(typeof(SpecialBlindNames)).Length);
+            blind = SpecialBlind.BlindFactory((SpecialBlindNames)index);
             
             if (blind != null && blind.minimumAnte > ante)//If special blind can't spawn yet, find different blind
             {

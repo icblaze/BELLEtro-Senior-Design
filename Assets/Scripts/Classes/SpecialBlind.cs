@@ -55,31 +55,14 @@ public class SpecialBlind
                 return new TheHandful();
             case SpecialBlindNames.TheBasket:
                 return new TheBasket();
-            default:
-                return null;
-        }
-    }
-
-    public static SpecialBlind BlindFromNumber(int index)
-    {
-        switch(index)
-        {
-            case 0:
-                return BlindFactory(SpecialBlindNames.TheCollector);
-            case 1:
-                return BlindFactory(SpecialBlindNames.ThePurist);
-            case 2:
-                return BlindFactory(SpecialBlindNames.TheYoink);
-            case 3:
-                return BlindFactory(SpecialBlindNames.TheSilence);
-            case 4:
-                return BlindFactory(SpecialBlindNames.JumboBlind);
-            case 5:
-                return BlindFactory(SpecialBlindNames.MegaBlind);
-            case 6:
-                return BlindFactory(SpecialBlindNames.TheBasket);
-            case 7:
-                return BlindFactory(SpecialBlindNames.TheHandful);
+            case SpecialBlindNames.VoicedVillain:
+                return new VoicedVillain();
+            case SpecialBlindNames.VileVoiceless:
+                return new VileVoiceless();
+            case SpecialBlindNames.TenseTrouble:
+                return new TenseTrouble();
+            case SpecialBlindNames.LackLax:
+                return new LackLax();
             default:
                 return null;
         }

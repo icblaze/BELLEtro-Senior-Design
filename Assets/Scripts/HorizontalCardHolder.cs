@@ -27,6 +27,11 @@ public class HorizontalCardHolder : MonoBehaviour
     bool isCrossing = false;
     [SerializeField] private bool tweenCardReturn = true;
 
+    [Header("Special Blind Settings")]
+    public bool hideSuitFlag = false;
+    public bool disabledSuitFlag = false;
+    public SuitName disabledSuitName;
+
     private Deck deck = Deck.access();
     private DeleteCard deleteScript;
 
@@ -264,5 +269,16 @@ public class HorizontalCardHolder : MonoBehaviour
         }
 
         cards.Clear();
+    }
+
+    //  Sets the disabled suit for Special Blinds that disable cards with a certain suit
+    public void SetDisabledSuit(bool disabledSuitFlag, SuitName disabledSuitName)
+    {
+        this.disabledSuitFlag = disabledSuitFlag;
+
+        if(disabledSuitFlag)
+        {
+            this.disabledSuitName = disabledSuitName;
+        }
     }
 }

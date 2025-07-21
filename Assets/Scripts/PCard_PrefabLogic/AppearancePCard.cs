@@ -15,6 +15,7 @@ public class AppearancePCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI termLayer;
     [SerializeField] private Image sealLayer;
     [SerializeField] private Image enhancementLayer;
+    [SerializeField] private Image disabledLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +85,20 @@ public class AppearancePCard : MonoBehaviour
         }
     }
 
+    //  When PCard is disabled, enable layer
+    public void UpdateDisabled(bool isDisabled)
+    {
+        //  If special blind activated to hide suit, then make it transparent
+        if (isDisabled)
+        {
+            disabledLayer.color = new Color(1f, 1f, 1f, 1f); // fully opaque
+        }
+        else
+        {
+            disabledLayer.color = new Color(1f, 1f, 1f, 0f); // fully transparent
+        }
+    }
+
     //  Update base layer for Mentor, disable other layers
     public void UpdateMentor(string mentorName)
     {
@@ -93,6 +108,7 @@ public class AppearancePCard : MonoBehaviour
         suitLayer.color = new Color(1f, 1f, 1f, 0f);
         sealLayer.color = new Color(1f, 1f, 1f, 0f); 
         enhancementLayer.color = new Color(1f, 1f, 1f, 0f);
+        disabledLayer.color = new Color(1f, 1f, 1f, 0f);
         termLayer.text = "";
     }
 
@@ -113,6 +129,7 @@ public class AppearancePCard : MonoBehaviour
         suitLayer.color = new Color(1f, 1f, 1f, 0f);
         sealLayer.color = new Color(1f, 1f, 1f, 0f);
         enhancementLayer.color = new Color(1f, 1f, 1f, 0f);
+        disabledLayer.color = new Color(1f, 1f, 1f, 0f);
         termLayer.text = "";
     }
 }

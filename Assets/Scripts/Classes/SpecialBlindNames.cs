@@ -19,6 +19,10 @@ public enum SpecialBlindNames
     TheBasket,
     TheHandful,
     JumboBlind,
-    MegaBlind
+    MegaBlind,
+    VoicedVillain,
+    VileVoiceless,
+    TenseTrouble,
+    LackLax
     //TheMirage
 }

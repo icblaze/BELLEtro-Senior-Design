@@ -73,9 +73,6 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     [SerializeField] private string editionName = "";
     [SerializeField] private bool disabled = false;
 
-    [Header("Special Blind Flags")]
-    private bool hideSuit = false;
-
     public Consumable consumable;
     [Header("Consumable Object")]
     public ConsumableType consumableType;
@@ -403,12 +400,6 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         cardVisual.Initialize(this);
     }
 
-    //  Set the flag for whether to hide the suit whenever PCard is assigned at start of blind
-    public void SetSuitVisibility(bool hideSuit)
-    {
-        this.hideSuit = hideSuit;
-    }
-
     //  Hide the description box
     public void HideDescription()
     {
@@ -437,6 +428,9 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         AppearancePCard appearance = cardVisual.GetComponentInChildren<AppearancePCard>();
         ShaderCodePCard shaderAppearance = cardVisual.GetComponentInChildren<ShaderCodePCard>();
 
+        //  Assign Horizontal Card Holder for Special Blinds
+        HorizontalCardHolder cardHolder = FindFirstObjectByType<HorizontalCardHolder>();
+
         //  Assign Card ID
         cardID = pcard.cardID;
 
@@ -457,10 +451,10 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         if (suitName != newSuit)
         {
             suitName = newSuit;
-            appearance.UpdateSuit(newSuit, hideSuit);
+            appearance.UpdateSuit(newSuit, cardHolder.hideSuitFlag);
         }
 
-        //  Update Suit if different
+        //  Update Enhancement if different
         string newEnhancement = pcard.enhancement.ToString();
         if (enhancementName != newEnhancement)
         {
@@ -482,6 +476,27 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         {
             editionName = newEdition;
             shaderAppearance.UpdateEdition(pcard.edition);
+        }
+
+        //  Check for special blind that disable suits
+        if (cardHolder.disabledSuitFlag)
+        {
+            //  If it's the disabled suit or is wild card, then set isDisabled to true
+            if (pcard.suit == cardHolder.disabledSuitName || pcard.enhancement == CardEnhancement.WildCard)
+            {
+                pcard.isDisabled = true;
+            }
+        }
+        else
+        {
+            pcard.isDisabled = false;
+        }
+
+        //  Disable card
+        if (disabled != pcard.isDisabled)
+        {
+            disabled = !disabled;
+            appearance.UpdateDisabled(disabled);
         }
 
         //  Description shows these attributes (for now just term and suit)
