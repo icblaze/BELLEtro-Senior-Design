@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VoicedVillain_0: -2157477918473270632
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

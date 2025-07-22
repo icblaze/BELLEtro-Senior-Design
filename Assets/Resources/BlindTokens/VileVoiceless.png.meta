@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      VileVoiceless_0: 8429820518843510164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

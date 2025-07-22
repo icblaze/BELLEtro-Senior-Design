@@ -62,9 +62,14 @@ public class PauseMenuManager : MonoBehaviour
 
         Debug.Log("QuitButton Was Clicked");
     }
-    //Load the main menu scene.
+    //Load the main menu scene. If victory screen reached, deactivate the particle system.
     public void DelayedLoad()
     {
+        VictoryManager  victoryManager = GameObject.FindFirstObjectByType<VictoryManager>().GetComponent<VictoryManager>();
+        if (victoryManager.victoryParticles.activeSelf == true)
+        {
+            victoryManager.victoryParticles.SetActive(false);
+        }
         SceneManager.LoadScene("MainMenu");
     }
 

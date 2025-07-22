@@ -10,6 +10,7 @@ public class VictoryManager : MonoBehaviour
     public static int cardsPurchased = 0;
     public static int packsPurchased = 0;
     public static int numRerolls = 0;
+    public GameObject victoryParticles;
     private static VictoryManager instance;  //VictoryManager instance varaiable
 
     //Singleton for the VictoryManager
@@ -32,19 +33,21 @@ public class VictoryManager : MonoBehaviour
 
     public void GameWon()
     {
+        victoryParticles.SetActive(true);
         victoryText = GameObject.Find("Victory Text");
         string bestHandString = "Best Hand Played: " + bestHand.ToString() + "\n";
         string handsPlayedString = "Hands Played: " + handsPlayed.ToString() + "\n";
         string cardsPurchasedString = "Cards Purchased: " + cardsPurchased.ToString() + "\n";
         string packsPurchasedString = "Packs Purchased: " + packsPurchased.ToString() + "\n";
         string numRerollsString = "Number of Rerolls: " + numRerolls.ToString() + "\n";
-        victoryText.GetComponent<TMP_Text>().text = "excELLEntly Job\n" + bestHandString + handsPlayedString + cardsPurchasedString + packsPurchasedString + numRerollsString;
+        victoryText.GetComponent<TMP_Text>().text = "excELLEntly Done\n" + bestHandString + handsPlayedString + cardsPurchasedString + packsPurchasedString + numRerollsString;
         ResetGameVictory();
     }
 
     public void ResetGameVictory()
     {
         bestHand = 0;
+        handsPlayed = 0;
         cardsPurchased = 0;
         packsPurchased = 0;
         numRerolls = 0;
