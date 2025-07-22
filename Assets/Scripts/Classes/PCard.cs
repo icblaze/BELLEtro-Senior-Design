@@ -79,9 +79,9 @@ public class PCard : BaseCard
     public override string ToString()
     {
         //  For testing/debugging
-        string description = term.ToString();
+        string description = "";
 
-        description += $"\n+{chips} Chips +{multiplier} Mult";
+        description += $"<color=blue>+{chips} Chips</color> <color=red>+{multiplier} Mult</color>";
         description += CardModifier.access().EnhancementDesc(enhancement);
         description += CardModifier.access().SealDesc(seal);
         description += CardModifier.access().EditionDesc(edition);

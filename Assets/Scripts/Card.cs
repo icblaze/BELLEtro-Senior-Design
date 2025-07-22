@@ -16,7 +16,10 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     public string cardDescription = "Default card information.";
 
     private static GameObject infoPanel;
-    private static TextMeshProUGUI infoText;
+    private static GameObject titlePanel;
+    private static TextMeshProUGUI titleText;
+    private static GameObject descriptionPanel;
+    private static TextMeshProUGUI descriptionText;
     private Canvas canvas;
     private Image imageComponent;
     [SerializeField] private bool instantiateVisual = true;
@@ -35,7 +38,10 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     public static void ResetStaticPanel()
     {
         infoPanel = null;
-        infoText = null;
+        titlePanel = null;
+        titleText = null;
+        descriptionPanel = null;
+        descriptionText = null;
     }
 
     [Header("Visual")]
@@ -96,11 +102,22 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
         if (infoPanel == null)
         {
             infoPanel = GameObject.Find("CardInfoPanel");
-            Image panelImage = infoPanel.GetComponent<Image>();
-            panelImage.color = new Color(255, 255, 255, 0.8f);
+
             if (infoPanel != null)
             {
-                infoText = infoPanel.GetComponentInChildren<TextMeshProUGUI>();
+                titlePanel = infoPanel.transform.Find("TitlePanel")?.gameObject;
+                descriptionPanel = infoPanel.transform.Find("DescriptionPanel")?.gameObject;
+
+                //  Get Title Panel
+                Image titleImage = titlePanel.GetComponent<Image>();
+                titleImage.color = new Color(255, 255, 255, 1f);
+
+                //  Get Description Panel
+                Image descImage = descriptionPanel.GetComponent<Image>();
+                descImage.color = new Color(255, 255, 255, 0.8f);
+
+                titleText = titlePanel.GetComponentInChildren<TextMeshProUGUI>();
+                descriptionText = descriptionPanel.GetComponentInChildren<TextMeshProUGUI>();
                 infoPanel.SetActive(false); // Ensure it's hidden at the start
             }
             else
@@ -171,15 +188,17 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
     {
         PointerEnterEvent.Invoke(this);
         isHovering = true;
-        if (infoPanel != null && infoText != null)
+        if (infoPanel != null && descriptionText != null)
         {
             //  Update specific description for card type
             if (cardType == CardType.Card)
             {
+                titleText.text = SplitCase.Split(pcard.term.ToString());
                 cardDescription = pcard.ToString();
             }
             else if (cardType == CardType.Mentor)
             {
+                titleText.text = SplitCase.Split(mentor.name.ToString());
                 cardDescription = mentor.GetDescription();
                 cardDescription += CardModifier.access().EditionDesc(mentor.edition);
             }
@@ -188,23 +207,22 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
                 if (consumableType == ConsumableType.CardBuff)
                 {
                     CardBuff cardBuff = (CardBuff)consumable;
+                    titleText.text = SplitCase.Split(cardBuff.name.ToString());
                     cardDescription = cardBuff.GetDescription();
                 }
                 else
                 {
                     Textbook tbook = (Textbook)consumable;
+                    titleText.text = SplitCase.Split(tbook.name.ToString());
                     cardDescription = tbook.GetDescription();
                 }
             }
 
             // Update the text with this card's specific description
-            infoText.text = cardDescription;
+            descriptionText.text = cardDescription;
 
             // Show the panel
             infoPanel.SetActive(true);
-
-
-
         }
     }
 

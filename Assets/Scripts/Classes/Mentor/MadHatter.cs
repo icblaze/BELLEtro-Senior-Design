@@ -20,13 +20,13 @@ public class MadHatter : Mentor
     {
         //  Don't have to include UseLocation.Blind since will check in SmallBlind and BigBlind
         locations = new UseLocation[] { UseLocation.Post };
-        description = "When a Small or Big Blind is selected, this Mentor gains X0.5 Mult and another Mentor is randomly destroyed (X1 Mult)";
+        description = $"When Small or Big Blind is selected, gain X0.5 Mult and another random Mentor is destroyed (X1 Mult)";
     }
 
     //  Change the xmult
     public override string GetDescription()
     {
-        description = $"When a Small or Big Blind is selected, this Mentor gains X0.5 Mult and another Mentor is randomly destroyed (X{xmult} Mult)";
+        description = $"When Small or Big Blind is selected, gain <b><color=red>X0.5 Mult</color></b> and another random Mentor is destroyed (<b><color=red>X{xmult} Mult</color></b>)";
         return description;
     }
 

@@ -252,8 +252,10 @@ public class BlindSceneManager : MonoBehaviour
         NewBlind();
 
         //  Hide the card info initially
-        Image panelImage = GameObject.Find("CardInfoPanel").GetComponent<Image>();
-        panelImage.color = new Color(255, 255, 255, 0);
+        Image titlePanelImage = GameObject.Find("TitlePanel").GetComponent<Image>();
+        titlePanelImage.color = new Color(255, 255, 255, 0);
+        Image descPanelImage = GameObject.Find("DescriptionPanel").GetComponent<Image>();
+        descPanelImage.color = new Color(255, 255, 255, 0);
     }
 
     //  For "Mad Hatter" mentor specifically activate the IncreaseMult effect on Small and Big Blind

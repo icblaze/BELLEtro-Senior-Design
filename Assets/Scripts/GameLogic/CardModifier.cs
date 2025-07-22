@@ -17,7 +17,7 @@ public class CardModifier
     private ConsumableCardHolder consumableCardHolder;
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.25f;
+    private readonly float waitIncrement = 0.5f;
 
     //  Make this a singleton
     private static CardModifier instance;
