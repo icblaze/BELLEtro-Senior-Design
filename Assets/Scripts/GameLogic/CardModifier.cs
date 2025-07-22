@@ -197,6 +197,7 @@ public class CardModifier
                 //  1 in 4 chance to break
                 if (Random.Range(0, 4) == 0)
                 {
+                    yield return scoringManager.ScorePopupPCard(card, $"<i>Crack!</i>");
                     Deck.access().MarkGlass(card.cardID);  //  Add to break stack
                 }
             }
