@@ -178,10 +178,12 @@ public class CardModifier
             if (card.enhancement == CardEnhancement.BonusCard)
             {
                 scoringManager.IncrementCurrentChips(30); // +30 chips
+                yield return scoringManager.ScorePopupPCard(card, $"<color=blue>+30 Chips</color>");
             }
             else if (card.enhancement == CardEnhancement.MultCard)
             {
                 scoringManager.IncrementCurrentMult(4); // +4 Mult
+                yield return scoringManager.ScorePopupPCard(card, $"<color=red>+4 Mult</color>");
             }
         }
         else if (location == UseLocation.PostCard)   //  XMult after the +Mult
@@ -190,6 +192,7 @@ public class CardModifier
             {
                 int xmult = scoringManager.GetCurrentMult() * 2; // X2 Mult
                 scoringManager.SetCurrentMult(xmult);
+                yield return scoringManager.ScorePopupPCard(card, $"<b><color=red>X2 Mult</color></b>");
 
                 //  1 in 4 chance to break
                 if (Random.Range(0, 4) == 0)
@@ -204,6 +207,7 @@ public class CardModifier
             {
                 int xmult = (int) (scoringManager.GetCurrentMult() * 1.5f); // X1.5 Mult
                 scoringManager.SetCurrentMult(xmult);
+                yield return scoringManager.ScorePopupHeld(card, $"<b><color=red>X1.5 Mult</color></b>");
             }
         }
         else if (location == UseLocation.PostBlind)  //  "Held in hand" after round completed
@@ -211,10 +215,10 @@ public class CardModifier
             if (card.enhancement == CardEnhancement.GoldCard)
             {
                 Player.access().moneyCount += 3;
+                yield return scoringManager.ScorePopupHeld(card, "<color=yellow>$3</color>");
                 ShopManager.access().UpdateMoneyDisplay();
             }
         }
-        yield return new WaitForSecondsRealtime(waitIncrement);
     }
 
     // Use edition effect with given use location
@@ -229,10 +233,12 @@ public class CardModifier
             if (card.edition == CardEdition.Foil)
             {
                 scoringManager.IncrementCurrentChips(50); // +50 chips
+                yield return scoringManager.ScorePopupPCard(card, $"<color=blue>+50 Chips</color>");
             }
             else if (card.edition == CardEdition.Holographic)
             {
                 scoringManager.IncrementCurrentMult(10); // +10 Mult
+                yield return scoringManager.ScorePopupPCard(card, $"<color=red>+10 Mult</color>");
             }
         }
         else if (location == UseLocation.PostCard)  //  XMult after the +Mult
@@ -241,9 +247,9 @@ public class CardModifier
             {
                 int xmult = (int)(scoringManager.GetCurrentMult() * 1.5f); // X1.5 Mult
                 scoringManager.SetCurrentMult(xmult);
+                yield return scoringManager.ScorePopupPCard(card, $"<b><color=red>X1.5 Mult</color></b>");
             }
         }
-        yield return new WaitForSecondsRealtime(waitIncrement);
     }
 
     //  Use edition effect of the mentors from (this will be called from left to right)
@@ -258,16 +264,19 @@ public class CardModifier
             if (mentor.edition == CardEdition.Foil)
             {
                 scoringManager.IncrementCurrentChips(50); // +50 chips
+                yield return scoringManager.ScorePopupMentor(mentor, $"<color=blue>+50 Chips</color>");
             }
             else if (mentor.edition == CardEdition.Holographic)
             {
                 scoringManager.IncrementCurrentMult(10); // +10 Mult
+                yield return scoringManager.ScorePopupMentor(mentor, $"<color=red>+10 Mult</color>");
             }
         }
         else if (checkPoly && mentor.edition == CardEdition.Polychrome)
         {
             int xmult = (int)(scoringManager.GetCurrentMult() * 1.5f);  // X1.5 Mult
             scoringManager.SetCurrentMult(xmult);
+            yield return scoringManager.ScorePopupMentor(mentor, $"<b><color=red>X1.5 Mult</color></b>");
         }
         yield return new WaitForSecondsRealtime(waitIncrement);
     }
@@ -285,6 +294,7 @@ public class CardModifier
             if (card.seal == CardSeal.Retake)
             {
                 card.replayCounter++;
+                yield break;
             }
         }
         else if(location == UseLocation.PreCard)
@@ -292,6 +302,7 @@ public class CardModifier
             if(card.seal == CardSeal.Funding)
             {
                 Player.access().moneyCount += 3;
+                yield return scoringManager.ScorePopupPCard(card, "<color=yellow>$3</color>");
                 ShopManager.access().UpdateMoneyDisplay();
             }
         }
@@ -309,12 +320,12 @@ public class CardModifier
                     {
                         consumableCardHolder = GameObject.FindFirstObjectByType<ConsumableCardHolder>();
                     }
+                    yield return scoringManager.ScorePopupHeld(card, "<color=#008080ff>Studied!</color>");
                     TextbookName handTextbook = GetTextbookFromString(scoringManager.GetCurrentHandType());
                     consumableCardHolder.AddConsumable(new Textbook(handTextbook));
                 }
             }
         }
-        yield return new WaitForSecondsRealtime(waitIncrement);
     }
 
     public TextbookName GetTextbookFromString(string handName)

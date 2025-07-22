@@ -36,8 +36,10 @@ public class ScoringManager : MonoBehaviour
     private bool isScoring = false;
 
     //  For having text below cards that show score change/effect indication
-    [SerializeField] CanvasGroup popupGroup;
-    [SerializeField] TMP_Text popupText;
+    [SerializeField] private CanvasGroup popupGroup;
+    [SerializeField] private TMP_Text popupText;
+    private JokerCardHolder jokerCardHolder;
+    private HorizontalCardHolder horizontalCardHolder;
 
     //  Adjust time of scoring manager between each score increment
     private readonly float waitIncrement = 0.5f;
@@ -70,6 +72,8 @@ public class ScoringManager : MonoBehaviour
     {
         sfxManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<SFXManager>();
         shakeScreen = FindFirstObjectByType<ShakeScreen>().GetComponent<ShakeScreen>();
+        jokerCardHolder = FindFirstObjectByType<JokerCardHolder>();
+        horizontalCardHolder = FindFirstObjectByType<HorizontalCardHolder>();
 
         //Get delete card script and do null check
         deleteCardScript = FindFirstObjectByType<DeleteCard>();
@@ -476,7 +480,38 @@ public class ScoringManager : MonoBehaviour
             //  Find the Card object that matches with scored card
             if(card.GetComponent<Card>().pcard.cardID == selectedPCard.cardID)
             {
-                popupText.transform.position = card.transform.position + new UnityEngine.Vector3(0f, -1.3f, 0f);
+                popupText.transform.position = card.transform.position + new UnityEngine.Vector3(0f, -1.2f, 0f);
+            }
+        }
+
+        //  Set string
+        popupText.text = text;
+
+        //  Make it appear and then fade out
+        popupGroup.alpha = 1;
+        popupGroup.blocksRaycasts = false;
+        popupGroup.interactable = false;
+        float timeToFade = .25f;
+        float timeElapsed = 0;
+        while (popupGroup.alpha > 0)
+        {
+            popupGroup.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
+            timeElapsed += Time.deltaTime;
+            yield return new WaitForSecondsRealtime(.01f);
+        }
+        popupGroup.alpha = 0;
+    }
+
+    //  Quickly show score/effect below mentor
+    public IEnumerator ScorePopupMentor(Mentor selectedMentor, string text)
+    {
+        //  Set position to mentor that activates this
+        foreach (Card card in jokerCardHolder.cards)
+        {
+            //  Find the Card object that matches with scored card
+            if (card.mentor == selectedMentor)
+            {
+                popupText.transform.position = card.transform.position + new UnityEngine.Vector3(0f, -1.2f, 0f);
             }
         }
 
@@ -498,10 +533,18 @@ public class ScoringManager : MonoBehaviour
         popupGroup.alpha = 0;
     }
 
-    //  Quickly show score/effect below mentor
-    public IEnumerator ScorePopupMentor(Mentor selectedMentor, string text)
+    //  Quickly show score/effect above playing card that are held in hand
+    public IEnumerator ScorePopupHeld(PCard heldCard, string text)
     {
-        //  Set position to mentor that activates this
+        //  Set position to above scored card
+        foreach (Card card in horizontalCardHolder.cards)
+        {
+            //  Find the Card object that matches with held card
+            if (card.pcard.cardID == heldCard.cardID)
+            {
+                popupText.transform.position = card.transform.position + new UnityEngine.Vector3(0f, 1.4f, 0f);
+            }
+        }
 
         //  Set string
         popupText.text = text;
@@ -510,7 +553,7 @@ public class ScoringManager : MonoBehaviour
         popupGroup.alpha = 1;
         popupGroup.blocksRaycasts = false;
         popupGroup.interactable = false;
-        float timeToFade = .2f;
+        float timeToFade = .25f;
         float timeElapsed = 0;
         while (popupGroup.alpha > 0)
         {
