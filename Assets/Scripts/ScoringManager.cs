@@ -35,6 +35,10 @@ public class ScoringManager : MonoBehaviour
     private BigInteger neededScore;                         //Score needed to win the round
     private bool isScoring = false;
 
+    //  For having text below cards that show score change/effect indication
+    [SerializeField] CanvasGroup popupGroup;
+    [SerializeField] TMP_Text popupText;
+
     //  Adjust time of scoring manager between each score increment
     private readonly float waitIncrement = 0.5f;
 
@@ -166,6 +170,7 @@ public class ScoringManager : MonoBehaviour
     {
         //Go through cards and add their scores. Wait for a small time
         //before going to the next card
+        yield return new WaitForSecondsRealtime(waitIncrement);
 
         if (MentorBufferManager.mentorBuffers[UseLocation.AllCards].Count >= 1)
         {
@@ -202,18 +207,13 @@ public class ScoringManager : MonoBehaviour
                 yield return mentorBuffer.RunBuffer(UseLocation.PreCard, playedCard);
 
                 //  Play Card
-                currentChips += playedCard.chips;
-                currentMult += playedCard.multiplier;
-                Debug.Log("Current Chips: " + currentChips.ToString());
-                Debug.Log("Current Mult: " + currentMult.ToString());
-                sfxManager.CardScoreSFX();
-
-                //Update the text UI.
-                //Should have a UI element that is shown in realtime
-                shakeScreen.StartShake();
-                blueScoreText.text = currentChips.ToString();
-                redScoreText.text = currentMult.ToString();
-                yield return new WaitForSecondsRealtime(waitIncrement);
+                IncrementCurrentChips(playedCard.chips);
+                yield return ScorePopupPCard(playedCard, $"<color=blue>+{playedCard.chips} Chips</color>");
+                if (playedCard.multiplier > 0)
+                {
+                    IncrementCurrentMult(playedCard.multiplier);
+                    yield return ScorePopupPCard(playedCard, $"<color=red>+{playedCard.multiplier} Mult</color>");
+                }
 
                 //Post Card (XMult usually)
                 yield return cardModifier.UseEnhancement(playedCard, UseLocation.PostCard);
@@ -399,6 +399,7 @@ public class ScoringManager : MonoBehaviour
         sfxManager.CardScoreSFX();
         currentChips = chips;
         blueScoreText.text = currentChips.ToString();
+        Debug.Log("Current Chips: " + currentChips.ToString());
     }
 
     public void IncrementCurrentChips(int chips)
@@ -464,5 +465,59 @@ public class ScoringManager : MonoBehaviour
     public bool GetScoringStatus()
     {
         return isScoring;
+    }
+
+    //  Quickly show score/effect below playing card
+    public IEnumerator ScorePopupPCard(PCard selectedPCard, string text)
+    {
+        //  Set position to below scored card
+        foreach(GameObject card in selectedCards)
+        {
+            //  Find the Card object that matches with scored card
+            if(card.GetComponent<Card>().pcard.cardID == selectedPCard.cardID)
+            {
+                popupText.transform.position = card.transform.position + new UnityEngine.Vector3(0f, -1.3f, 0f);
+            }
+        }
+
+        //  Set string
+        popupText.text = text;
+
+        //  Make it appear and then fade out
+        popupGroup.alpha = 1;
+        popupGroup.blocksRaycasts = false;
+        popupGroup.interactable = false;
+        float timeToFade = .2f;
+        float timeElapsed = 0;
+        while (popupGroup.alpha > 0)
+        {
+            popupGroup.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
+            timeElapsed += Time.deltaTime;
+            yield return new WaitForSecondsRealtime(.01f);
+        }
+        popupGroup.alpha = 0;
+    }
+
+    //  Quickly show score/effect below mentor
+    public IEnumerator ScorePopupMentor(Mentor selectedMentor, string text)
+    {
+        //  Set position to mentor that activates this
+
+        //  Set string
+        popupText.text = text;
+
+        //  Make it appear and then fade out
+        popupGroup.alpha = 1;
+        popupGroup.blocksRaycasts = false;
+        popupGroup.interactable = false;
+        float timeToFade = .2f;
+        float timeElapsed = 0;
+        while (popupGroup.alpha > 0)
+        {
+            popupGroup.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
+            timeElapsed += Time.deltaTime;
+            yield return new WaitForSecondsRealtime(.01f);
+        }
+        popupGroup.alpha = 0;
     }
 }

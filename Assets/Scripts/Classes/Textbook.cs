@@ -7,6 +7,7 @@
 using System.Collections;
 using UnityEngine;
 using System.Linq;
+using SplitString;
 
 // Textbooks will enhance the base chips and mult for a kind of hand
 public class Textbook : Consumable
@@ -76,11 +77,11 @@ public class Textbook : Consumable
 
         if(!hasAnnotated)
         {
-            return "(lvl. " + level + ") Level up " + handName + " +" + incrementMult + " Mult and" + "+" + incrementChips + " Chips";
+            return $"(lvl. {level}) Level up {SplitCase.Split(handName)}\n <color=red>+{incrementMult} Mult</color> and <color=blue>+{incrementChips} Chips</color>";
         }
         else
         {
-            return "(lvl. " + level + ") Level up " + handName + " +" + (incrementMult * 2) + " Mult and" + "+" + (incrementChips * 2) + " Chips (Annotated)";
+            return $"(lvl. {level}) Level up {SplitCase.Split(handName)}\n <color=red>+{incrementMult * 2} Mult</color> and <color=blue>+{incrementChips * 2} Chips</color> (Annotated)";
         }
     }
 }

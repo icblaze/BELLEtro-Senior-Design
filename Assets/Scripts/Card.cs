@@ -213,7 +213,7 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
                 else
                 {
                     Textbook tbook = (Textbook)consumable;
-                    titleText.text = SplitCase.Split(tbook.name.ToString());
+                    titleText.text = SplitCase.Split(tbook.name.ToString()) + " Textbook";
                     cardDescription = tbook.GetDescription();
                 }
             }
