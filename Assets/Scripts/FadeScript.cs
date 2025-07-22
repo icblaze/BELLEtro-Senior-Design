@@ -21,7 +21,7 @@ public class FadeScript
     {
         fadeInObject.blocksRaycasts = true;
         fadeInObject.interactable = true;
-        float timeToFade = .2f;
+        float timeToFade = .5f;
         float timeElapsed = 0;
         while (fadeInObject.alpha < 1)
         {
@@ -36,7 +36,7 @@ public class FadeScript
     {
         fadeInObject.blocksRaycasts = false;
         fadeInObject.interactable = false;
-        float timeToFade = .2f;
+        float timeToFade = .5f;
         float timeElapsed = 0;
         while (fadeInObject.alpha > 0)
         {

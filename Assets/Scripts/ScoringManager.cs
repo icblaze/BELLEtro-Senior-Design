@@ -66,6 +66,9 @@ public class ScoringManager : MonoBehaviour
         }
 
         instance = this;
+
+        //  Simulate WebGL framerate in Unity editor
+        Application.targetFrameRate = 60;
     }
 
     public void Start()
@@ -491,7 +494,7 @@ public class ScoringManager : MonoBehaviour
         popupGroup.alpha = 1;
         popupGroup.blocksRaycasts = false;
         popupGroup.interactable = false;
-        float timeToFade = .25f;
+        float timeToFade = waitIncrement;
         float timeElapsed = 0;
         while (popupGroup.alpha > 0)
         {
@@ -522,13 +525,13 @@ public class ScoringManager : MonoBehaviour
         popupGroup.alpha = 1;
         popupGroup.blocksRaycasts = false;
         popupGroup.interactable = false;
-        float timeToFade = .2f;
+        float timeToFade = waitIncrement;
         float timeElapsed = 0;
         while (popupGroup.alpha > 0)
         {
             popupGroup.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
             timeElapsed += Time.deltaTime;
-            yield return new WaitForSecondsRealtime(.01f);
+            yield return null;
         }
         popupGroup.alpha = 0;
     }
@@ -553,7 +556,7 @@ public class ScoringManager : MonoBehaviour
         popupGroup.alpha = 1;
         popupGroup.blocksRaycasts = false;
         popupGroup.interactable = false;
-        float timeToFade = .25f;
+        float timeToFade = waitIncrement;
         float timeElapsed = 0;
         while (popupGroup.alpha > 0)
         {

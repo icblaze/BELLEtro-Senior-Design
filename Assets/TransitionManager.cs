@@ -67,6 +67,7 @@ public class TransitionManager : MonoBehaviour
         GameObject.FindFirstObjectByType<DeleteCard>().ResetDiscards();
 
         //  Run Blind Mentor Buffer
+        MentorBufferManager.access().AssignToBuffer();
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Blind);
 
         //  Hand Draw After Blind Selected
@@ -90,6 +91,7 @@ public class TransitionManager : MonoBehaviour
         ShopManager shopManager = GameObject.FindFirstObjectByType<ShopManager>().GetComponent<ShopManager>();
         shopManager.NewShop();
         shopManager.resetShopMentor();
+        MentorBufferManager.access().AssignToBuffer();
         MentorBufferManager.access().RunBufferImmediate(UseLocation.Shop);
 
         titleManager.changeToShopScreen();
