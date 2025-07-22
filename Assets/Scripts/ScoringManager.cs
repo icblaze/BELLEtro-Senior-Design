@@ -531,9 +531,15 @@ public class ScoringManager : MonoBehaviour
         {
             popupGroup.alpha = Mathf.Lerp(1, 0, timeElapsed / timeToFade);
             timeElapsed += Time.deltaTime;
-            yield return null;
+            yield return new WaitForSecondsRealtime(.01f);
         }
         popupGroup.alpha = 0;
+    }
+
+    //  Call StartCoroutine from classes that are not of MonoBehavior
+    public void ExternalCoroutine(IEnumerator coroutine)
+    {
+        StartCoroutine(coroutine);
     }
 
     //  Quickly show score/effect above playing card that are held in hand

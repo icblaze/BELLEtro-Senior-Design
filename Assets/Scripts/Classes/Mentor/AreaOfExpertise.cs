@@ -26,5 +26,6 @@ public class AreaOfExpertise : Mentor
 
         //  Increment mult
         ScoringManager.access().IncrementCurrentMult(timesPlayed);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{timesPlayed} Mult</color>"));
     }
 }

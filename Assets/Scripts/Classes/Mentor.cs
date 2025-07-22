@@ -175,6 +175,12 @@ public class Mentor
 
     }
 
+    //  Call StartCoroutine from classes that are not of MonoBehavior
+    public void ScoreCoroutine(IEnumerator coroutine)
+    {
+        ScoringManager.access().ExternalCoroutine(coroutine);
+    }
+
     //  Returns the description of mentor 
     public virtual string GetDescription()
     {
