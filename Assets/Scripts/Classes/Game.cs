@@ -497,7 +497,7 @@ public class Game
 
     public void ResetGame()//Resets the variables held in Game.cs
     {
-        ante = 1;
+        SetAnte(1); //  Also change BackendHook's variable
         roundValue = 1;
         currentChipAmount = 0;
         ChipTotal = 0;
