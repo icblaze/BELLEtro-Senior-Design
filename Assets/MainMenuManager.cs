@@ -22,6 +22,9 @@ public class MainMenuManager : MonoBehaviour
     public CanvasGroup fadeToBlack;
     public CanvasGroup optionsMenu;
     public CanvasGroup howToPlayMenu;
+    public CanvasGroup collections;
+    public GameObject colletionsObject;
+    public GameObject particles;
     public TMP_Text text;
 
     //Function called when object is first created/started. Used to obtain objects. Possibly do not need these
@@ -97,6 +100,7 @@ public class MainMenuManager : MonoBehaviour
     {
         howToPlayMenu.alpha = 1;
         howToPlayMenu.blocksRaycasts = true;
+        particles.SetActive(false);
     }
 
     //Function that is called once the animation is done to load the playable scene.
@@ -149,6 +153,21 @@ public class MainMenuManager : MonoBehaviour
     {
         howToPlayMenu.alpha = 0;
         howToPlayMenu.blocksRaycasts = false;
+        particles.SetActive(true);
+    }
+    public void CollectionsButton()
+    {
+        particles.SetActive(false);
+        collections.alpha = 1;
+        collections.blocksRaycasts = true;
+        colletionsObject.SetActive(true);
+    }
+    public void CollectionsBackButton()
+    {
+        particles.SetActive(true);
+        collections.alpha = 0;
+        collections.blocksRaycasts = false;
+        colletionsObject.SetActive(false);
     }
 }
 
