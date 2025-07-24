@@ -126,7 +126,7 @@ public class MainMenuManager : MonoBehaviour
     //In this case, it is the next page.
     public void NextPage()
     {
-        if (text.pageToDisplay == 21)
+        if (text.pageToDisplay == 25)
         {
             //Nothing
         }
