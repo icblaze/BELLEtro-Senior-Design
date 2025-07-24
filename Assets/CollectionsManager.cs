@@ -260,10 +260,18 @@ public class CollectionsManager : MonoBehaviour
     //Functions for setting up the info on the info panel
     public void ShowMentorDetails()
     {
+        string cardDescription = "";
         // Show the panel
         infoPanel.SetActive(true);
         titleText.text = SplitCase.Split(currentMentor.name.ToString());
-        string cardDescription = currentMentor.GetDescription();
+        if (currentMentor.name.ToString() == "HistoryClass")
+        {
+            cardDescription = "If first hand of round is 1 card, then add a copy of that card to the deck";
+        }
+        else
+        {
+            cardDescription = currentMentor.GetDescription();
+        }
         cardDescription += CardModifier.access().EditionDesc(currentMentor.edition);
         descriptionText.text = cardDescription;
 
