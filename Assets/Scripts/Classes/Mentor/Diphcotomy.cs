@@ -16,13 +16,13 @@ public class Diphcotomy : Mentor
     public Diphcotomy(CardEdition edition) : base(MentorName.Diphcotomy, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.PreCard, UseLocation.Post };
-        description = "This Mentor gains +1 Mult per consecutive hand played without a scoring Diphthong ( +0)";
+        description = "This Mentor gains <color=red>+1 Mult</color> per consecutive hand played without a scoring Diphthong (<color=red>+0 Mult</color>)";
     }
 
     //  Update description with mult variable
     public override string GetDescription()
     {
-        description = "This Mentor gains +1 Mult per consecutive hand played without a scoring Diphthong ( +" + mult + ")";
+        description = "This Mentor gains <color=red>+1 Mult</color> per consecutive hand played without a scoring Diphthong (<color=red>+" + mult + " Mult</color>)";
         return description;
     }
 

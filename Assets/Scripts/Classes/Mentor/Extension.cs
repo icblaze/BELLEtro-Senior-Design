@@ -18,7 +18,7 @@ public class Extension : Mentor
     public Extension(CardEdition edition) : base(MentorName.Extension, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.Shop };
-        description = "Next purchased Mentor is $3 off";
+        description = "Next purchased Mentor is <color=#BB8525FF>$3</color> off";
     }
 
     //  Next purchased Mentor is $3 off

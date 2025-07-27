@@ -15,13 +15,13 @@ public class Library : Mentor
     public Library(CardEdition edition) : base(MentorName.Library, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "This mentor gains x0.1 Mult when a Textbook is used (X1 Mult)";
+        description = "This mentor gains <b><color=red>X0.1 Mult</color></b> when a Textbook is used (<b><color=red>X1 Mult</color></b>)";
     }
 
     //  This mentor gains X0.1 Mult when a Textbook is used (X1 Mult)
     public override string GetDescription()
     {
-        description = $"This mentor gains X0.1 Mult when a Textbook is used (X{textbookMult} Mult)";
+        description = $"This mentor gains <b><color=red>X0.1 Mult</color></b> when a Textbook is used (<b><color=red>X{textbookMult} Mult</color></b>)";
         return description;
     }
 

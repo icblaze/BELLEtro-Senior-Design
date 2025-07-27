@@ -15,7 +15,7 @@ public class Consonant : Mentor
     public Consonant(CardEdition edition) : base(MentorName.Consonant, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.PreCard };
-        description = " Consonants give +30 Chips when scored";
+        description = " Consonants give <color=blue>+30 Chips</color> when scored";
     }
 
     //  Played Consonants give plus 30 chips when scored.

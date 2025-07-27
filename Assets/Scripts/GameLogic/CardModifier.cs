@@ -107,17 +107,17 @@ public class CardModifier
             case CardEnhancement.Base:
                 return "";
             case CardEnhancement.BonusCard:
-                return "\nBonus Card: +30 extra Chips";
+                return "\nBonus Card: <color=blue>+30 Chips</color>";
             case CardEnhancement.MultCard:
-                return "\nMult Card: +4 Mult";
+                return "\nMult Card: <color=red>+4 Mult</color>";
             case CardEnhancement.WildCard:
                 return "\nWild Card: Can be used as any suit";
             case CardEnhancement.GoldCard:
-                return "\nGold Card: Gain $3 if held in hand at end of round";
+                return "\nGold Card: Gain <color=#BB8525FF>$3</color> if held in hand at end of round";
             case CardEnhancement.SteelCard:
-                return "\nSteel Card: X1.5 Mult when held in hand";
+                return "\nSteel Card: <b><color=red>X1.5 Mult</color></b> when held in hand";
             case CardEnhancement.GlassCard:
-                return "\nGlass Card: X2 Mult when scored. 25% chance of being destroyed after scoring";
+                return "\nGlass Card: <b><color=red>X2 Mult</color></b> when scored. 25% chance of being destroyed after scoring";
         }
 
         return "";
@@ -131,13 +131,13 @@ public class CardModifier
             case CardEdition.Base:
                 return "";
             case CardEdition.Foil:
-                return "\nFoil: +50 Chips";
+                return "\nFoil: <color=blue>+50 Chips</color>";
             case CardEdition.Holographic:
-                return "\nHolographic: +10 Mult";
+                return "\nHolographic: <color=red>+10 Mult</color>";
             case CardEdition.Polychrome:
-                return "\nPolychrome: X1.5 Mult";
+                return "\nPolychrome: <b><color=red>X1.5 Mult</color></b>";
             case CardEdition.Negative:
-                return "\nNegative: +1 Mentor Slot";
+                return "\nNegative: <color=purple>+1 Mentor Slot</color>";
         }
 
         return "";
@@ -151,7 +151,7 @@ public class CardModifier
             case CardSeal.Base:
                 return "";
             case CardSeal.Funding:
-                return "\nFunding Seal: Gain $3 when scored";
+                return "\nFunding Seal: Gain <color=#BB8525FF>$3</color> when scored";
             case CardSeal.Retake:
                 return "\nRetake Seal: Retrigger this card";
             case CardSeal.Study:

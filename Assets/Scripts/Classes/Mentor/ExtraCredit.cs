@@ -13,7 +13,7 @@ public class ExtraCredit : Mentor
     public ExtraCredit(CardEdition edition) : base(MentorName.ExtraCredit, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.PreShop };
-        description = "Earn $1 at end of round";
+        description = "Earn <color=#BB8525FF>$1</color> at end of round";
     }
 
     //  Adds $1 at end of round

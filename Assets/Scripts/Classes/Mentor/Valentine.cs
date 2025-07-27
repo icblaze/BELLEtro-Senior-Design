@@ -13,7 +13,7 @@ public class Valentine : Mentor
     public Valentine(CardEdition edition) : base(MentorName.Valentine, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.PreCard };
-        description = "Played cards with Voiced/Tense suit give +3 Mult when scored";
+        description = "Played cards with <b>Voiced</b>/<b>Tense</b> suit give <color=red>+3 Mult</color> when scored";
     }
 
     //  Played card will add +3 Mult if Voiced/Tense suit

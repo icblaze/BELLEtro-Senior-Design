@@ -15,7 +15,7 @@ public class Eyes : Mentor
     public Eyes(CardEdition edition) : base(MentorName.Eyes, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "+8 Mult if played hand contains a Pair";
+        description = "<color=red>+8 Mult</color> if played hand contains a Pair";
     }
 
     //  +8 Mult if played hand contains a Pair

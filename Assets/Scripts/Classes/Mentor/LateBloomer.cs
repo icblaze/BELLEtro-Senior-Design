@@ -15,7 +15,7 @@ public class LateBloomer : Mentor
     public LateBloomer(CardEdition edition) : base(MentorName.LateBloomer, edition, 8)
     {
         locations = new UseLocation[] {UseLocation.Post };
-        description = "X3 Mult after Ante 4 (inactive)";
+        description = "<b><color=red>X3 Mult</color></b> after Ante 4 (<i>inactive</i>)";
     }
 
     //  Update description with active status
@@ -23,11 +23,11 @@ public class LateBloomer : Mentor
     {
         if(gameInst.GetAnte() > 4)
         {
-            description = "X3 Mult after Ante 4 (active)";
+            description = "<b><color=red>X3 Mult</color></b> after Ante 4 (<i>active</i>)";
         }
         else
         {
-            description = "X3 Mult after Ante 4 (inactive)";
+            description = "<b><color=red>X3 Mult</color></b> after Ante 4 (<i>inactive</i>)";
         }
         return description;
     }

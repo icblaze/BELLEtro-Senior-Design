@@ -15,7 +15,7 @@ public class EvenAirflow : Mentor
     public EvenAirflow(CardEdition edition) : base(MentorName.EvenAirflow, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Post};
-        description = "X2 Mult if played hand has both voiced and voiceless sounds scored.";
+        description = "<b><color=red>X2 Mult</color></b> if played hand has both voiced and voiceless sounds scored.";
     }
 
     //  X2 Mult if played hand has both voiced and voiceless sounds scored.

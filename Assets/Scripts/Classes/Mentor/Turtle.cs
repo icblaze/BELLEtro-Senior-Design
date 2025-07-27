@@ -20,13 +20,13 @@ public class Turtle : Mentor
     public Turtle(CardEdition edition) : base(MentorName.Turtle, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Blind, UseLocation.PostBlind };
-        description = "Hand Size increase by " + handSizeBonus + ", reduce by 1 end of round.";
+        description = "Hand Size increase by <i><color=orange>" + handSizeBonus + "</color></i>, reduce by <color=orange>1</color> end of round.";
     }
 
     //  Update handSize bonus in description
     public override string GetDescription()
     {
-        description = "Hand Size increase by " + handSizeBonus + ", reduce by 1 end of round.";
+        description = "Hand Size increase by <i><color=orange>" + handSizeBonus + "</color></i>, reduce by <color=orange>1</color> end of round.";
         return description;
     }
 

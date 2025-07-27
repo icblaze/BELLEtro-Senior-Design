@@ -14,7 +14,7 @@ public class LinguistsEdge : Mentor
     public LinguistsEdge(CardEdition edition) : base(MentorName.LinguistsEdge, edition, 9)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "X2 Mult if scored hand contains 3 or more cards";
+        description = "<b><color=red>X2 Mult</color></b> if scored hand contains 3 or more cards";
     }
 
     //  X2 Mult if scored hand contains 3 or more cards

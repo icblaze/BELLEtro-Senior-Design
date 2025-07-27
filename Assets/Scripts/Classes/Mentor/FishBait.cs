@@ -14,7 +14,7 @@ public class FishBait : Mentor
     public FishBait(CardEdition edition) : base(MentorName.FishBait, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "+100 Chips if played hand contains a straight";
+        description = "<color=blue>+100 Chips</color> if played hand contains a straight";
     }
 
     // +100 chips if played hand contains a straight.

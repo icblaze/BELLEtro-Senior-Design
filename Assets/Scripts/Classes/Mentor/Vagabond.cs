@@ -17,7 +17,7 @@ public class Vagabond : Mentor
     public Vagabond(CardEdition edition) : base(MentorName.Vagabond, edition, 8)
     {
         locations = new UseLocation[] { UseLocation.PostHand };
-        description = "Spawns a Card Buff card after a hand is played if player has $4 or less";
+        description = "Spawns a Card Buff card after a hand is played if player has <color=#BB8525FF>$4</color> or less";
     }
 
     //  Spawns a Card Buff card after a hand is played if player has $4 or less.

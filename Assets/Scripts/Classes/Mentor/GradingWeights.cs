@@ -16,12 +16,12 @@ public class GradingWeights : Mentor
     public GradingWeights(CardEdition edition) : base(MentorName.GradingWeights, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.Retrigger };
-        description = $"Each scored {suit} cards is retriggered (Suit changes each round)";
+        description = $"Each scored <b>{suit}</b> card is retriggered (Suit changes each round)";
     }
 
     public override string GetDescription()
     {
-        description = $"Each scored {suit} cards is retriggered (Suit changes each round)";
+        description = $"Each scored <b>{suit}</b> card is retriggered (Suit changes each round)";
         return description;
     }
 

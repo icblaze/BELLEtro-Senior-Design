@@ -15,7 +15,7 @@ public class PageFlip : Mentor
     public PageFlip(CardEdition edition) : base(MentorName.PageFlip, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.Blind };
-        description = "+1 Discard each round";
+        description = "<color=orange>+1</color> Discard each round";
     }
 
     //  +1 Discard each round

@@ -15,13 +15,13 @@ public class FrequencyHopper : Mentor
     public FrequencyHopper(CardEdition edition) : base(MentorName.FrequencyHopper, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Initial, UseLocation.Post };
-        description = "This Mentor gains +1 Mult if scored hand contains a vowel (+0 Mult)";
+        description = "This Mentor gains <color=red>+1 Mult</color> if scored hand contains a vowel (<color=red>+0 Mult</color>)";
     }
 
     //  Update description with mult variable
     public override string GetDescription()
     {
-        description = $"This Mentor gains +1 Mult if scored hand contains a vowel (+{mult} Mult)";
+        description = $"This Mentor gains <color=red>+1 Mult</color> if scored hand contains a vowel (<color=red>+{mult} Mult</color>)";
         return description;
     }
 

@@ -16,7 +16,7 @@ public class Glider : Mentor
     public Glider(CardEdition edition) : base(MentorName.Glider, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "Gives X0.4 Mult for each glide in your full deck (Currently x1.2)";
+        description = "Gives <b><color=red>X0.4 Mult</color></b> for each glide in your full deck (Currently <b><color=red>X1.2 Mult</color></b>)";
     }
 
     //  Calculate multiplier
@@ -24,7 +24,7 @@ public class Glider : Mentor
     {
         glideMult = 0.4f * GlideCount();
 
-        description = $"Gives X0.4 Mult for each glide in your full deck (Currently x{glideMult})";
+        description = $"Gives <b><color=red>X0.4 Mult</color></b> for each glide in your full deck (Currently <b><color=red>X{glideMult} Mult</color></b>)";
         return description;
     }
 

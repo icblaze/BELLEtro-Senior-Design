@@ -17,13 +17,13 @@ public class MindMeld : Mentor
     public MindMeld(CardEdition edition) : base(MentorName.MindMeld, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "Mentor gains +1 Mult if multiple hand types played this round (+0 Mult)";
+        description = "Mentor gains <color=red>+1 Mult</color> if multiple hand types played this round (<color=red>+0 Mult</color>)";
     }
 
     //  Change mult of description
     public override string GetDescription()
     {
-        description = $"Mentor gains +1 Mult if multiple hand types played this round (+{mult} Mult)";
+        description = $"Mentor gains <color=red>+1 Mult</color> if multiple hand types played this round (<color=red>+{mult} Mult</color>)";
         return description;
     }
 

@@ -15,7 +15,7 @@ public class DiphthongDelight : Mentor
     public DiphthongDelight(CardEdition edition) : base(MentorName.DiphthongDelight, edition, 5)
     {
         locations = new UseLocation[] {UseLocation.Initial, UseLocation.PostCard };
-        description = "X2 Mult when first Diphthong is scored";
+        description = "<b><color=red>X2 Mult</color></b> when first Diphthong is scored";
     }
 
     //  Reset firstDiphthong to true before scoring

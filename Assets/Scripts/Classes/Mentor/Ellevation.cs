@@ -15,13 +15,13 @@ public class Ellevation : Mentor
     public Ellevation(CardEdition edition) : base(MentorName.ELLEvation, edition, 8)
     {
         locations = new UseLocation[] { UseLocation.PreCard, UseLocation.Post };
-        description = "This Mentor gains +8 Chips when each played /ɛ/ or /l/ is scored ( +0 Chips)";
+        description = "This Mentor gains <color=blue>+8 Chips</color> when each played /ɛ/ or /l/ is scored (<color=blue>+0 Chips</color>)";
     }
 
     //  Update description with chips variable
     public override string GetDescription()
     {
-        description = "This Mentor gains +8 Chips when each played /ɛ/ or /l/ is scored  ( +" + chips + " Chips)";
+        description = "This Mentor gains <color=blue>+8 Chips</color> when each played /ɛ/ or /l/ is scored  (+<color=blue>" + chips + " Chips</color>)";
         return description;
     }
 

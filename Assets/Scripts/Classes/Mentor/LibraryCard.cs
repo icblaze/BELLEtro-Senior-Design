@@ -16,14 +16,14 @@ public class LibraryCard : Mentor
     public LibraryCard(CardEdition edition) : base(MentorName.LibraryCard, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.PostBlind };
-        description = "Give $1 at end of round per unique Textbook used";
+        description = "Give <color=#BB8525FF>$1</color> at end of round per unique Textbook used";
     }
 
     //  Change description basd on uniqueCount
     public override string GetDescription()
     {
         calculateUnique();
-        description = "Give $1 at end of round per unique Textbook used " + $"(${uniqueCount})";
+        description = "Give <color=#BB8525FF>$1</color> at end of round per unique Textbook used " + $"(<color=#BB8525FF>${uniqueCount}</color>)";
         return description;
     }
 

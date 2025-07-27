@@ -15,7 +15,7 @@ public class WildCard : Mentor
     public WildCard(CardEdition edition) : base(MentorName.WildCard, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.PreFromDraw };
-        description = "+2 Mult for every unique term held in hand";
+        description = "<color=red>+2 Mult</color> for every unique term held in hand";
     }
 
     // +2 Mult for every unique term held in hand

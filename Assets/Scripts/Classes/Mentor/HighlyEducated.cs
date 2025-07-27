@@ -16,7 +16,7 @@ public class HighlyEducated : Mentor
     public HighlyEducated(CardEdition edition) : base(MentorName.HighlyEducated, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "This Mentor gains x0.25 Mult every time a card is added to the deck (X1 Mult)";
+        description = "This Mentor gains <b><color=red>X0.25 Mult</color></b> every time a card is added to the deck (<b><color=red>X1 Mult</color></b>)";
     }
 
     //  Calculate multiplier
@@ -24,7 +24,7 @@ public class HighlyEducated : Mentor
     {
         xmult = 1 + (0.25f * NewCardCount());
 
-        description = $"This Mentor gains x0.25 Mult every time a card is added to the deck (X{xmult} Mult)";
+        description = $"This Mentor gains <b><color=red>X0.25 Mult</color></b> every time a card is added to the deck (<b><color=red>X{xmult} Mult</color></b>)";
         return description;
     }
 

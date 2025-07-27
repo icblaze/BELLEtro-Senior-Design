@@ -18,13 +18,13 @@ public class MakeupExam : Mentor
     public MakeupExam(CardEdition edition) : base(MentorName.MakeupExam, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.PreCard, UseLocation.PostHand};
-        description = "Retrigger all cards for the next 10 hands";
+        description = "Retrigger all cards for the next <i><color=orange>10</color></i> hands";
     }
 
     //  Update description with uses left
     public override string GetDescription()
     {
-        description = "Retrigger all cards for the next " + retriggerUses + " hands";
+        description = "Retrigger all cards for the next <i><color=orange>" + retriggerUses + "</color></i> hands";
         return description;
     }
 

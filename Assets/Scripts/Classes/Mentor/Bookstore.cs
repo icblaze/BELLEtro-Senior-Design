@@ -15,7 +15,7 @@ public class Bookstore : Mentor
     public Bookstore(CardEdition edition) : base(MentorName.Bookstore, edition, 8)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "X3 Mult if the current hand played has been played before in this round";
+        description = "<b><color=red>X3 Mult</color></b> if the current hand played has been played before in this round";
     }
 
     // X3 Mult if the current hand played has been played before in this round

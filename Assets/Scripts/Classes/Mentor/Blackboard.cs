@@ -15,7 +15,7 @@ public class Blackboard : Mentor
     public Blackboard(CardEdition edition) : base(MentorName.Blackboard, edition, 6)
     {
         locations = new UseLocation[] {UseLocation.Post };
-        description = "X3 Mult if all cards held in hand are Voiced or Tense";
+        description = "<b><color=red>X3 Mult</color></b> if all cards held in hand are <b>Voiced</b> or <b>Tense</b>";
     }
 
     // X3 Mult if all cards held in hand are Voiced or Tense

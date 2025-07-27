@@ -18,13 +18,13 @@ public class LightSnack : Mentor
     public LightSnack(CardEdition edition) : base(MentorName.LightSnack, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.Post, UseLocation.PostBlind};
-        description = "+20 Mult, -4 Mult at end of round";
+        description = "<color=red>+20 Mult</color>, <color=red>-4 Mult</color> at end of round";
     }
 
     //  Update description with uses left
     public override string GetDescription()
     {
-        description = $"+{snackMult} Mult, -4 Mult at end of round";
+        description = $"<color=red>+{snackMult} Mult</color>, <color=red>-4 Mult</color> at end of round";
         return description;
     }
 

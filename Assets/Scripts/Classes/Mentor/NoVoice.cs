@@ -13,7 +13,7 @@ public class NoVoice : Mentor
     public NoVoice(CardEdition edition) : base(MentorName.NoVoice, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.PreCard };
-        description = "Played cards with Voiceless/Lax suit give +3 Mult when scored";
+        description = "Played cards with <b>Voiceless</b>/<b>Lax</b> suit give <color=red>+3 Mult</color> when scored";
     }
 
     //  Played card will add +3 Mult if Voiceless/Lax suit

@@ -17,13 +17,13 @@ public class FastLearner : Mentor
     public FastLearner(CardEdition edition) : base(MentorName.FastLearner, edition, 5)
     {
         locations = new UseLocation[] { UseLocation.Discard, UseLocation.Post };
-        description = "Mentor gains +1 Mult for every 7 cards discarded this run (+0 Mult)";
+        description = "Mentor gains <color=red>+1 Mult</color> for every 7 cards discarded this run (<color=red>+0 Mult</color>)";
     }
 
     //  Change mult in description
     public override string GetDescription()
     {
-        description = $"Mentor gains +1 Mult for every 7 cards discarded this run (+{mult} Mult)";
+        description = $"Mentor gains <color=red>+1 Mult</color> for every 7 cards discarded this run (<color=red>+{mult} Mult</color>)";
         return description;
     }
 

@@ -15,7 +15,7 @@ public class EchoChamber : Mentor
     public EchoChamber(CardEdition edition) : base(MentorName.EchoChamber, edition, 8)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "X2 Mult if hand has been repeated consecutively this round";
+        description = "<b><color=red>X2 Mult</color></b> if hand has been repeated consecutively this round";
     }
 
     // X2 Mult if hand has been repeated consecutively this round

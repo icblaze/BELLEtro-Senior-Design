@@ -14,7 +14,7 @@ public class Triplets : Mentor
     public Triplets(CardEdition edition) : base(MentorName.Triplets, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "+12 Mult if played hand contains three of a kind";
+        description = "<color=red>+12 Mult</color> if played hand contains three of a kind";
     }
 
     // +12 Mult if played hand contains three of a kind

@@ -15,13 +15,13 @@ public class Daydreamer : Mentor
     public Daydreamer(CardEdition edition) : base(MentorName.Daydreamer, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Blind, UseLocation.Post };
-        description = "50% chance for Mentor to gain +4 Mult at the start of a round (+0 Mult)";
+        description = "50% chance for Mentor to gain <color=red>+4 Mult</color> at the start of a round (<color=red>+0 Mult</color>)";
     }
 
     //  Update description with +mult
     public override string GetDescription()
     {
-        description = $"50% chance for Mentor to gain +4 Mult at the start of a round (+{mult} Mult)";
+        description = $"50% chance for Mentor to gain <color=red>+4 Mult</color> at the start of a round (<color=red>+{mult} Mult</color>)";
         return description;
     }
 

@@ -14,7 +14,7 @@ public class BonusPoints : Mentor
     {
         //  Might have to change this buffer location?
         locations = new UseLocation[] { UseLocation.PreShop };
-        description = "Earn extra $1 for every $5 at end of round (max $5)";
+        description = "Earn extra <color=#BB8525FF>$1</color> for every <color=#BB8525FF>$5</color> at end of round (max $5)";
     }
 
     //  Earn an extra $1 for every $5 at end of round, maximum $5

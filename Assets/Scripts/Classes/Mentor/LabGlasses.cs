@@ -15,14 +15,14 @@ public class LabGlasses : Mentor
     public LabGlasses(CardEdition edition) : base(MentorName.LabGlasses, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.Post };
-        description = "Give +2 Mult for every $5 you have";
+        description = "Give <color=red>+2 Mult</color> for every <color=#BB8525FF>$5</color> you have";
     }
 
     //  Update description based on player's money
     public override string GetDescription()
     {
         multipleCount = Player.access().moneyCount / 5;
-        description = "Give +2 Mult for every $5 you have ( +" + (multipleCount * 2) + " Mult)";
+        description = "Give <color=red>+2 Mult</color> for every <color=#BB8525FF>$5</color> you have (<color=red>+" + (multipleCount * 2) + " Mult</color>)";
         return description;
     }
 

@@ -15,7 +15,7 @@ public class TheUsualSpot : Mentor
     public TheUsualSpot(CardEdition edition) : base(MentorName.TheUsualSpot, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.Post};
-        description = "Gives +80 Chips if played hand matches by place of articulation";
+        description = "Gives <color=blue>+80 Chips</color> if played hand matches by place of articulation";
     }
 
     //  Gives +80 Chips if played hand matches by place of articulation

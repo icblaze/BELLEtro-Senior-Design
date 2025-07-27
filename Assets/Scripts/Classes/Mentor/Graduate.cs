@@ -13,7 +13,7 @@ public class Graduate : Mentor
     public Graduate(CardEdition edition) : base(MentorName.Graduate, edition, 4)
     {
         locations = new UseLocation[] { UseLocation.PreCard };
-        description = "+20 Chips and +4 Mult when Dipthongs are scored";
+        description = "<color=blue>+20 Chips</color> and <color=red>+4 Mult</color> when Dipthongs are scored";
     }
 
     public override void UseMentor(PCard pcard)

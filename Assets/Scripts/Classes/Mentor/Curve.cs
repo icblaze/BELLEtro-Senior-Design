@@ -19,7 +19,7 @@ public class Curve : Mentor
     {
         //  Might have to change this buffer location?
         locations = new UseLocation[] { UseLocation.PostBlind };
-        description = "Prevents loss if chips scored at least required 25%. Disappears after use.";
+        description = "Prevents loss if chips scored at least 25% required. <i>Disappears after use.</i>";
     }
 
     //  Prevents loss if chips scored at least required 25%. Disappears after use.
