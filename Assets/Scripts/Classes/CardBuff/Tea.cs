@@ -24,7 +24,7 @@ public class Tea : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Add a Study seal to 1 selected card.";
+        description = "Add a Study seal to <color=orange>1</color> selected card.";
         return description;
     }
 

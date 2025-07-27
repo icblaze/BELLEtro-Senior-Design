@@ -32,7 +32,7 @@ public class Milk : CardBuff
         }
 
         description = "Gives total sell value of current Mentors";
-        description += $" (${totalSell})";
+        description += $" (<color=#BB8525FF>${totalSell}</color>)";
 
         return description;
     }

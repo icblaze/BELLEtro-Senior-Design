@@ -24,7 +24,7 @@ public class Potato : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Add a Funding seal to 1 selected card.";
+        description = "Add a Funding seal to <color=orange>1</color> selected card.";
         return description;
     }
 

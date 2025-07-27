@@ -24,7 +24,7 @@ public class Flatbread : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Raise +1 Mult for up to 3 selected cards";
+        description = "Raise <color=red>+1 Mult</color> for up to <color=orange>3</color> selected cards";
         return description;
     }
 

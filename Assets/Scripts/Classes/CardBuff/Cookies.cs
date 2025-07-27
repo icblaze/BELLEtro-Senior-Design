@@ -26,7 +26,7 @@ public class Cookies : CardBuff
     {
         //  Checks if at least 1 card selected, max 2
 
-        description = "Enhances up to 2 selected cards to Mult cards";
+        description = "Enhances up to <color=orange>2</color> selected cards to Mult cards";
         return description;
     }
 

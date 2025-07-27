@@ -48,7 +48,7 @@ public class ChiliPepper : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Enhances 1 selected card to be Glass.";
+        description = "Enhances <color=orange>1</color> selected card to be Glass.";
         return description;
     }
 

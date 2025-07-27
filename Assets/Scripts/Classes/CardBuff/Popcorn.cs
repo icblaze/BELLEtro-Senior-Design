@@ -24,7 +24,7 @@ public class Popcorn : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Enhances 1 card to Wild card.";
+        description = "Enhances <color=orange>1</color> card to Wild card.";
         return description;
     }
 

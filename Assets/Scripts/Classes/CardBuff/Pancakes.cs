@@ -23,7 +23,7 @@ public class Pancakes : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Generates up to 2 random Card Buffs.";
+        description = "Generates up to <color=orange>2</color> random Card Buffs.";
         return description;
     }
 

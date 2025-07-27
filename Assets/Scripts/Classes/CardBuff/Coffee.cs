@@ -26,7 +26,7 @@ public class Coffee : CardBuff
     {
         //  Disable if 1 card isn't selected
 
-        description = "Add a Retake seal to 1 selected card.";
+        description = "Add a Retake seal to <color=orange>1</color> selected card.";
         return description;
     }
 

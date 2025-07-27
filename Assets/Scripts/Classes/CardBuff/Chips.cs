@@ -24,7 +24,7 @@ public class Chips : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Enhances up to 2 selected cards to Bonus cards.";
+        description = "Enhances up to <color=orange>2</color> selected cards to Bonus cards.";
         return description;
     }
 

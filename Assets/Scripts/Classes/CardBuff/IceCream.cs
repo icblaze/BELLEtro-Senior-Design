@@ -26,7 +26,7 @@ public class IceCream : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Destroys up to 2 selected cards.";
+        description = "Destroys up to <color=orange>2</color> selected cards.";
         return description;
     }
 

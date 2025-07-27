@@ -72,6 +72,7 @@ public class Leftovers : CardBuff
         }
 
         //  Set prev used consumable to current consumable (except for Leftovers)
+        game.previousConsumable = null;
     }
 }
 

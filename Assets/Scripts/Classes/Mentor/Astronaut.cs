@@ -15,7 +15,7 @@ public class Astronaut : Mentor
     public Astronaut(CardEdition edition) : base(MentorName.Astronaut, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Shop };
-        description = "All Textbook cards and Textbook packs in the shop are free";
+        description = "All <color=#008080ff>Textbook</color> cards and <color=#008080ff>Textbook</color> packs in the shop are free";
     }
 
     //  All Textbook cards and Textbook packs in the shop are free.

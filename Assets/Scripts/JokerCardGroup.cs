@@ -43,8 +43,8 @@ public class JokerCardHolder : MonoBehaviour
     {
         if (testMode)
         {
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.Turtle, CardEdition.Base));
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.MadHatter, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.CheatSheet, CardEdition.Base));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.AreaOfExpertise, CardEdition.Foil));
         }
 
         //  Debug mentors in the list, order from left to right
@@ -249,6 +249,9 @@ public class JokerCardHolder : MonoBehaviour
                 player.moneyCount += cardComponent.mentor.sellValue;
 
                 Debug.Log("Money AFTER sale: " + player.moneyCount);
+
+                SFXManager sfxManager = GameObject.FindFirstObjectByType<SFXManager>().GetComponent<SFXManager>();
+                sfxManager.UseButton();
 
                 // Tell the ShopManager to update the UI display
                 shopManager.UpdateMoneyDisplay();

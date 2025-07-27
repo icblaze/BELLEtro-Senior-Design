@@ -24,7 +24,7 @@ public class Toast : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Increase chips by 10 for up to 3 selected cards";
+        description = "Increase <color=blue>Chips</color> by 10 for up to <color=orange>3</color> selected cards";
         return description;
     }
 

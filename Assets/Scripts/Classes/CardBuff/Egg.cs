@@ -23,7 +23,7 @@ public class Egg : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Doubles current money (up to $20)";
+        description = "Doubles current money (up to <color=#BB8525FF>$20</color>)";
         return description;
     }
 

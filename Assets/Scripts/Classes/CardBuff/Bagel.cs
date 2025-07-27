@@ -24,7 +24,7 @@ public class Bagel : CardBuff
     //  Set if the card buff can be used to set isDisabled, and return details
     public override string GetDescription()
     {
-        description = "Add a copy of 1 selected card to your deck";
+        description = "Add a copy of <color=orange>1</color> selected card to your deck";
         return description;
     }
 

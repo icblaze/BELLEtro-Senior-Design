@@ -26,7 +26,7 @@ public class Spinach : CardBuff
     {
         //  Disables if 1 card isn't selected
 
-        description = "Enhances 1 card to a Steel card."; 
+        description = "Enhances <color=orange>1</color> card to a Steel card."; 
         return description;
     }
 
