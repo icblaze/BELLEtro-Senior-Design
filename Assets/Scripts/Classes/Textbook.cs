@@ -77,11 +77,11 @@ public class Textbook : Consumable
 
         if(!hasAnnotated)
         {
-            return $"(lvl. {level}) Level up {SplitCase.Split(handName)}\n <color=red>+{incrementMult} Mult</color> and <color=blue>+{incrementChips} Chips</color>";
+            return $"(lvl. {level}) Level up <b>{SplitCase.Split(handName)}</b>\n <color=red>+{incrementMult} Mult</color> and <color=blue>+{incrementChips} Chips</color>";
         }
         else
         {
-            return $"(lvl. {level}) Level up {SplitCase.Split(handName)}\n <color=red>+{incrementMult * 2} Mult</color> and <color=blue>+{incrementChips * 2} Chips</color> (Annotated)";
+            return $"(lvl. {level}) Level up <b>{SplitCase.Split(handName)}</b>\n <color=red>+{incrementMult * 2} Mult</color> and <color=blue>+{incrementChips * 2} Chips</color> (Annotated)";
         }
     }
 }

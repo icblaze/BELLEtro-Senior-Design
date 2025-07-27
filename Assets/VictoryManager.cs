@@ -42,6 +42,14 @@ public class VictoryManager : MonoBehaviour
         string numRerollsString = "Number of Rerolls: " + numRerolls.ToString() + "\n";
         victoryText.GetComponent<TMP_Text>().text = "excELLEntly Done\n" + bestHandString + handsPlayedString + cardsPurchasedString + packsPurchasedString + numRerollsString;
         ResetGameVictory();
+
+        //  End play session
+        BackendHook.StartHook(BackendHook.endSession(Game.access().GetAnte()));
+
+        Game.access().ResetGame();
+        Round.access().RestartGame();
+        Player.access().Reset();
+        Deck.access().Reset();
     }
 
     public void ResetGameVictory()

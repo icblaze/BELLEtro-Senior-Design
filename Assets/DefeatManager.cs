@@ -41,6 +41,10 @@ public class DefeatManager : MonoBehaviour
         }
         defeatText = GameObject.Find("Defeat Text");
         defeatText.GetComponent<TMP_Text>().text = score + rounds + defeated;
+
+        //  End play session
+        BackendHook.StartHook(BackendHook.endSession(inst.GetAnte()));
+
         Game.access().ResetGame();
         Round.access().RestartGame();
         Player.access().Reset();
