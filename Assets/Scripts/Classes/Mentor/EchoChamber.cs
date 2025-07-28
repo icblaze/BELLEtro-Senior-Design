@@ -28,7 +28,7 @@ public class EchoChamber : Mentor
         {
             //  Apply X2 Mult if same as prevHand
             ScoringManager.access().SetCurrentMult(ScoringManager.access().GetCurrentMult() * 2);
-            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>X2 Mult</color>"));
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X2 Mult</color></b>"));
         }
 
         //  Set prev hand to playedHand

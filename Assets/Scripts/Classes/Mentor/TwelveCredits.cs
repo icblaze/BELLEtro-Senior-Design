@@ -13,7 +13,7 @@ public class TwelveCredits : Mentor
     public TwelveCredits(CardEdition edition) : base(MentorName.TwelveCredits, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.AllCards };
-        description = "If exactly 4 cards are played, <color=red>+12 Mult";
+        description = "If exactly 4 cards are played, <color=red>+12 Mult</color>";
     }
 
     //  If exactly 4 cards are played, +12 Mult

@@ -42,7 +42,7 @@ public class EvenAirflow : Mentor
         {
             int mult = ScoringManager.access().GetCurrentMult();
             ScoringManager.access().SetCurrentMult(mult * 2);
-            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>X2 Mult</color>"));
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X2 Mult</color></b>"));
         }
         
     }
