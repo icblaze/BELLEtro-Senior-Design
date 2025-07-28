@@ -20,5 +20,6 @@ public class ExtraCredit : Mentor
     public override void UseMentor()
     {
         EndOfRoundManager.access().IncrementMentorReward(1);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=yellow>$1</color>"));
     }
 }

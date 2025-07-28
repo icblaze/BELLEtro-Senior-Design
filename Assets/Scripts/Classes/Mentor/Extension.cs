@@ -18,7 +18,7 @@ public class Extension : Mentor
     public Extension(CardEdition edition) : base(MentorName.Extension, edition, 7)
     {
         locations = new UseLocation[] { UseLocation.Shop };
-        description = "Next purchased Mentor is <color=#BB8525FF>$3</color> off";
+        description = "Initial Mentors in Shop are <color=#BB8525FF>$3</color> off";
     }
 
     //  Next purchased Mentor is $3 off
@@ -28,6 +28,7 @@ public class Extension : Mentor
         if(!hasDiscounted)
         {
             ShopManager.access().mentorShopEffect(this);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, "Discounted!"));
             hasDiscounted = true; //    Only activate once per shop
         }
     }

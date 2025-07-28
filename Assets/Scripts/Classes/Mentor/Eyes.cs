@@ -26,6 +26,7 @@ public class Eyes : Mentor
         if(playedHand.Equals("Pair") || playedHand.Equals("TwoPair") || playedHand.Equals("ThreeKind") || playedHand.Equals("FourKind") || playedHand.Equals("FullHouse") || playedHand.Equals("FiveKind") || playedHand.Equals("FlushFive") || playedHand.Equals("FlushHouse"))
         {
             ScoringManager.access().IncrementCurrentMult(8);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, "<color=red>+8 Mult</color>"));
         }
      
     }

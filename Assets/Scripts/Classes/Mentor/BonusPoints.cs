@@ -21,8 +21,16 @@ public class BonusPoints : Mentor
     public override void UseMentor()
     {
         int extraCount = Player.access().moneyCount / 5;
+        if(extraCount < 0)
+        {
+            extraCount = 0;
+        }
         extraCount = Math.Min(extraCount, 5);   //  maximum $5
 
         EndOfRoundManager.access().IncrementMentorReward(extraCount);
+        if (extraCount > 0)
+        {
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=yellow>${extraCount}</color>"));
+        }
     }
 }

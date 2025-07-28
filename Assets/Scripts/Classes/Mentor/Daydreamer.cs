@@ -31,6 +31,7 @@ public class Daydreamer : Mentor
         if(ScoringManager.access().GetScoringStatus())
         {
             ScoringManager.access().IncrementCurrentMult(mult);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{mult} Mult</color>"));
         }
         else
         {
@@ -41,6 +42,7 @@ public class Daydreamer : Mentor
             if(chance == 1)
             {
                 mult += 4;
+                ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+4 Mult</color>"));
             }
         }
     }

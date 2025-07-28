@@ -34,6 +34,7 @@ public class CrossItOut : Mentor
         if(Player.access().discards == Player.access().maxDiscards)
         {
             Player.access().handTable[tbookName].IncreaseLevel();
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"Level Up!"));
         }
     }
 }

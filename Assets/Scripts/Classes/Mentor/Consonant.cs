@@ -28,6 +28,7 @@ public class Consonant : Mentor
             if ((LinguisticTerms) i == pcard.term)
             {
                 ScoringManager.access().IncrementCurrentChips(30);
+                ScoreCoroutine(ScoringManager.access().ScorePopupPCard(pcard, $"<color=blue>+30 Chips</color>"));
             }
         }
     }

@@ -30,6 +30,7 @@ public class DiphthongDelight : Mentor
         if(firstDipthong && pcard.isDiphthong)
         {
             ScoringManager.access().SetCurrentMult(ScoringManager.access().GetCurrentMult() * 2);
+            ScoreCoroutine(ScoringManager.access().ScorePopupPCard(pcard, $"<color=red>X2 Mult</color>"));
             firstDipthong = false;
         }
     }

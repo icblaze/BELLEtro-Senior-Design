@@ -42,7 +42,7 @@ public class ScoringManager : MonoBehaviour
     private HorizontalCardHolder horizontalCardHolder;
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.5f;
+    private readonly float waitIncrement = 0.55f;
 
     //  Call to MentorBufferManager
     private MentorBufferManager mentorBuffer = MentorBufferManager.access();

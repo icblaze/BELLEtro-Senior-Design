@@ -38,6 +38,7 @@ public class FastLearner : Mentor
         if(ScoringManager.access().GetScoringStatus())
         {
             ScoringManager.access().IncrementCurrentMult(mult);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{mult} Mult</color>"));
         }
         else
         {
@@ -51,6 +52,7 @@ public class FastLearner : Mentor
             {
                 discardCounter -= 7;
                 mult++;
+                ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+1 Mult</color>"));
             }
         }
     }

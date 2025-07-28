@@ -27,6 +27,7 @@ public class Bookstore : Mentor
         if(handNames.Contains(playedHand))
         {
             ScoringManager.access().SetCurrentMult(ScoringManager.access().GetCurrentMult() * 3);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X3 Mult</color></b>"));
         }
 
         handNames.Add(playedHand);

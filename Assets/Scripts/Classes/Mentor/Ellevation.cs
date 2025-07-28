@@ -32,6 +32,7 @@ public class Ellevation : Mentor
         if (pcard.term == LinguisticTerms.Lax_Mid_Front || pcard.term == LinguisticTerms.Voiced_Liquid_Alveolar_Lateral)
         {
             chips += 8;
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=blue>+8 Chips</color>"));
         }
     }
 
@@ -39,5 +40,6 @@ public class Ellevation : Mentor
     public override void UseMentor()
     {
         ScoringManager.access().IncrementCurrentChips(chips);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=blue>+{chips} Chips</color>"));
     }
 }

@@ -16,7 +16,7 @@ public class MentorBufferManager
     private Game game = Game.access();
 
     //  Adjust time of scoring manager between each score increment
-    private readonly float waitIncrement = 0.5f;
+    private readonly float waitIncrement = 0.6f;
 
     //  Make this a singleton
     private static MentorBufferManager instance;

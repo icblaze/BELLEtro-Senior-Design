@@ -69,7 +69,7 @@ public class Cherry : CardBuff
 
         //  Update left card to be copy of right card, maintain left card's ID
         int leftID = leftCard.pcard.cardID;
-        leftCard.pcard = rightCard.pcard;
+        leftCard.pcard = PCard.CloneCard(rightCard.pcard);
         leftCard.pcard.cardID = leftID;
         leftCard.AssignPCard(leftCard.pcard);
 

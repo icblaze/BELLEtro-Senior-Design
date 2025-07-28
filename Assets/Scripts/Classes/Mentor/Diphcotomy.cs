@@ -32,6 +32,7 @@ public class Diphcotomy : Mentor
         if(pcard.isDiphthong)
         {
             mult = -1;  //  so it'll be +0 when Post is run
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, "Reset!"));
         }
     }
 
@@ -42,5 +43,6 @@ public class Diphcotomy : Mentor
         mult++;
 
         ScoringManager.access().IncrementCurrentMult(mult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{mult} Mult</color>"));
     }
 }

@@ -1365,7 +1365,7 @@ public class ShopManager : MonoBehaviour
             {
                 mentor1.price = (mentor1.price < 3 ? 0 : mentor1.price - 3);
             }
-            else if (mentor2 != null)
+            if (mentor2 != null)
             {
                 mentor2.price = (mentor2.price < 3 ? 0 : mentor2.price - 3);
             }
