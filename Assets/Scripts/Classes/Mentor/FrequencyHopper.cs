@@ -31,6 +31,7 @@ public class FrequencyHopper : Mentor
         if (ScoringManager.access().GetScoringStatus())
         {
             ScoringManager.access().IncrementCurrentMult(mult);    //  If scoring, increment mult
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{mult} Mult</color>"));
         }
         else
         {
@@ -41,6 +42,7 @@ public class FrequencyHopper : Mentor
                 if(card.term >= LinguisticTerms.Tense_High_Front && card.term <= LinguisticTerms.Lax_Low_Front)
                 {
                     mult++;
+                    ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+1 Mult</color>"));
                     return;
                 }
             }

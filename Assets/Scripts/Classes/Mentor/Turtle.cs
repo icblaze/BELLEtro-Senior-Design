@@ -20,13 +20,13 @@ public class Turtle : Mentor
     public Turtle(CardEdition edition) : base(MentorName.Turtle, edition, 6)
     {
         locations = new UseLocation[] { UseLocation.Blind, UseLocation.PostBlind };
-        description = "Hand Size increase by <i><color=orange>" + handSizeBonus + "</color></i>, reduce by <color=orange>1</color> end of round.";
+        description = "Hand Size increase by <color=orange>" + handSizeBonus + "</color>, reduce by <color=orange>1</color> end of round.";
     }
 
     //  Update handSize bonus in description
     public override string GetDescription()
     {
-        description = "Hand Size increase by <i><color=orange>" + handSizeBonus + "</color></i>, reduce by <color=orange>1</color> end of round.";
+        description = "Hand Size increase by <color=orange>" + handSizeBonus + "</color>, reduce by <color=orange>1</color> end of round.";
         return description;
     }
 
@@ -38,6 +38,7 @@ public class Turtle : Mentor
             Debug.Log("Turtle Hand Size");
             //  Before intial draw to deck call
             player.handSize += handSizeBonus;
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=orange>+{handSizeBonus} Hand Size</color>"));
 
             //  Set flag for when called PostBlind
             startRound = false;
@@ -58,6 +59,10 @@ public class Turtle : Mentor
             if(handSizeBonus <= 0)
             {
                 mentorCardHolder.RemoveMentor(this);
+            }
+            else
+            {
+                ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=orange>-1 Hand Size</color>"));
             }
 
             //  Set flag for when called Blind

@@ -31,6 +31,7 @@ public class HelpingHand : Mentor
         {
             //  Let the player win by setting to goal
             ScoringManager.access().SetRoundScore(ScoringManager.access().GetNeededScore());
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, "Passed!"));
         }
     }
 }

@@ -34,6 +34,7 @@ public class HighlyEducated : Mentor
         int newMult = (int) Math.Floor(ScoringManager.access().GetCurrentMult() * xmult);
 
         ScoringManager.access().SetCurrentMult(newMult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X{xmult} Mult</color></b>"));
     }
 
     //  Check counter and original deck size to see how many cards added

@@ -23,6 +23,7 @@ public class Graduate : Mentor
         {
             ScoringManager.access().IncrementCurrentChips(20);
             ScoringManager.access().IncrementCurrentMult(4);
+            ScoreCoroutine(ScoringManager.access().ScorePopupPCard(pcard, $"<color=blue>+20 Chips</color> <color=red>+4 Mult</color>"));
         }
     }
 }

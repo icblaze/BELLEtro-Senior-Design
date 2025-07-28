@@ -34,6 +34,7 @@ public class Glider : Mentor
         int newMult = (int) Math.Ceiling(ScoringManager.access().GetCurrentMult() * glideMult);
 
         ScoringManager.access().SetCurrentMult(newMult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X{glideMult} Mult</color></b>"));
     }
 
     //  Check both piles for the amount of glides

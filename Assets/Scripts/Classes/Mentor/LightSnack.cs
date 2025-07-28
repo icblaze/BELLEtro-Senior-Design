@@ -34,6 +34,7 @@ public class LightSnack : Mentor
         if (ScoringManager.access().GetScoringStatus())
         {
             ScoringManager.access().IncrementCurrentMult(snackMult);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{snackMult} Mult</color>"));
         }
         else
         {
@@ -45,6 +46,10 @@ public class LightSnack : Mentor
             {
                 mentorCardHolder = GameObject.FindFirstObjectByType<JokerCardHolder>();
                 mentorCardHolder.RemoveMentor(this);
+            }
+            else
+            {
+                ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>-4 Mult</color>"));
             }
         }
     }

@@ -181,6 +181,12 @@ public class Game
         newCard.enhancement = CardModifier.access().GetWeightedModifier(adjustedEnhancements);
         newCard.edition = CardModifier.access().GetWeightedModifier(adjustedEditions);
 
+        //  Playing Cards can NOT be of Negative edition
+        if(newCard.edition == CardEdition.Negative)
+        {
+            newCard.edition = CardEdition.Polychrome;
+        }
+
 
         return newCard;
     }

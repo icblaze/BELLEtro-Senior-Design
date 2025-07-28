@@ -43,7 +43,7 @@ public class JokerCardHolder : MonoBehaviour
     {
         if (testMode)
         {
-            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.FastLearner, CardEdition.Foil));
+            player.mentorDeck.Add(Mentor.MentorFactory(MentorName.ELLEvation, CardEdition.Negative));
         }
 
         //  Debug mentors in the list, order from left to right

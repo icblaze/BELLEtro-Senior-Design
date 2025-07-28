@@ -37,6 +37,7 @@ public class Vagabond : Mentor
                     consumableCardHolder = GameObject.FindAnyObjectByType<ConsumableCardHolder>();
                 }
                 consumableCardHolder.AddConsumable(randCard);
+                ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=purple>Card Buff</color>"));
             }
         }
         

@@ -26,6 +26,7 @@ public class Triplets : Mentor
         if (playedHand.Equals("ThreeKind") || playedHand.Equals("FullHouse") || playedHand.Equals("FourKind") || playedHand.Equals("FiveKind") || playedHand.Equals("FlushFive") | playedHand.Equals("FlushHouse"))
         {
             ScoringManager.access().IncrementCurrentMult(12);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+12 Mult</color>"));
         }
     }
 }

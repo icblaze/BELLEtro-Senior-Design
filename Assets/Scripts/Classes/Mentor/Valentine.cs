@@ -22,6 +22,7 @@ public class Valentine : Mentor
         if(card.suit == SuitName.Voiced || card.suit == SuitName.Tense || (!card.isDisabled && card.enhancement == CardEnhancement.WildCard))
         {
             ScoringManager.access().IncrementCurrentMult(3);
+            ScoreCoroutine(ScoringManager.access().ScorePopupPCard(card, $"<color=red>+3 Mult</color>"));
         }
     }
 }

@@ -25,6 +25,7 @@ public class FishBait : Mentor
         if (playedHand.Equals("Straight") || playedHand.Equals("StraightFlush"))
         {
             ScoringManager.access().IncrementCurrentChips(100);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=blue>+100 Chips</color>"));
         }
     }
 }

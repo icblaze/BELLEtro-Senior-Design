@@ -22,6 +22,7 @@ public class LabGlasses : Mentor
     public override string GetDescription()
     {
         multipleCount = Player.access().moneyCount / 5;
+        multipleCount = Mathf.Max(multipleCount, 0);
         description = "Give <color=red>+2 Mult</color> for every <color=#BB8525FF>$5</color> you have (<color=red>+" + (multipleCount * 2) + " Mult</color>)";
         return description;
     }
@@ -31,7 +32,9 @@ public class LabGlasses : Mentor
     {
         multipleCount = Player.access().moneyCount / 5;
         int mult = multipleCount * 2;
+        mult = Mathf.Max(mult, 0);
 
         ScoringManager.access().IncrementCurrentMult(mult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{mult} Mult</color>"));
     }
 }

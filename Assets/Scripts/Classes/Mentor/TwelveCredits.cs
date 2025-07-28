@@ -23,6 +23,7 @@ public class TwelveCredits : Mentor
         if(ScoringManager.access().GetScoredPCards().Count == 4)
         {
             ScoringManager.access().IncrementCurrentMult(12);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+12 Mult</color>"));
         }
     }
 }

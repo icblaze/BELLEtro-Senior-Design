@@ -27,5 +27,6 @@ public class PageFlip : Mentor
         }
 
         deleteScript.SetDiscards(Player.access().discards + 1);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, "<color=orange>+1 Discard</color>"));
     }
 }

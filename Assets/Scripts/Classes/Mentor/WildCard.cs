@@ -25,7 +25,7 @@ public class WildCard : Mentor
 
         foreach(PCard heldCard in Deck.access().heldHand)
         {
-            if(pcardComparer.Equals(card, heldCard))
+            if(card.term == heldCard.term)
             {
                 occurenceCounter++;
             }
@@ -35,6 +35,7 @@ public class WildCard : Mentor
         if(occurenceCounter == 1)
         {
             ScoringManager.access().IncrementCurrentMult(2);
+            ScoreCoroutine(ScoringManager.access().ScorePopupHeld(card, $"<color=red>+2 Mult</color>"));
         }
     }
 }

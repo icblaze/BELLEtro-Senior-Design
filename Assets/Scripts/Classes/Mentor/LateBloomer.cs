@@ -38,6 +38,7 @@ public class LateBloomer : Mentor
         if(gameInst.GetAnte() > 4)
         {
             ScoringManager.access().SetCurrentMult(ScoringManager.access().GetCurrentMult() * 3);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X3 Mult</color></b>"));
         }
     }
 }

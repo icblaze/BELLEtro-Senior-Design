@@ -35,7 +35,6 @@ public class LibraryCard : Mentor
 
         //  Add to player's moneyCount
         EndOfRoundManager.access().IncrementMentorReward(uniqueCount);
-
     }
 
     //  For calculating unique used textbook

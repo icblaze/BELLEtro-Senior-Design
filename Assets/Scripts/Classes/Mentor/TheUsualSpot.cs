@@ -44,6 +44,7 @@ public class TheUsualSpot : Mentor
 
         //  Gives +80 Chips if played hand matches by place of articulation
         ScoringManager.access().IncrementCurrentChips(80);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=blue>+80 Chips</color>"));
     }
 
 }

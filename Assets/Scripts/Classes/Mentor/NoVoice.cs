@@ -22,6 +22,7 @@ public class NoVoice : Mentor
         if(card.suit == SuitName.Voiceless || card.suit == SuitName.Lax || (!card.isDisabled && card.enhancement == CardEnhancement.WildCard))
         {
             ScoringManager.access().IncrementCurrentMult(3);
+            ScoreCoroutine(ScoringManager.access().ScorePopupPCard(card, $"<color=red>+3 Mult</color>"));
         }
     }
 }

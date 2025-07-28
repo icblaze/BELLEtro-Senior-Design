@@ -28,9 +28,5 @@ public class BonusPoints : Mentor
         extraCount = Math.Min(extraCount, 5);   //  maximum $5
 
         EndOfRoundManager.access().IncrementMentorReward(extraCount);
-        if (extraCount > 0)
-        {
-            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=yellow>${extraCount}</color>"));
-        }
     }
 }

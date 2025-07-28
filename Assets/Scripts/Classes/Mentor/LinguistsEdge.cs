@@ -23,6 +23,7 @@ public class LinguistsEdge : Mentor
         if (ScoringManager.access().GetScoredPCards().Count >= 3)
         {
             ScoringManager.access().SetCurrentMult(ScoringManager.access().GetCurrentMult() * 2);
+            ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X2 Mult</color></b>"));
         }
     }
 }

@@ -29,11 +29,13 @@ public class Library : Mentor
     {
         int newMult = (int) Math.Ceiling(ScoringManager.access().GetCurrentMult() * textbookMult);
         ScoringManager.access().SetCurrentMult(newMult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X{textbookMult} Mult</color></b>"));
     }
 
     //  Called when textbook is used
     public void IncreaseMult()
     {
         textbookMult += 0.1f;
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>XMult Increase</color>"));
     }
 }

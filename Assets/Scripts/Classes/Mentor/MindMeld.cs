@@ -48,6 +48,7 @@ public class MindMeld : Mentor
         }
 
         ScoringManager.access().IncrementCurrentMult(mult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<color=red>+{mult} Mult</color>"));
     }
 
     //  Empty hash set

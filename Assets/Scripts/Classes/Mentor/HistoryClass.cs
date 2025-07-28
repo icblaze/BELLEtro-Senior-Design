@@ -56,7 +56,7 @@ public class HistoryClass : Mentor
             List<PCard> scoredPCards = ScoringManager.access().GetScoredPCards();
             if (isFirstHand && scoredPCards.Count == 1)
             {
-                Debug.Log("Card cloned!");
+                ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, "Cloned!"));
                 deck.AddCard(PCard.CloneCard(scoredPCards[0]));
             }
         }

@@ -35,6 +35,7 @@ public class MadHatter : Mentor
     {
         int newMult = (int)Math.Floor(ScoringManager.access().GetCurrentMult() * xmult);
         ScoringManager.access().SetCurrentMult(newMult);
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>X{xmult} Mult</color></b>"));
     }
 
     //  Call when Small or Big Blind selected
@@ -63,5 +64,6 @@ public class MadHatter : Mentor
 
         //  Gain X0.5 Mult
         xmult += 0.5f;
+        ScoreCoroutine(ScoringManager.access().ScorePopupMentor(this, $"<b><color=red>Increase XMult</color></b>"));
     }
 }
