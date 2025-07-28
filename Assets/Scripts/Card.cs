@@ -193,7 +193,17 @@ public class Card : MonoBehaviour, IDragHandler, IPointerClickHandler, IBeginDra
             //  Update specific description for card type
             if (cardType == CardType.Card)
             {
-                titleText.text = SplitCase.Split(pcard.term.ToString());
+                //  Hide based on PlayerPrefs HIDE_TERM 
+                if (PlayerPrefs.GetInt("HIDE_TERM", 0) == 1)
+                { 
+                    string symbol;
+                    LinguisticTermSymbol.unicodeMap.TryGetValue(pcard.term, out symbol);
+                    titleText.text = $"/{symbol}/";
+                }
+                else
+                {
+                    titleText.text = SplitCase.Split(pcard.term.ToString());
+                }
                 cardDescription = pcard.ToString();
             }
             else if (cardType == CardType.Mentor)
