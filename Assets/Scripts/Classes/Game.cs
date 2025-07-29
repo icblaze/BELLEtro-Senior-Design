@@ -482,7 +482,7 @@ public class Game
         Tag tag = null;
         for (int i = 0; i < tagCount; ++i)
         {
-            index = randomizer(0, 8);
+            index = randomizer(0, System.Enum.GetValues(typeof(TagNames)).Length);
             tag = Tag.TagFromIndex(index);
             tagList[i] = tag;
         }
