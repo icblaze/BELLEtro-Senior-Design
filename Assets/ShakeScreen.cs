@@ -13,6 +13,7 @@ public class ShakeScreen : MonoBehaviour
     public AnimationCurve animationCurve;
     public float duration = 0.75f;
     public bool shake;
+    public static bool noShake = false;
     private static ShakeScreen instance;
     //Singleton for the screen shake
     public static ShakeScreen access()
@@ -34,7 +35,12 @@ public class ShakeScreen : MonoBehaviour
     }
     public void StartShake()
     {
-        OnShake(1f, .025f);
+        if(noShake == false)
+            OnShake(1f, .025f);
+    }
+    public void SetNoShake(bool noShakeBool)
+    {
+        noShake = noShakeBool;
     }
 
     private void OnShake(float duration, float strength)
