@@ -154,8 +154,8 @@ public class BackendHook : MonoBehaviour
 
         form.AddField("sessionID", sessionID);
         form.AddField("endTime", endTimeString);
-        form.AddField("playerScore", anteScore.ToString());
-        form.AddField("Most Frequent Hand Played:", mostFrequentHand);
+        form.AddField("playerScore", "Ante: " + anteScore.ToString() + "| Most Used Hand: " + mostFrequentHand);
+      
 
         Debug.Log("Exit on ante: " + currentAnte);  //  Might make the input parameter redundant?
         UnityWebRequest endSessionRequest = UnityWebRequest.Post(url, form);

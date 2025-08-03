@@ -101,7 +101,7 @@ public class Game
     //This randomizer will also be used to retrieve a random index so we can select a random consumable/pack.
     public int randomizer(int start, int Size)
     {
-        return Random.Range(start, Size);
+        return UnityEngine.Random.Range(start, Size);
     }
 
     //This will randomly draw a card from the deck after a player plays a hand or removes cards from the deck.
@@ -434,8 +434,8 @@ public class Game
         {
             pack[i] = new Pack(); //Instantiate a new pack object
 
-            PackEdition selectedEdition = (PackEdition)Random.Range(1, System.Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
-            PackType selectedType = (PackType)Random.Range(0, System.Enum.GetValues(typeof(PackType)).Length);             // Get the PackType value that corresponds to a PackType in the enum list
+            PackEdition selectedEdition = (PackEdition)UnityEngine.Random.Range(1, System.Enum.GetValues(typeof(PackEdition)).Length); // Get a PackEdition value that corresponds to a packEdition in the enum list
+            PackType selectedType = (PackType)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(PackType)).Length);             // Get the PackType value that corresponds to a PackType in the enum list
 
             //The following code fills all the variables for the pack
             pack[i].packType = selectedType;

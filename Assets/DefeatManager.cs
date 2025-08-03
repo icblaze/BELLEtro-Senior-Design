@@ -43,7 +43,7 @@ public class DefeatManager : MonoBehaviour
         defeatText.GetComponent<TMP_Text>().text = score + rounds + defeated;
 
         //  End play session
-        BackendHook.StartHook(BackendHook.endSession(inst.GetAnte()));
+        BackendHook.StartHook(BackendHook.endSession(inst.GetAnte(), inst.getMostFrequentHandPlayed()));
 
         Game.access().ResetGame();
         Round.access().RestartGame();
