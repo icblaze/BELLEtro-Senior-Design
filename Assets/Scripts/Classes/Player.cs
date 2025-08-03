@@ -33,7 +33,7 @@ public class Player
     public List<Mentor> mentorDeck;                              //List of Mentors that the player currently has.
     public List<Consumable> consumables;                         //List of consumables that the player currently has. Consumables are also called Textbooks.
     public int discards;                                         //The amount of discards the player currently has.
-    public int handCount;                                        //The amoung of hands the player can play.
+    public int handCount;                                        //The amount of hands the player can play.
     public int maxDiscards;                                      //The max amount of discards of the player has, typically changed before round starts
     public int maxHandCount;                                     //The max hands the player can play, typically changed before round starts
     public int moneyCount;                                       //Money count for player.
@@ -58,6 +58,7 @@ public class Player
         PlayerPrefsManager.SetDiscardCount(discards);
         PlayerPrefsManager.SetRound(Game.roundValue);
         PlayerPrefsManager.SetAnte(Game.ante);
+        //Optional: Save the most frequent hand to PlayerPrefsManager
     }
 
     //Load players saved data to the game
@@ -65,9 +66,10 @@ public class Player
     {
         moneyCount = PlayerPrefsManager.GetMoney();
         Game.roundValue = PlayerPrefsManager.GetRound();
-        handCount = PlayerPrefsManager.GetHandCount();                 
+        handCount = PlayerPrefsManager.GetHandCount();
         discards = PlayerPrefsManager.GetDiscardCount();
         Game.ante = PlayerPrefsManager.GetAnte();
+        //Optional: add the most frequent hand to PlayerPrefsManager
     }
 
     //  The player constructor

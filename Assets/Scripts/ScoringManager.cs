@@ -323,7 +323,7 @@ public class ScoringManager : MonoBehaviour
         Player.access().handsPlayed++;
     }
 
-    //Takes in hand name and gets chips and mult of hand (also increment playCount
+    //Takes in hand name and gets chips and mult of hand (also increment playCount)
     private void SetHandScore(string name)
     {
         switch (name)

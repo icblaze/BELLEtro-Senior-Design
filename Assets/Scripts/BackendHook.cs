@@ -133,7 +133,7 @@ public class BackendHook : MonoBehaviour
     }
 
     // This function records the final time of the session and the player's points (takes in Ante the player left on)
-    public static IEnumerator endSession(int anteScore)
+    public static IEnumerator endSession(int anteScore, string mostFrequentHand)
     {
         string url = API_ENDPOINT + "/endsession";
         WWWForm form = new WWWForm();
@@ -155,6 +155,7 @@ public class BackendHook : MonoBehaviour
         form.AddField("sessionID", sessionID);
         form.AddField("endTime", endTimeString);
         form.AddField("playerScore", anteScore.ToString());
+        form.AddField("Most Frequent Hand Played:", mostFrequentHand);
 
         Debug.Log("Exit on ante: " + currentAnte);  //  Might make the input parameter redundant?
         UnityWebRequest endSessionRequest = UnityWebRequest.Post(url, form);

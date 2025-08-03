@@ -49,7 +49,7 @@ public class PauseMenuManager : MonoBehaviour
     public void QuitClick()
     {
         //  End play session
-        BackendHook.StartHook(BackendHook.endSession(Game.access().GetAnte()));
+        BackendHook.StartHook(BackendHook.endSession(Game.access().GetAnte(), Game.access().getMostFrequentHandPlayed()));
 
         Game.access().ResetGame();
         Round.access().RestartGame();

@@ -18,6 +18,7 @@ using UnityEngine;
 using Unity.VisualScripting;
 using System.Xml;
 using Unity.Collections;
+using System;
 
 
 
@@ -49,8 +50,30 @@ public class Game
     public int skipCount;                                                          //This int will be used to count the number of skips the player does
     public Consumable previousConsumable = null;                                   //Stores the name of last used consumable
     public List<SpecialBlind> pastSpecialBlinds = new List<SpecialBlind>();        //PastSpecialBlinds are the used Blinds 
-
     public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.  
+    public string mostFrequentHandPlayed;
+
+    public string getMostFrequentHandPlayed()
+    {
+        mostFrequentHandPlayed = TextbookName.None.ToString();
+        TextbookName topCard = TextbookName.None;
+        int currentMax = -1;
+        thePlayer = Player.access(); //Get access to the player class singleton
+
+
+        foreach (var name in thePlayer.handTable)
+        {
+            if (name.Value.timesPlayed > currentMax)
+            {
+                currentMax = name.Value.timesPlayed;
+                topCard = name.Key;
+                mostFrequentHandPlayed = Enum.GetName(typeof(TextbookName), topCard);
+            }
+        }
+
+        return mostFrequentHandPlayed;
+    }
+
 
     //Getter and Setter for the ante variable   
     public int GetAnte()
