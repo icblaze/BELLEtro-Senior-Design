@@ -69,7 +69,7 @@ public class BackendHook : MonoBehaviour
         }
         else
         {
-            // Debug.Log("Upload complete!");
+            Debug.Log("Upload complete!");
         }
 
         loginTokenString = loginRequest.downloadHandler.text;
@@ -133,8 +133,10 @@ public class BackendHook : MonoBehaviour
     }
 
     // This function records the final time of the session and the player's points (takes in Ante the player left on)
-    public static IEnumerator endSession(int anteScore, string mostFrequentHand)
+    public static IEnumerator endSession(int anteScore, int mostFrequentHand)
     {
+        StartHook(sendQuestionInfo(anteScore, mostFrequentHand, true));
+
         string url = API_ENDPOINT + "/endsession";
         WWWForm form = new WWWForm();
 
@@ -154,8 +156,7 @@ public class BackendHook : MonoBehaviour
 
         form.AddField("sessionID", sessionID);
         form.AddField("endTime", endTimeString);
-        form.AddField("playerScore", "Ante: " + anteScore.ToString() + "| Most Used Hand: " + mostFrequentHand);
-      
+        form.AddField("playerScore", anteScore.ToString());
 
         Debug.Log("Exit on ante: " + currentAnte);  //  Might make the input parameter redundant?
         UnityWebRequest endSessionRequest = UnityWebRequest.Post(url, form);
@@ -185,15 +186,50 @@ public class BackendHook : MonoBehaviour
             setUserIsPlayingGame(0); // Signal to JS/React that game session has ended
         #endif
     }
+    
+    public static IEnumerator sendQuestionInfo(int questionID, int termID, bool correct)
+    {
+        Debug.Log("Inside sendQuestionInfo");
+        string url = API_ENDPOINT + "/loggedanswer";
+
+        termID += 2114;
+        //then tostring the number        
+        WWWForm form = new WWWForm();
+        form.AddField("questionID", questionID);
+        form.AddField("termID", termID);
+        form.AddField("sessionID", sessionID);
+        form.AddField("correct", "1");
+
+        UnityWebRequest getModuleRequest = UnityWebRequest.Post(url, form);
+
+        getModuleRequest.SetRequestHeader("Authorization", "Bearer " + loginToken);
+
+        yield return getModuleRequest.SendWebRequest();
+
+        if (getModuleRequest.result == UnityWebRequest.Result.ConnectionError || getModuleRequest.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.Log(getModuleRequest.error);
+        }
+        else
+        {
+            // Debug.Log("Upload complete!");
+        }
+
+        // Dispose of the native collections, avoiding memory leaks
+        getModuleRequest.disposeUploadHandlerOnDispose = true;
+        getModuleRequest.disposeDownloadHandlerOnDispose = true;
+        getModuleRequest.Dispose();
+        Debug.Log("Finished sendQuestionInfo");
+    }
 
     public void WEBGL_ExtractGameInfo()
     {
         Debug.Log("Unity is now extracting current game info.");
 
-        #if UNITY_WEBGL == true && UNITY_EDITOR == false
+#if UNITY_WEBGL == true && UNITY_EDITOR == false
             setSessionID(sessionID);
             setCurrentAnte(currentAnte);
-        #endif
+#endif
     }
 
     public static void StartHook(IEnumerator routine)

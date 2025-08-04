@@ -11,7 +11,6 @@
 
 using System.Numerics;
 using System.Collections;
-//using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -53,9 +52,9 @@ public class Game
     public bool isEasyMode = true;                                                 //This variable is used to determine the mode that the user selected.  
     public string mostFrequentHandPlayed;
 
-    public string getMostFrequentHandPlayed()
+    public int getMostFrequentHandPlayed()
     {
-        mostFrequentHandPlayed = TextbookName.None.ToString();
+        //mostFrequentHandPlayed = TextbookName.None.ToString();
         TextbookName topCard = TextbookName.None;
         int currentMax = -1;
         thePlayer = Player.access(); //Get access to the player class singleton
@@ -65,13 +64,44 @@ public class Game
         {
             if (name.Value.timesPlayed > currentMax)
             {
+                mostFrequentHandPlayed = name.Key.ToString();
                 currentMax = name.Value.timesPlayed;
                 topCard = name.Key;
-                mostFrequentHandPlayed = Enum.GetName(typeof(TextbookName), topCard);
             }
         }
 
-        return mostFrequentHandPlayed;
+        //return mostFrequentHandPlayed;
+        switch (topCard)
+        {
+            case TextbookName.None:
+                return 0;
+            case TextbookName.HighCard:
+                return 1;
+            case TextbookName.Pair:
+                return 2;
+            case TextbookName.TwoPair:
+                return 3;
+            case TextbookName.ThreeKind:
+                return 4;
+            case TextbookName.Straight:
+                return 5;
+            case TextbookName.Flush:
+                return 6;
+            case TextbookName.FullHouse:
+                return 7;
+            case TextbookName.FourKind:
+                return 8;
+            case TextbookName.StraightFlush:
+                return 9;
+            case TextbookName.FiveKind:
+                return 10;
+            case TextbookName.FlushHouse:
+                return 11;
+            case TextbookName.FlushFive:
+                return 12;
+            default:
+                return 0;
+        }
     }
 
 
