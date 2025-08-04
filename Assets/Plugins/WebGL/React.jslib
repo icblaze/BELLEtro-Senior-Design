@@ -19,5 +19,12 @@ mergeInto(LibraryManager.library, {
         } catch (e) {
             console.warn("Failed to dispatch React event 'setCurrentAnte' from Unity.");
         }
+    },
+    setMostFrequentHand: function (mostFrequentHand) {
+        try {
+            window.dispatchReactUnityEvent("setMostFrequentHand", mostFrequentHand);
+        } catch (e) {
+            console.warn("Failed to dispatch React event 'setMostFrequentHand' from Unity.");
+        }
     }
 });
