@@ -36,6 +36,8 @@ public class BackendHook : MonoBehaviour
     private static extern void setCurrentAnte(int score);
     [DllImport("__Internal")]
     private static extern void setUserIsPlayingGame(int state);
+    [DllImport("__Internal")]
+    private static extern void setMostFrequentHand(int mostFrequentHand);
 
     private static BackendHook instance;
 
@@ -195,8 +197,8 @@ public class BackendHook : MonoBehaviour
         termID += 2114;
         //then tostring the number        
         WWWForm form = new WWWForm();
-        form.AddField("questionID", questionID);
-        form.AddField("termID", termID);
+        form.AddField("questionID", questionID.ToString());
+        form.AddField("termID", termID.ToString());
         form.AddField("sessionID", sessionID);
         form.AddField("correct", "1");
 
@@ -226,10 +228,11 @@ public class BackendHook : MonoBehaviour
     {
         Debug.Log("Unity is now extracting current game info.");
 
-#if UNITY_WEBGL == true && UNITY_EDITOR == false
+        #if UNITY_WEBGL == true && UNITY_EDITOR == false
             setSessionID(sessionID);
             setCurrentAnte(currentAnte);
-#endif
+            setMostFrequentHand(Game.access().getMostFrequentHandPlayed());
+        #endif
     }
 
     public static void StartHook(IEnumerator routine)

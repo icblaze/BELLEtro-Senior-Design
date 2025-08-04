@@ -54,7 +54,6 @@ public class Game
 
     public int getMostFrequentHandPlayed()
     {
-        //mostFrequentHandPlayed = TextbookName.None.ToString();
         TextbookName topCard = TextbookName.None;
         int currentMax = -1;
         thePlayer = Player.access(); //Get access to the player class singleton
@@ -64,13 +63,11 @@ public class Game
         {
             if (name.Value.timesPlayed > currentMax)
             {
-                mostFrequentHandPlayed = name.Key.ToString();
                 currentMax = name.Value.timesPlayed;
                 topCard = name.Key;
             }
         }
 
-        //return mostFrequentHandPlayed;
         switch (topCard)
         {
             case TextbookName.None:
